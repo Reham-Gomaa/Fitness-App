@@ -1,0 +1,15 @@
+.error-item {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #EF4444;
+}
+
+@media (max-width: 700px) {
+  .error-item {
+    font-size: 0.85rem;
+  }
+}
+.error-list {
+  list-style: none;
+  padding: 0;
+}
