@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fitness-app/fitness-form": ["packages/ui/fitness-form/src/index.ts"]
+      "@fitness-app/fitness-form": ["packages/ui/fitness-form/src/index.ts"],
+      "@fitness-app/environment/*": ["apps/environment/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
