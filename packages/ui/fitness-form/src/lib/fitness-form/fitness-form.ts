@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'lib-fitness-form',
   imports: [],
   templateUrl: './fitness-form.html',
-  styleUrl: './fitness-form.css',
+  styleUrl: './fitness-form.scss',
 })
 export class FitnessForm {}
