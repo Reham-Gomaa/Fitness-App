@@ -1,4 +1,4 @@
-import { environment } from './../../environment/baseUrl.dev';
+import { environment } from '../../environment/baseUrl.dev';
 
 export class EndPoint {
   static SIGNUP = `${environment.baseApiUrl}/api/v1/auth/signup`;
