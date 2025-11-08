@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/apps/Fitness",
         "browser": "apps/Fitness/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [],
         "tsConfig": "apps/Fitness/tsconfig.app.json",
         "assets": [
           {
@@ -24,7 +24,7 @@
           "node_modules/primeicons/primeicons.css",
           "node_modules/primeflex/primeflex.css",
           "node_modules/primeflex/themes/primeone-light.css",
-          "apps/Fitness/src/styles.css"
+          "apps/Fitness/src/styles.scss"
         ],
         "outputMode": "static"
       },
