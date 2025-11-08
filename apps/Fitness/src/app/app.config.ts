@@ -1,3 +1,4 @@
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import {
   ApplicationConfig,
@@ -21,7 +22,7 @@ import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { ToastModule } from 'primeng/toast';
-// Translation
+
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -37,7 +38,7 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       })
     ),
-    //{ provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideHttpClient(withFetch()),
     provideTranslateService({
       loader: provideTranslateHttpLoader({
@@ -52,6 +53,11 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       theme: {
         preset: Aura,
+        options: {
+          prefix: 'p',
+          darkModeSelector: 'light-mode',
+          cssLayer: false,
+        },
       },
     }),
   ],
