@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { Main } from './features/layouts/main/main';
+import { Auth } from './features/layouts/auth/auth';
 
 export const appRoutes: Route[] = [
   {
@@ -23,10 +24,10 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'auth',
+    component: Auth,
     title: 'Authintication',
-    loadComponent: () =>
-      import('./features/layouts/auth/auth').then((c) => c.Auth),
     children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
         path: 'login',
         title: 'Login',
