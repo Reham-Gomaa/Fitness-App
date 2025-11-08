@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "logout": "Logout"
+  },
+  "footer": {
+    "copyright": "All rights reserved",
+    "year": "2025"
+  }
+}
