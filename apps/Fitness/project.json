@@ -95,6 +95,55 @@
         "staticFilePath": "dist/apps/Fitness/browser",
         "spa": true
       }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "apps/Fitness/.storybook",
+        "browserTarget": "Fitness:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/Fitness",
+        "configDir": "apps/Fitness/.storybook",
+        "browserTarget": "Fitness:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c apps/Fitness/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build-storybook"],
+      "options": {
+        "buildTarget": "Fitness:build-storybook",
+        "staticFilePath": "dist/storybook/Fitness",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "Fitness:build-storybook:ci"
+        }
+      }
     }
   }
 }
