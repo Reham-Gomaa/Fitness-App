@@ -6,13 +6,12 @@ import {
 } from '@angular/common/http';
 import {
   ApplicationConfig,
+  importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
+// Hydration imports removed - not needed for static builds
+// import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   provideRouter,
@@ -25,6 +24,7 @@ import { appRoutes } from './app.routes';
 import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
+import { ToastModule } from 'primeng/toast';
 
 // Translation
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
@@ -35,6 +35,7 @@ import { DEFAULT_LANGUAGE } from './core/constants/translation.constants';
 // Auth LIB
 import { API_CONFIG } from 'auth-api-kp';
 import { environment } from '@fitness-app/environment/baseUrl.dev';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -69,8 +70,6 @@ export const appConfig: ApplicationConfig = {
       },
     },
 
-    // Zoneless / Hydration / Animations
-    provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideAnimationsAsync(),
@@ -83,11 +82,11 @@ export const appConfig: ApplicationConfig = {
         useFactory: () => createCustomTranslateLoader(),
       },
       fallbackLang: DEFAULT_LANGUAGE,
-      lang: DEFAULT_LANGUAGE,
     }),
 
     // PrimeNG
     MessageService,
+    importProvidersFrom(ToastModule),
     providePrimeNG({
       theme: {
         preset: Aura,
@@ -102,11 +101,11 @@ export const appConfig: ApplicationConfig = {
     // Router with hash location (Angular 20 best practice)
     provideRouter(
       appRoutes,
-      // Enable hash routing for language prefixes
       withViewTransitions(),
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
       })
     ),
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
 };

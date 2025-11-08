@@ -59,12 +59,8 @@ export class Translation {
     this.lang.set(lang);
 
     // Update URL without page refresh (after signal update)
-    if (this.platformService.isBrowser()) {
-      // Use setTimeout to ensure signal update is processed
-      setTimeout(() => {
-        this.updateUrlWithLanguage(lang);
-      }, 0);
-    }
+    // The effect will handle the actual navigation and translation loading
+    // We don't need to manually update URL here as the effect handles it
   }
 
   async initialize(preferredLang?: string): Promise<void> {
@@ -95,19 +91,38 @@ export class Translation {
       }
 
       await new Promise<void>((resolve) => {
-        this.translationManager.loadCoreTranslations(lang).subscribe(() => {
-          const routePath = this.getBaseRoutePath();
-          if (routePath) {
-            this.translationManager
-              .preloadRouteTranslations(routePath, lang)
-              .subscribe(() => {
-                this.translate.use(lang);
-                resolve();
-              });
-          } else {
+        this.translationManager.loadCoreTranslations(lang).subscribe({
+          next: () => {
+            // loadCoreTranslations already sets translations via tap operator
+            // Now load route translations if needed, then use the language
+            const routePath = this.getBaseRoutePath();
+            if (routePath) {
+              this.translationManager
+                .preloadRouteTranslations(routePath, lang)
+                .subscribe({
+                  next: () => {
+                    // Ensure translations are ready before using language
+                    // Use the language - translations should already be set
+                    this.translate.use(lang);
+                    resolve();
+                  },
+                  error: () => {
+                    // Even if route translations fail, use the language with core translations
+                    this.translate.use(lang);
+                    resolve();
+                  },
+                });
+            } else {
+              // No route path, use language immediately (translations already set)
+              this.translate.use(lang);
+              resolve();
+            }
+          },
+          error: () => {
+            // Fallback: use language even if translations fail to load
             this.translate.use(lang);
             resolve();
-          }
+          },
         });
       });
     } finally {
@@ -296,9 +311,22 @@ export class Translation {
 
     // Navigate - withHashLocation() automatically handles hash prefix
     // Use replaceUrl: true to replace current history entry
-    this.router.navigateByUrl(newUrl, { replaceUrl: true }).catch((err) => {
-      console.error('Error updating URL with language:', err);
-    });
+    // Suppress view transitions for language changes to avoid AbortError
+    this.router
+      .navigateByUrl(newUrl, {
+        replaceUrl: true,
+        skipLocationChange: false,
+      })
+      .catch((err) => {
+        // Silently ignore AbortError from view transitions - it's expected when transitions are skipped
+        // This happens because view transitions may abort when navigating to the same route structure
+        if (
+          err?.name !== 'AbortError' &&
+          err?.message !== 'Transition was skipped'
+        ) {
+          console.error('Error updating URL with language:', err);
+        }
+      });
   }
 
   isRtl(lang?: string): boolean {

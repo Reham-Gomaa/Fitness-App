@@ -130,10 +130,9 @@ export class TranslationManagerService {
         translations.forEach((moduleTranslations) => {
           merged = this.deepMerge(merged, moduleTranslations);
         });
-        return merged;
-      }),
-      tap((merged) => {
+        // Set translations synchronously before emitting
         this.getTranslateService().setTranslation(lang, merged, false);
+        return merged;
       })
     );
   }
