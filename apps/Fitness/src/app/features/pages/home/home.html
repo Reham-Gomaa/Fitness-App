@@ -1,1 +1,26 @@
+<div class="home-container">
+  <h1>{{ 'home.title' | translate }}</h1>
 
+  <div class="language-section">
+    <h2>
+      {{ 'home.currentLanguage' | translate }}: {{ currentLang() | uppercase }}
+    </h2>
+    <p>{{ 'home.url' | translate }}: <code>{{ currentUrl() }}</code></p>
+
+    <div class="language-buttons">
+      @for (lang of languages; track lang.code) {
+      <p-button
+        [label]="lang.flag + ' ' + lang.label"
+        [severity]="currentLang() === lang.code ? 'success' : 'secondary'"
+        (onClick)="switchLanguage(lang.code)"
+        [outlined]="currentLang() !== lang.code"
+      />
+      }
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h3>{{ 'home.testTranslation' | translate }}</h3>
+    <p>{{ 'home.description' | translate }}</p>
+  </div>
+</div>
