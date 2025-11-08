@@ -1,0 +1,29 @@
+{
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "submit": "Login",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up"
+  },
+  "register": {
+    "title": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "submit": "Register",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign in"
+  },
+  "forgetpass": {
+    "title": "Forgot Password",
+    "email": "Email",
+    "submit": "Send Reset Link",
+    "backToLogin": "Back to login"
+  }
+}

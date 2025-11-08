@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-auth',
   imports: [],
   templateUrl: './auth.html',
-  styleUrl: './auth.css',
+  styleUrl: './auth.scss',
 })
 export class Auth {}

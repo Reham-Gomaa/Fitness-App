@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-forgetpass',
   imports: [],
   templateUrl: './forgetpass.html',
-  styleUrl: './forgetpass.css',
+  styleUrl: './forgetpass.scss',
 })
 export class Forgetpass {}

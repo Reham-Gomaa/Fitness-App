@@ -1,0 +1,11 @@
+{
+  "home": {
+  "title": "Home",
+  "welcome": "Welcome to Fitness App",
+  "description": "Your journey to a healthier lifestyle starts here",
+  "currentLanguage": "Current Language",
+  "url": "Current URL",
+  "testTranslation": "Translation Test",
+  "switchLanguage": "Switch Language"
+  }
+}
