@@ -26,19 +26,15 @@
           "node_modules/primeflex/themes/primeone-light.css",
           "apps/Fitness/src/styles.css"
         ],
-        "server": "apps/Fitness/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/Fitness/src/server.ts"
-        },
-        "outputMode": "server"
+        "outputMode": "static"
       },
       "configurations": {
         "production": {
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "2mb",
+              "maximumError": "4mb"
             },
             {
               "type": "anyComponentStyle",
@@ -46,12 +42,25 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "optimization": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/environment/baseUrl.dev.ts",
+              "with": "apps/environment/baseUrl.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/environment/baseUrl.prod.ts",
+              "with": "apps/environment/baseUrl.dev.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
