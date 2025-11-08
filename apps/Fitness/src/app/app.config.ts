@@ -35,6 +35,7 @@ import { DEFAULT_LANGUAGE } from './core/constants/translation.constants';
 // Auth LIB
 import { API_CONFIG } from 'auth-api-kp';
 import { environment } from '@fitness-app/environment/baseUrl.dev';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -108,5 +109,6 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       })
     ),
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
 };
