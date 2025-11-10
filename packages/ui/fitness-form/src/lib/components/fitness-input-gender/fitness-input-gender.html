@@ -1,24 +1,40 @@
 <div class="gender-container">
-  <div class="gender-item" [class.active]="gender() === Gender.Male" (click)="genderChangeHandler(Gender.Male)">
+  <div
+    class="gender-item"
+    [class.active]="gender() === Gender.Male"
+    role="button"
+    tabindex="0"
+    (click)="genderChangeHandler(Gender.Male)"
+    (keydown.enter)="genderChangeHandler(Gender.Male)"
+    (keydown.space)="genderChangeHandler(Gender.Male)"
+  >
     <img
       ngSrc="images/male.svg"
       width="37"
       height="51"
       loading="lazy"
       alt="Male"
-      async 
+      async
     />
     <p class="gender-item-title">Male</p>
   </div>
 
-  <div class="gender-item" [class.active]="gender() === Gender.Female" (click)="genderChangeHandler(Gender.Female)">
+  <div
+    class="gender-item"
+    [class.active]="gender() === Gender.Female"
+    role="button"
+    tabindex="0"
+    (click)="genderChangeHandler(Gender.Female)"
+    (keydown.enter)="genderChangeHandler(Gender.Female)"
+    (keydown.space)="genderChangeHandler(Gender.Female)"
+  >
     <img
       ngSrc="images/female.svg"
       width="37"
       height="51"
       loading="lazy"
       alt="Female"
-      async 
+      async
     />
     <p class="gender-item-title">Female</p>
   </div>
