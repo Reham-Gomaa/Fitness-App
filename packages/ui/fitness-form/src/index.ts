@@ -1,3 +1,6 @@
-export * from './lib/fitness-form/fitness-form';
-export * from './lib/fitness-input/fitness-input';
-export * from './lib/fitness-input-error-handeling/fitness-input-error-handeling';
+// Components
+export * from './lib/components/fitness-input-error-handeling/fitness-input-error-handeling';
+export * from './lib/components/fitness-input-gender/fitness-input-gender';
+export * from './lib/components/fitness-input/fitness-input';
+// Enums
+export * from './lib/enums/gender';

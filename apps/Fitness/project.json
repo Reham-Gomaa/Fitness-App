@@ -24,7 +24,7 @@
           "node_modules/primeicons/primeicons.css",
           "node_modules/primeflex/primeflex.css",
           "node_modules/primeflex/themes/primeone-light.css",
-          "apps/Fitness/src/styles.css"
+          "apps/Fitness/src/styles.scss"
         ],
         "outputMode": "static"
       },

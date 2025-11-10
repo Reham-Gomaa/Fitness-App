@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Shared-components
-import { FitnessInput } from '@fitness-app/fitness-form';
+import { FitnessInput, FitnessInputGender, Gender } from '@fitness-app/fitness-form';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, FitnessInput],
+  imports: [ReactiveFormsModule, FitnessInput, FitnessInputGender],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -30,5 +30,10 @@ export class Register {
       this.registerForm.markAllAsTouched();
     }
   }
+
+
+  onGenderChange(gender: Gender) {
+  console.log('Selected gender:', gender);
+}
 }
 
