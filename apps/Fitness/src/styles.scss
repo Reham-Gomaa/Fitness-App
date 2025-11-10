@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @use './app/shared/styles/_utilities' as utl; /* You can add global styles to this file, and also import other style files */
+=======
+@use './app/shared/styles/_utilities' as utl;
+>>>>>>> cb3fd35fcd74d47748cab2e46210fc0595f2a1e3
 @use './app/shared/styles/_variables' as vars;
 
 body,
@@ -7,4 +11,8 @@ html {
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+<<<<<<< HEAD
 } /* You can add global styles to this file, and also import other style files */
+=======
+}
+>>>>>>> cb3fd35fcd74d47748cab2e46210fc0595f2a1e3

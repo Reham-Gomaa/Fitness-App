@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/apps/Fitness",
         "browser": "apps/Fitness/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [],
         "tsConfig": "apps/Fitness/tsconfig.app.json",
         "assets": [
           {
