@@ -1,0 +1,10 @@
+@use './app/shared/styles/utilities' as utl;
+@use './app/shared/styles/_variables' as vars;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}

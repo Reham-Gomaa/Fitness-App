@@ -5,6 +5,6 @@ import { AboutUs } from './components/about-us/about-us';
   selector: 'app-home',
   imports: [AboutUs],
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrl: './home.scss',
 })
 export class Home {}

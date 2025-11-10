@@ -7,6 +7,6 @@ import { RouterModule } from '@angular/router';
   selector: 'app-main',
   imports: [Navbar, Footer, RouterModule],
   templateUrl: './main.html',
-  styleUrl: './main.css',
+  styleUrl: './main.scss',
 })
 export class Main {}

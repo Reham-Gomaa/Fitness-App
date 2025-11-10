@@ -1,15 +1,17 @@
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import {
   ApplicationConfig,
   importProvidersFrom,
   provideBrowserGlobalErrorListeners,
-  provideZoneChangeDetection,
+  provideZonelessChangeDetection,
 } from '@angular/core';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
+// Hydration imports removed - not needed for static builds
+// import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   provideRouter,
@@ -17,39 +19,46 @@ import {
   withViewTransitions,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
+
 // Primeng
 import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { ToastModule } from 'primeng/toast';
 
-import { provideTranslateService } from '@ngx-translate/core';
-import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+// Translation
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+import { DEFAULT_LANGUAGE } from './core/constants/translation.constants';
+import { TRANSLATION_INITIALIZER } from './core/initializers/translation.initializer';
+import { createCustomTranslateLoader } from './core/services/translation/custom-translate-loader';
+
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideClientHydration(withEventReplay()),
-    provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(
-      appRoutes,
-      withViewTransitions(),
-      withInMemoryScrolling({
-        scrollPositionRestoration: 'enabled',
-      })
+    // HTTP Client
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([]),
+      withInterceptorsFromDi()
     ),
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-    provideHttpClient(withFetch()),
+    provideBrowserGlobalErrorListeners(),
+    provideZonelessChangeDetection(),
+    provideAnimationsAsync(),
+
+    // Translation
+    TRANSLATION_INITIALIZER,
     provideTranslateService({
-      loader: provideTranslateHttpLoader({
-        prefix: './i18n/',
-        suffix: '.json',
-      }),
-      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: () => createCustomTranslateLoader(),
+      },
+      fallbackLang: DEFAULT_LANGUAGE,
     }),
+
+    // PrimeNG
     MessageService,
     importProvidersFrom(ToastModule),
-    provideAnimationsAsync(),
     providePrimeNG({
       theme: {
         preset: Aura,
@@ -60,5 +69,15 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+
+    // Router with hash location (Angular 20 best practice)
+    provideRouter(
+      appRoutes,
+      withViewTransitions(),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+      })
+    ),
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
 };
