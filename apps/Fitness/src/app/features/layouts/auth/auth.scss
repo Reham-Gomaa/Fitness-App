@@ -1,0 +1,66 @@
+.auth-layout {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; 
+
+  .background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: -2;
+  }
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #24242499;
+      backdrop-filter: blur(1.5625rem); 
+
+    z-index: -1;
+  }
+
+  .left-side {
+    height: 100%;
+    border-right: #ff410033 2px solid;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .fitness-logo {
+      width: 25%;
+    }
+    .auth-logo {
+      width: 65%;
+      height: auto;
+    }
+  }
+
+  .right-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .left-side {
+      flex: 0;
+      font-size: 2rem;
+      padding: 1rem;
+    }
+
+    .right-side {
+      flex: 1;
+    }
+  }
+}
