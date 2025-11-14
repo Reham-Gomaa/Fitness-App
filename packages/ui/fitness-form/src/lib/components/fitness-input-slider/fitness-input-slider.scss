@@ -1,7 +1,7 @@
 .slider-container {
   width: 100%;
   max-width: 600px;
-  padding: 2rem;
+  padding: 1rem;
   background: transparent;
   border-radius: 12px;
 }
@@ -44,7 +44,7 @@
 
 .unit {
   text-align: center;
-  color: #999;
+  color: var(--orange-500);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;

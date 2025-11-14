@@ -10,11 +10,10 @@ export class FitnessInputSlider {
   weight = signal(90);
   minWeight = input(60);
   maxWeight = input(300);
-  unit = input<string>('KG');
+  unit = input.required<string>();
   
   weightChange = output<number>();
-  
-  // Convert to signals for zoneless compatibility
+
   isDragging = signal(false);
   startX = signal(0);
   startWeight = signal(0);

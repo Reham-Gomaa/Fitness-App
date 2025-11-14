@@ -1,6 +1,8 @@
 <div class="slider-container">
   <div class="weight-display">
-    <div 
+    <div class="unit">{{ unit() }}</div>
+
+    <div
       class="weights-row"
       (wheel)="onWheel($event)"
       (mousedown)="onMouseDown($event)"
@@ -9,22 +11,21 @@
       (mouseleave)="onMouseUp()"
       (touchstart)="onTouchStart($event)"
       (touchmove)="onTouchMove($event)"
-      (touchend)="onTouchEnd()">
+      (touchend)="onTouchEnd()"
+    >
       @for (w of visibleWeights(); track w) {
-        <span 
-          class="weight-number"
-          [class.active]="w === weight()"
-          [style.opacity]="getOpacity(w)">
-          {{ w }}
-        </span>
+      <span
+        class="weight-number"
+        [class.active]="w === weight()"
+        [style.opacity]="getOpacity(w)"
+      >
+        {{ w }}
+      </span>
       }
     </div>
-    <div class="unit">{{ unit() }}</div>
   </div>
-  
+
   <div class="arrow-indicator">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M12 4L12 20M12 4L8 8M12 4L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <span class="pi pi-arrow-up"></span>
   </div>
 </div>
