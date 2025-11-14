@@ -4,6 +4,7 @@ import {
   SUPPORTED_LANGUAGES,
 } from './core/constants/translation.constants';
 import { Main } from './features/layouts/main/main';
+import { Auth } from './features/layouts/auth/auth';
 
 // Helper function to create routes with language prefix
 function createLanguageRoutes(): Route[] {
@@ -36,8 +37,7 @@ function createLanguageRoutes(): Route[] {
         {
           path: 'auth',
           title: 'Authentication',
-          loadComponent: () =>
-            import('./features/layouts/auth/auth').then((c) => c.Auth),
+          component: Auth,
           children: [
             {
               path: 'login',
