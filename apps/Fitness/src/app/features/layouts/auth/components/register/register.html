@@ -37,6 +37,13 @@
       <lib-fitness-input-slider unit="kg" (weightChange)="onWeightChanged($event)"></lib-fitness-input-slider>
     </div>
 
+    <div>
+      <lib-fitness-form-radio
+        [config]="radioConfig"
+        (selectedItemChange)="onActivityLevelChanged($event)"
+      ></lib-fitness-form-radio>
+    </div>
+
     <button type="submit" class="submit-btn">Register</button>
   </form>
 

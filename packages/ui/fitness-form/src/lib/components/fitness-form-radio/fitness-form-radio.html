@@ -1,0 +1,14 @@
+@for (item of config(); track $index) {
+<label class="fitness-form-radio__label">
+  <span class="fitness-form-radio__text">{{ item.label }}</span>
+  <input
+    type="radio"
+    class="fitness-form-radio__input"
+    name="fitness-radio-group"
+    value="{{ item.value }}"
+    [checked]="selectedItem()===item.value"
+    (change)="selectedItemChangeHandler(item.value)"
+  />
+  <span class="fitness-form-radio__custom-circle"></span>
+</label>
+}

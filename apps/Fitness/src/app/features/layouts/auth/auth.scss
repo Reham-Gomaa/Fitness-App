@@ -1,8 +1,8 @@
 .auth-layout {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   position: relative;
   overflow: hidden; 
 
@@ -25,7 +25,6 @@
   }
 
   .left-side {
-    height: 100%;
     border-right: #ff410033 2px solid;
     flex: 1;
     flex-direction: column;

@@ -9,7 +9,7 @@ import {
 import { RouterModule } from '@angular/router';
 
 // Shared-components
-import { FitnessInput, FitnessInputGender, Gender, FitnessInputSlider } from '@fitness-app/fitness-form';
+import { FitnessInput, FitnessInputGender, Gender, FitnessInputSlider, FitnessFormRadio, RadioItem } from '@fitness-app/fitness-form';
 
 @Component({
   selector: 'app-register',
@@ -19,13 +19,22 @@ import { FitnessInput, FitnessInputGender, Gender, FitnessInputSlider } from '@f
     FitnessInputGender,
     FitnessInput,
     RouterModule,
-    FitnessInputSlider
+    FitnessInputSlider,
+    FitnessFormRadio
 ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
 export class Register {
   registerForm: FormGroup;
+
+
+  radioConfig: RadioItem[] = [
+    { value: 'Gain weight', label: 'Gain weight' },
+    { value: 'lose weight', label: 'lose weight' },
+    { value: 'Get fitter', label: 'Get fitter' },
+    { value: 'Gain more flexible', label: 'Gain more flexible' },
+  ]
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
@@ -47,7 +56,11 @@ export class Register {
     console.log('Selected gender:', gender);
   }
 
-onWeightChanged(newWeight: number): void {
-  console.log('Weight changed to:', newWeight);
-}
+  onWeightChanged(newWeight: number): void {
+    console.log('Weight changed to:', newWeight);
+  }
+
+  onActivityLevelChanged(newActivityLevel: string): void {
+    console.log('Activity level changed to:', newActivityLevel);
+  }
 }
