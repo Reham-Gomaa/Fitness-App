@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
-import { Main } from './features/layouts/main/main';
 import {
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
 } from './core/constants/translation.constants';
+import { Main } from './features/layouts/main/main';
 import { Auth } from './features/layouts/auth/auth';
 
 // Helper function to create routes with language prefix

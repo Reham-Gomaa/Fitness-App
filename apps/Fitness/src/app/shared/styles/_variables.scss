@@ -7,6 +7,7 @@
   // Light Theme Colors
 
   --white-90: #ffffff99;
+  --white-95: #fffffff2;
   --white: #ffffff;
   --black: #000000;
 
@@ -14,7 +15,22 @@
   --gray-200: #d9d9d9;
   --gray-300: #d3d3d3;
   --gray-900: #242424;
+  --gray-950: #232526;
+  --gray-100-14: #f3f3f424;
+  --gray-900-14: #24242424;
   --gray-900-60: #24242499;
 
   --orange-500: #ff4100;
+
+  // About-Us
+  --section-bg: var(--white-95);
+  --text-color: var(--gray-900);
+  --line-break-bg: var(--gray-900-14);
+}
+
+.dark {
+  // About-Us
+  --section-bg: var(--gray-950);
+  --text-color: var(--gray-100);
+  --line-break-bg: var(--gray-100-14);
 }
