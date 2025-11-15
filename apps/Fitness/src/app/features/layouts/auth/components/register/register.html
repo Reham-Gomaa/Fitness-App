@@ -1,5 +1,5 @@
 <div class="register-container flex flex-column">
-  <h2 class="title">Create Accountttttttttttttttttttttttttttttttt</h2>
+  <h2 class="title">Create Account</h2>
 
   <form [formGroup]="registerForm" (ngSubmit)="submit()" class="flex flex-column gap-3">
     <!-- First Name -->
@@ -30,16 +30,14 @@
     ></lib-fitness-input>
 
     <div>
-          <lib-fitness-input-gender (genderChange)="onGenderChange($event)"></lib-fitness-input-gender>
+      <lib-fitness-input-gender (genderChange)="onGenderChange($event)"></lib-fitness-input-gender>
+    </div>
 
-    <div class="flex justify-content-center ">
-      <lib-fitness-input-slider  (weightChange)="onWeightChanged($event)">
-        ></lib-fitness-input-slider
-      >
+    <div class="flex justify-content-center">
+      <lib-fitness-input-slider unit="kg" (weightChange)="onWeightChanged($event)"></lib-fitness-input-slider>
     </div>
 
     <button type="submit" class="submit-btn">Register</button>
   </form>
-  </div>
 
 </div>
