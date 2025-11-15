@@ -33,6 +33,8 @@ import { TRANSLATION_INITIALIZER } from './core/initializers/translation.initial
 import { createCustomTranslateLoader } from './core/services/translation/custom-translate-loader';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { environment } from '@fitness-app/environment/baseUrl.dev';
+import { API_CONFIG } from 'auth-api-kp';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -42,6 +44,32 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([]),
       withInterceptorsFromDi()
     ),
+
+    // Auth API Configuration
+    {
+      provide: API_CONFIG,
+      useValue: {
+        baseUrl: `${environment.baseApiUrl}/api`,
+        apiVersion: 'v1',
+        endpoints: {
+          auth: {
+            login: 'auth/signin',
+            register: 'auth/signup',
+            logout: 'auth/logout',
+            forgotPassword: 'auth/forgotPassword',
+            verifyResetCode: 'auth/verifyResetCode',
+            resetPassword: 'auth/resetPassword',
+            profileData: 'auth/profile-data',
+            editProfile: 'auth/editProfile',
+            changePassword: 'auth/change-password',
+            deleteMe: 'auth/deleteMe',
+            uploadPhoto: 'auth/upload-photo',
+            forgetPasswordForm: 'auth/forgetPasswordForm',
+          },
+        },
+      },
+    },
+
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideAnimationsAsync(),

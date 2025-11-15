@@ -1,16 +1,16 @@
-import { TranslateLoader } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { TranslationManagerService } from './translation-manager.service';
-import { inject } from '@angular/core';
+import {TranslateLoader} from "@ngx-translate/core";
+import {Observable} from "rxjs";
+import {TranslationManagerService} from "./translation-manager.service";
+import {inject} from "@angular/core";
 
 export class CustomTranslateLoader implements TranslateLoader {
-  private readonly translationManager = inject(TranslationManagerService);
+    private readonly translationManager = inject(TranslationManagerService);
 
-  getTranslation(lang: string): Observable<any> {
-    return this.translationManager.loadCoreTranslations(lang);
-  }
+    getTranslation(lang: string): Observable<any> {
+        return this.translationManager.loadCoreTranslations(lang);
+    }
 }
 
 export function createCustomTranslateLoader(): CustomTranslateLoader {
-  return new CustomTranslateLoader();
+    return new CustomTranslateLoader();
 }
