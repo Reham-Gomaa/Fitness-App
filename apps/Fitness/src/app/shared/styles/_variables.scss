@@ -17,4 +17,23 @@
   --gray-900-60: #24242499;
 
   --orange-500: #ff4100;
+
+  --gradient-70:#B4B3B1;
+
+
+  //meals and workouts shared
+  --long-desc-font:var(--font-1);
+  --card-font:var(--font-1);
+  --span-font:var(--font-3);
+  --main-color:var(--orange-500);
+  --text-color:var(--black);
+  --sec-grad-color:var(--gradient-70)
+}
+
+html.dark {
+  --gradient-70:#232425;
+    //meals and workouts shared
+  --text-color:var(--white)
+  --sec-grad-bg:var(--gradient-70)
+
 }

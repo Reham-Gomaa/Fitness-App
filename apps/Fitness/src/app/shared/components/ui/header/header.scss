@@ -1,0 +1,16 @@
+.sec-long-desc {
+  font-family: var(--long-desc-font);
+  font-size: calc(40 / 16) + rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #242424;
+  .long-desc-span {
+    color: #FF4100;
+  }
+}
+
+@media (max-width: 768px) {
+ .sec-long-desc {
+    font-size: calc(25 / 16) + rem;
+  }
+}

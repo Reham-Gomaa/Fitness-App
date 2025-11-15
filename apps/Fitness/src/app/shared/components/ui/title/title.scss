@@ -1,0 +1,19 @@
+.section-title {
+  position: relative;
+  top: 12px;
+  img {
+    height: 100%;
+  }
+  .sub-title {
+    font-family: var(--span-font);
+    color: #FF4100;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    bottom: 6px;
+
+  }
+}
