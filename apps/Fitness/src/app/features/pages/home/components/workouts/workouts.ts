@@ -1,27 +1,34 @@
-import { Component, DestroyRef, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { MainCard } from './../../../../../shared/components/ui/main-card/main-card';
 //primeNg
-import { CarouselModule } from 'primeng/carousel';
-import { ButtonModule } from 'primeng/button';
-import { TagModule } from 'primeng/tag';
-import { Skeleton } from 'primeng/skeleton';
 import { MessageService } from 'primeng/api';
-import { Toast } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
 import { Ripple } from 'primeng/ripple';
+import { Skeleton } from 'primeng/skeleton';
+import { TagModule } from 'primeng/tag';
+import { Toast } from 'primeng/toast';
 
 //rxjs
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 //app Service
-import {Muscles} from "./../../../../../shared/services/muscle/muscles"
+import { Muscles } from './../../../../../shared/services/muscle/muscles';
 
 //interfaces
 import { Muscle, MuscleGroup } from './../../../../../shared/models/muscles';
 
 //reusable directive
-import { Title } from './../../../../../core/components/title/title';
-import { Header } from './../../../../../core/components/header/header';
 import { Carousel } from './../../../../../shared/components/ui/carousel/carousel';
+import { Header } from './../../../../../shared/components/ui/header/header';
+import { Title } from './../../../../../shared/components/ui/title/title';
 
 @Component({
   selector: 'app-workouts',
@@ -35,7 +42,6 @@ import { Carousel } from './../../../../../shared/components/ui/carousel/carouse
     Header,
     Carousel,
     Toast,
-    Ripple,
   ],
   templateUrl: './workouts.html',
   styleUrl: './workouts.scss',
@@ -91,9 +97,7 @@ export class Workouts implements OnInit {
             this.noMusclesFound();
             return;
           }
-          this.related_Muscles.set(
-            res.muscles
-          );
+          this.related_Muscles.set(res.muscles);
         },
       });
   }
