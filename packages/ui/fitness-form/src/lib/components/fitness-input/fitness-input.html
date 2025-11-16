@@ -1,5 +1,7 @@
 <div class="flex flex-column gap-2">
-  <label [for]="id()" class="label-color mt-3">{{ labelText() }}</label>
+  @if(labelText()?.length&& labelText()!.trim().length > 0) {
+  <label [for]="id()" class="input-label">{{ labelText() }}</label>
+  }
 
   <div class="input-wrapper">
     <!-- Left icon (based on input type) -->

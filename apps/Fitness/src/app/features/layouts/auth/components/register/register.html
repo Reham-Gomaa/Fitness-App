@@ -1,4 +1,4 @@
-<div class="register-container flex flex-column gap-3">
+<div class="register-container flex flex-column">
   <h2 class="title">Create Account</h2>
 
   <form [formGroup]="registerForm" (ngSubmit)="submit()" class="flex flex-column gap-3">
@@ -29,11 +29,22 @@
       id="password"
     ></lib-fitness-input>
 
-    <div class="bg-black-alpha-90">
-          <lib-fitness-input-gender (genderChange)="onGenderChange($event)"></lib-fitness-input-gender>
+    <div>
+      <lib-fitness-input-gender (genderChange)="onGenderChange($event)"></lib-fitness-input-gender>
+    </div>
 
+    <div class="flex justify-content-center">
+      <lib-fitness-input-slider unit="kg" (weightChange)="onWeightChanged($event)"></lib-fitness-input-slider>
+    </div>
+
+    <div>
+      <lib-fitness-form-radio
+        [config]="radioConfig"
+        (selectedItemChange)="onActivityLevelChanged($event)"
+      ></lib-fitness-form-radio>
     </div>
 
     <button type="submit" class="submit-btn">Register</button>
   </form>
+
 </div>

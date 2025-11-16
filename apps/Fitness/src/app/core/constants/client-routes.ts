@@ -1,22 +1,22 @@
 export const CLIENT_ROUTES = {
-  root: '',
+    root: "",
 
-  dashboard: {
-    base: 'dashboard',
-  },
+    dashboard: {
+        base: "dashboard",
+    },
 
-  shared: {
-    base: 'shared',
-  },
+    shared: {
+        base: "shared",
+    },
 
-  documentation: {
-    base: 'documentation',
-  },
+    documentation: {
+        base: "documentation",
+    },
 
-  auth: {
-    base: 'auth',
-    login: 'login',
-  },
+    auth: {
+        base: "auth",
+        login: "login",
+    },
 } as const;
 
 export type ClientRoutes = typeof CLIENT_ROUTES;
