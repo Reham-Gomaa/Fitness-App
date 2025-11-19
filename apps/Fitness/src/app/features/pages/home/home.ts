@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, computed, inject, PLATFORM_ID } from '@angular/core';
 import { Workouts } from './components/workouts/workouts';
 import { Meals } from "./components/meals/meals";
 
