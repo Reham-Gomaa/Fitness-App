@@ -1,6 +1,15 @@
-import { Component, DestroyRef, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { MainCard } from './../../../../../shared/components/ui/main-card/main-card';
 //primeNg
+import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
@@ -11,6 +20,7 @@ import { Toast } from 'primeng/toast';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 //app Service
+import { Muscles } from './../../../../../shared/services/muscle/muscles';
 import { Muscles } from './../../../../../shared/services/muscle/muscles';
 
 //interfaces
@@ -93,6 +103,7 @@ export class Workouts implements OnInit {
             this.noMusclesFound();
             return;
           }
+          this.related_Muscles.set(res.muscles);
           this.related_Muscles.set(res.muscles);
         },
       });
