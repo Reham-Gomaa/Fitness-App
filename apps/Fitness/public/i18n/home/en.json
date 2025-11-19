@@ -1,11 +1,32 @@
 {
-  "home": {
-  "title": "Home",
-  "welcome": "Welcome to Fitness App",
-  "description": "Your journey to a healthier lifestyle starts here",
-  "currentLanguage": "Current Language",
-  "url": "Current URL",
-  "testTranslation": "Translation Test",
-  "switchLanguage": "Switch Language"
-  }
+    "about": {
+        "section": "ABOUT US",
+        "title": "EMPOWERING YOU TO ACHIEVE YOUR FITNESS GOALS",
+        "paragraph": "We believe fitness is more than just a workout—it's a lifestyle. With top-of- the-line facilities, certified trainers, and a supportive community, we're here to inspire and guide you every step of the way.",
+        "service1": {
+            "header": "Personal Trainer",
+            "paragraph1": "Achieve your fitness goals with the",
+            "paragraph2": "guidance of our certifiedtrainers."
+        },
+        "service2": {
+            "header": "Cardio Programs",
+            "paragraph1": "From steady-state runs to interval",
+            "paragraph2": "sprints, our treadmillprograms."
+        },
+        "service3": {
+            "header": "Quality Equipment",
+            "paragraph1": "Our gym is equipped with the",
+            "paragraph2": "latest cardio & strength machines."
+        },
+        "service4": {
+            "header": "Healthy Nutrition",
+            "paragraph1": "Fuel your fitness journey with",
+            "paragraph2": "customized meal plans for you."
+        },
+        "sronly": {
+            "figCaption": "Our certified personal trainers at FitZone",
+            "about-features": "Our Key Fitness Services",
+            "about-features-desc": "Explore our main services including personal training, cardio, quality equipment, and nutrition guidance."
+        }
+    }
 }

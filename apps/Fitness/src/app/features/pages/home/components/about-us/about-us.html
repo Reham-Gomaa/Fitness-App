@@ -1,0 +1,138 @@
+<section
+    class="about-layout grid"
+    role="region"
+    aria-labelledby="about-heading"
+    aria-describedby="about-summary"
+>
+    <figure
+        class="col-12 flex-order-1 xl:flex-order-0 relative"
+        role="group"
+        aria-label="Trainers gallery"
+    >
+        @for (t of trainers(); track t.name) {
+        <picture>
+            <source
+                srcset="./images/about-us/{{t.name}}-min.avif"
+                type="image/avif"
+            />
+            <source
+                srcset="./images/about-us/{{t.name}}-min.webp"
+                type="image/webp"
+            />
+            <img
+                priority
+                [style.aspectRatio]="t.ratio"
+                class="{{t.name}}"
+                ngSrc="./images/about-us/{{t.name}}-min.jpg"
+                [width]="t.width"
+                [height]="t.height"
+                alt="Trainer image"
+                decoding="async"
+            />
+        </picture>
+        }
+        <figcaption class="sr-only">{{ 'about.sronly.figCaption' |translate}}</figcaption>
+    </figure>
+
+    <article
+        class="article col-12 flex-order-0 xl:flex-order-1"
+        aria-labelledby="about-heading"
+        aria-describedby="about-summary"
+    >
+        <header>
+            <h1 id="about-heading">{{"about.section" |translate}}</h1>
+            <h2 class="mt-4">{{"about.title" |translate}}</h2>
+        </header>
+        <p
+            id="about-summary"
+            class="p-vision"
+        >
+            {{"about.paragraph" |translate}}
+        </p>
+        <section
+            aria-labelledby="about-features"
+            role="region"
+            aria-describedby="about-features-desc"
+        >
+            <h2
+                id="about-features"
+                class="sr-only"
+            >
+                {{"about.sronly.about-features" |translate}}
+            </h2>
+            <p
+                id="about-features-desc"
+                class="sr-only"
+            >
+                {{"about.sronly.about-features-desc" |translate}}
+            </p>
+
+            <ul
+                class="grid list-none p-0 m-0"
+                role="list"
+                aria-label="List of fitness services"
+            >
+                @for (item of services(); track $index) {
+                <li
+                    class="col-12 sm:col-6"
+                    role="listitem"
+                >
+                    <article
+                        [attr.aria-labelledby]="'service-' + $index + '-title'"
+                        [attr.aria-describedby]="'service-' + $index + '-desc'"
+                    >
+                        <h3
+                            id="service-{{$index}}-title"
+                            class="service-header"
+                        >
+                            <picture>
+                                <source
+                                    srcset="./images/about-us/Vector.avif"
+                                    type="image/avif"
+                                />
+                                <source
+                                    srcset="./images/about-us/Vector.webp"
+                                    type="image/webp"
+                                />
+                                <img
+                                    style="object-fit: cover; aspect-ratio: 18 / 17"
+                                    decoding="async"
+                                    loading="lazy"
+                                    ngSrc="./images/about-us/Vector.jpg"
+                                    width="18"
+                                    height="17"
+                                    alt="right arrow"
+                                    class="icon"
+                                    aria-hidden="true"
+                                />
+                            </picture>
+                            {{item.header |translate}}
+                        </h3>
+                        <div id="service-{{$index}}-desc">
+                            <p class="service-p">{{item.paragraph1 |translate}}</p>
+                            <p class="service-p">{{item.paragraph2 |translate}}</p>
+                        </div>
+                    </article>
+                </li>
+                <div
+                    [class.hidden]="$index !== 1"
+                    class="line-break"
+                ></div>
+                }
+            </ul>
+        </section>
+
+        <footer
+            class="mt-5 mb-8 md:mb-0"
+            role="contentinfo"
+            aria-label="Get Started section"
+        >
+            <button
+                type="button"
+                aria-label="Get started with FitZone services"
+            >
+                Get Started
+            </button>
+        </footer>
+    </article>
+</section>
