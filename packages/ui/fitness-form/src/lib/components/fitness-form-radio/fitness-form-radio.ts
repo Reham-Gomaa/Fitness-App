@@ -3,7 +3,6 @@ import {
   input,
   OnInit,
   output,
-  Signal,
   signal,
   WritableSignal,
 } from '@angular/core';
