@@ -3,36 +3,40 @@
     (ngSubmit)="verifyCodeSubmit()"
     role="form"
     aria-label="Verification code form"
+    class="otp-form"
 >
     <div class="otp-wrapper">
-        <p-inputOtp
-            formControlName="otpCode"
-            [length]="6"
-            [integerOnly]="true"
-            (onComplete)="verifyCodeSubmit()"
-        >
-        </p-inputOtp>
+        <div class="card flex justify-center">
+            <p-inputotp
+                formControlName="otpCode"
+                [length]="6"
+                [integerOnly]="true"
+                (onComplete)="verifyCodeSubmit()"
+            >
+                <ng-template
+                    #input
+                    let-token
+                    let-events="events"
+                >
+                    <input
+                        class="custom-otp-input"
+                        (input)="events.input($event)"
+                        (keydown)="events.keydown($event)"
+                        type="text"
+                        [attr.value]="token"
+                        [maxLength]="1"
+                    />
+                </ng-template>
+            </p-inputotp>
+        </div>
     </div>
 
-    <div class="resend-wrapper">
-        <button
-            type="button"
-            class="resend-button"
-            (click)="resendVerificationCode()"
-            [disabled]="isResending() || cooldownSeconds() > 0"
-        >
-            Resend Code
-            @if (cooldownSeconds() > 0) {
-                ({{ cooldownSeconds() }}s)
-            }
-        </button>
-    </div>
-
-    <button 
-        type="submit" 
+    <!-- Confirm Button -->
+    <button
+        type="submit"
         [disabled]="verifyCodeForm.invalid || isLoading()"
-        class="solid-button"
+        class="confirm-button"
     >
-        {{ isLoading() ? 'Verifying...' : 'Verify Code' }}
+        {{ isLoading() ? 'Verifying...' : 'Confirm' }}
     </button>
 </form>

@@ -2,35 +2,19 @@
     <lib-fitness-input
         formControlName="password"
         type="password"
-        placeholder="********"
+        placeholder="New Password"
         id="password"
         [errorHandilgControl]="resetPasswordForm.get('password')!"
         (input)="onPasswordInput()"
     ></lib-fitness-input>
 
-    @if (resetPasswordForm.get("password")?.value) {
-        <div class="password-strength">
-            <div class="strength-bar" [class.strength-1]="strengthLevel() >= 1"></div>
-            <div class="strength-bar" [class.strength-2]="strengthLevel() >= 2"></div>
-            <div class="strength-bar" [class.strength-3]="strengthLevel() >= 3"></div>
-            <div class="strength-bar" [class.strength-4]="strengthLevel() >= 4"></div>
-            <div class="strength-bar" [class.strength-5]="strengthLevel() >= 5"></div>
-        </div>
-    }
-
     <lib-fitness-input
         formControlName="confirmPassword"
         type="password"
-        placeholder="********"
+        placeholder="Confirm Password"
         id="confirmPassword"
         [errorHandilgControl]="resetPasswordForm.get('confirmPassword')!"
     ></lib-fitness-input>
 
-    <button 
-        type="submit" 
-        [disabled]="resetPasswordForm.invalid || isLoading()"
-        class="solid-button"
-    >
-        {{ isLoading() ? 'Resetting...' : 'Reset Password' }}
-    </button>
+    <button>Reset Password</button>
 </form>

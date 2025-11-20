@@ -1,32 +1,36 @@
 <div class="forgetpass-container">
     @if (forgetFlow() === "send") {
+    <div class="container">
+        <h2>Forgot Password</h2>
         <div class="step-wrapper">
-            <h2>Forgot Password</h2>
-            <p>Enter your email to receive a verification code</p>
+            <p>Enter Your Email</p>
             <app-send-email (emailSubmitted)="onEmailSubmitted($event)" />
         </div>
-    }
-    
-    @if (forgetFlow() === "verify") {
+    </div>
+
+    } @if (forgetFlow() === "verify") {
+    <div class="container">
+        <h2>OTP CODE</h2>
         <div class="step-wrapper">
-            <h2>Verify Code</h2>
-            <p>Enter the 6-digit code sent to <strong>{{ email() }}</strong></p>
+            <p>Enter Your OTP Check your email</p>
             <app-confirm-otp
                 [email]="email()"
-                (codeVerified)="onCodeVerified()"
+                (codeVerified)="onCodeVerified($event)"
                 (goBack)="goBackToSend()"
             />
         </div>
-    }
-    
-    @if (forgetFlow() === "reset") {
+    </div>
+
+    } @if (forgetFlow() === "reset") {
+    <div class="container">
+        <h2>Create New Password</h2>
         <div class="step-wrapper">
-            <h2>Create New Password</h2>
-            <p>Please enter your new password</p>
+            <p>make sure its 8 characters or more</p>
             <app-create-new-pass
                 [email]="email()"
                 (passwordReset)="onPasswordReset()"
             />
         </div>
+    </div>
     }
 </div>

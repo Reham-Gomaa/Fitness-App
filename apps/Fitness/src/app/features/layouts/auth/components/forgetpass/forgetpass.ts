@@ -18,7 +18,8 @@ export class Forgetpass {
         this.forgetFlow.set("verify");
     }
 
-    onCodeVerified() {
+    onCodeVerified(otp: number) {
+        console.log(otp);
         this.forgetFlow.set("reset");
     }
 
