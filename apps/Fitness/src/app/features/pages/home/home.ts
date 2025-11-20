@@ -1,34 +1,33 @@
 import {Component, computed, inject, PLATFORM_ID} from "@angular/core";
-import {Workouts} from "./components/workouts/workouts";
-import {Meals} from "./components/meals/meals";
-
 import {isPlatformBrowser} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {ButtonModule} from "primeng/button";
+// Services
 import {Translation} from "../../../core/services/translation/translation";
-
-import {AboutUs} from "./components/about-us/about-us";
-import {WhyUs} from "./components/why-us/why-us";
+import {SeoService} from "../../../core/services/seo/seo.service";
+// Shared_components
 import {HorizontalCarousel} from "../../../shared/components/ui/horizontalCarousel/horizontalCarousel";
-import {MainButton} from "../../../shared/components/ui/main-button/main-button";
+import {AboutUs} from "./components/about-us/about-us";
+import {Workouts} from "./components/workouts/workouts";
+import {WhyUs} from "./components/why-us/why-us";
+import {Meals} from "./components/meals/meals";
 @Component({
     selector: "app-home",
-    imports: [
-        ButtonModule,
-        TranslateModule,
-        AboutUs,
-        WhyUs,
-        Workouts,
-        Meals,
-        HorizontalCarousel,
-        MainButton,
-    ],
+    imports: [ButtonModule, TranslateModule, AboutUs, WhyUs, Workouts, Meals, HorizontalCarousel],
     templateUrl: "./home.html",
     styleUrl: "./home.scss",
 })
 export class Home {
     private readonly translation = inject(Translation);
     private readonly platformId = inject(PLATFORM_ID);
+    private seo = inject(SeoService);
+
+    constructor() {
+        this.seo.update(
+            "Home | FitZone",
+            "Kickstart your fitness journey. Explore our personalized workout plans, expert trainer sessions, and nutritious meal guides. Discover our mission, modern equipment, and join a community focused on your results. Get started today!"
+        );
+    }
 
     // Expose language signal for template
     currentLang = this.translation.lang;

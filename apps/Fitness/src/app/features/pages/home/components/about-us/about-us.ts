@@ -1,6 +1,5 @@
 import {NgOptimizedImage} from "@angular/common";
-import {Component, inject, signal, WritableSignal} from "@angular/core";
-import {SeoService} from "./../../../../../core/services/seo/seo.service";
+import {Component, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
 
 export interface trainersKeys {
@@ -22,16 +21,7 @@ export interface servicesKeys {
     styleUrl: "./about-us.scss",
 })
 export class AboutUs {
-    private seo = inject(SeoService);
-
-    constructor() {
-        this.seo.update(
-            "About Us | FitZone",
-            "Learn more about FitZone – empowering you to achieve your fitness goals with certified trainers, top equipment, and a supportive community."
-        );
-    }
-
-    trainers: WritableSignal<trainersKeys[]> = signal([
+    readonly trainers: WritableSignal<trainersKeys[]> = signal([
         {
             name: "trainer-3",
             width: 358,
@@ -52,7 +42,7 @@ export class AboutUs {
         },
     ]);
 
-    services: WritableSignal<servicesKeys[]> = signal([
+    readonly services: WritableSignal<servicesKeys[]> = signal([
         {
             header: "about.service1.header",
             paragraph1: "about.service1.paragraph1",
