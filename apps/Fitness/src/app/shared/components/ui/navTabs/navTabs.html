@@ -1,0 +1,21 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+ <ul class="nav-tabs">
+          @if (navItems()!.length > 0) {
+            @for (item of navItems(); track $index) {
+              <li>
+                <a  [class]="{
+                  'active':item.isActive
+                }" (click)="itemClickEmit($event , item)">
+                  {{item.name}}
+                </a>
+              </li>
+            }
+          }@else {
+            @for (item of makeArr(13); track $index) {
+            <li>
+              <p-skeleton height="1rem" width="5rem" class="mb-2" />
+            </li>
+            }
+          }
+        </ul>

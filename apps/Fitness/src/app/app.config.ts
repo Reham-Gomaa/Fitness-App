@@ -107,5 +107,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    provideHttpClient(withFetch())
   ],
 };

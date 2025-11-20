@@ -21,11 +21,16 @@
     --gray-900-60: #24242499;
 
     --orange-500: #ff4100;
+    --gradient-70: #b4b3b1;
 
     // About-Us
     --section-bg: var(--white-95);
     --text-color: var(--gray-900);
     --line-break-bg: var(--gray-900-14);
+    //meals and workouts shared
+    --main-color: var(--orange-500);
+    --text-color: var(--gray-900);
+    --sec-grad-color: var(--gradient-70);
     // Why-Us
     --section-bg: var(--white-95);
     --text-color: var(--gray-900);
@@ -39,6 +44,9 @@
     --section-bg: var(--gray-950);
     --text-color: var(--gray-100);
     --line-break-bg: var(--gray-100-14);
+    //meals and workouts shared
+    --text-color: var(--white);
+    --sec-grad-bg: var(--gradient-70);
     // Why-Us
     --section-bg: var(--gray-950);
     --text-color: var(--gray-100);

@@ -1,0 +1,24 @@
+<div id="main-card" class="w-10 h-full mx-auto">
+  <div class="card-img">
+    <img
+    [ngSrc]="item()?.img || '/images/div.png'"
+    fill
+    decoding="async"
+    alt="card img">
+  </div>
+  <div class="card-desc">
+    <h3 class="card-title mt-0">
+      {{item()?.name || "Meal Group" }}
+    </h3>
+    <div class="card-btn ">
+      <button class="bg-transparent flex gap-3 align-items-center uppercase font-bold">
+        explore
+        <div
+        class="icon flex justify-content-center align-items-center border-circle">
+          <i class="pi pi-arrow-up-right text-xs text-black" ></i>
+        </div>
+      </button>
+
+    </div>
+  </div>
+</div>

@@ -1,4 +1,7 @@
 import {Component, computed, inject, PLATFORM_ID} from "@angular/core";
+import {Workouts} from "./components/workouts/workouts";
+import {Meals} from "./components/meals/meals";
+
 import {isPlatformBrowser} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {ButtonModule} from "primeng/button";
@@ -6,9 +9,20 @@ import {Translation} from "../../../core/services/translation/translation";
 
 import {AboutUs} from "./components/about-us/about-us";
 import {WhyUs} from "./components/why-us/why-us";
+import {HorizontalCarousel} from "../../../shared/components/ui/horizontalCarousel/horizontalCarousel";
+import {MainButton} from "../../../shared/components/ui/main-button/main-button";
 @Component({
     selector: "app-home",
-    imports: [ButtonModule, TranslateModule, AboutUs, WhyUs],
+    imports: [
+        ButtonModule,
+        TranslateModule,
+        AboutUs,
+        WhyUs,
+        Workouts,
+        Meals,
+        HorizontalCarousel,
+        MainButton,
+    ],
     templateUrl: "./home.html",
     styleUrl: "./home.scss",
 })
