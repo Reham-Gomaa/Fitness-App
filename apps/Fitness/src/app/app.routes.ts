@@ -32,6 +32,15 @@ function createLanguageRoutes(): Route[] {
                             loadComponent: () =>
                                 import("./features/pages/home/home").then((c) => c.Home),
                         },
+                        {
+                            path: "about",
+                            title: "About",
+                            canActivate: [translationPreloadGuard],
+                            loadComponent: () =>
+                                import("./features/pages/home/components/about-us/about-us").then(
+                                    (c) => c.AboutUs
+                                ),
+                        },
                     ],
                 },
                 {
