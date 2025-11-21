@@ -45,8 +45,8 @@ export class WhyUs {
     readonly trainersCol1: WritableSignal<TrainersKeys[] | undefined> = signal([
         {
             name: "trainer-1",
-            width: 2000,
-            height: 1333,
+            width: 291,
+            height: 378,
             alt: "Certified personal trainer guiding client through customized workout routine",
             specialty: "personal training",
             description: "Expert trainer focusing on individualized fitness programs",
@@ -63,16 +63,16 @@ export class WhyUs {
     readonly trainersCol2: WritableSignal<TrainersKeys[] | undefined> = signal([
         {
             name: "trainer-3",
-            width: 304,
-            height: 286,
+            width: 291,
+            height: 285,
             alt: "Fitness instructor demonstrating proper strength training technique",
             specialty: "strength training",
             description: "Specialized in weight lifting and muscle building techniques",
         },
         {
             name: "trainer-4",
-            width: 2000,
-            height: 1333,
+            width: 291,
+            height: 346,
             alt: "Professional fitness coach demonstrating proper exercise form and technique",
             specialty: "exercise technique",
             description: "Specialized in form correction and movement optimization",
