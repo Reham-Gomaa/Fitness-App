@@ -4,8 +4,20 @@
 >
     <article class="col-12 lg:col">
         <header>
-            <h1 id="why-us-heading">{{ "why-us.section" |translate}}</h1>
-            <h2>{{ "why-us.title" |translate}}</h2>
+            <app-title
+                id="why-us-heading"
+                [titleTxt]="'why-us.section' |translate"
+                [containerClass]="''"
+                [justifyCenter]="false"
+            ></app-title>
+            <app-header
+                class="sec-header mt-4"
+                [containerClass]="''"
+            >
+                {{"why-us.titleStart" |translate}}
+                <span class="long-desc-span">{{"why-us.titleMiddle" |translate}}</span>
+                {{"why-us.titleEnd" |translate}}
+            </app-header>
         </header>
         <p class="goals-p">{{ "why-us.paragraph" |translate}}</p>
         <ul
@@ -97,9 +109,6 @@
                 }
             </div>
         </div>
-        <figcaption class="sr-only">
-            Professional FitZone trainers demonstrating expertise in personalized fitness programs,
-            strength training, and modern exercise techniques.
-        </figcaption>
+        <figcaption class="sr-only"></figcaption>
     </figure>
 </section>

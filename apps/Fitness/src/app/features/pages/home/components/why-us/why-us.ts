@@ -1,6 +1,8 @@
 import {NgOptimizedImage} from "@angular/common";
 import {Component, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
+import {Title} from "./../../../../../shared/components/ui/title/title";
+import {Header} from "./../../../../../shared/components/ui/header/header";
 
 export interface StepsKeys {
     id: string;
@@ -18,7 +20,7 @@ export interface TrainersKeys {
 
 @Component({
     selector: "app-why-us",
-    imports: [NgOptimizedImage, TranslatePipe],
+    imports: [NgOptimizedImage, TranslatePipe, Title, Header],
     templateUrl: "./why-us.html",
     styleUrl: "./why-us.scss",
 })

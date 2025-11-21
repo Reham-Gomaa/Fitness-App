@@ -1,8 +1,11 @@
 {
     "about": {
         "section": "ABOUT US",
-        "title": "EMPOWERING YOU TO ACHIEVE YOUR FITNESS GOALS",
+        "titleStart": "EMPOWERING YOU TO ACHIEVE  ",
+        "titleMiddle": "YOUR FITNESS ",
+        "titleEnd": "GOALS",
         "paragraph": "We believe fitness is more than just a workout—it's a lifestyle. With top-of- the-line facilities, certified trainers, and a supportive community, we're here to inspire and guide you every step of the way.",
+        "button": "Get Started",
         "service1": {
             "header": "Personal Trainer",
             "paragraph1": "Achieve your fitness goals with the",
@@ -31,7 +34,9 @@
     },
     "why-us": {
         "section": "WHY US",
-        "title": "Elevate fitness with the best way possible",
+        "titleStart": "Elevate fitness with the ",
+        "titleMiddle": "best way ",
+        "titleEnd": "possible",
         "paragraph": "We offer a fitness journey that's tailored to your goals, supported by professional trainers and a welcoming community. Whether it's weight loss, strength building, or overall wellness, our proven methods.",
         "step1": {
             "id": "01",
@@ -47,6 +52,7 @@
             "id": "03",
             "header": "state-of-the-art equipment",
             "paragraph": "We provide the latest in gym equipment, from cardio machines to free "
-        }
+        },
+        "sr-only": "Professional FitZone trainers demonstrating expertise in personalized fitness programs, strength training, and modern exercise techniques."
     }
 }

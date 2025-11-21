@@ -1,6 +1,9 @@
 import {NgOptimizedImage} from "@angular/common";
 import {Component, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
+import {Header} from "./../../../../../shared/components/ui/header/header";
+import {Title} from "./../../../../../shared/components/ui/title/title";
+import {MainButton} from "./../../../../../shared/components/ui/main-button/main-button";
 
 export interface trainersKeys {
     name: string;
@@ -16,7 +19,7 @@ export interface servicesKeys {
 
 @Component({
     selector: "app-about-us",
-    imports: [NgOptimizedImage, TranslatePipe],
+    imports: [NgOptimizedImage, TranslatePipe, Header, Title, MainButton],
     templateUrl: "./about-us.html",
     styleUrl: "./about-us.scss",
 })

@@ -41,8 +41,20 @@
         aria-describedby="about-summary"
     >
         <header>
-            <h1 id="about-heading">{{"about.section" |translate}}</h1>
-            <h2 class="mt-4">{{"about.title" |translate}}</h2>
+            <app-title
+                id="about-heading"
+                [titleTxt]="'about.section' |translate"
+                [containerClass]="''"
+                [justifyCenter]="false"
+            ></app-title>
+            <app-header
+                class="sec-header mt-4"
+                [containerClass]="''"
+            >
+                {{"about.titleStart" |translate}}
+                <span class="long-desc-span">{{"about.titleMiddle" |translate}}</span>
+                {{"about.titleEnd" |translate}}
+            </app-header>
         </header>
         <p
             id="about-summary"
@@ -128,12 +140,10 @@
             role="contentinfo"
             aria-label="Get Started section"
         >
-            <button
-                type="button"
-                aria-label="Get started with FitZone services"
-            >
-                Get Started
-            </button>
+            <app-main-button
+                [fontWeight]="'font-semibold'"
+                [btnText]="'about.button' |translate"
+            ></app-main-button>
         </footer>
     </article>
 </section>
