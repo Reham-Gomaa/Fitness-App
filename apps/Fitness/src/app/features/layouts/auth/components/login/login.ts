@@ -1,18 +1,25 @@
+// Core
 import {Component, DestroyRef, inject, signal} from "@angular/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {HttpErrorResponse} from "@angular/common/http";
 // Forms
 import {ReactiveFormsModule, FormBuilder, FormGroup, Validators} from "@angular/forms";
 // i18n
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 // Shared-components
 import {FitnessInput} from "@fitness-app/fitness-form";
-import {AuthApiKpService} from "auth-api-kp";
-import {Router} from "@angular/router";
-import {MessageService} from "primeng/api";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
+// Prime ng
+import {MessageService} from "primeng/api";
+
+// Router
+import {Router, RouterLink} from "@angular/router";
+import {CLIENT_ROUTES} from "apps/Fitness/src/app/core/constants/client-routes";
+// package
+import {AuthApiKpService, ErrorResponse, SignInResponse} from "auth-api-kp";
 @Component({
     selector: "app-login",
-    imports: [ReactiveFormsModule, FitnessInput, TranslatePipe],
+    imports: [ReactiveFormsModule, FitnessInput, TranslatePipe,RouterLink],
     templateUrl: "./login.html",
     styleUrl: "./login.scss",
 })
@@ -24,7 +31,7 @@ export class Login {
     private readonly _router = inject(Router);
     public _messageService = inject(MessageService);
     private readonly _translate = inject(TranslateService);
-
+    routes = CLIENT_ROUTES;
     isLoading = signal<boolean>(false);
 
     loginForm: FormGroup = this.formBuilder.group({
@@ -54,29 +61,27 @@ export class Login {
             .login(this.loginForm.value)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
-                next: (res) => {
-                    console.log(res);
-                    if( res.error){
-                      console.log(res.error);
-                        this._messageService.add({
-                            severity: "success",
-                            detail: this._translate.instant("messagesToast.loginSuccess"),
-                            life: 3000,
-                        });
-                        this._router.navigate(["/"]);
-                    }else{
+                next: (res: SignInResponse | ErrorResponse) => {
+                    if ("error" in res) {
                         this._messageService.add({
                             severity: "error",
+                            detail: (res as ErrorResponse).error,
+                            life: 3000,
+                        });
+                    } else {
+                        console.log(res.token);
+                        this._messageService.add({
+                            severity: "success",
                             detail: this._translate.instant("messagesToast.loginFailed"),
                             life: 5000,
                         });
+                        this._router.navigate(["/"]);
                     }
-
                 },
-                error: () => {
+                error: (err: HttpErrorResponse) => {
                     this._messageService.add({
                         severity: "error",
-                        detail: this._translate.instant("messagesToast.loginFailed"),
+                        detail: err.error,
                         life: 5000,
                     });
                 },

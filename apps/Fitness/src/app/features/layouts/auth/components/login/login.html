@@ -27,14 +27,9 @@
             ></lib-fitness-input>
             <a
                 class="forget-link"
-                href="#"
+                [routerLink]="[routes.auth,routes.auth.forgetpass]"
                 >{{ "login.forgotPassword" | translate }}</a
             >
-            <div class="or-separator">
-                <span class="line"></span>
-                <span class="text">{{ "login.or" | translate }}</span>
-                <span class="line"></span>
-            </div>
 
             <button
                 type="submit"
@@ -46,7 +41,7 @@
 
         <p class="register">
             {{ "login.noAccount" | translate }}
-            <a href="#">{{ "login.signUp" | translate }}</a>
+            <a [routerLink]="[routes.auth,routes.auth.register]">{{ "login.signUp" | translate }}</a>
         </p>
     </div>
 </section>

@@ -16,6 +16,8 @@ export const CLIENT_ROUTES = {
     auth: {
         base: "auth",
         login: "login",
+        register: "register",
+        forgetpass: "forgetpass",
     },
 } as const;
 
