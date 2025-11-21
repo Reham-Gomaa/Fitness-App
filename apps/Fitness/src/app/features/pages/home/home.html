@@ -1,5 +1,6 @@
+<app-horizontal-carousel />
+<div>
 <app-about-us />
-<div class="language-buttons">
     @for (lang of languages; track lang.code) {
     <p-button
         [label]="lang.flag + ' ' + lang.label"
@@ -9,3 +10,6 @@
     />
     }
 </div>
+<app-workouts />
+<app-meals />
+<app-horizontal-carousel />

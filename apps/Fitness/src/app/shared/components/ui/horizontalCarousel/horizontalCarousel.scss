@@ -1,0 +1,24 @@
+.card {
+  padding: 10px 8px;
+  background-color: var(--main-color);
+  font-family: var(--font-3);
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  i,h3{
+    color: #F3F3F4 !important;
+  }
+
+
+}
+
+:host ::ng-deep .p-carousel-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1 1 auto !important;
+}
+
+

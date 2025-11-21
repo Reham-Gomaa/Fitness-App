@@ -1,0 +1,32 @@
+<section id="meals" class="py-5">
+  <app-title
+   [titleImg]="'/images/meals/Healthy.png'"
+   [titleTxt]="'Healthy Nutritions'"
+   [imgW]="'258'"
+   [imgH]="'43'"
+
+   />
+  <div class="sec-gradient overflow-hidden">
+    <div class="container">
+      <div class="meals-info text-center my-4">
+          <app-header >
+            Fuel your fitness journey with <br>
+            customized
+            <span class="long-desc-span">meal plans</span>
+            for you
+          </app-header>
+      </div>
+      <div class="meal-items">
+            <div class="card">
+
+                <app-carousel  [data]="mealCats()" />
+
+
+            </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</section>

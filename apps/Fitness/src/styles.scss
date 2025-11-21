@@ -8,3 +8,19 @@ html {
   box-sizing: border-box;
   overflow-x: hidden;
 } /* You can add global styles to this file, and also import other style files */
+
+/* meals and workouts */
+.sec-gradient {
+
+  background: linear-gradient(to bottom, var(--sec-grad-color) 0% 75%, transparent 70% 100%);
+
+
+}
+
+.container {
+  max-width: 90%;
+  margin: auto;
+}
+
+
+

@@ -1,0 +1,38 @@
+ @if (data().length) {
+            <p-carousel [value]="data()"
+            [numVisible]="3"
+            autoplayInterval="3000"
+            [numScroll]="2"
+            [circular]="false"
+            [responsiveOptions]="responsiveOptions"
+            [showNavigators]="false"
+            [indicatorStyle]="{
+              'background-color':'#242424',
+              'width':'10px',
+              'height':'10px',
+              'border-radius':'50%',
+            }"
+
+            >
+                <ng-template let-product #item>
+                    <app-main-card [item]="{
+                      name:product.name || product.strCategory,
+                      id:product.id || product.idCategory,
+                      img:product.image || product.strCategoryThumb
+                    }" />
+                </ng-template>
+            </p-carousel>
+}@else {
+
+
+  <div class="grid">
+    @for (sk of [1,2,3]; track $index) {
+    <div class="col-12 xl:col-4 md:col-6">
+      <p-skeleton height="10rem" />
+
+    </div>
+    }
+  </div>
+
+}
+

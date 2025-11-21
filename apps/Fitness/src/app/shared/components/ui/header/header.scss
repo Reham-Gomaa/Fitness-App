@@ -1,0 +1,16 @@
+:host ::ng-deep .sec-long-desc {
+  font-family: var(--font-1);
+  font-size: calc(40 / 16) + rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-color);
+  .long-desc-span {
+    color: var(--main-color) !important;
+  }
+}
+
+@media (max-width: 768px) {
+ .sec-long-desc {
+    font-size: calc(25 / 16) + rem;
+  }
+}

@@ -1,0 +1,7 @@
+:host ::ng-deep .p-carousel-indicator-active button {
+  background-color: var(--main-color) !important;
+  border-radius: 5px !important;
+  width: 30px !important;
+  height: 10px !important;
+  transition: all 0.2s;
+}
