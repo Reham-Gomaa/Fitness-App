@@ -10,4 +10,5 @@ export class MainButton {
     btnText = input.required<string>();
     btnIcon = input<string>();
     fontWeight = input<string>();
+    customClass = input<string>();
 }
