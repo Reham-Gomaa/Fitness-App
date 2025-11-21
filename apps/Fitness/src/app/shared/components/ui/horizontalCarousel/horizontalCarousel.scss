@@ -1,4 +1,10 @@
-.card {
+
+
+
+.horizontal-carousel-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
   padding: 10px 8px;
   background-color: var(--main-color);
   font-family: var(--font-3);
@@ -10,15 +16,26 @@
   i,h3{
     color: #F3F3F4 !important;
   }
-
-
 }
 
-:host ::ng-deep .p-carousel-item {
+.horizontal-carousel {
   display: flex;
-  justify-content: space-around;
+  animation: scroll-left 9s linear infinite;
+}
+
+.item {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  display: flex;
   align-items: center;
-  flex: 1 1 auto !important;
+  justify-content: space-around;
+  // flex: 0 0 auto;
+}
+
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 

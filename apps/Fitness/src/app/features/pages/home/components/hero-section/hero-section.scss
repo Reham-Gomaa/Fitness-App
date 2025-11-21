@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  background-color: var(--main-bg);
+}
+
+
+#hero {
+  .hero-caption
+  {
+
+    p.hero-desc {
+     font-family: var(--font-2);
+     font-weight: 400;
+     font-size: 18px;
+     line-height: 28.8px;
+     color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+     &::before {
+       content: "";
+       display: inline-block;
+       width: 8px;
+       height: 100px;
+       background-color: var(--main-color);
+
+     }
+   }
+   .statistics {
+    margin-top: 40px;
+    .st-item {
+      h4 {
+       font-family: var(--font-3);
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 22.3px;
+        line-height: 36px;
+        margin-bottom: 5px;
+
+      }
+      p {
+        font-family: var(--font-2);
+        font-size: 18px;
+        line-height: 28.8px;
+        font-weight: normal;
+        text-transform: capitalize;
+
+      }
+    }
+   }
+   .btns {
+    gap: 64px;
+   }
+  }
+}
+
+
+

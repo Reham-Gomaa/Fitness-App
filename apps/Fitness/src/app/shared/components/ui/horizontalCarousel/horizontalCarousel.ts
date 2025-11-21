@@ -11,17 +11,7 @@ import {TagModule} from "primeng/tag";
 })
 export class HorizontalCarousel implements OnInit {
     responsiveOptions: any[] | undefined;
-    expressions = signal<string[]>([
-      "Personal Trainers",
-      "Live Classes",
-      "Outdoor & Online Trainers",
-        "Nutrition Coaching",
-        "Workout Programs",
-        "Yoga & Meditation",
-        "Strength Training",
-        "Cardio Sessions",
-        "Home Workouts",
-    ]);
+    
     ngOnInit(): void {
         this.responsiveOptions = [
             {
@@ -45,5 +35,18 @@ export class HorizontalCarousel implements OnInit {
                 numScroll: 1,
             },
         ];
+    }
+
+    expressions() {
+        const arr = [
+            "NUTRITION COACHING",
+            "WORKOUT PROGRAMS",
+            "YOGA & MEDITATION",
+            "STRENGTH TRAINING",
+            "CARDIO SESSIONS",
+            "HOME WORKOUTS",
+        ];
+
+        return [...arr, ...arr]; // 👈 IMPORTANT (double array)
     }
 }

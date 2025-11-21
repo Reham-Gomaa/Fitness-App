@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  imports: [],
-  templateUrl: './header.html',
-  styleUrl: './header.scss',
+    selector: "app-header",
+    imports: [],
+    templateUrl: "./header.html",
+    styleUrl: "./header.scss",
 })
-export class Header {}
+export class Header {
+    containerClass = input<string>("text-center mx-auto w-12 xl:w-8");
+}
