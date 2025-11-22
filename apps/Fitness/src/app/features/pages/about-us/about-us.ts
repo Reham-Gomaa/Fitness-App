@@ -1,9 +1,9 @@
-import {isPlatformBrowser, NgOptimizedImage} from "@angular/common";
-import {Component, computed, inject, PLATFORM_ID, signal, WritableSignal} from "@angular/core";
-import {SeoService} from "../../../core/services/seo/seo.service";
+import {NgOptimizedImage} from "@angular/common";
+import {Component, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
-import {Translation} from "../../../core/services/translation/translation";
-import {Button} from "primeng/button";
+import {Header} from "./../../../shared/components/ui/header/header";
+import {Title} from "./../../../shared/components/ui/title/title";
+import {MainButton} from "./../../../shared/components/ui/main-button/main-button";
 
 export interface trainersKeys {
     name: string;
@@ -19,21 +19,12 @@ export interface servicesKeys {
 
 @Component({
     selector: "app-about-us",
-    imports: [NgOptimizedImage, TranslatePipe, Button],
+    imports: [NgOptimizedImage, TranslatePipe, Header, Title, MainButton],
     templateUrl: "./about-us.html",
     styleUrl: "./about-us.scss",
 })
 export class AboutUs {
-    private seo = inject(SeoService);
-
-    constructor() {
-        this.seo.update(
-            "About Us | FitZone",
-            "Learn more about FitZone – empowering you to achieve your fitness goals with certified trainers, top equipment, and a supportive community."
-        );
-    }
-
-    trainers: WritableSignal<trainersKeys[]> = signal([
+    readonly trainers: WritableSignal<trainersKeys[]> = signal([
         {
             name: "trainer-3",
             width: 358,
@@ -54,7 +45,7 @@ export class AboutUs {
         },
     ]);
 
-    services: WritableSignal<servicesKeys[]> = signal([
+    readonly services: WritableSignal<servicesKeys[]> = signal([
         {
             header: "about.service1.header",
             paragraph1: "about.service1.paragraph1",
@@ -76,28 +67,4 @@ export class AboutUs {
             paragraph2: "about.service4.paragraph2",
         },
     ]);
-
-    private readonly translation = inject(Translation);
-    private readonly platformId = inject(PLATFORM_ID);
-
-    // Expose language signal for template
-    currentLang = this.translation.lang;
-
-    // Get current URL for display
-    currentUrl = computed(() => {
-        if (isPlatformBrowser(this.platformId)) {
-            return window.location.href;
-        }
-        return "";
-    });
-
-    // Get supported languages for buttons
-    readonly languages = [
-        {code: "en", label: "English", flag: "🇬🇧"},
-        {code: "ar", label: "العربية", flag: "🇸🇦"},
-    ];
-
-    switchLanguage(lang: string): void {
-        this.translation.setLanguage(lang);
-    }
 }

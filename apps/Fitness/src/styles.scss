@@ -1,4 +1,4 @@
-@use './app/shared/styles/_utilities' as utl; /* You can add global styles to this file, and also import other style files */
+@use './app/shared/styles/_utilities' as utl;
 @use './app/shared/styles/_variables' as vars;
 
 body,
@@ -7,7 +7,7 @@ html {
     padding: 0;
     box-sizing: border-box;
     overflow-x: hidden;
-} /* You can add global styles to this file, and also import other style files */
+}
 
 /* meals and workouts */
 .sec-gradient {
@@ -17,4 +17,12 @@ html {
 .container {
     max-width: 90%;
     margin: auto;
+}
+
+@font-face {
+    font-family: 'primeicons';
+    src: url('./../../../node_modules/primeicons/fonts/primeicons.woff2') format('woff2');
+    font-display: swap; /* This will display fonts when ready */
+    font-weight: normal;
+    font-style: normal;
 }
