@@ -1,23 +1,25 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@fitness-app/fitness-form": ["packages/ui/fitness-form/src/index.ts"],
-      "@fitness-app/environment/*": ["apps/environment/*"]
-    }
-  },
-  "exclude": ["node_modules", "tmp"]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": ["es2020", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@fitness-app/fitness-form": ["packages/ui/fitness-form/src/index.ts"],
+            "@fitness-app/buttons": ["packages/ui/buttons/src/index.ts"],
+            "@fitness-app/environment/*": ["apps/environment/*"],
+            "@fitness-app/services": ["packages/services/src/index.ts"]
+        }
+    },
+    "exclude": ["node_modules", "tmp"]
 }
