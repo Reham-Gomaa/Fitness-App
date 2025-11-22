@@ -46,8 +46,7 @@ export const appConfig: ApplicationConfig = {
         {
             provide: API_CONFIG,
             useValue: {
-                baseUrl: `${environment.baseApiUrl}/api`,
-                apiVersion: "v1",
+                baseUrl: `${environment.baseApiUrl}`,
                 endpoints: {
                     auth: {
                         login: "auth/signin",
