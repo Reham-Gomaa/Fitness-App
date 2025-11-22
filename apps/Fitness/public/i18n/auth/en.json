@@ -1,13 +1,16 @@
 {
   "login": {
     "title": "Login",
+    "greeting": "Hey There",
+    "welcomeBack": "WELCOME BACK",
     "email": "Email",
     "password": "Password",
     "rememberMe": "Remember me",
-    "forgotPassword": "Forgot password?",
+    "forgotPassword": "Forgot Password?",
+    "or": "Or",
     "submit": "Login",
-    "noAccount": "Don't have an account?",
-    "signUp": "Sign up"
+    "noAccount": "Don't Have An Account Yet?",
+    "signUp": "Register"
   },
   "register": {
     "title": "Register",
@@ -25,5 +28,25 @@
     "email": "Email",
     "submit": "Send Reset Link",
     "backToLogin": "Back to login"
+  },  "inputErrors": {
+    "required": "This field is required",
+    "minlength": {
+      "prefix": "Minimum",
+      "suffix": "characters required"
+    },
+    "maxlength": {
+      "prefix": "Maximum",
+      "suffix": "characters allowed"
+    },
+    "email": "Invalid email format (e.g., example@example.com)",
+    "passwordPattern": "Password must be at least 8 characters, include uppercase, lowercase, and a special character.",
+    "onlyNumbers": "This number is not valid",
+    "misMatch": "Passwords do not match"
+  },
+    "messagesToast": {
+    "loginSuccess": "Login successful! Welcome back.",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "registerSuccess": "Registration successful! Please log in.",
+    "registerFailed": "Registration failed. Please try again."
   }
 }

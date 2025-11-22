@@ -1,21 +1,19 @@
 export const CLIENT_ROUTES = {
     root: "",
 
-    dashboard: {
-        base: "dashboard",
+    main: {
+        base: "main",
+        home: "home",
+        about: "about",
+        classes: "classes",
+        meals: "meals",
+        account: "account",
     },
-
-    shared: {
-        base: "shared",
-    },
-
-    documentation: {
-        base: "documentation",
-    },
-
     auth: {
         base: "auth",
         login: "login",
+        register: "register",
+        forgetpass: "forgetpass",
     },
 } as const;
 

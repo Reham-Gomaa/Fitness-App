@@ -1,1 +1,47 @@
-<p>login works!</p>
+<section class="login">
+    <p class="title">{{ "login.greeting" | translate }}</p>
+    <p class="header">{{ "login.welcomeBack" | translate }}</p>
+    <div class="body">
+        <p class="form-head">{{ "login.title" | translate }}</p>
+        <form
+            [formGroup]="loginForm"
+            (ngSubmit)="LoginSubmit()"
+            class="flex flex-column gap-3"
+        >
+            <!-- Email -->
+            <lib-fitness-input
+                formControlName="email"
+                [errorHandilgControl]="loginForm.get('email')!"
+                placeholder="Enter your email"
+                type="email"
+                id="email"
+            ></lib-fitness-input>
+
+            <!-- Password -->
+            <lib-fitness-input
+                formControlName="password"
+                [errorHandilgControl]="loginForm.get('password')!"
+                placeholder="Enter your password"
+                type="password"
+                id="password"
+            ></lib-fitness-input>
+            <a
+                class="forget-link"
+                [routerLink]="_routeBuilder.buildPath(ROUTES.auth.base, ROUTES.auth.forgetpass)"
+                >{{ "login.forgotPassword" | translate }}</a
+            >
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                {{ "login.submit" | translate }}
+            </button>
+        </form>
+
+        <p class="register">
+            {{ "login.noAccount" | translate }}
+            <a  [routerLink]="_routeBuilder.buildPath(ROUTES.auth.base, ROUTES.auth.register)">{{ "login.signUp" | translate }}</a>
+        </p>
+    </div>
+</section>

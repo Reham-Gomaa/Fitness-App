@@ -16,7 +16,7 @@ export class FitnessInputErrorHandeling {
   control = input.required<AbstractControl>();
 
   readonly passwordPattern =
-    '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&\\)]).{8,}$";
     
   readonly phonePattern = '/^(\\+201|01)[0125][0-9]{8}$/';
 }
