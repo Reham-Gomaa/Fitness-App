@@ -1,5 +1,21 @@
-<p>details works!</p>
-
-itemId --> {{id()}}
-<br>
-itemType --> {{cat()}}
+<section
+    id="details"
+    [style.backgroundImage]="'url(./images/details/bg-2.avif)'"
+>
+    <div class="blur-overlay"></div>
+    <div class="container">
+        <div class="content grid">
+            <app-panel class="col-3" />
+            <div class="video-wrapper col-9">
+                <div class="flex flex-column gap-4">
+                    <div class="bg-green-500 h-4rem"></div>
+                    <div class="bg-green-500 h-4rem"></div>
+                    <div class="bg-green-500 h-4rem"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    itemId --> {{id()}}
+    <br />
+    itemType --> {{cat()}}
+</section>
