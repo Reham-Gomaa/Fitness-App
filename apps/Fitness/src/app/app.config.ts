@@ -14,7 +14,7 @@ import {
 // Hydration imports removed - not needed for static builds
 // import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
-import {provideRouter, withInMemoryScrolling, withViewTransitions} from "@angular/router";
+import {provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions} from "@angular/router";
 import {routes} from "./app.routes";
 
 // Primeng
@@ -100,7 +100,8 @@ export const appConfig: ApplicationConfig = {
             withViewTransitions(),
             withInMemoryScrolling({
                 scrollPositionRestoration: "enabled",
-            })
+            }),
+            withComponentInputBinding()
         ),
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         provideHttpClient(withFetch()),

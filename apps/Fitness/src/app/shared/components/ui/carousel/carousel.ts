@@ -22,6 +22,7 @@ import { Skeleton } from "primeng/skeleton";
 })
 export class Carousel implements OnInit {
   data = input.required<Muscle[] | Category[]>();
+  cat = input<string>();
   responsiveOptions: any[] | undefined;
   ngOnInit(): void {
     this.responsiveOptions = [

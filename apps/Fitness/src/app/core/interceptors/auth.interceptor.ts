@@ -15,13 +15,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     // Get current language (ar or en)
     const lang = translation.lang();
 
-    // Clone the request and add headers
-    const clonedRequest = req.clone({
-        setHeaders: {
-            ...(token && {token: token}),
-            lang: lang || "en",
-        },
-    });
 
-    return next(clonedRequest);
+    // Clone the request and add headers
+    if (req.url.includes("www.themealdb.com") == false) {
+      const clonedRequest = req.clone({
+          setHeaders: {
+              ...(token && {token: token}),
+              lang: lang || "en",
+          },
+      });
+
+      return next(clonedRequest);
+    }
+    return next(req)
+
 };

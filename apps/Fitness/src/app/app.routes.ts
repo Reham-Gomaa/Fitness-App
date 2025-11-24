@@ -58,6 +58,13 @@ export const routes: Routes = [
                         loadComponent: () =>
                             import("./features/pages/account/account").then((c) => c.Account),
                     },
+                    {
+                        path: CLIENT_ROUTES.main.details,
+                        title: "Details",
+                        canActivate: [translationPreloadGuard],
+                        loadComponent: () =>
+                            import("./shared/components/ui/details/details").then((c) => c.Details),
+                    },
                 ],
             },
             {
