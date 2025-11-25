@@ -33,15 +33,19 @@
 
             <button
                 type="submit"
-                class="submit-btn"
+                [disabled]="isLoading()"
+                [class.invalid]="loginForm.invalid"
+                class="auth-btn"
             >
-                {{ "login.submit" | translate }}
+                {{ isLoading() ? ('login.loggingIn' | translate) : ('login.submit' | translate) }}
             </button>
         </form>
 
         <p class="register">
             {{ "login.noAccount" | translate }}
-            <a  [routerLink]="_routeBuilder.buildPath(ROUTES.auth.base, ROUTES.auth.register)">{{ "login.signUp" | translate }}</a>
+            <a [routerLink]="_routeBuilder.buildPath(ROUTES.auth.base, ROUTES.auth.register)"
+                >{{ "login.signUp" | translate }}</a
+            >
         </p>
     </div>
 </section>

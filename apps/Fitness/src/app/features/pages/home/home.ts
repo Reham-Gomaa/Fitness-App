@@ -9,9 +9,10 @@ import {HorizontalCarousel} from "../../../shared/components/ui/horizontalCarous
 import {AboutUs} from "../about-us/about-us";
 import {Meals} from "../meals/meals";
 import {Workouts} from "../workouts/workouts";
+import { HeroSection } from "./components/hero-section/hero-section";
 @Component({
     selector: "app-home",
-    imports: [ButtonModule, TranslateModule, AboutUs, Workouts, Meals, HorizontalCarousel],
+    imports: [ButtonModule, TranslateModule, AboutUs, Workouts, Meals, HorizontalCarousel, HeroSection],
     templateUrl: "./home.html",
     styleUrl: "./home.scss",
 })

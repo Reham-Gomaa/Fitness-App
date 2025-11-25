@@ -1,1 +1,36 @@
-<p>forgetpass works!</p>
+<div class="forgetpass-container">
+    @if (forgetFlow() === "send") {
+    <div class="container">
+        <h2>{{ 'forgetpass.title' | translate }}</h2>
+        <div class="step-wrapper">
+            <p>{{ 'forgetpass.enterEmail' | translate }}</p>
+            <app-send-email (emailSubmitted)="onEmailSubmitted($event)" />
+        </div>
+    </div>
+
+    } @if (forgetFlow() === "verify") {
+    <div class="container">
+        <h2>{{ 'forgetpass.otpTitle' | translate }}</h2>
+        <div class="step-wrapper">
+            <p>{{ 'forgetpass.otpInstructions' | translate }}</p>
+            <app-confirm-otp
+                [email]="email()"
+                (codeVerified)="onCodeVerified($event)"
+                (goBack)="goBackToSend()"
+            />
+        </div>
+    </div>
+
+    } @if (forgetFlow() === "reset") {
+    <div class="container">
+        <h2>{{ 'forgetpass.createTitle' | translate }}</h2>
+        <div class="step-wrapper">
+            <p>{{ 'forgetpass.createHint' | translate }}</p>
+            <app-create-new-pass
+                [email]="email()"
+                (passwordReset)="onPasswordReset()"
+            />
+        </div>
+    </div>
+    }
+</div>

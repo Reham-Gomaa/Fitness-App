@@ -1,9 +1,18 @@
 {
-  "inputErrors": {
-    "required": "This field is required",
-    "minlength": {
-      "prefix": "Minimum",
-      "suffix": "characters required"
+    "inputErrors": {
+        "required": "This field is required",
+        "minlength": {
+            "prefix": "Minimum",
+            "suffix": "characters required"
+        },
+        "maxlength": {
+            "prefix": "Maximum",
+            "suffix": "characters allowed"
+        },
+        "email": "Invalid email format (e.g., example@example.com)",
+        "passwordPattern": "Password must be at least 8 characters, include uppercase, lowercase, and a special character.",
+        "onlyNumbers": "This number is not valid",
+        "misMatch": "Passwords do not match"
     },
     "maxlength": {
       "prefix": "Maximum",

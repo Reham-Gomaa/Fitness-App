@@ -1,22 +1,14 @@
-<div class="card">
-    <p-carousel
-    [value]="expressions()"
-    [numVisible]="4.7"
-    [numScroll]="1"
-    [circular]="true"
-    [autoplayInterval]="3000"
-    [showNavigators]="false"
-    [showIndicators]="false"
-    [scrollLeft]="true"
-    [responsiveOptions]="responsiveOptions"
-    class="peek-carousel"
-    >
-        <ng-template let-product #item>
-
-            <h3 class="text-center px-3 uppercase ">
-              {{product}}
+<div class="horizontal-carousel-container">
+  <div class="horizontal-carousel">
+    @for (exp of expressions(); track $index) {
+      <div class="item" >
+         <h3 class="text-center px-3 uppercase ">
+              {{exp}}
             </h3>
             <i class="pi pi-star-fill"></i>
-        </ng-template>
-    </p-carousel>
+
+      </div>
+    }
+  </div>
 </div>
+

@@ -1,0 +1,90 @@
+.otp-form {
+    font-family: 'Baloo Thambi 2', cursive;
+    color: var(--white);
+    text-align: center;
+    width: 100%;
+}
+
+.otp-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    .resend-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+
+        p {
+            margin: 0;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        a {
+            color: var(--orange-500);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        .wait-text {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.custom-otp-input {
+    width: 3.5rem;
+    height: 3.6rem;
+    text-align: center;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--orange-500);
+    background: transparent;
+    color: var(--orange-500);
+    outline: none;
+    margin: 0 0.4rem;
+}
+
+.custom-otp-input:focus {
+    border-width: 2px;
+    box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.3);
+}
+
+/* Confirm Button */
+// .confirm-button {
+//     width: 80%;
+//     padding: 0.9rem;
+//     background: var(--orange-500);
+//     border-radius: 2rem;
+//     border: none;
+//     color: #fff;
+//     font-size: 1rem;
+//     cursor: pointer;
+//     margin-top: 0.3rem;
+//     transition: 0.2s;
+// }
+
+/* Hint text */
+.otp-hint {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+    .custom-otp-input {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+}

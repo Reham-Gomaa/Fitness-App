@@ -10,16 +10,18 @@
     <div class="container">
       <div class="meals-info text-center my-4">
           <app-header >
-            Fuel your fitness journey with <br>
+          
+              Fuel your fitness journey with <br>
             customized
             <span class="long-desc-span">meal plans</span>
             for you
+            
           </app-header>
       </div>
       <div class="meal-items">
             <div class="card">
 
-                <app-carousel  [data]="mealCats()" />
+                <app-carousel  [data]="mealCats()" [cat]="'meals'" />
 
 
             </div>

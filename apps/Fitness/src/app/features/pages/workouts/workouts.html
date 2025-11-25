@@ -13,36 +13,16 @@
       <div class="meals-info text-center my-3">
 
         <app-header>
-
-           Transform Your Body with Our <br>
+             Transform Your Body with Our <br>
              Dynamic <span class="long-desc-span">
               Upcoming Workouts
             </span>
-
         </app-header>
 
       </div>
       <div class="meal-items">
 
-        <!-- <ul class="nav-tabs">
-          @if (workout_muscles.length > 0) {
-            @for (muscle of workout_muscles; track $index) {
-              <li>
-                <a  [class]="{
-                  'active':muscle.isActive
-                }" (click)="SetCurrentMuscle($event , muscle)">
-                  {{muscle.name}}
-                </a>
-              </li>
-            }
-          }@else {
-            @for (item of makeArr(13); track $index) {
-            <li>
-              <p-skeleton height="1rem" width="5rem" class="mb-2" />
-            </li>
-            }
-          }
-        </ul> -->
+
         <app-nav-tabs
         [navItems]="workout_muscles()"
         (navItemClick)="SetCurrentMuscle($event)" />
@@ -50,7 +30,7 @@
           @if(related_Muscles().length > 3) {
 
             <div class="card">
-              <app-carousel  [data]="related_Muscles()" />
+              <app-carousel  [data]="related_Muscles()" [cat]="'classes'" />
             </div>
           }@else  {
             <div class="grid justify-content-center">
@@ -59,9 +39,11 @@
                   <div class="xl:col-4 md:col-6 col-12">
                     <app-main-card [item]="{
                         name:muscle.name,
-                        id:muscle._id,
-                        img:muscle.image
+                        id:muscle._id || '123456',
+                        img:muscle.image,
+                        cat:'classes'
                       }" />
+
                   </div>
                 }
               }

@@ -10,7 +10,7 @@ import {
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {firstValueFrom} from "rxjs";
-import {PlatFormService} from "../platform/platform";
+
 import {StorageKeys} from "../../constants/storage.config";
 import {TranslationManagerService} from "./translation-manager.service";
 import {
@@ -22,6 +22,7 @@ import {
     getDirectionForLanguage,
     isRtlLanguage,
 } from "../../constants/translation.constants";
+import { PlatFormService } from "@fitness-app/services";
 
 @Injectable({providedIn: "root"})
 export class Translation {

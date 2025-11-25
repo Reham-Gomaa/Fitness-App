@@ -19,7 +19,7 @@ export type FeatureTranslationModule = (typeof FEATURE_TRANSLATION_MODULES)[numb
 export type TranslationModule = (typeof TRANSLATION_MODULES)[number];
 
 export const ROUTE_MODULE_MAP: Record<string, TranslationModule[]> = {
-    "/login": ["auth"],
+    "/auth": ["auth"],
     "/home": ["home", "about"],
     "/about": ["about"],
     "/classes": ["classes"],

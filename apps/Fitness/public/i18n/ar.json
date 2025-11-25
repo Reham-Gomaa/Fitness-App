@@ -1,9 +1,18 @@
 {
-  "inputErrors": {
-    "required": "هذا الحقل مطلوب",
-    "minlength": {
-      "prefix": "الحد الأدنى",
-      "suffix": "حرف مطلوب"
+    "inputErrors": {
+        "required": "هذا الحقل مطلوب",
+        "minlength": {
+            "prefix": "الحد الأدنى",
+            "suffix": "حرف مطلوب"
+        },
+        "maxlength": {
+            "prefix": "الحد الأقصى",
+            "suffix": "حرف مسموح"
+        },
+        "email": "تنسيق البريد الإلكتروني غير صحيح (مثال: example@example.com)",
+        "passwordPattern": "كلمة المرور يجب أن تكون 8 أحرف على الأقل، وتشمل حروف كبيرة وصغيرة ورمز خاص.",
+        "onlyNumbers": "ادخل الرقم بطريقه الصحيحه",
+        "misMatch": "كلمات المرور غير متطابقة"
     },
     "maxlength": {
       "prefix": "الحد الأقصى",

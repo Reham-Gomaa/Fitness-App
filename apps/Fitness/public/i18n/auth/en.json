@@ -1,52 +1,73 @@
 {
-  "login": {
-    "title": "Login",
-    "greeting": "Hey There",
-    "welcomeBack": "WELCOME BACK",
-    "email": "Email",
-    "password": "Password",
-    "rememberMe": "Remember me",
-    "forgotPassword": "Forgot Password?",
-    "or": "Or",
-    "submit": "Login",
-    "noAccount": "Don't Have An Account Yet?",
-    "signUp": "Register"
-  },
-  "register": {
-    "title": "Register",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "submit": "Register",
-    "haveAccount": "Already have an account?",
-    "signIn": "Sign in"
-  },
-  "forgetpass": {
-    "title": "Forgot Password",
-    "email": "Email",
-    "submit": "Send Reset Link",
-    "backToLogin": "Back to login"
-  },  "inputErrors": {
-    "required": "This field is required",
-    "minlength": {
-      "prefix": "Minimum",
-      "suffix": "characters required"
+    "login": {
+        "title": "Login",
+        "greeting": "Hey There",
+        "welcomeBack": "WELCOME BACK",
+        "email": "Email",
+        "password": "Password",
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot Password?",
+        "or": "Or",
+        "submit": "Login",
+        "noAccount": "Don't Have An Account Yet?",
+        "signUp": "Register",
+        "loggingIn": "Logging In..."
     },
-    "maxlength": {
-      "prefix": "Maximum",
-      "suffix": "characters allowed"
+    "register": {
+        "title": "Register",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "submit": "Register",
+        "haveAccount": "Already have an account?",
+        "signIn": "Sign in"
     },
-    "email": "Invalid email format (e.g., example@example.com)",
-    "passwordPattern": "Password must be at least 8 characters, include uppercase, lowercase, and a special character.",
-    "onlyNumbers": "This number is not valid",
-    "misMatch": "Passwords do not match"
-  },
+    "forgetpass": {
+        "title": "Forgot Password",
+        "email": "Email",
+        "submit": "Send Reset Link",
+        "backToLogin": "Back to login",
+        "enterEmail": "Enter your email",
+        "sendCode": "Send Code",
+        "sending": "Sending...",
+        "verifying": "Verifying...",
+        "confirm": "Confirm",
+        "resetPassword": "Reset Password",
+        "otpTitle": "OTP CODE",
+        "otpInstructions": "Enter Your OTP Check Your Email",
+        "createTitle": "Create New Password",
+        "createHint": "make sure its 8 characters or more",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "resetting": "Resetting...",
+        "didntReceiveCode": "Didn't Recieve Verification Code?",
+        "resendCode": "Resend Code?",
+        "wait": "Wait {{seconds}}s"
+    },
+    "inputErrors": {
+        "required": "This field is required",
+        "minlength": {
+            "prefix": "Minimum",
+            "suffix": "characters required"
+        },
+        "maxlength": {
+            "prefix": "Maximum",
+            "suffix": "characters allowed"
+        },
+        "email": "Invalid email format (e.g., example@example.com)",
+        "passwordPattern": "Password must be at least 8 characters, include uppercase, lowercase, and a special character.",
+        "onlyNumbers": "This number is not valid",
+        "misMatch": "Passwords do not match",
+        "passwordMismatch": "Passwords do not match"
+    },
     "messagesToast": {
-    "loginSuccess": "Login successful! Welcome back.",
-    "loginFailed": "Login failed. Please check your credentials.",
-    "registerSuccess": "Registration successful! Please log in.",
-    "registerFailed": "Registration failed. Please try again."
-  }
+        "loginSuccess": "Login successful! Welcome back.",
+        "loginFailed": "Login failed. Please check your credentials.",
+        "registerSuccess": "Registration successful! Please log in.",
+        "registerFailed": "Registration failed. Please try again.",
+        "otpVerified": "OTP Verified Successfully",
+        "codeResent": "Verification code sent successfully"
+    }
 }

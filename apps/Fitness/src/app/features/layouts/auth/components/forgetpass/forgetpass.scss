@@ -1,0 +1,51 @@
+p {
+    margin: 0;
+    padding: 0;
+}
+.forgetpass-container {
+    font-family: var(--font-1);
+    margin: 0 auto;
+    padding: 2rem;
+    color: var(--white);
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h2 {
+            font-weight: 800;
+            font-size: 3rem;
+            text-align: center;
+            text-transform: capitalize;
+            margin: 0;
+            white-space: nowrap;
+        }
+        .step-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 3.125rem;
+            padding: 2.5rem;
+
+            p {
+                font-weight: 400;
+                font-size: 1.5rem;
+                text-align: center;
+                text-transform: capitalize;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .forgetpass-container {
+        padding: 1rem;
+        .container {
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    }
+}

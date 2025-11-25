@@ -1,0 +1,77 @@
+:host {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+}
+
+#hero {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    &::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        // Preload LCP image
+        background-image: url('/images/hero/bg-2.avif');
+    }
+    .hero-blur {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(86px);
+        z-index: 1;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2; // content stays above the blur
+    }
+    .hero-caption {
+        p.hero-desc {
+            font-family: var(--font-2);
+            font-weight: 400;
+            font-size: 1.125rem;
+            line-height: 28.8px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 8px;
+                height: 100px;
+                background-color: var(--main-color);
+            }
+        }
+        .statistics {
+            margin: 4rem 0;
+            .st-item {
+                h4 {
+                    font-family: var(--font-3);
+                    font-weight: 700;
+                    font-style: Bold;
+                    font-size: 1.3938rem;
+                    line-height: 36px;
+                    margin-bottom: 5px;
+                }
+                p {
+                    font-family: var(--font-2);
+                    font-size: 1.125rem;
+                    line-height: 28.8px;
+                    font-weight: normal;
+                    text-transform: capitalize;
+                }
+            }
+        }
+        .btns {
+            gap: 64px;
+        }
+    }
+}

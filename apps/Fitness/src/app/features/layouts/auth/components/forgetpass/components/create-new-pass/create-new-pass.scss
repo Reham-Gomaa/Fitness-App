@@ -1,0 +1,61 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.password-strength {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.strength-bar {
+  flex: 1;
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+
+  &.strength-1 {
+    background-color: #ff4444;
+  }
+
+  &.strength-2 {
+    background-color: #ff8800;
+  }
+
+  &.strength-3 {
+    background-color: #ffbb00;
+  }
+
+  &.strength-4 {
+    background-color: #88cc00;
+  }
+
+  &.strength-5 {
+    background-color: #44cc44;
+  }
+}
+
+.solid-button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+
+  &:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

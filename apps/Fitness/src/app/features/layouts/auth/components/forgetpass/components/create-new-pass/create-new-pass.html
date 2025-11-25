@@ -1,0 +1,30 @@
+<form
+    [formGroup]="resetPasswordForm"
+    (ngSubmit)="resetPasswordSubmit()"
+>
+    <lib-fitness-input
+        formControlName="password"
+        type="password"
+        placeholder="{{ 'forgetpass.newPassword' | translate }}"
+        id="password"
+        [errorHandilgControl]="resetPasswordForm.get('password')!"
+    ></lib-fitness-input>
+
+    <lib-fitness-input
+        formControlName="confirmPassword"
+        type="password"
+        placeholder="{{ 'forgetpass.confirmPassword' | translate }}"
+        id="confirmPassword"
+        [errorHandilgControl]="resetPasswordForm.get('confirmPassword')!"
+    ></lib-fitness-input>
+
+    <button
+        type="submit"
+        [disabled]="isLoading()"
+        [class.invalid]="resetPasswordForm.invalid"
+        class="auth-btn mt-4"
+    >
+        {{ isLoading() ? ('forgetpass.resetting' | translate) : ('forgetpass.resetPassword' |
+        translate) }}
+    </button>
+</form>

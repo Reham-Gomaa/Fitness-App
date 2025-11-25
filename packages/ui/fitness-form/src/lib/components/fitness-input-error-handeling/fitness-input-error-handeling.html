@@ -1,42 +1,36 @@
 @if (control().invalid && control().touched) {
-  <div class="error-block">
+<div class="error-block">
     <ul class="error-list">
-      @if (control().hasError("required")) {
+        @if (control().hasError("required")) {
+        <li class="error-item">{{ "inputErrors.required" | translate }}</li>
+        } @else if (control().hasError("minlength")) {
         <li class="error-item">
-         {{ "inputErrors.required" | translate }}
+            {{ "inputErrors.minlength.prefix" | translate }} {{
+            control().getError("minlength")?.requiredLength }} {{ "inputErrors.minlength.suffix" |
+            translate }}
         </li>
-      } @else if (control().hasError("minlength")) {
+        } @else if (control().hasError("maxlength")) {
         <li class="error-item">
-        
-          {{ "inputErrors.minlength.prefix" | translate }}
-          {{ control().getError("minlength")?.requiredLength }}
-          {{ "inputErrors.minlength.suffix" | translate }}
+            {{ "inputErrors.maxlength.prefix" | translate }} {{
+            control().getError("maxlength")?.requiredLength }} {{ "inputErrors.maxlength.suffix" |
+            translate }}
         </li>
-      } @else if (control().hasError("maxlength")) {
-        <li class="error-item">
-        
-          {{ "inputErrors.maxlength.prefix" | translate }}
-          {{ control().getError("maxlength")?.requiredLength }}
-          {{ "inputErrors.maxlength.suffix" | translate }}
-        </li>
-      } @else if (control().hasError("email")) {
-        <li class="error-item">
-         {{ "inputErrors.email" | translate }}
-        </li>
-      } @else if (
-        control().hasError("pattern") &&
-        control().getError("pattern").requiredPattern === passwordPattern
-      ) {
-        <li class="error-item">
-         {{ "inputErrors.passwordPattern" | translate }}
-        </li>
-      } @else if (
-        control().hasError("pattern") && control().getError("pattern").requiredPattern === phonePattern
-      ) {
-        <li class="error-item">
-         {{ "inputErrors.onlyNumbers" | translate }}
-        </li>
-      }
+        } @else if (control().hasError("email")) {
+        <li class="error-item">{{ "inputErrors.email" | translate }}</li>
+        } @else if ( control().hasError("pattern") && control().getError("pattern").requiredPattern
+        === passwordPattern ) {
+        <li class="error-item">{{ "inputErrors.passwordPattern" | translate }}</li>
+        } @else if ( control().hasError("pattern") && control().getError("pattern").requiredPattern
+        === phonePattern ) {
+        <li class="error-item">{{ "inputErrors.onlyNumbers" | translate }}</li>
+        }
     </ul>
-  </div>
+    @if (control().parent?.errors?.['passwordMismatch'] && control().touched) {
+    <div class="error-block">
+        <ul class="error-list">
+            <li class="error-item">{{ "inputErrors.passwordMismatch" | translate }}</li>
+        </ul>
+    </div>
+    }
+</div>
 }

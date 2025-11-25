@@ -17,8 +17,9 @@
                 <ng-template let-product #item>
                     <app-main-card [item]="{
                       name:product.name || product.strCategory,
-                      id:product.id || product.idCategory,
-                      img:product.image || product.strCategoryThumb
+                      id:product._id || product.idCategory,
+                      img:product.image || product.strCategoryThumb,
+                      cat:cat()
                     }" />
                 </ng-template>
             </p-carousel>

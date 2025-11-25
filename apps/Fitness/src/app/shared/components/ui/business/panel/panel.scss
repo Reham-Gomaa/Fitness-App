@@ -1,0 +1,31 @@
+#panel {
+    border: 2px solid #282828;
+    // background: #24242480;
+    gap: 24px;
+    border-radius: 20px;
+    padding-top: 16px;
+    position: relative;
+    height: 100vh;
+    &::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        // Preload LCP image
+        background-image: url('/images/details/bg-1.avif');
+    }
+
+    .blur-overlay {
+        backdrop-filter: blur(20px);
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        // background: #24242499;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+}

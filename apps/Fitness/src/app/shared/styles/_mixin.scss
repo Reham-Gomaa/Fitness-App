@@ -1,0 +1,21 @@
+$breakpoint-mobile-min: 320px;
+$breakpoint-mobile-max: 767px;
+
+$breakpoint-tablet-min: 768px;
+$breakpoint-tablet-max: 1024px;
+
+/// 📱 Mobile mixin
+/// Usage: @include mobile { ... }
+@mixin mobile {
+    @media (min-width: #{$breakpoint-mobile-min}) and (max-width: #{$breakpoint-mobile-max}) {
+        @content;
+    }
+}
+
+/// 💻 Tablet mixin
+/// Usage: @include tablet { ... }
+@mixin tablet {
+    @media (min-width: #{$breakpoint-tablet-min}) and (max-width: #{$breakpoint-tablet-max}) {
+        @content;
+    }
+}

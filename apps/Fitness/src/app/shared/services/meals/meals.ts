@@ -11,14 +11,6 @@ export class MealService {
   private http = inject(HttpClient)
 
   getMealsCats():Observable<mealCatRes>{
-    return this.http.get<mealCatRes>(
-      `
-      ${environment.mealApiUrl}/categories.php`,
-      {
-        headers: {
-          'accept-language': 'en',
-        },
-      }
-    );
+    return this.http.get<mealCatRes>(`${environment.mealApiUrl}categories.php`,);
   }
 }

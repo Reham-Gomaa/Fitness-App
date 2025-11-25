@@ -1,0 +1,23 @@
+<form
+    [formGroup]="forgetPassForm"
+    (ngSubmit)="forgetpasswordSubmit()"
+    role="form"
+    aria-label="Forgot Password Form"
+>
+    <lib-fitness-input
+        formControlName="email"
+        [errorHandilgControl]="forgetPassForm.get('email')!"
+        placeholder="{{ 'forgetpass.email' | translate }}"
+        type="email"
+        id="email"
+    ></lib-fitness-input>
+
+    <button
+        type="submit"
+        [disabled]="isLoading()"
+        [class.invalid]="forgetPassForm.invalid"
+        class="auth-btn mt-4"
+    >
+        {{ isLoading() ? ('forgetpass.sending' | translate) : ('forgetpass.sendCode' | translate) }}
+    </button>
+</form>

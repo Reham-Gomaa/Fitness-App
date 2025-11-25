@@ -1,0 +1,12 @@
+<button
+    type="button"
+    [class]="['btn-theme', spacing() ? 'm-1rem' : '']"
+    (click)="toggle()"
+    [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+>
+    @if (themeService.theme() === 'dark') {
+    <i class="pi pi-sun"></i>
+    } @else {
+    <i class="pi pi-moon"></i>
+    }
+</button>
