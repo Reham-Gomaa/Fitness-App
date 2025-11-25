@@ -1,0 +1,25 @@
+#ingradients {
+  font-family: var(--font-1);
+  font-weight: 600;
+  .ingradient-items {
+    background-color: #262827;
+   padding: 16px 8px;
+   border-radius: 20px;
+   .ing-item {
+    border-bottom: 1.7px solid #2D2D2D;
+   }
+  }
+  h3 {
+    font-size: 32px;
+
+  }
+  .ing-text , h3 {
+    color: var(--gray-100);
+  }
+  .ing-text {
+    text-transform: capitalize;
+  }
+  .ing-amount {
+    color: var(--main-color);
+  }
+}
