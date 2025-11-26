@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
+import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
 import {Category} from "./../../../shared/models/meals";
 import {MealService} from "./../../../shared/services/meals/meals";
 //reusable
@@ -17,6 +17,8 @@ export class Meals implements OnInit {
     private mealService = inject(MealService);
     private destroyRef = inject(DestroyRef);
     mealCats: WritableSignal<Category[]> = signal([]);
+
+    renderLocation = input()
 
     ngOnInit(): void {
         this.getMealCats();

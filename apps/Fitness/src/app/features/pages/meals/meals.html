@@ -1,4 +1,7 @@
-<section id="meals" class="py-5">
+<section id="meals" [class]="{
+  'at-home':renderLocation()==='home',
+  'py-5':renderLocation()==='home'
+}" class="app-section" >
   <app-title
    [titleImg]="'/images/meals/Healthy.png'"
    [titleTxt]="'Healthy Nutritions'"
@@ -6,16 +9,18 @@
    [imgH]="'43'"
 
    />
-  <div class="sec-gradient overflow-hidden">
+  <div class="sec-gradient overflow-hidden" [class]="{
+    'at-home':renderLocation()==='home'
+  }">
     <div class="container">
       <div class="meals-info text-center my-4">
           <app-header >
-          
+
               Fuel your fitness journey with <br>
             customized
             <span class="long-desc-span">meal plans</span>
             for you
-            
+
           </app-header>
       </div>
       <div class="meal-items">

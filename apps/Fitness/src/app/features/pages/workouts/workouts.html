@@ -1,14 +1,19 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
-<section id="workouts" class="py-5">
+<section id="workouts" [class]="{
+  'at-home':renderLocation()==='home',
+  'py-5':renderLocation()==='home'
+}" class="app-section">
   <app-title
   [titleImg]="'/images/workouts/WOrkouts.png'"
   [titleTxt]="'Fitness Class'"
   [imgW]="'330'"
   [imgH]="'44'"
   />
-  <div class="sec-gradient overflow-hidden">
+  <div [class]="{
+    'at-home':renderLocation()==='home'
+  }" class="sec-gradient  overflow-hidden">
     <div class="container">
       <div class="meals-info text-center my-3">
 

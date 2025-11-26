@@ -10,8 +10,14 @@ html {
     background-color: var(--body);
 }
 
-.sec-gradient {
+.sec-gradient.at-home {
     background: linear-gradient(to bottom, var(--sec-grad-color) 0% 75%, transparent 70% 100%);
+}
+.sec-gradient {
+    background-color: transparent
+}
+.app-section {
+  background-color: #24242499;
 }
 
 .container {

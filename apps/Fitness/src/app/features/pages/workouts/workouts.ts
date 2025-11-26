@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
+import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
 import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 //primeNg
 import {MessageService} from "primeng/api";
@@ -43,6 +43,7 @@ export class Workouts implements OnInit {
     private muscleService = inject(Muscles);
     private destroyRef = inject(DestroyRef);
     private msgService = inject(MessageService);
+    renderLocation = input()
 
     // workout_muscles: MuscleGroup[] = [] as MuscleGroup[];
     workout_muscles = signal<MuscleGroup[]>([]);
