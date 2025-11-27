@@ -43,7 +43,7 @@ export class Workouts implements OnInit {
     private muscleService = inject(Muscles);
     private destroyRef = inject(DestroyRef);
     private msgService = inject(MessageService);
-    renderLocation = input()
+    renderLocation = input('main')
 
     // workout_muscles: MuscleGroup[] = [] as MuscleGroup[];
     workout_muscles = signal<MuscleGroup[]>([]);

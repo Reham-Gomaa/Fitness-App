@@ -1,7 +1,7 @@
 <section id="meals" [class]="{
   'at-home':renderLocation()==='home',
-  'py-5':renderLocation()==='home'
-}" class="app-section" >
+  'main':renderLocation()!=='home',
+}" class="app-section py-5" >
   <app-title
    [titleImg]="'/images/meals/Healthy.png'"
    [titleTxt]="'Healthy Nutritions'"
@@ -10,7 +10,8 @@
 
    />
   <div class="sec-gradient overflow-hidden" [class]="{
-    'at-home':renderLocation()==='home'
+    'at-home':renderLocation()==='home',
+  'main':renderLocation()!=='home',
   }">
     <div class="container">
       <div class="meals-info text-center my-4">
@@ -26,7 +27,7 @@
       <div class="meal-items">
             <div class="card">
 
-                <app-carousel  [data]="mealCats()" [cat]="'meals'" />
+                <app-carousel  [data]="mealCats()" [cat]="'meals'" [rendLocation]="renderLocation()!" />
 
 
             </div>

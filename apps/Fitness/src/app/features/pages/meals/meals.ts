@@ -18,7 +18,7 @@ export class Meals implements OnInit {
     private destroyRef = inject(DestroyRef);
     mealCats: WritableSignal<Category[]> = signal([]);
 
-    renderLocation = input()
+    renderLocation = input<string>()
 
     ngOnInit(): void {
         this.getMealCats();
