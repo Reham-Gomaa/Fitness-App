@@ -1,15 +1,15 @@
 <div class="modal-container">
   <div class="modal-header">
-     <button class="close-button" (click)="close()">
-          <i class="pi pi-times"></i>
-      </button>
-    <h2 class="modal-title">Your Regular Physical Activity Level?</h2>
-    <p class="modal-subtitle">This Helps Us Create Your Personalized Plan</p>
+    <button class="close-button" (click)="close()">
+      <i class="pi pi-times"></i>
+    </button>
+    <h2 class="modal-title">{{ 'ACCOUNT.LEVEL.TITLE' | translate }}</h2>
+    <p class="modal-subtitle">{{ 'ACCOUNT.LEVEL.SUBTITLE' | translate }}</p>
   </div>
   
   <div class="modal-content">
     <lib-fitness-form-radio 
-      [config]=" activityLevelOptions "
+      [config]="activityLevelOptions()" 
       [selectedItem]="selectedActivityLevel"
       (selectedItemChange)="onLevelChange($event)"
     />
@@ -20,7 +20,7 @@
       pButton 
       class="p-button-primary next-button"
       (click)="onNext()"
-      label="Next"
+      [label]="'ACCOUNT.MODALS.NEXT' | translate"
     ></button>
   </div>
 </div>

@@ -1,19 +1,20 @@
 import {HttpInterceptorFn} from "@angular/common/http";
 import {inject} from "@angular/core";
 import {StorageKeys} from "../constants/storage.config";
-import {Translation} from "../services/translation/translation";
 
 /**
  * HTTP Interceptor that adds authentication token and language headers to all requests
  */
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-    const translation = inject(Translation);
+    
 
     // Get token from localStorage
     const token = typeof window !== "undefined" ? localStorage.getItem(StorageKeys.TOKEN) : null;
 
     // Get current language (ar or en)
-    const lang = translation.lang();
+     const lang = typeof window !== "undefined" 
+        ? localStorage.getItem(StorageKeys.LANGUAGE) || "en" 
+        : "en";
 
 
     // Clone the request and add headers
@@ -30,3 +31,4 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req)
 
 };
+

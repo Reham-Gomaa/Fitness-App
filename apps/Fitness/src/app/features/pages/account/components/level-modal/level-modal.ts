@@ -1,54 +1,56 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { FitnessFormRadio } from '@fitness-app/fitness-form';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: "app-level-modal",
   standalone: true,
-  imports: [CommonModule, ButtonModule, FitnessFormRadio],
+  imports: [CommonModule, ButtonModule, FitnessFormRadio, TranslateModule],
   templateUrl: "./level-modal.html",
   styleUrl: "./level-modal.scss",
 })
 export class LevelModal implements OnInit {
   private dialogRef = inject(DynamicDialogRef);
   private dialogConfig = inject(DynamicDialogConfig);
+  private translate = inject(TranslateService);
 
   selectedActivityLevel: string = 'level1';
-  
-  activityLevelOptions = [
-    { value: 'level1', label: 'Rookie' },
-    { value: 'level2', label: 'Beginner' },
-    { value: 'level3', label: 'Intermediate' },
-    { value: 'level4', label: 'Advanced' },
-    { value: 'level5', label: 'True Beast' }
-  ];
+  activityLevelOptions = signal<{ value: string, label: string }[]>([]);
 
   ngOnInit(): void {
-    console.log('Level modal data received:', this.dialogConfig.data);
-    
     const currentLevel = this.dialogConfig.data?.currentActivityLevel;
     
     if (currentLevel) {
-      console.log('Setting modal level to:', currentLevel);
       this.selectedActivityLevel = currentLevel;
-    } else {
-      console.log('No current level provided, using default:', this.selectedActivityLevel);
     }
+    
+    this.updateOptions();
+  }
+
+  private updateOptions(): void {
+    const options = [
+      { value: 'level1', label: this.translate.instant('ACCOUNT.LEVEL.ROOKIE') },
+      { value: 'level2', label: this.translate.instant('ACCOUNT.LEVEL.BEGINNER') },
+      { value: 'level3', label: this.translate.instant('ACCOUNT.LEVEL.INTERMEDIATE') },
+      { value: 'level4', label: this.translate.instant('ACCOUNT.LEVEL.ADVANCED') },
+      { value: 'level5', label: this.translate.instant('ACCOUNT.LEVEL.TRUE_BEAST') }
+    ];
+    
+    this.activityLevelOptions.set(options);
   }
 
   onLevelChange(level: string): void {
-    console.log('Level selected in modal:', level);
     this.selectedActivityLevel = level;
   }
 
   onNext(): void {
-    console.log('Closing modal with level:', this.selectedActivityLevel);
     this.dialogRef.close(this.selectedActivityLevel);
   }
 
-   close(): void {
+  close(): void {
     this.dialogRef.close(false); 
   }
 }

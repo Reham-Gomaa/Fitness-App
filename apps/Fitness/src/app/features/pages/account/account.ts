@@ -12,12 +12,13 @@ import { MessageService } from 'primeng/api';
 import { LogoutConfirmationModalComponent } from './components/logout-confirmation-modal/logout-confirmation-modal';
 import { Router } from '@angular/router';
 import { WeightModalComponent } from './components/weight-modal/weight-modal';
-
+import { Translation } from '../../../core/services/translation/translation';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: "app-account",
     standalone: true,
-    imports: [CommonModule, ButtonModule],
+    imports: [CommonModule, ButtonModule, TranslateModule],
     templateUrl: "./account.html",
     styleUrl: "./account.scss",
 })
@@ -25,12 +26,15 @@ export class Account implements OnInit, OnDestroy {
   private userService = inject(UserService);
   private dialogService = inject(DialogService);
   themeService = inject(ThemeService);
-  private readonly messageService = inject(MessageService);
+  private messageService = inject(MessageService);
   private router = inject(Router);
+  private translation = inject(Translation);
+  private translate = inject(TranslateService);
 
   private subscriptions = new Subscription();
 
   user = this.userService.currentUser;
+  currentLang = this.translation.lang;
 
   ngOnInit(): void {
     this.loadUserData();
@@ -53,16 +57,34 @@ export class Account implements OnInit, OnDestroy {
     this.themeService.toggle();
   }
 
+  getCurrentLanguageDisplay(): string {
+    const current = this.currentLang();
+    return current === 'en' ? 'English' : 'العربية';
+  }
+
+  switchLanguage(): void {
+    const current = this.currentLang();
+    const newLang = current === 'en' ? 'ar' : 'en';
+    
+    console.log('Switching language from', current, 'to', newLang);
+    this.translation.setLanguage(newLang);
+    
+    const languageName = newLang === 'en' ? 'English' : 'العربية';
+    this.messageService.add({
+      severity: 'success',
+      summary: this.translate.instant('ACCOUNT.MESSAGES.LANGUAGE_CHANGED', { language: languageName }),
+      life: 2000
+    });
+  }
+
   openGoalModal(): void {
     const currentGoal = this.user()?.goal;
-    console.log('Opening goal modal with current goal:', currentGoal);
     
     const dialogRef = this.dialogService.open(GoalModalComponent, {
       width: '90vw',
       style: { 
         'max-width': '500px', 
         'border-radius': '16px',
-        
       },
       data: {
         currentGoal: currentGoal
@@ -80,54 +102,49 @@ export class Account implements OnInit, OnDestroy {
   }
 
   openWeightModal(): void {
-  const currentWeight = this.user()?.weight;
-  console.log('Opening weight modal with current weight:', currentWeight);
-  
-  const dialogRef = this.dialogService.open(WeightModalComponent, {
-    width: '90vw',
-    style: { 
-      'max-width': '500px', 
-      'border-radius': '16px'
-    },
-    data: {
-      currentWeight: currentWeight
-    }
-  });
+    const currentWeight = this.user()?.weight;
+    
+    const dialogRef = this.dialogService.open(WeightModalComponent, {
+      width: '90vw',
+      style: { 
+        'max-width': '500px', 
+        'border-radius': '16px'
+      },
+      data: {
+        currentWeight: currentWeight
+      }
+    });
 
-  if (dialogRef) {
-    const sub = dialogRef.onClose.subscribe((result: number) => {
-      if (result) {
-        this.updateWeight(result);
+    if (dialogRef) {
+      const sub = dialogRef.onClose.subscribe((result: number) => {
+        if (result) {
+          this.updateWeight(result);
+        }
+      });
+      this.subscriptions.add(sub);
+    }
+  }
+
+  private updateWeight(weight: number): void {
+    const sub = this.userService.updateWeight(weight).subscribe({
+      next: () => {
+        console.log('Weight updated successfully');
+      },
+      error: (error) => {
+        console.error('Error updating weight:', error);
       }
     });
     this.subscriptions.add(sub);
   }
-}
-
-private updateWeight(weight: number): void {
-  console.log('Updating weight to:', weight);
-  
-  const sub = this.userService.updateWeight(weight).subscribe({
-    next: () => {
-      console.log('Weight updated successfully');
-    },
-    error: (error) => {
-      console.error('Error updating weight:', error);
-    }
-  });
-  this.subscriptions.add(sub);
-}
 
   openActivityLevelModal(): void {
     const currentLevel = this.user()?.activityLevel;
-    console.log('Opening level modal with current level:', currentLevel);
     
     const dialogRef = this.dialogService.open(LevelModal, {
       width: '90vw',
       style: { 
         'max-width': '500px', 
         'border-radius': '16px',
-        
       },
       data: {
         currentActivityLevel: currentLevel
@@ -144,10 +161,7 @@ private updateWeight(weight: number): void {
     }
   }
 
-
   private updateActivityLevel(activityLevel: string): void {
-    console.log(' Updating activity level to:', activityLevel);
-    
     const sub = this.userService.updateActivityLevel(activityLevel).subscribe({
       next: () => {
         console.log('Activity level updated successfully');
@@ -172,151 +186,128 @@ private updateWeight(weight: number): void {
   }
 
   getDisplayGoal(goal: string | undefined): string {
-    if (!goal) return 'Not Set';
+    if (!goal) return this.translate.instant('ACCOUNT.GOAL.NOT_SET');
     
     const goalMap: { [key: string]: string } = {
-      'gain_weight': 'Gain Weight',
-      'lose_weight': 'Lose Weight',
-      'get_fitter': 'Get Fitter',
-      'gain_more_flexible': 'Gain More Flexible',
-      'learn_the_basic': 'Learn The Basic'
+      'gain_weight': this.translate.instant('ACCOUNT.GOAL.GAIN_WEIGHT'),
+      'lose_weight': this.translate.instant('ACCOUNT.GOAL.LOSE_WEIGHT'),
+      'get_fitter': this.translate.instant('ACCOUNT.GOAL.GET_FITTER'),
+      'gain_more_flexible': this.translate.instant('ACCOUNT.GOAL.GAIN_MORE_FLEXIBLE'),
+      'learn_the_basic': this.translate.instant('ACCOUNT.GOAL.LEARN_THE_BASIC')
     };
     
     return goalMap[goal] || goal;
   }
 
   getDisplayActivityLevel(level: string | undefined): string {
-    if (!level) return 'Not Set';
+    if (!level) return this.translate.instant('ACCOUNT.LEVEL.NOT_SET');
     
     const levelMap: { [key: string]: string } = {
-      'beginner': 'Beginner',
-      'intermediate': 'Intermediate',
-      'advanced': 'Advanced',
-      'true_beast': 'True Beast'
+      'level1': this.translate.instant('ACCOUNT.LEVEL.ROOKIE'),
+      'level2': this.translate.instant('ACCOUNT.LEVEL.BEGINNER'),
+      'level3': this.translate.instant('ACCOUNT.LEVEL.INTERMEDIATE'),
+      'level4': this.translate.instant('ACCOUNT.LEVEL.ADVANCED'),
+      'level5': this.translate.instant('ACCOUNT.LEVEL.TRUE_BEAST')
     };
     
     return levelMap[level] || level;
   }
 
   openChangePasswordModal(): void {
-  const dialogRef = this.dialogService.open(ChangePasswordModalComponent, {
-    width: '90vw',
-    style: { 
-      'max-width': '500px', 
-      'border-radius': '16px'
-    }
-  });
-
-  if (dialogRef) {
-    const sub = dialogRef.onClose.subscribe((result: { oldPassword: string, newPassword: string }) => {
-      if (result) {
-        this.changePassword(result.oldPassword, result.newPassword);
+    const dialogRef = this.dialogService.open(ChangePasswordModalComponent, {
+      width: '90vw',
+      style: { 
+        'max-width': '500px', 
+        'border-radius': '16px'
       }
     });
-    this.subscriptions.add(sub);
-  }
-}
 
-private changePassword(oldPassword: string, newPassword: string): void {
-  console.log('Changing password...');
-  
-  const sub = this.userService.changePassword(oldPassword, newPassword).subscribe({
-    next: (response) => {
-      console.log(' Password changed successfully:', response);
-      
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Password changed successfully!',
-        life: 3000
+    if (dialogRef) {
+      const sub = dialogRef.onClose.subscribe((result: { oldPassword: string, newPassword: string }) => {
+        if (result) {
+          this.changePassword(result.oldPassword, result.newPassword);
+        }
       });
-
-    },
-    error: (error) => {
-      console.error('Error changing password:', error);
-      
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error', 
-        detail: 'Failed to change password. Please try again.',
-        life: 3000
-      });
+      this.subscriptions.add(sub);
     }
-  });
-  this.subscriptions.add(sub);
-}
-
-
-openLogoutConfirmation(): void {
-  const dialogRef = this.dialogService.open(LogoutConfirmationModalComponent, {
-    width: '90vw',
-    style: { 
-      'max-width': '400px', 
-      'border-radius': '16px'
-    }
-  });
-
-  if (dialogRef) {
-    const sub = dialogRef.onClose.subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        this.logout();
-      }
-    });
-    this.subscriptions.add(sub);
   }
-}
 
-private logout(): void {
-  console.log('Logging out...');
-  
-  const sub = this.userService.logout().subscribe({
-    next: () => {
-      console.log('Logged out successfully');
-      
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Logged out successfully!',
-        life: 3000
-      });
-      
-      this.router.navigate(['/']);
-      
-      // Scroll to top
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
-    },
-    error: (error) => {
-      console.error('Error during logout:', error);
-      
-      // Even if GET fails, clear local data
-      this.userService.currentUser.set(null);
-      localStorage.removeItem('token');
-    
-      if (error.status === 404) {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Info',
-          detail: 'Logged out locally',
-          life: 3000
-        });
-      } else {
+  private changePassword(oldPassword: string, newPassword: string): void {
+    const sub = this.userService.changePassword(oldPassword, newPassword).subscribe({
+      next: (response) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Success',
-          detail: 'Logged out successfully!',
+          summary: this.translate.instant('ACCOUNT.MESSAGES.PASSWORD_CHANGED_SUCCESS'),
+          life: 3000
+        });
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('ACCOUNT.MESSAGES.PASSWORD_CHANGE_ERROR'),
           life: 3000
         });
       }
-      
-      this.router.navigate(['/']);
-      
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
+    });
+    this.subscriptions.add(sub);
+  }
+
+  openLogoutConfirmation(): void {
+    const dialogRef = this.dialogService.open(LogoutConfirmationModalComponent, {
+      width: '90vw',
+      style: { 
+        'max-width': '400px', 
+        'border-radius': '16px'
+      }
+    });
+
+    if (dialogRef) {
+      const sub = dialogRef.onClose.subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          this.logout();
+        }
+      });
+      this.subscriptions.add(sub);
     }
-  });
-  this.subscriptions.add(sub);
-}
+  }
+
+  private logout(): void {
+    const sub = this.userService.logout().subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: this.translate.instant('ACCOUNT.MESSAGES.LOGOUT_SUCCESS'),
+          life: 3000
+        });
+        this.router.navigate(['/']);
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      },
+      error: (error) => {
+        this.userService.currentUser.set(null);
+        localStorage.removeItem('token');
+      
+        if (error.status === 404) {
+          this.messageService.add({
+            severity: 'info',
+            summary: this.translate.instant('ACCOUNT.MESSAGES.LOGOUT_LOCAL'),
+            life: 3000
+          });
+        } else {
+          this.messageService.add({
+            severity: 'success',
+            summary: this.translate.instant('ACCOUNT.MESSAGES.LOGOUT_SUCCESS'),
+            life: 3000
+          });
+        }
+        
+        this.router.navigate(['/']);
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      }
+    });
+    this.subscriptions.add(sub);
+  }
 }
