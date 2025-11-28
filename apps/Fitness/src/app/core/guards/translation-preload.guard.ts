@@ -32,7 +32,6 @@
 //             current = current.parent;
 //         }
 
-//         // Remove language prefix if present (e.g., 'EN', 'AR')
 //         const languageCodes = SUPPORTED_LANGUAGES.map((l) => l.toUpperCase());
 //         const filtered = segments.filter((seg) => !languageCodes.includes(seg.toUpperCase()));
 
@@ -122,8 +121,11 @@ export const translationPreloadGuard: CanActivateFn = (route) => {
     }
 
     // Also check for company base path if we're in company routes
-    if (modules.length === 0 && (fullPath.includes("home") || routePath.includes("home"))) {
-        modules = ROUTE_MODULE_MAP["/home"] || [];
+    if (
+        modules.length === 0 &&
+        (fullPath.includes("main/home") || routePath.includes("main/home"))
+    ) {
+        modules = ROUTE_MODULE_MAP["/main/home"] || [];
     }
 
     // Also check for branches base path if we're in branches routes

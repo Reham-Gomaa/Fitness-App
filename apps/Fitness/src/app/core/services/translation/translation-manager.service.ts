@@ -108,6 +108,8 @@ export class TranslationManagerService {
                     cachedTranslations = this.deepMerge(cachedTranslations, cached);
                 }
             });
+            // IMPORTANT: Set cached translations so translate.use() can find them
+            this.getTranslateService().setTranslation(lang, cachedTranslations, false);
             return of(cachedTranslations);
         }
 
