@@ -1,14 +1,14 @@
 .footer {
   background-color: var(--footer-bg);
   width: 100%;
-  min-height: 261px;
+  min-height: 16.313rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
 
   .footer-container {
-    max-width: 1440px;
+    max-width:90rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -44,8 +44,8 @@
   .brand-section {
       
       .footer-logo {
-        width: 87px;
-        height: 55px;
+        width: 5.438rem;
+        height: 3.438rem;
         object-fit: contain;
         
       }
@@ -54,7 +54,7 @@
     .brand-tagline {
       font-family: var(--font-1); 
       font-weight: 400; 
-      font-size: 18px;
+      font-size: 1.125rem;
       color: var(--footer-text);
       margin: 0;
 
@@ -68,7 +68,7 @@
 
   // Section Titles
   .section-title {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 700;
     color: var(--footer-text);
     margin: 0 0 0.5rem 0;
@@ -97,8 +97,8 @@
         filter: invert(var(--icon-color));
       }
       .icon-wrapper {
-        width: 40px;
-        height: 40px;
+        width: 2.5rem;
+        height: 2.5rem;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -114,7 +114,7 @@
 
       .contact-text {
         font-family: var(--font-1);
-        font-size: 18px;
+        font-size: 1.125rem;
         color: var(--footer-text);
         font-weight: 400;
       }
@@ -131,7 +131,7 @@
 
     .timing-text {
         font-family: var(--font-1);
-        font-size: 18px;
+        font-size: 1.125rem;
         color: var(--footer-text);
         font-weight: 400;
         line-height: 25.2px;
@@ -144,7 +144,7 @@
   .location-section {
     .location-text {
       font-family: var(--font-1);
-        font-size: 18px;
+        font-size: 1.125rem;
         color: var(--footer-text);
         font-weight: 400;
         line-height: 25.2px;
@@ -169,27 +169,27 @@
     }
 
     .brand-section .footer-logo {
-      width: 70px;
-      height: 70px;
+      width: 4.375rem;
+      height: 4.375rem;
     }
 
     .section-title {
-      font-size: 13px;
+      font-size: 0.813rem;
     }
 
     .brand-tagline,
     .contact-text,
     .timing-text,
     .location-text {
-      font-size: 13px;
+      font-size: 0.813rem;
     }
 
     .contact-item .icon-wrapper {
-      width: 32px;
-      height: 32px;
+      width: 2rem;
+      height: 2rem;
 
       i {
-        font-size: 14px;
+        font-size: 0.875rem;
       }
     }
   }
