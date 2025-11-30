@@ -1,7 +1,8 @@
 {
   "ACCOUNT": {
     "GOAL": {
-      "TITLE": "What is your Goal?",
+      "TITLE": "Goal",
+      "MODAL_TITLE": "What is your Goal?",
       "SUBTITLE": "This Helps Us Create Your Personalized Plan",
       "GAIN_WEIGHT": "Gain Weight",
       "LOSE_WEIGHT": "Lose Weight",
@@ -11,7 +12,8 @@
       "NOT_SET": "Not Set"
     },
     "LEVEL": {
-      "TITLE": "Your Regular Physical Activity Level?",
+      "TITLE": "level",
+      "MODAL_TITLE": "Your Regular Physical Activity Level?",
       "SUBTITLE": "This Helps Us Create Your Personalized Plan",
       "ROOKIE": "Rookie",
       "BEGINNER": "Beginner",
