@@ -1,1 +1,112 @@
-<p>navbar works!</p>
+<nav class="navbar surface-0 p-3 shadow-2 w-full">
+  <div class="flex align-items-center justify-content-between w-full">
+    <!-- Logo/Brand -->
+    <div class="nav-brand flex align-items-center">
+      <a 
+        [routerLink]="[getCurrentLang(), 'main', 'home']" 
+        class="text-2xl font-bold text-primary no-underline">
+        YOUR_LOGO
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Links -->
+    <div class="nav-links hidden md:flex gap-5">
+      @for (item of navItems; track item.label) {
+        <a 
+          [routerLink]="getRoute(item.path)" 
+          class="text-900 hover:text-primary font-medium no-underline transition-colors transition-duration-300">
+          {{ item.label }}
+        </a>
+      }
+    </div>
+
+    <!-- Desktop Auth Section -->
+    <div class="nav-auth hidden md:flex align-items-center gap-3">
+      @if (!isLoggedIn) {
+        <div class="flex gap-2">
+          <p-button 
+            label="Login" 
+            severity="secondary" 
+            (onClick)="onLogin()"
+            class="p-button-sm">
+          </p-button>
+          <p-button 
+            label="Sign Up" 
+            (onClick)="onSignup()"
+            class="p-button-sm">
+          </p-button>
+        </div>
+      } @else {
+        <div class="flex align-items-center">
+          <p-avatar 
+            icon="pi pi-user" 
+            styleClass="mr-2 cursor-pointer" 
+            size="normal"
+            (click)="accountMenu.toggle($event)"
+            style="background-color: var(--primary-color);">
+          </p-avatar>
+          <p-menu #accountMenu [model]="accountMenuItems" [popup]="true" [style]="{'width': '160px'}"></p-menu>
+        </div>
+      }
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu md:hidden">
+      @if (!isLoggedIn) {
+        <p-button 
+          icon="pi pi-bars"
+          styleClass="p-button-text"
+          (onClick)="toggleMobileMenu()">
+        </p-button>
+      } @else {
+        <div class="flex align-items-center gap-2">
+          <p-avatar 
+            icon="pi pi-user" 
+            styleClass="cursor-pointer" 
+            size="normal"
+            (click)="mobileAccountMenu.toggle($event)"
+            style="background-color: var(--primary-color);">
+          </p-avatar>
+          <p-button 
+            icon="pi pi-bars"
+            styleClass="p-button-text"
+            (onClick)="toggleMobileMenu()">
+          </p-button>
+          <p-menu #mobileAccountMenu [model]="accountMenuItems" [popup]="true" [style]="{'width': '160px'}"></p-menu>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Mobile Menu Dropdown -->
+  @if (mobileMenuOpen) {
+    <div class="mobile-dropdown surface-0 shadow-2 absolute w-full left-0 top-100 p-3 border-round-bottom-2xl md:hidden">
+      <div class="flex flex-column gap-3">
+        @for (item of navItems; track item.label) {
+          <a 
+            [routerLink]="getRoute(item.path)" 
+            (click)="toggleMobileMenu()"
+            class="text-900 hover:text-primary font-medium no-underline p-3 border-round hover:surface-100 transition-colors transition-duration-300">
+            {{ item.label }}
+          </a>
+        }
+        
+        @if (!isLoggedIn) {
+          <div class="flex flex-column gap-2 pt-3 border-top-1 surface-100">
+            <p-button 
+              label="Login" 
+              severity="secondary" 
+              (onClick)="onLogin()"
+              class="w-full">
+            </p-button>
+            <p-button 
+              label="Sign Up" 
+              (onClick)="onSignup()"
+              class="w-full">
+            </p-button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</nav>
