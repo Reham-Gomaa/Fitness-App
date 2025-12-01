@@ -1,32 +1,68 @@
 import {HttpInterceptorFn} from "@angular/common/http";
+import {PlatFormService} from "@fitness-app/services";
 import {inject} from "@angular/core";
 import {StorageKeys} from "../constants/storage.config";
-import {Translation} from "../services/translation/translation";
 
 /**
- * HTTP Interceptor that adds authentication token and language headers to all requests
+ * @name headerInterceptor
+ * @category Interceptors
+ * @description
+ * Interceptor responsible for automatically attaching apikey and subdomain headers to HTTP requests.
+ *
+ * ### Usage
+ * Registered in app.config.ts:
+ * ```ts
+ * providers: [
+ *   { provide: HTTP_INTERCEPTORS, useClass: headerInterceptor, multi: true }
+ * ]
+ * ```
+ *
+ * @since 1.0.0
  */
+
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-    const translation = inject(Translation);
+    const platform = inject(PlatFormService);
 
-    // Get token from localStorage
-    const token = typeof window !== "undefined" ? localStorage.getItem(StorageKeys.TOKEN) : null;
+    if (platform.isBrowser()) {
+        const headers: {[key: string]: string} = {};
 
-    // Get current language (ar or en)
-    const lang = translation.lang();
+        const isLoginRequest = req.url.includes("/users/auth/login");
 
+        if (!isLoginRequest) {
+            const token = localStorage.getItem(StorageKeys.TOKEN);
+            if (token && !req.headers.has("token")) {
+                headers["token"] = token;
+            }
+        }
 
-    // Clone the request and add headers
-    if (req.url.includes("www.themealdb.com") == false) {
-      const clonedRequest = req.clone({
-          setHeaders: {
-              ...(token && {token: token}),
-              lang: lang || "en",
-          },
-      });
+        if (window.location && window.location.hostname && !req.headers.has("subdomain")) {
+            const hostname = window.location.hostname;
+            const dotIndex = hostname.indexOf(".");
 
-      return next(clonedRequest);
+            let subdomain = "localhost";
+            if (dotIndex > 0) {
+                const extractedSubdomain = hostname.substring(0, dotIndex);
+                if (extractedSubdomain) {
+                    subdomain = extractedSubdomain;
+                }
+            } else if (dotIndex === -1 && hostname) {
+                subdomain = hostname;
+            }
+
+            headers["subdomain"] = subdomain;
+        }
+
+        if (localStorage.getItem(StorageKeys.LANGUAGE)) {
+            headers["accept-language"] = localStorage.getItem(StorageKeys.LANGUAGE) || "en";
+        } else {
+            headers["accept-language"] = "en";
+        }
+
+        if (Object.keys(headers).length > 0) {
+            req = req.clone({
+                setHeaders: headers,
+            });
+        }
     }
-    return next(req)
-
+    return next(req);
 };
