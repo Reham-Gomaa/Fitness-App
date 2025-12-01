@@ -1,4 +1,66 @@
 <section id="panel">
     <div class="blur-overlay"></div>
-    <div class="container"></div>
+    <section class="container">
+        <section class="nav-tabs">
+            @if (panelType() === 'classes' && difficultyLevels()) {
+            <app-nav-tabs
+                [navItems]="difficultyLevels()"
+                (navItemClick)="getExercises($event)"
+            />
+            } @else if (panelType() === 'meals' && mealsCategories()) {
+            <app-nav-tabs
+                [navItems]="mealsCategories()"
+                (navItemClick)="getMeals($event)"
+            />
+            }
+        </section>
+        <ul class="list list-none p-0 pt-1 m-0">
+            @if (panelType() === 'classes') { @for (item of exercesList(); track $index) {
+            <li
+                [class.border-none]="$index === exercesList.length - 1"
+                class="item flex align-items-center"
+            >
+                <div class="image">
+                    <img
+                        src="./images/details/bg-2.avif"
+                        alt=""
+                    />
+                </div>
+                <div class="content flex align-items-center">
+                    <div class="text">
+                        <h1>{{ item.exercise }}</h1>
+                        <p>{{ item.primary_equipment }}</p>
+                    </div>
+                    <div class="icon-wrapper">
+                        <div class="icon">
+                            <i
+                                class="pi pi-caret-right"
+                                style="color: var(--panel-text-color)"
+                            ></i>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            } }@else if (panelType() === 'meals') { @for (item of mealsList(); track $index) {
+            <li
+                [class.border-none]="$index === mealsList.length - 1"
+                class="item flex align-items-center"
+            >
+                <div class="image">
+                    <img
+                        src="./images/details/bg-2.avif"
+                        alt=""
+                    />
+                </div>
+                <div class="content">
+                    <h1>{{ item.strMeal }}</h1>
+                    <div class="text flex justify-content-between align-items-start">
+                        <p>{{ item.strMeal }}</p>
+                        <div class="icon"></div>
+                    </div>
+                </div>
+            </li>
+            } }
+        </ul>
+    </section>
 </section>

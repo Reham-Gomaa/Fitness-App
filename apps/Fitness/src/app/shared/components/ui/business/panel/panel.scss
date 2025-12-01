@@ -1,31 +1,112 @@
 #panel {
-    border: 2px solid #282828;
-    // background: #24242480;
-    gap: 24px;
-    border-radius: 20px;
-    padding-top: 16px;
+    border: 0.125rem solid var(--panel-border-color);
+    gap: 1.5rem;
+    border-radius: 1.25rem;
+    //padding: 16px 0 0;
     position: relative;
-    height: 100vh;
-    &::before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        // Preload LCP image
-        background-image: url('/images/details/bg-1.avif');
-    }
+    overflow: hidden;
+    background: var(--details-bg);
+    z-index: 1;
+    color: var(--panel-text-color);
 
     .blur-overlay {
         backdrop-filter: blur(20px);
         position: absolute;
         inset: 0;
-        z-index: 1;
-        // background: #24242499;
+        z-index: 2;
     }
 
     .container {
         position: relative;
-        z-index: 2;
+        z-index: 3;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        .list {
+            // gap: 0.5rem;
+            max-height: 75vh;
+            overflow: hidden;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+
+            &::-webkit-scrollbar {
+                display: none; /* Chrome, Safari and Opera */
+            }
+            .item {
+                height: 5.625rem;
+                padding: 8px 0px 8px 16px;
+                border-bottom: 0.0625rem solid var(--panel-border-color);
+                gap: 1.0625rem;
+                transition: all 0.2s ease;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--panel-hover-bg);
+                    padding-inline-end: 8px;
+
+                    .image {
+                        img {
+                            filter: brightness(1.05) contrast(1.1);
+                            transition: filter 0.3s ease;
+                        }
+                    }
+
+                    .icon {
+                        i {
+                            color: var(--panel-icon-hover-color) !important;
+                        }
+                    }
+                }
+
+                .image {
+                    border-radius: 1.25rem;
+                    padding: 0;
+                    width: 20%;
+                    img {
+                        height: 4.875rem;
+                        width: 100%;
+                        display: block;
+                        border-radius: 1.25rem;
+                        object-fit: cover;
+                    }
+                }
+                .content {
+                    width: 78%;
+                    font-family: var(--font-1);
+                    cursor: pointer;
+                    text-transform: capitalize;
+
+                    h1 {
+                        font-weight: 500;
+                        font-size: 1.125rem;
+                        line-height: 140%;
+                        margin: 0;
+                    }
+                    .text {
+                        width: 85%;
+                        p {
+                            font-family: var(--font-1);
+                            font-weight: 400;
+                            font-size: 0.875rem;
+                            line-height: 140%;
+                            margin: 0;
+                        }
+                    }
+                    .icon-wrapper {
+                        width: 15%;
+                        .icon {
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            background-color: var(--panel-icon-bg);
+                            border-radius: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
