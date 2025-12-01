@@ -10,9 +10,13 @@
     --white: #ffffff;
     --black: #000000;
 
+    --gray-50: #f1f1f1;
     --gray-100: #f3f3f4;
     --gray-200: #d9d9d9;
     --gray-300: #d3d3d3;
+    --gray-400: #c1c1c1;
+    --gray-700: #4a4a4a;
+    --gray-800: #2d2d2d;
     --gray-900: #242424;
     --gray-950: #232526;
     --gray-100-14: #f3f3f424;
@@ -20,6 +24,8 @@
     --gray-900-60: #24242499;
 
     --orange-500: #ff4100;
+    --light-orange-4: rgba(255, 65, 0, 0.04);
+    --light-orange-5: rgba(255, 255, 255, 0.05);
     --gradient-70: #b4b3b1;
 
     --body: var(--white);
@@ -28,6 +34,17 @@
     --main-color: var(--orange-500);
     --text-color: var(--gray-900);
     --sec-grad-color: var(--gradient-70);
+
+    // Details
+    --details-bg: #ffffff4d;
+    // Panel
+    --panel-border-color: var(--gray-900-14);
+    --panel-text-color: var(--gray-900);
+    --panel-scrollbar-track: var(--gray-50);
+    --panel-scrollbar-thumb: var(--gray-400);
+    --panel-icon-bg: var(--orange-500);
+    --panel-icon-hover-color: var(--white);
+    --panel-hover-bg: var(--light-orange-4);
 }
 .dark-mode {
     --body: var(--gray-950);
@@ -37,8 +54,18 @@
     --text-color: var(--white);
     --sec-grad-bg: var(--gradient-70);
 
+    // Details
+    --details-bg: var(--gray-900-60);
+    // Panel
+    --panel-border-color: #2d2d2d;
+    --panel-text-color: var(--gray-100);
+    --panel-scrollbar-track: var(--gray-800);
+    --panel-scrollbar-thumb: var(--gray-700);
+    --panel-icon-hover-color: var(--gray-900);
+    --panel-hover-bg: var(--light-orange-5);
+
     /* About-Us */
-    --section-bg: var(--white-95);
-    --text-color: var(--gray-900);
-    --line-break-bg: var(--gray-900-14);
+    --about-section-bg: var(--white-95);
+    --about-text-color: var(--gray-900);
+    --about-line-break-bg: var(--gray-900-14);
 }
