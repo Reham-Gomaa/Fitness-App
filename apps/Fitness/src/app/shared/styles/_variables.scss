@@ -35,13 +35,14 @@
     --text-color: var(--gray-900);
     --sec-grad-color: var(--gradient-70);
 
+    // Scrollbar
+    --panel-scrollbar-track: var(--gray-50);
+    --panel-scrollbar-thumb: var(--gray-400);
     // Details
     --details-bg: #ffffff4d;
     // Panel
     --panel-border-color: var(--gray-900-14);
     --panel-text-color: var(--gray-900);
-    --panel-scrollbar-track: var(--gray-50);
-    --panel-scrollbar-thumb: var(--gray-400);
     --panel-icon-bg: var(--orange-500);
     --panel-icon-hover-color: var(--white);
     --panel-hover-bg: var(--light-orange-4);
@@ -54,13 +55,14 @@
     --text-color: var(--white);
     --sec-grad-bg: var(--gradient-70);
 
+    // Scrollbar
+    --panel-scrollbar-track: var(--gray-800);
+    --panel-scrollbar-thumb: var(--gray-700);
     // Details
     --details-bg: var(--gray-900-60);
     // Panel
     --panel-border-color: #2d2d2d;
     --panel-text-color: var(--gray-100);
-    --panel-scrollbar-track: var(--gray-800);
-    --panel-scrollbar-thumb: var(--gray-700);
     --panel-icon-hover-color: var(--gray-900);
     --panel-hover-bg: var(--light-orange-5);
 

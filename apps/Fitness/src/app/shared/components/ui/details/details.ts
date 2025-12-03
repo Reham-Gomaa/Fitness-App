@@ -1,10 +1,11 @@
 import {Component, inject, OnInit, signal, WritableSignal} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Panel} from "../business/panel/panel";
+import {NavTabs} from "../navTabs/navTabs";
 
 @Component({
     selector: "app-details",
-    imports: [Panel],
+    imports: [Panel, NavTabs],
     templateUrl: "./details.html",
     styleUrl: "./details.scss",
 })

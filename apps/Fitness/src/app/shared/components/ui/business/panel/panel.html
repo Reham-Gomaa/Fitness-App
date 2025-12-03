@@ -1,66 +1,147 @@
-<section id="panel">
-    <div class="blur-overlay"></div>
+<section
+    id="panel"
+    role="region"
+    aria-labelledby="panel-heading"
+>
+    <div
+        class="blur-overlay"
+        aria-hidden="true"
+    ></div>
     <section class="container">
-        <section class="nav-tabs">
+        <!-- Add heading for the panel section -->
+        <h2
+            id="panel-heading"
+            class="sr-only"
+        >
+            {{ panelType() === 'classes' ? 'Workout Exercises' : 'Meal Recipes' }}
+        </h2>
+
+        <section
+            class="nav-tabs"
+            role="tablist"
+            aria-label="{{ panelType() === 'classes' ? 'Difficulty Levels' : 'Meal Categories' }}"
+        >
             @if (panelType() === 'classes' && difficultyLevels()) {
             <app-nav-tabs
                 [navItems]="difficultyLevels()"
                 (navItemClick)="getExercises($event)"
+                role="presentation"
             />
             } @else if (panelType() === 'meals' && mealsCategories()) {
             <app-nav-tabs
                 [navItems]="mealsCategories()"
                 (navItemClick)="getMeals($event)"
+                role="presentation"
             />
             }
         </section>
-        <ul class="list list-none p-0 pt-1 m-0">
-            @if (panelType() === 'classes') { @for (item of exercesList(); track $index) {
+
+        <ul
+            class="list list-none p-0 pt-1 m-0"
+            role="list"
+            aria-label="{{ panelType() === 'classes' ? 'List of exercises' : 'List of meals' }}"
+        >
+            @if (panelType() === 'classes') { @for (item of exercesList(); track $index; let isLast
+            = $last) {
             <li
-                [class.border-none]="$index === exercesList.length - 1"
+                [class.border-none]="$index === exercesList()!.length - 1"
                 class="item flex align-items-center"
+                role="listitem"
+                tabindex="0"
+                aria-label="{{ item.exercise }}, {{ item.primary_equipment }}"
             >
-                <div class="image">
+                <div
+                    class="image"
+                    aria-hidden="true"
+                >
                     <img
                         src="./images/details/bg-2.avif"
-                        alt=""
+                        alt="{{ item.exercise }}"
+                        role="presentation"
                     />
                 </div>
                 <div class="content flex align-items-center">
                     <div class="text">
-                        <h1>{{ item.exercise }}</h1>
+                        <h3 class="m-0">{{ item.exercise }}</h3>
                         <p>{{ item.primary_equipment }}</p>
                     </div>
                     <div class="icon-wrapper">
-                        <div class="icon">
+                        <div
+                            class="icon"
+                            aria-hidden="true"
+                        >
                             <i
                                 class="pi pi-caret-right"
                                 style="color: var(--panel-text-color)"
                             ></i>
                         </div>
+                        <span class="sr-only">View details for {{ item.exercise }}</span>
                     </div>
                 </div>
             </li>
-            } }@else if (panelType() === 'meals') { @for (item of mealsList(); track $index) {
+            } @empty {
             <li
-                [class.border-none]="$index === mealsList.length - 1"
-                class="item flex align-items-center"
+                class="no-items"
+                role="listitem"
             >
-                <div class="image">
+                <p class="empty">No exercises found</p>
+            </li>
+            } }@else if (panelType() === 'meals') { @for (item of mealsList(); track $index; let
+            isLast = $last) {
+            <li
+                [class.border-none]="$index === mealsList()!.length - 1"
+                class="item flex align-items-center"
+                role="listitem"
+                tabindex="0"
+                aria-label="{{ item.strMeal }}"
+            >
+                <div
+                    class="image"
+                    aria-hidden="true"
+                >
                     <img
-                        src="./images/details/bg-2.avif"
-                        alt=""
+                        [src]="item.strMealThumb"
+                        alt="{{ item.strMeal }}"
+                        role="presentation"
                     />
                 </div>
-                <div class="content">
-                    <h1>{{ item.strMeal }}</h1>
-                    <div class="text flex justify-content-between align-items-start">
+                <div class="content flex align-items-center">
+                    <div class="text">
+                        <h3 class="m-0">{{ item.strMeal }}</h3>
                         <p>{{ item.strMeal }}</p>
-                        <div class="icon"></div>
+                    </div>
+                    <div class="icon-wrapper">
+                        <div
+                            class="icon"
+                            aria-hidden="true"
+                        >
+                            <i
+                                class="pi pi-caret-right"
+                                style="color: var(--panel-text-color)"
+                            ></i>
+                        </div>
+                        <span class="sr-only">View recipe for {{ item.strMeal }}</span>
                     </div>
                 </div>
+            </li>
+            } @empty {
+            <li
+                class="no-items"
+                role="listitem"
+            >
+                <p class="empty">No meals found</p>
             </li>
             } }
         </ul>
+
+        <!-- Status messages for screen readers -->
+        <div
+            aria-live="polite"
+            aria-atomic="true"
+            class="sr-only"
+        >
+            @if (panelType() === 'classes') { {{ exercesList()?.length || 0 }} exercises loaded }
+            @else if (panelType() === 'meals') { {{ mealsList()?.length || 0 }} meals loaded }
+        </div>
     </section>
 </section>
