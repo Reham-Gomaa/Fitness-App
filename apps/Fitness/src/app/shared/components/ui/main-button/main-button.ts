@@ -9,7 +9,6 @@ import {Component, input} from "@angular/core";
 export class MainButton {
     btnText = input.required<string>();
     btnIcon = input<string>();
-    btnBg = input<string>();
-    btnColor = input<string>();
-    btnBorder = input<string>();
+    fontWeight = input<string>();
+    customClass = input<string>();
 }

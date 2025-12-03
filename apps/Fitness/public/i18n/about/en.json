@@ -1,8 +1,11 @@
 {
     "about": {
         "section": "ABOUT US",
-        "title": "EMPOWERING YOU TO ACHIEVE YOUR FITNESS GOALS",
+        "titleStart": "EMPOWERING YOU TO ACHIEVE  ",
+        "titleMiddle": "YOUR FITNESS ",
+        "titleEnd": "GOALS",
         "paragraph": "We believe fitness is more than just a workout—it's a lifestyle. With top-of- the-line facilities, certified trainers, and a supportive community, we're here to inspire and guide you every step of the way.",
+        "button": "Get Started",
         "service1": {
             "header": "Personal Trainer",
             "paragraph1": "Achieve your fitness goals with the",
