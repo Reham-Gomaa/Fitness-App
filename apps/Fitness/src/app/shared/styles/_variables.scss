@@ -6,6 +6,7 @@
 
     // Light Theme Colors
 
+    --white-30: #ffffff4d;
     --white-90: #ffffff99;
     --white-95: #fffffff2;
     --white: #ffffff;
@@ -25,40 +26,42 @@
 
     --body: var(--white);
 
+    // Hero
+    --hero-bg: var(--white-30);
     // About-Us
-    --section-bg: var(--white-95);
-    --text-color: var(--gray-900);
-    --line-break-bg: var(--gray-900-14);
+    --about-section-bg: var(--white-95);
+    --about-text-color: var(--gray-900);
+    --about-line-break-bg: var(--gray-900-14);
     //meals and workouts shared
     --main-color: var(--orange-500);
     --text-color: var(--gray-900);
     --sec-grad-color: var(--gradient-70);
     // Why-Us
-    --section-bg: var(--white-95);
-    --text-color: var(--gray-900);
-    --step-bg: var(--orange-500);
-    --step-color: var(--gray-100);
-    --step-border-color: var(--gray-900-14);
+    --whyus-section-bg: var(--white-95);
+    --whyus-text-color: var(--gray-900);
+    --whyus-step-bg: var(--orange-500);
+    --whyus-step-color: var(--gray-100);
+    --whyus-step-border-color: var(--gray-900-14);
 }
 
-.dark {
+.dark-mode {
     --body: var(--gray-950);
 
     --gradient-70: #232425;
 
+    // Hero
+    --hero-bg: var(--gray-900-60);
     // About-Us
-    --section-bg: var(--gray-950);
-    --text-color: var(--gray-100);
-    --line-break-bg: var(--gray-100-14);
+    --about-section-bg: var(--gray-950);
+    --about-text-color: var(--gray-100);
+    --about-line-break-bg: var(--gray-100-14);
     //meals and workouts shared
     --text-color: var(--white);
     --sec-grad-bg: var(--gradient-70);
     // Why-Us
-    --section-bg: var(--gray-950);
-    --text-color: var(--gray-100);
-    --step-bg: var(--orange-500);
-    --step-color: var(--gray-100);
-    --step-border-color: var(--gray-900-14);
-    --step-dashed-border: var(--gray-900-14);
-    --step-border-color: var(--gray-900-14);
+    --whyus-section-bg: var(--gray-950);
+    --whyus-text-color: var(--gray-100);
+    --whyus-step-bg: var(--orange-500);
+    --whyus-step-color: var(--gray-100);
+    --whyus-step-border-color: var(--gray-100-14);
 }
