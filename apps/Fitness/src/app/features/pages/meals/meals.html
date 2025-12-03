@@ -4,7 +4,7 @@
 >
     <app-title
         [titleImg]="'/images/meals/Healthy.png'"
-        [titleTxt]="'Healthy Nutritions'"
+        [titleTxt]="'meals.title' |translate"
         [imgW]="'258'"
         [imgH]="'43'"
     />
@@ -12,10 +12,10 @@
         <div class="container">
             <div class="meals-info text-center my-4">
                 <app-header>
-                    Fuel your fitness journey with <br />
-                    customized
-                    <span class="long-desc-span">meal plans</span>
-                    for you
+                    {{'meals.header.part1' |translate}} <br />
+                    {{'meals.header.part2' |translate}}
+                    <span class="long-desc-span">{{'meals.header.part3' |translate}}</span>
+                    {{'meals.header.part4' |translate}}
                 </app-header>
             </div>
             <div class="meal-items">
