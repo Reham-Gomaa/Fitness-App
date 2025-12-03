@@ -1,14 +1,10 @@
 <div class="horizontal-carousel-container">
-  <div class="horizontal-carousel">
-    @for (exp of expressions(); track $index) {
-      <div class="item" >
-         <h3 class="text-center px-3 uppercase ">
-              {{exp}}
-            </h3>
+    <div class="horizontal-carousel">
+        @for (exp of expressions(); track $index) {
+        <div class="item">
+            <h3 class="text-center px-3 uppercase">{{exp}}</h3>
             <i class="pi pi-star-fill"></i>
-
-      </div>
-    }
-  </div>
+        </div>
+        }
+    </div>
 </div>
-

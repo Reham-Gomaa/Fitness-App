@@ -17,6 +17,7 @@
             type="image/x-icon"
             href="./images/logo.avif"
         />
+        <!-- Preconnect -->
         <link
             rel="preconnect"
             href="https://fonts.googleapis.com"
@@ -25,46 +26,62 @@
             rel="preconnect"
             href="https://fonts.gstatic.com"
             crossorigin
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-            rel="preload"
-            as="style"
-            onload="this.rel='stylesheet'"
-        />
-        <link
-            rel="preconnect"
-            href="https://fonts.googleapis.com"
-        />
-        <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossorigin
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-            rel="stylesheet"
         />
         <link
             rel="preconnect"
             href="https://fitness.elevateegy.com"
             crossorigin
+        />
+        <!-- PreFetch -->
+        <link
+            rel="dns-prefetch"
+            href="https://fonts.googleapis.com"
+        />
+        <link
+            rel="dns-prefetch"
+            href="https://fonts.gstatic.com"
         />
         <link
             rel="dns-prefetch"
             href="https://fitness.elevateegy.com"
         />
+        <!-- Google Fonts -->
+        <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+            />
+        </noscript>
+
+        <!--  Preload PrimeIcons font -->
+        <link
+            rel="preload"
+            href="./media/primeicons.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+
+        <!-- Preload LCP images -->
         <link
             rel="preload"
             href="./images/hero/Theo Vance.avif"
             as="image"
             fetchpriority="high"
+            imagesrcset=""
         />
         <link
             rel="preload"
             href="./images/hero/bg-2.avif"
             as="image"
             fetchpriority="high"
+            imagesizes="100vw"
         />
         <link
             rel="preload"

@@ -7,7 +7,7 @@
 >
     <app-title
         [titleImg]="'/images/workouts/WOrkouts.png'"
-        [titleTxt]="'Fitness Class'"
+        [titleTxt]="'classes.title' |translate"
         [imgW]="'330'"
         [imgH]="'44'"
     />
@@ -15,13 +15,13 @@
         <div class="container">
             <div class="meals-info text-center my-3">
                 <app-header>
-                    Transform Your Body with Our <br />
-                    Dynamic <span class="long-desc-span"> Upcoming Workouts </span>
+                    {{'classes.header.part1' |translate}} <br />
+                    {{'classes.header.part2' |translate}}
+                    <span class="long-desc-span"> {{'classes.header.part3' |translate}} </span>
                 </app-header>
             </div>
             <div class="meal-items">
                 <app-nav-tabs
-                    class="relative z-5"
                     [navItems]="workout_muscles()"
                     (navItemClick)="SetCurrentMuscle($event)"
                 />
@@ -48,7 +48,7 @@
                       }"
                         />
                     </div>
-                    } }
+                    <<<<<<< HEAD ======= >>>>>>> a129055bc722a531901f2e59f076d0f0f36f283c } }
                 </div>
                 }
             </div>

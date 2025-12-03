@@ -7,10 +7,11 @@ import {Carousel} from "./../../../shared/components/ui/carousel/carousel";
 import {Header} from "./../../../shared/components/ui/header/header";
 import {Title} from "./../../../shared/components/ui/title/title";
 import {SeoService} from "../../../core/services/seo/seo.service";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
     selector: "app-meals",
-    imports: [Title, Header, Carousel],
+    imports: [Title, Header, Carousel, TranslatePipe],
     templateUrl: "./meals.html",
     styleUrl: "./meals.scss",
 })

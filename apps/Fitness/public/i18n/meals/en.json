@@ -1,1 +1,11 @@
-{}
+{
+    "meals": {
+        "title": "Healthy Nutritions",
+        "header": {
+            "part1": "Fuel your fitness journey with",
+            "part2": "customized",
+            "part3": "meal plans",
+            "part4": "for you"
+        }
+    }
+}

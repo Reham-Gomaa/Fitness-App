@@ -1,1 +1,71 @@
-{}
+{
+    "hero": {
+        "header": {
+            "part1": "Your body can",
+            "part2": "stand almost",
+            "part3": "anything"
+        },
+        "paragraph": "It's your mind that needs convincing. Push past your limits, stay committed, and watch as your body transform into power house of strength and resilience. Start your journey today & truly capable of!",
+        "statistics": {
+            "index0": {
+                "number": "1200",
+                "text": "Active Members"
+            },
+            "index1": {
+                "number": "12",
+                "text": "Certified Trainers"
+            },
+            "index2": {
+                "number": "20",
+                "text": "Year Of Experience"
+            }
+        },
+        "btn-start": "Get Started",
+        "btn-explore": "Explore More"
+    },
+    "why-us": {
+        "section": "WHY US",
+        "titleStart": "Elevate fitness with the ",
+        "titleMiddle": "best way ",
+        "titleEnd": "possible",
+        "paragraph": "We offer a fitness journey that's tailored to your goals, supported by professional trainers and a welcoming community. Whether it's weight loss, strength building, or overall wellness, our proven methods.",
+        "step1": {
+            "id": "01",
+            "header": "personalized fitness plans",
+            "paragraph": "We tailor every workout to fit your unique goals and fitness level ensuring"
+        },
+        "step2": {
+            "id": "02",
+            "header": "results-driven focus",
+            "paragraph": "Everything we do is designed to help you achieve measurable results, "
+        },
+        "step3": {
+            "id": "03",
+            "header": "state-of-the-art equipment",
+            "paragraph": "We provide the latest in gym equipment, from cardio machines to free "
+        },
+        "sr-only": {
+            "figCaption": "Professional FitZone trainers demonstrating expertise in personalized fitness programs, strength training, and modern exercise techniques.",
+            "trainer-1": {
+                "alt": "Certified personal trainer guiding client through customized workout routine",
+                "speciality": "personal training",
+                "description": "Expert trainer focusing on individualized fitness programs"
+            },
+            "trainer-2": {
+                "alt": "Experienced trainer assisting with advanced fitness equipment usage",
+                "speciality": "equipment training",
+                "description": "Expert in modern gym equipment and functional training"
+            },
+            "trainer-3": {
+                "alt": "Fitness instructor demonstrating proper strength training technique",
+                "speciality": "strength training",
+                "description": "Specialized in weight lifting and muscle building techniques"
+            },
+            "trainer-4": {
+                "alt": "Professional fitness coach demonstrating proper exercise form and technique",
+                "speciality": "exercise technique",
+                "description": "Specialized in form correction and movement optimization"
+            }
+        }
+    }
+}

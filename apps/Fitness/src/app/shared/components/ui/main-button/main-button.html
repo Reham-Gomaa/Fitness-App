@@ -1,10 +1,18 @@
-<div id="main-btn" class="mt-5 w-fit relative">
-  <button [style]="{
-    'background-color':btnBg() || 'var(--main-color)',
-    'color':btnColor() || '#F3F3F4',
-    'border':btnBorder() || 0,
-  }" >{{btnText()}}</button>
-  <div class="icon shadow-2">
-    <i class="pi pi-arrow-up-right text-white" ></i>
-  </div>
+<div
+    id="main-btn"
+    class="mt-5 w-fit relative"
+>
+    <button
+        [class]="[fontWeight(), customClass()]"
+        type="button"
+        [aria-label]="btnText()"
+    >
+        {{btnText()}}
+    </button>
+    <div class="icon shadow-2">
+        <i
+            class="pi pi-arrow-up-right text-white"
+            style="font-size: 0.75rem"
+        ></i>
+    </div>
 </div>

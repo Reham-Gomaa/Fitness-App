@@ -10,6 +10,14 @@ html {
     background-color: var(--body);
 }
 
+@font-face {
+    font-family: 'primeicons';
+    src: url('./../../../node_modules/primeicons/fonts/primeicons.woff2') format('woff2');
+    font-display: swap; /* This will display fonts when ready */
+    font-weight: normal;
+    font-style: normal;
+}
+
 .sec-gradient {
     background: linear-gradient(to bottom, var(--sec-grad-color) 0% 75%, transparent 70% 100%);
 }

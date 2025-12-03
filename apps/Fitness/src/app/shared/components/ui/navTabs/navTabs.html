@@ -5,6 +5,7 @@
         @if (navItems()!.length > 0) { @for (item of navItems(); track $index) {
         <li>
             <a
+                href="#workout-{{item._id}}"
                 [class]="{
                   'active':item.isActive
                 }"

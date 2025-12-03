@@ -5,7 +5,7 @@
     background: var(--about-section-bg);
     backdrop-filter: blur(86px);
     @media all and (min-width: 48rem) {
-        padding: 5rem 2.5rem;
+        padding: 2.5rem 5rem;
         gap: 5rem;
     }
     @media all and (62rem <= width <= 78.125rem) {
@@ -114,6 +114,9 @@
             flex-grow: 1;
             flex-basis: 0;
         }
+    }
+    .sec-header {
+        text-align: start;
     }
     .article {
         gap: 4rem;

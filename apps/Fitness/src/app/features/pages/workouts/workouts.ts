@@ -1,5 +1,5 @@
+import {TranslatePipe} from "@ngx-translate/core";
 import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
-import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 //primeNg
 import {MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
@@ -23,6 +23,7 @@ import {NavTabs} from "./../../../shared/components/ui/navTabs/navTabs";
 import {Title} from "./../../../shared/components/ui/title/title";
 import {navItem} from "./../../../shared/models/navItem";
 import {SeoService} from "../../../core/services/seo/seo.service";
+import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 
 @Component({
     selector: "app-workouts",
@@ -36,6 +37,7 @@ import {SeoService} from "../../../core/services/seo/seo.service";
         Carousel,
         Toast,
         NavTabs,
+        TranslatePipe,
     ],
     templateUrl: "./workouts.html",
     styleUrl: "./workouts.scss",
