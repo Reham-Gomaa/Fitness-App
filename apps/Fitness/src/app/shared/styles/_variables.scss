@@ -1,10 +1,12 @@
 :root {
-    /* Fonts */
+    // Fonts
     --font-1: 'Baloo Thambi 2', system-ui;
     --font-2: 'Rubik', sans-serif;
     --font-3: 'Inter', sans-serif;
-    /* Light Theme Colors */
 
+    // Light Theme Colors
+
+    --white-30: #ffffff4d;
     --white-90: #ffffff99;
     --white-95: #fffffff2;
     --white: #ffffff;
@@ -24,23 +26,95 @@
 
     --body: var(--white);
 
-    /* meals and workouts shared */
+    // Hero
+    --hero-bg: var(--white-30);
+    // About-Us
+    --about-section-bg: var(--white-95);
+    --about-text-color: var(--gray-900);
+    --about-line-break-bg: var(--gray-900-14);
+    //meals and workouts shared
     --main-color: var(--orange-500);
     --text-color: var(--gray-900);
     --sec-grad-color: var(--gradient-70);
     /*details*/
     --txt-color:var(--gray-100);
+
+    // Why-Us
+    --whyus-section-bg: var(--white-95);
+    --whyus-text-color: var(--gray-900);
+    --whyus-step-bg: var(--orange-500);
+    --whyus-step-color: var(--gray-100);
+    --whyus-step-border-color: var(--gray-900-14);
+   
+    /* Footer */
+    --footer-bg: var(--gray-100);
+    --footer-text: var(--gray-900);
+    --icon-color:0;
+    --icon-border-color: var(--gray-900);
+
+    /* Account Page */
+    --text-color:var(--gray-900);
+    --bg-color: 255, 255, 255, 0.5;
+    --hover-bg-color: 50, 50, 50, 0.6;
+    --modal-bg-color: var(--gray-100) !important;
+    --modal-title-color: var(--black);
+    --modal-radio-color: var(--gray-900);
+    --modal-radio-background: var(--gray-300);
+    --logout-btn-text: var(--gray-900);
+    --logout-btn-color: var(--orange-500);
+    --hint-text: var(--gray-900-60);
+    --cancel-hover: 41, 38, 36, 0.3;
+
+    /* Navbar */
+    --scroll-bg: 255, 255, 255, 0.95;
+    --sidebar-bg: var(--white);
+    --nav-bg: var(--gray-100);
+   
 }
+
 .dark-mode {
     --body: var(--gray-950);
 
     --gradient-70: #232425;
-    /* meals and workouts shared */
+
+    // Hero
+    --hero-bg: var(--gray-900-60);
+    // About-Us
+    --about-section-bg: var(--gray-950);
+    --about-text-color: var(--gray-100);
+    --about-line-break-bg: var(--gray-100-14);
+    //meals and workouts shared
     --text-color: var(--white);
     --sec-grad-bg: var(--gradient-70);
+    // Why-Us
+    --whyus-section-bg: var(--gray-950);
+    --whyus-text-color: var(--gray-100);
+    --whyus-step-bg: var(--orange-500);
+    --whyus-step-color: var(--gray-100);
+    --whyus-step-border-color: var(--gray-100-14);
 
-    /* About-Us */
-    --section-bg: var(--white-95);
-    --text-color: var(--gray-900);
-    --line-break-bg: var(--gray-900-14);
+    /* Footer */
+    --footer-bg: var(--gray-900);
+    --footer-text: var(--gray-100);
+    --icon-color:1;
+    --icon-border-color: var(--gray-900);
+
+    /* Account Page */
+    --text-color:var(--gray-100);
+    --bg-color: 20, 20, 20, 0.85;
+    --hover-bg-color: 50, 50, 50, 0.9;
+    --modal-bg-color: var(--gray-900)!important; ;
+    --modal-title-color: var(--white);
+    --modal-radio-background: var(--gray-100-14) ;
+    --modal-radio-color: var(--gray-200);
+    --logout-btn-text: var(--gray-300);
+    --logout-btn-color: var(--orange-500);
+    --hint-text: var(--gray-300);
+    --cancel-hover: 248, 240, 235, 0.3;
+
+    /* Navbar */
+    --scroll-bg: 29, 28, 28, 0.95;
+    --sidebar-bg: var(--gray-950);
+    --nav-bg: var(--gray-900);
+    
 }

@@ -1,1 +1,126 @@
-<p>navbar works!</p>
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <div class="nav-brand">
+      <a [routerLink]="[getCurrentLang(), 'main', 'home']" class="logo-link">
+        <img src="/images/fit 1.png" alt="Super Fitness" class="logo">
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Links -->
+    <div class="nav-links desktop-only">
+      @for (item of navItems; track item.labelKey) {
+        <a 
+          [routerLink]="getRoute(item.path)" 
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="nav-link">
+          {{ item.labelKey | translate }}
+        </a>
+      }
+    </div>
+
+    <!-- Desktop Auth Section -->
+    <div class="nav-auth desktop-only">
+      @if (!isLoggedIn) {
+        <div class="auth-buttons">
+          <div class="cursor-pointer" (click)="onLogin()">
+            <app-main-button 
+              [btnText]="'navbar.login' | translate"
+              [customClass]="'orange-btn'"
+              [fontWeight]="'font-semibold'">
+            </app-main-button>
+          </div>
+          
+          <div class="cursor-pointer" (click)="onSignup()">
+            <app-main-button 
+              [btnText]="'navbar.signup' | translate"
+              [customClass]="'trans-btn'"
+              [fontWeight]="'font-semibold'">
+            </app-main-button>
+          </div>
+        </div>
+      } @else {
+        <div class="user-section">
+          <p-avatar 
+            icon="pi pi-user" 
+            size="large"
+            shape="circle"
+            class="user-avatar"
+            (click)="navigateToAccount()">
+          </p-avatar>
+        </div>
+      }
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu-btn mobile-only">
+      @if (isLoggedIn) {
+        <p-avatar 
+          icon="pi pi-user" 
+          size="large"
+          shape="circle"
+          class="user-avatar"
+          (click)="navigateToAccount()">
+        </p-avatar>
+      }
+      <button class="hamburger" (click)="toggleMobileMenu()" [class.active]="mobileMenuOpen">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" 
+       [class.active]="mobileMenuOpen" 
+       (click)="closeMobileMenu()"></div>
+
+  <!-- Mobile Sidebar Menu -->
+  <div class="mobile-sidebar" [class.active]="mobileMenuOpen">
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <img src="/images/fit 1.png" alt="Super Fitness" class="sidebar-logo">
+    </div>
+
+    <!-- Sidebar Content -->
+    <div class="sidebar-content">
+      <!-- Navigation Links -->
+      <div class="mobile-nav-links">
+        @for (item of navItems; track item.labelKey) {
+          <a 
+            [routerLink]="getRoute(item.path)" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="mobile-nav-link"
+            (click)="closeMobileMenu()">
+            {{ item.labelKey | translate }}
+          </a>
+        }
+      </div>
+
+      <!-- Auth Buttons / User Info -->
+      @if (!isLoggedIn) {
+        <div class="mobile-auth-buttons">
+          <div class="cursor-pointer" (click)="onLogin(); closeMobileMenu()">
+            <app-main-button 
+              [btnText]="'navbar.login' | translate"
+              [customClass]="'orange-btn'"
+              [fontWeight]="'font-semibold'"
+              [btnText]="'about.button' |translate">
+            </app-main-button>
+          </div>
+          
+          <div class="cursor-pointer" (click)="onSignup(); closeMobileMenu()">
+            <app-main-button 
+              [btnText]="'navbar.signup' | translate"
+              [customClass]="'trans-btn'"
+              [fontWeight]="'font-semibold'">
+            </app-main-button>
+          </div>
+        </div>
+      } 
+    </div>
+  </div>
+</nav>

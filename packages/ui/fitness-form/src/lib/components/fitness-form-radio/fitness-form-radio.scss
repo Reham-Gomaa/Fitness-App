@@ -5,8 +5,8 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 0.5rem 1rem 0.5rem;
-    background: #d3d3d333;
-    border: 0.0625rem solid var(--gray-200);
+    background: var( --modal-radio-background);
+    border: 0.0625rem solid var(--modal-radio-color);
     border-radius: 1.25rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -70,9 +70,10 @@
 
     padding: 0 1rem;
     flex: 1;
-    color: var(--white);
+    color: var(--modal-radio-color);
     font-weight: 700;
     font-size: 1rem;
     user-select: none;
   }
 }
+

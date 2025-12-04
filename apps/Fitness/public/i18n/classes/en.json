@@ -1,1 +1,10 @@
-{}
+{
+    "classes": {
+        "title": "Fitness Class",
+        "header": {
+            "part1": "Transform Your Body with Our",
+            "part2": "Dynamic",
+            "part3": "Upcoming Workouts"
+        }
+    }
+}

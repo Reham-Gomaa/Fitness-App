@@ -1,0 +1,28 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <button class="close-button" (click)="close()">
+      <i class="pi pi-times"></i>
+    </button>
+    <h2 class="modal-title">{{ 'ACCOUNT.WEIGHT.MODAL_TITLE' | translate }}</h2>
+    <p class="modal-subtitle">{{ 'ACCOUNT.WEIGHT.MODAL_SUBTITLE' | translate }}</p>
+  </div>
+  
+  <div class="modal-content">
+    <lib-fitness-input-slider
+      [unit]="'kg'" 
+      [initialWeight]="currentWeight()"  
+      [minWeight]="40"
+      [maxWeight]="200"
+      (weightChange)="onWeightChange($event)"
+    />
+  </div>
+  
+  <div class="modal-actions">
+    <button 
+      pButton 
+      class="done-button"
+      (click)="onDone()"
+      [label]="'ACCOUNT.MODALS.DONE' | translate"
+    ></button>
+  </div>
+</div>

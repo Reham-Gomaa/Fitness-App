@@ -1,0 +1,323 @@
+:host {
+  display: block;
+  font-family: var(--font-1);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background:var(--nav-bg);
+  padding: 0;
+  transition: background-color 0.3s ease;
+  
+
+
+  &.scrolled {
+    background: rgba(var(--scroll-bg));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 87.5rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 0.5rem 2rem;
+
+    @media (max-width: 768px) {
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  // Logo Section
+  .nav-brand {
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      
+      .nav-brand {
+        height: 10rem;
+        width: auto;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+          height: 2.5rem;
+        }
+      }
+    }
+  }
+
+  // Desktop Navigation Links
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+
+    .nav-link {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+
+      &:hover {
+        color: var(--orange-500);
+      }
+
+      &.active {
+        color: var(--orange-500);
+        font-weight: 700;
+
+       
+      }
+    }
+  }
+
+  // Desktop Auth Section
+  .nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -1.25rem;
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // Mobile Menu Button
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .hamburger {
+      background: var(--orange-500);
+      border: none;
+      width: 3.125rem;
+      height: 3.125rem;
+      border-radius:70% !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+
+      &:hover {
+         transform: scale(1.05);
+         box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+      }
+
+      .hamburger-line {
+        width: 1.25rem;
+        height: 0.125rem;
+        background: white;
+        transition: all 0.3s ease;
+        border-radius: 0.125rem;
+      }
+
+      &.active {
+        .hamburger-line {
+          background: white;
+
+          &:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+          }
+
+          &:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+          }
+        }
+      }
+    }
+  }
+
+  // Mobile Menu Overlay (Slide from left)
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // Mobile Sidebar Menu
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: fit-content;
+    background: var(--sidebar-bg);
+    z-index: 1000;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+    &.active {
+      left: 0;
+      z-index: 1001;
+    }
+
+    // Sidebar Header
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      
+
+      .sidebar-logo {
+        height: 3.75rem;
+        width: auto;
+      }
+
+    }
+
+    // Sidebar Content
+    .sidebar-content {
+      flex: 1;
+      padding: 1.5rem;
+
+      .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+
+        .mobile-nav-link {
+          display: flex;
+          align-items: center;
+          color:var(--text-color);
+          text-decoration: none;
+          font-size: 1.25rem;
+          font-weight: 700;
+          padding: 0.875rem 1rem;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: rgba(255, 107, 53, 0.1);
+            color:var(--orange-500);
+          }
+
+          &.active {
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--orange-500);
+            font-weight: 700;
+          }
+        }
+      }
+
+      .mobile-auth-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: -2rem;
+
+        app-main-button {
+          width: 100%;
+        }
+      }
+
+      
+    }
+  }
+
+  // Responsive Utilities
+  .desktop-only {
+    display: flex;
+
+    @media (max-width: 768px) {
+      display: none !important;
+    }
+  }
+
+  .mobile-only {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+}
+
+// Avatar Styles (updated for white background)
+::ng-deep .user-avatar{
+  background: var(--orange-500) !important;
+  border: 2px solid transparent !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+  }
+
+  .p-avatar-icon {
+    color: var(--white);
+  }
+}
+
+// Animation for sidebar links
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-nav-links .mobile-nav-link {
+  animation: slideInLeft 0.3s ease forwards;
+  opacity: 0;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}
+

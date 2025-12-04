@@ -1,0 +1,332 @@
+.why-us-layout {
+    padding: 1rem;
+    color: var(--whyus-text-color);
+
+    @media (min-width: 48rem) {
+        padding: 2.5rem 5rem;
+    }
+
+    article {
+        @media (max-width: 62rem) {
+            margin-bottom: 1rem;
+        }
+
+        .goals-p {
+            font-family: var(--font-2);
+            font-weight: 400;
+            font-size: 1.125rem;
+            line-height: 1.8rem;
+            margin: 1.5rem 0 1rem;
+
+            @media (min-width: 62rem) {
+                margin: 1.5rem 0 4rem;
+            }
+        }
+
+        ul {
+            overflow: hidden;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                inset-inline-start: 1.4375rem;
+                top: 2.5rem;
+                bottom: 5.625rem;
+                width: 0.0938rem;
+                background: linear-gradient(to bottom, var(--whyus-step-border-color) 50%, transparent 50%);
+                background-size: 0.0938rem 1.875rem;
+                background-repeat: repeat-y;
+                margin-bottom: 2rem;
+                z-index: 1;
+
+                @media (min-width: 24.3125rem) {
+                    inset-inline-start: 1.9063rem;
+                }
+
+                @media (min-width: 62rem) {
+                    background-size: 1.5px 2.5rem;
+                    top: 1.875rem;
+                    bottom: 3.4375rem;
+                }
+            }
+
+            li {
+                font-family: var(--font-3);
+                margin-bottom: 2rem;
+                position: relative;
+                z-index: 2;
+
+                .step-wrapper {
+                    position: relative;
+
+                    @media (max-width: 47.9375rem) {
+                        justify-content: space-between;
+                    }
+
+                    .step-num {
+                        width: 2.8125rem;
+                        height: 2.8125rem;
+                        border-radius: 1.875rem;
+                        background-color: var(--whyus-step-bg);
+                        color: var(--step-color);
+                        border: 0.0625rem solid var(--whyus-step-border-color);
+                        font-weight: 700;
+                        font-size: 0.6937rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+                        z-index: 3;
+
+                        // Consolidated media queries
+                        @media (min-width: 24.3125rem) {
+                            width: 3.75rem;
+                            height: 3.75rem;
+                        }
+
+                        @media (min-width: 83.25rem) {
+                            width: 3.75rem;
+                            height: 3.75rem;
+                        }
+                    }
+                }
+
+                h3 {
+                    font-weight: 700;
+                    font-size: 0.875rem;
+                    line-height: 1.5rem;
+                    margin-bottom: 0.5rem;
+                    text-transform: capitalize;
+
+                    @media (min-width: 24.3125rem) {
+                        font-size: 1.0437rem;
+                    }
+                }
+
+                p {
+                    font-family: var(--font-2);
+                    font-weight: 400;
+                    font-size: 0.875rem;
+                    line-height: 1.6rem;
+                    margin: 0;
+
+                    @media (min-width: 24.3125rem) {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    figure {
+        .images-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            height: 100%;
+            padding-inline: 0.5rem;
+
+            @media (max-width: 48rem) {
+                justify-content: center;
+            }
+
+            @media (min-width: 62rem) {
+                flex-direction: column;
+                justify-content: start !important;
+            }
+
+            @media (min-width: 83.25rem) {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0.6375rem;
+                margin: 0;
+
+                @media (min-width: 48rem) {
+                    border-radius: 1.125rem;
+                }
+            }
+
+            // Consolidated trainer classes
+            .trainer-1,
+            .trainer-3 {
+                @media (min-width: 62rem) {
+                    margin-left: auto !important;
+                }
+            }
+
+            .trainer-1,
+            .trainer-2,
+            .trainer-3,
+            .trainer-4 {
+                width: 8.75rem;
+
+                @media (min-width: 22.4375rem) {
+                    width: 10rem;
+                }
+
+                @media (min-width: 24.3125rem) {
+                    width: 10.3125rem;
+                }
+
+                @media (min-width: 25.8125rem) {
+                    width: 11.25rem;
+                }
+
+                @media (min-width: 48rem) {
+                    width: 18.1875rem;
+                }
+
+                @media (min-width: 50rem) {
+                    width: 19.5625rem;
+                }
+
+                @media (min-width: 53.125rem) {
+                    width: 21.5625rem;
+                }
+
+                @media (min-width: 62rem) {
+                    width: 11.875rem;
+                }
+
+                @media (min-width: 68.375rem) {
+                    width: 13.75rem;
+                }
+
+                @media (min-width: 1096px) {
+                    width: 15rem;
+                }
+
+                @media (min-width: 83.25rem) {
+                    width: 18.1875rem;
+                    margin-left: 0;
+                }
+            }
+
+            // Specific heights
+            .trainer-1 {
+                height: 13.375rem;
+
+                @media (min-width: 25.8125rem) {
+                    height: 14.375rem;
+                }
+
+                @media (min-width: 48rem) {
+                    height: 23.625rem;
+                }
+
+                @media (min-width: 62rem) {
+                    height: 11.875rem;
+                }
+
+                @media (min-width: 83.25rem) {
+                    height: 23.625rem;
+                }
+            }
+
+            .trainer-2 {
+                height: 12.1875rem;
+
+                @media (min-width: 25.8125rem) {
+                    height: 13.4375rem;
+                }
+
+                @media (min-width: 48rem) {
+                    height: 21.5rem;
+                }
+
+                @media (min-width: 62rem) {
+                    height: 11.875rem;
+                }
+
+                @media (min-width: 83.25rem) {
+                    height: 21.5rem;
+                }
+            }
+
+            .trainer-3 {
+                height: 10.125rem;
+
+                @media (min-width: 25.8125rem) {
+                    height: 11.0625rem;
+                }
+
+                @media (min-width: 48rem) {
+                    height: 17.8125rem;
+                }
+
+                @media (min-width: 62rem) {
+                    height: 11.875rem;
+                }
+
+                @media (min-width: 83.25rem) {
+                    height: 17.8125rem;
+                }
+            }
+
+            .trainer-4 {
+                height: 12.25rem;
+
+                @media (min-width: 25.8125rem) {
+                    height: 13.1875rem;
+                }
+
+                @media (min-width: 48rem) {
+                    height: 21.625rem;
+                }
+
+                @media (min-width: 62rem) {
+                    height: 11.875rem;
+                }
+
+                @media (min-width: 83.25rem) {
+                    height: 21.625rem;
+                }
+            }
+
+            .first-col,
+            .second-col {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0;
+            }
+
+            .second-col {
+                justify-content: center;
+
+                @media (min-width: 62rem) {
+                    justify-content: space-around;
+                }
+
+                @media (min-width: 83.25rem) {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    // RTL support
+    :host-context([dir='rtl']) {
+        .images-wrapper {
+            @media (min-width: 62rem) {
+                justify-content: end !important;
+            }
+        }
+
+        .trainer-1,
+        .trainer-3 {
+            @media (min-width: 62rem) {
+                margin-right: auto !important;
+                margin-left: 0 !important;
+            }
+        }
+    }
+}

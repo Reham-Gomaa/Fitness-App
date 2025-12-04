@@ -1,0 +1,72 @@
+{
+  "ACCOUNT": {
+    "GOAL": {
+      "TITLE": "الهدف",
+      "MODAL_TITLE": "ما هو هدفك؟",
+      "SUBTITLE": "هذا يساعدنا في إنشاء خطتك الشخصية",
+      "GAIN_WEIGHT": "زيادة الوزن",
+      "LOSE_WEIGHT": "خسارة الوزن",
+      "GET_FITTER": "اللياقة البدنية",
+      "GAIN_MORE_FLEXIBLE": "زيادة المرونة",
+      "LEARN_THE_BASIC": "تعلم الأساسيات",
+      "NOT_SET": "غير محدد"
+    },
+    "LEVEL": {
+      "TITLE": "المستوى",
+      "MODAL_TITLE": "مستوى نشاطك البدني المعتاد؟",
+      "SUBTITLE": "هذا يساعدنا في إنشاء خطتك الشخصية",
+      "ROOKIE": "جدا مبتدئ",
+      "BEGINNER": "مبتدئ",
+      "INTERMEDIATE": "متوسط",
+      "ADVANCED": "متقدم",
+      "TRUE_BEAST": "محترف",
+      "NOT_SET": "غير محدد"
+    },
+    "WEIGHT": {
+      "TITLE": "الوزن",
+      "MODAL_TITLE": "ما هو وزنك؟",
+      "MODAL_SUBTITLE": "هذا يساعدنا في إنشاء خطتك الشخصية",
+      "UNIT": "كجم"
+    },
+    "SETTINGS": {
+      "TAP_TO_CHANGE": "اضغط للتغيير",
+      "CHANGE_PASSWORD": "تغيير كلمة المرور",
+      "SELECT_LANGUAGE": "اختر اللغة",
+      "MOOD": "المظهر",
+      "DARK": "داكن",
+      "LIGHT": "فاتح",
+      "SECURITY": "الأمان",
+      "PRIVACY_POLICY": "سياسة الخصوصية",
+      "HELP": "المساعدة",
+      "LOGOUT": "تسجيل الخروج"
+    },
+    "MODALS": {
+      "CHANGE_PASSWORD": {
+        "TITLE": "تغيير كلمة المرور",
+        "SUBTITLE": "أدخل كلمة المرور الحالية والجديدة",
+        "CURRENT_PASSWORD": "كلمة المرور الحالية",
+        "NEW_PASSWORD": "كلمة المرور الجديدة",
+        "CURRENT_PASSWORD_PLACEHOLDER": "أدخل كلمة المرور الحالية",
+        "NEW_PASSWORD_PLACEHOLDER": "أدخل كلمة المرور الجديدة",
+        "PASSWORD_HINT": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+        "CHANGE_BUTTON": "تغيير كلمة المرور",
+        "CANCEL": "إلغاء"
+      },
+      "LOGOUT": {
+        "TITLE": "تسجيل الخروج",
+        "CONFIRMATION": "هل أنت متأكد من تسجيل الخروج؟",
+        "CANCEL": "إلغاء",
+        "CONFIRM": "نعم، سجل الخروج"
+      },
+      "NEXT": "التالي",
+      "DONE": "تم"
+    },
+    "MESSAGES": {
+      "PASSWORD_CHANGED_SUCCESS": "تم تغيير كلمة المرور بنجاح!",
+      "PASSWORD_CHANGE_ERROR": "فشل تغيير كلمة المرور. حاول مرة أخرى.",
+      "LOGOUT_SUCCESS": "تم تسجيل الخروج بنجاح!",
+      "LOGOUT_LOCAL": "تم تسجيل الخروج محلياً",
+      "LANGUAGE_CHANGED": "تم تغيير اللغة إلى {{language}}"
+    }
+  }
+}

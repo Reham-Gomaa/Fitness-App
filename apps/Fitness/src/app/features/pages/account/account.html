@@ -1,1 +1,102 @@
-<p>account works!</p>
+<div class="page-container">
+  <!-- Background Section -->
+  <div class="background-section">
+    <img class="background-image" src="images/auth-background.png" alt="Authentication Background" />
+    <div class="overlay"></div>
+  </div>
+  
+  <!-- Content Section -->
+  <div class="content-section">
+    <div class="account-container">
+      <div class="content-wrapper">
+        <!-- Top Settings Row -->
+        <div class="settings-row">
+          <!-- Goal Card -->
+          <div class="setting-card goal">
+            <div class="setting-header" (click)="openGoalModal()">
+              <span class="setting-title">{{ 'ACCOUNT.GOAL.TITLE' | translate }}</span>
+              <span class="setting-subtitle">{{ 'ACCOUNT.SETTINGS.TAP_TO_CHANGE' | translate }}</span>
+            </div>
+            <button class="setting-button">
+              <span>{{ getDisplayGoal(user()?.goal) }}</span>
+              <i class="pi pi-sync"></i>
+            </button>
+          </div>
+
+          <!-- Activity Level Card -->
+          <div class="setting-card level">
+            <div class="setting-header" (click)="openActivityLevelModal()">
+              <span class="setting-title">{{ 'ACCOUNT.LEVEL.TITLE' | translate }}</span>
+              <span class="setting-subtitle">{{ 'ACCOUNT.SETTINGS.TAP_TO_CHANGE' | translate }}</span>
+            </div>
+            <button class="setting-button">
+              <span>{{ getDisplayActivityLevel(user()?.activityLevel) }}</span>
+              <i class="pi pi-sync"></i>
+            </button>
+          </div>
+
+          <!-- Weight Card -->
+          <div class="setting-card weight">
+            <div class="setting-header" (click)="openWeightModal()">
+              <span class="setting-title">{{ 'ACCOUNT.WEIGHT.TITLE' | translate }}</span>
+              <span class="setting-subtitle">{{ 'ACCOUNT.SETTINGS.TAP_TO_CHANGE' | translate }}</span>
+            </div>
+            <button class="setting-button">
+              <span>{{ user()?.weight }} {{ 'ACCOUNT.WEIGHT.UNIT' | translate }}</span>
+              <i class="pi pi-sync"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Options Grid -->
+        <div class="options-grid">
+          <button class="option-card" (click)="openChangePasswordModal()">
+            <i class="pi pi-lock"></i>
+            <span>{{ 'ACCOUNT.SETTINGS.CHANGE_PASSWORD' | translate }}</span>
+          </button>
+
+          <button class="option-card" (click)="switchLanguage()">
+            <i class="pi pi-globe"></i>
+            <span>{{ 'ACCOUNT.SETTINGS.SELECT_LANGUAGE' | translate }}<br/><span class="highlight">({{ getCurrentLanguageDisplay() }})</span></span>
+          </button>
+
+          <button class="option-card mood-card" (click)="onThemeToggle()">
+            <i [class]="themeService.theme() === 'dark' ? 'pi pi-moon' : 'pi pi-sun'"></i>
+            <span>{{ 'ACCOUNT.SETTINGS.MOOD' | translate }} <span class="highlight">({{ (themeService.theme() === 'dark' ? 'ACCOUNT.SETTINGS.DARK' : 'ACCOUNT.SETTINGS.LIGHT') | translate }})</span></span>
+            <label class="toggle-switch" (click)="$event.stopPropagation()">
+              <input 
+                type="checkbox" 
+                [checked]="themeService.theme() === 'dark'"
+                (change)="onThemeToggle()"
+              >
+              <span class="toggle-slider"></span>
+            </label>
+          </button>
+
+          <button class="option-card">
+            <i class="pi pi-shield"></i>
+            <span>{{ 'ACCOUNT.SETTINGS.SECURITY' | translate }}</span>
+          </button>
+
+          <button class="option-card">
+            <i class="pi pi-file"></i>
+            <span>{{ 'ACCOUNT.SETTINGS.PRIVACY_POLICY' | translate }}</span>
+          </button>
+
+          <button class="option-card">
+            <i class="pi pi-question-circle"></i>
+            <span>{{ 'ACCOUNT.SETTINGS.HELP' | translate }}</span>
+          </button>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="logout-section">
+          <button class="logout-button" (click)="openLogoutConfirmation()">
+            <i class="pi pi-sign-out"></i>
+            <span>{{ 'ACCOUNT.SETTINGS.LOGOUT' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -39,8 +39,23 @@
         aria-describedby="about-summary"
     >
         <header>
-            <h1 id="about-heading">{{"about.section" |translate}}</h1>
-            <h2 class="mt-4">{{"about.title" |translate}}</h2>
+            <app-title
+                id="about-heading"
+                [titleImg]="'./images/about-us/About us.avif'"
+                [imgW]="'200'"
+                [imgH]="'45'"
+                [titleTxt]="'about.section' |translate"
+                [containerClass]="''"
+                [justifyCenter]="false"
+            ></app-title>
+            <app-header
+                class="sec-header mt-4"
+                [containerClass]="''"
+            >
+                {{"about.titleStart" |translate}}
+                <span class="long-desc-span">{{"about.titleMiddle" |translate}}</span>
+                {{"about.titleEnd" |translate}}
+            </app-header>
         </header>
         <p
             id="about-summary"
@@ -126,23 +141,11 @@
             role="contentinfo"
             aria-label="Get Started section"
         >
-            <button
-                type="button"
-                aria-label="Get started with FitZone services"
-            >
-                Get Started
-            </button>
+            <app-main-button
+                [customClass]="'orange-btn'"
+                [fontWeight]="'font-semibold'"
+                [btnText]="'about.button' |translate"
+            ></app-main-button>
         </footer>
     </article>
 </section>
-
-<div>
-    @for (lang of languages; track lang.code) {
-    <p-button
-        [label]="lang.flag + ' ' + lang.label"
-        [severity]="currentLang() === lang.code ? 'success' : 'secondary'"
-        (onClick)="switchLanguage(lang.code)"
-        [outlined]="currentLang() !== lang.code"
-    />
-    }
-</div>

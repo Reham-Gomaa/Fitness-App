@@ -1,158 +1,165 @@
 {
-  "name": "Fitness",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
-  "prefix": "app",
-  "sourceRoot": "apps/Fitness/src",
-  "tags": [],
-  "targets": {
-    "build": {
-      "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/Fitness",
-        "browser": "apps/Fitness/src/main.ts",
-        "polyfills": [],
-        "tsConfig": "apps/Fitness/tsconfig.app.json",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/Fitness/public"
-          }
-        ],
-        "styles": [
-          "node_modules/primeicons/primeicons.css",
-          "node_modules/primeflex/primeflex.css",
-          "node_modules/primeflex/themes/primeone-light.css",
-          "apps/Fitness/src/styles.scss"
-        ],
-        "outputMode": "static"
-      },
-      "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "2mb",
-              "maximumError": "4mb"
+    "name": "Fitness",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "prefix": "app",
+    "sourceRoot": "apps/Fitness/src",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@angular/build:application",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/Fitness",
+                "browser": "apps/Fitness/src/main.ts",
+                "polyfills": [],
+                "tsConfig": "apps/Fitness/tsconfig.app.json",
+                "assets": [
+                    {
+                        "glob": "**/*",
+                        "input": "apps/Fitness/public"
+                    }
+                ],
+                "styles": [
+                    "node_modules/primeicons/primeicons.css",
+                    "node_modules/primeflex/primeflex.css",
+                    "node_modules/primeflex/themes/primeone-light.css",
+                    "apps/Fitness/src/styles.scss"
+                ],
+                "outputMode": "static"
             },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
-            }
-          ],
-          "outputHashing": "all",
-          "optimization": true,
-          "fileReplacements": [
-            {
-              "replace": "apps/environment/baseUrl.dev.ts",
-              "with": "apps/environment/baseUrl.prod.ts"
-            }
-          ]
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "2mb",
+                            "maximumError": "4mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "6kb",
+                            "maximumError": "10kb"
+                        }
+                    ],
+                    "outputHashing": "all",
+                    "optimization": {
+                        "scripts": true,
+                        "styles": {
+                            "minify": true,
+                            "removeSpecialComments": true
+                        },
+                        "fonts": true
+                    },
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/environment/baseUrl.dev.ts",
+                            "with": "apps/environment/baseUrl.prod.ts"
+                        }
+                    ]
+                },
+                "development": {
+                    "optimization": false,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/environment/baseUrl.prod.ts",
+                            "with": "apps/environment/baseUrl.dev.ts"
+                        }
+                    ]
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "fileReplacements": [
-            {
-              "replace": "apps/environment/baseUrl.prod.ts",
-              "with": "apps/environment/baseUrl.dev.ts"
-            }
-          ]
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "continuous": true,
-      "executor": "@angular/build:dev-server",
-      "configurations": {
-        "production": {
-          "buildTarget": "Fitness:build:production"
+        "serve": {
+            "continuous": true,
+            "executor": "@angular/build:dev-server",
+            "configurations": {
+                "production": {
+                    "buildTarget": "Fitness:build:production"
+                },
+                "development": {
+                    "buildTarget": "Fitness:build:development"
+                }
+            },
+            "defaultConfiguration": "development"
         },
-        "development": {
-          "buildTarget": "Fitness:build:development"
+        "extract-i18n": {
+            "executor": "@angular/build:extract-i18n",
+            "options": {
+                "buildTarget": "Fitness:build"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/Fitness/jest.config.ts",
+                "tsConfig": "apps/Fitness/tsconfig.spec.json"
+            }
+        },
+        "serve-static": {
+            "continuous": true,
+            "executor": "@nx/web:file-server",
+            "options": {
+                "buildTarget": "Fitness:build",
+                "port": 4200,
+                "staticFilePath": "dist/apps/Fitness/browser",
+                "spa": true
+            }
+        },
+        "storybook": {
+            "executor": "@storybook/angular:start-storybook",
+            "options": {
+                "port": 4400,
+                "configDir": "apps/Fitness/.storybook",
+                "browserTarget": "Fitness:build-storybook",
+                "compodoc": false
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "build-storybook": {
+            "executor": "@storybook/angular:build-storybook",
+            "outputs": ["{options.outputDir}"],
+            "options": {
+                "outputDir": "dist/storybook/Fitness",
+                "configDir": "apps/Fitness/.storybook",
+                "browserTarget": "Fitness:build-storybook",
+                "compodoc": false
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "test-storybook": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "test-storybook -c apps/Fitness/.storybook --url=http://localhost:4400"
+            }
+        },
+        "static-storybook": {
+            "executor": "@nx/web:file-server",
+            "dependsOn": ["build-storybook"],
+            "options": {
+                "buildTarget": "Fitness:build-storybook",
+                "staticFilePath": "dist/storybook/Fitness",
+                "spa": true
+            },
+            "configurations": {
+                "ci": {
+                    "buildTarget": "Fitness:build-storybook:ci"
+                }
+            }
         }
-      },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular/build:extract-i18n",
-      "options": {
-        "buildTarget": "Fitness:build"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/Fitness/jest.config.ts",
-        "tsConfig": "apps/Fitness/tsconfig.spec.json"
-      }
-    },
-    "serve-static": {
-      "continuous": true,
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "Fitness:build",
-        "port": 4200,
-        "staticFilePath": "dist/apps/Fitness/browser",
-        "spa": true
-      }
-    },
-    "storybook": {
-      "executor": "@storybook/angular:start-storybook",
-      "options": {
-        "port": 4400,
-        "configDir": "apps/Fitness/.storybook",
-        "browserTarget": "Fitness:build-storybook",
-        "compodoc": false
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "build-storybook": {
-      "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputDir}"],
-      "options": {
-        "outputDir": "dist/storybook/Fitness",
-        "configDir": "apps/Fitness/.storybook",
-        "browserTarget": "Fitness:build-storybook",
-        "compodoc": false
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "test-storybook": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "test-storybook -c apps/Fitness/.storybook --url=http://localhost:4400"
-      }
-    },
-    "static-storybook": {
-      "executor": "@nx/web:file-server",
-      "dependsOn": ["build-storybook"],
-      "options": {
-        "buildTarget": "Fitness:build-storybook",
-        "staticFilePath": "dist/storybook/Fitness",
-        "spa": true
-      },
-      "configurations": {
-        "ci": {
-          "buildTarget": "Fitness:build-storybook:ci"
-        }
-      }
     }
-  }
 }

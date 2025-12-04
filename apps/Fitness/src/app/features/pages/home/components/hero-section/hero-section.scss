@@ -22,7 +22,7 @@
     .hero-blur {
         position: absolute;
         inset: 0;
-        background: rgba(255, 255, 255, 0.3);
+        background: var(--hero-bg);
         backdrop-filter: blur(86px);
         z-index: 1;
     }
@@ -32,6 +32,7 @@
         z-index: 2; // content stays above the blur
     }
     .hero-caption {
+        text-align: start;
         p.hero-desc {
             font-family: var(--font-2);
             font-weight: 400;
@@ -53,6 +54,7 @@
         .statistics {
             margin: 4rem 0;
             .st-item {
+                text-align: start;
                 h4 {
                     font-family: var(--font-3);
                     font-weight: 700;

@@ -1,4 +1,4 @@
-import { Component, computed, input, output, signal } from '@angular/core';
+import { Component, computed, input, output, signal, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'lib-fitness-input-slider',
@@ -11,12 +11,24 @@ export class FitnessInputSlider {
   minWeight = input(60);
   maxWeight = input(300);
   unit = input.required<string>();
+   initialWeight = input<number>();
   
   weightChange = output<number>();
 
   isDragging = signal(false);
   startX = signal(0);
   startWeight = signal(0);
+
+
+ngOnChanges(changes: SimpleChanges): void {
+    // Update weight when initialWeight input changes
+    if (changes['initialWeight'] && this.initialWeight() !== undefined) {
+      const initial = this.initialWeight()!;
+      if (initial >= this.minWeight() && initial <= this.maxWeight()) {
+        this.weight.set(initial);
+      }
+    }
+  }
 
   // Get 8 numbers centered around current weight
   visibleWeights = computed(() => {

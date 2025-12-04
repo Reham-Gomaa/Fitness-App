@@ -1,0 +1,27 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <h2 class="modal-title">{{ 'ACCOUNT.MODALS.LOGOUT.TITLE' | translate }}</h2>
+    <button class="close-button" (click)="close()">
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+  
+  <div class="modal-content">
+    <p class="confirmation-text">{{ 'ACCOUNT.MODALS.LOGOUT.CONFIRMATION' | translate }}</p>
+  </div>
+  
+  <div class="modal-actions">
+    <button 
+      pButton 
+      class="cancel-button"
+      (click)="close()"
+      [label]="'ACCOUNT.MODALS.LOGOUT.CANCEL' | translate"
+    ></button>
+    <button 
+      pButton 
+      class="logout-button"
+      (click)="confirmLogout()"
+      [label]="'ACCOUNT.MODALS.LOGOUT.CONFIRM' | translate"
+    ></button>
+  </div>
+</div>

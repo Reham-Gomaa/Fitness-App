@@ -6,7 +6,7 @@
     class="fitness-form-radio__input"
     name="fitness-radio-group"
     value="{{ item.value }}"
-    [checked]="selectedItem()===item.value"
+    [checked]="selectedItemSignal()===item.value"
     (change)="selectedItemChangeHandler(item.value)"
   />
   <span class="fitness-form-radio__custom-circle"></span>

@@ -1,0 +1,285 @@
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  margin-top: 5rem;
+  
+}
+
+.background-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--bg-color));
+  backdrop-filter: blur(1.5625rem);
+}
+
+.content-section {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+.account-container {
+  width: 100%;
+}
+
+.content-wrapper {
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+/* Settings Row */
+.settings-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.setting-card {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.setting-header {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    .setting-subtitle {
+      color: var(--orange-500);
+    }
+  }
+}
+
+.setting-title {
+  display: block;
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-1);
+}
+
+.setting-subtitle {
+  display: block;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: var(--font-1);
+  text-decoration: underline; 
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.setting-button {
+  width: 100%;
+  background: var(--orange-500);
+  border:2px solid var(--text-color);
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+  font-family: var(--font-1);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.setting-button span {
+  color: var(--text-color);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.setting-button i {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+/* Options Grid */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.option-card {
+  background: transparent;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--text-color);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 8.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  font-family: var(--font-1);
+}
+
+.option-card:hover {
+  background: rgba(var(--hover-bg-color));
+  transform: translateY(-2px);
+}
+
+.option-card i {
+  color: var(--orange-500);
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.option-card span {
+  color: var(--text-color);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.option-card .highlight {
+  color: var(--orange-500);
+  font-weight: 600;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: absolute;
+  bottom: 1rem;
+  width: 2.625rem;
+  height: 1.375rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-900);
+  border-radius: 22px;
+  transition: 0.3s;
+}
+
+.toggle-slider::before {
+  position: absolute;
+  content: '';
+  height: 1rem;
+  width: 1rem;
+  left: 0.188rem;
+  bottom: 0.188rem;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--orange-500);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(20px);
+}
+
+.mood-card {
+  position: relative;
+}
+
+/* Logout Section */
+.logout-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.logout-button {
+  background: transparent;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--text-color);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 8.75rem;
+  min-width: 12.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+   font-family: var(--font-1);
+}
+
+.logout-button:hover {
+  background: rgba(50, 50, 50, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.logout-button i {
+  color: var(--orange-500);
+  font-size: 1.5rem;
+}
+
+.logout-button span {
+  color: var(--orange-500);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .settings-row,
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .content-wrapper {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

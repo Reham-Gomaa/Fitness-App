@@ -7,36 +7,35 @@
     <div class="container">
         <div class="grid align-items-center">
             <div class="hero-caption col-12 lg:col-8">
-                <app-header [containerClass]="'text-left my-1 w-12 xl:w-7'">
-                    Your body can
-                    <span class="long-desc-span">stand almost</span>
-                    anything
+                <app-header [containerClass]="'my-1 w-12 xl:w-7'">
+                    {{'hero.header.part1' |translate}}
+                    <span class="long-desc-span">{{'hero.header.part2' |translate}}</span>
+                    {{'hero.header.part3' |translate}}
                 </app-header>
-                <p class="lg:w-8 w-12 mt-0 hero-desc">
-                    It's your mind that needs convincing. Push past your limits, stay committed, and
-                    watch as your body transform into power house of strength and resilience. Start
-                    your journey today & truly capable of!
-                </p>
+                <p class="lg:w-8 w-12 mt-0 hero-desc">{{'hero.paragraph' |translate}}</p>
 
                 <div class="statistics grid">
                     @for (st of statistics; track $index) {
                     <div class="md:col-4 col-12">
-                        <div class="st-item text-left">
-                            <h4>{{st.num}}+</h4>
-                            <p class="m-0">{{st.desc}}</p>
+                        <div class="st-item">
+                            <h4>{{st.num |translate}}+</h4>
+                            <p class="m-0">{{st.desc |translate}}</p>
                         </div>
                     </div>
                     }
                 </div>
 
                 <div class="btns flex justify-content-center lg:justify-content-start">
-                    <app-main-button [btnText]="'Get Started'"></app-main-button>
                     <app-main-button
-                        [btnText]="'Explore More'"
-                        [btnBg]="'transparent'"
-                        [btnColor]="'var(--main-color)'"
-                        [btnBorder]="'1px solid var(--main-color)'"
-                    ></app-main-button>
+                        [customClass]="'orange-btn'"
+                        [fontWeight]="'font-semibold'"
+                        [btnText]="'hero.btn-start' |translate"
+                    />
+                    <app-main-button
+                        [customClass]="'trans-btn'"
+                        [fontWeight]="'font-semibold'"
+                        [btnText]="'hero.btn-explore' |translate"
+                    />
                 </div>
             </div>
 

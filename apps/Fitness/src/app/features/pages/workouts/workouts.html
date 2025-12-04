@@ -1,64 +1,60 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
-<section id="workouts" class="py-5">
-  <app-title
-  [titleImg]="'/images/workouts/WOrkouts.png'"
-  [titleTxt]="'Fitness Class'"
-  [imgW]="'330'"
-  [imgH]="'44'"
-  />
-  <div class="sec-gradient overflow-hidden">
-    <div class="container">
-      <div class="meals-info text-center my-3">
-
-        <app-header>
-             Transform Your Body with Our <br>
-             Dynamic <span class="long-desc-span">
-              Upcoming Workouts
-            </span>
-        </app-header>
-
-      </div>
-      <div class="meal-items">
-
-
-        <app-nav-tabs
-        [navItems]="workout_muscles()"
-        (navItemClick)="SetCurrentMuscle($event)" />
-
-          @if(related_Muscles().length > 3) {
-
-            <div class="card">
-              <app-carousel  [data]="related_Muscles()" [cat]="'classes'" />
+<section
+    id="workouts"
+    class="py-5"
+>
+    <app-title
+        [titleImg]="'/images/workouts/WOrkouts.png'"
+        [titleTxt]="'classes.title' |translate"
+        [imgW]="'330'"
+        [imgH]="'44'"
+    />
+    <div class="sec-gradient overflow-hidden">
+        <div class="container">
+            <div class="meals-info text-center my-3">
+                <app-header>
+                    {{'classes.header.part1' |translate}} <br />
+                    {{'classes.header.part2' |translate}}
+                    <span class="long-desc-span"> {{'classes.header.part3' |translate}} </span>
+                </app-header>
             </div>
-          }@else  {
-            <div class="grid justify-content-center">
-              @if (related_Muscles().length) {
-                @for (muscle of related_Muscles(); track muscle._id) {
-                  <div class="xl:col-4 md:col-6 col-12">
-                    <app-main-card [item]="{
+            <div class="meal-items">
+                <app-nav-tabs
+                    [navItems]="workout_muscles()"
+                    (navItemClick)="SetCurrentMuscle($event)"
+                />
+
+                @if(related_Muscles().length > 3) {
+
+                <div class="card">
+                    <app-carousel
+                        [data]="related_Muscles()"
+                        [cat]="'classes'"
+                    />
+                </div>
+                }@else {
+                <div class="grid justify-content-center">
+                    @if (related_Muscles().length) { @for (muscle of related_Muscles(); track
+                    muscle._id) {
+                    <div class="xl:col-4 md:col-6 col-12">
+                        <app-main-card
+                            [item]="{
                         name:muscle.name,
                         id:muscle._id || '123456',
                         img:muscle.image,
                         cat:'classes'
-                      }" />
+                      }"
+                        />
+                    </div>
 
-                  </div>
+                    } }
+                </div>
                 }
-              }
             </div>
-          }
-
-
-      </div>
+        </div>
     </div>
-
-
-
-  </div>
 </section>
 
-<p-toast
-[breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"
- />
+<p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />

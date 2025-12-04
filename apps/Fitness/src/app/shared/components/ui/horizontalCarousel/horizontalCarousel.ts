@@ -11,7 +11,7 @@ import {TagModule} from "primeng/tag";
 })
 export class HorizontalCarousel implements OnInit {
     responsiveOptions: any[] | undefined;
-    
+
     ngOnInit(): void {
         this.responsiveOptions = [
             {

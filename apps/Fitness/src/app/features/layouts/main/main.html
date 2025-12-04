@@ -1,8 +1,14 @@
 <section class="mainPage">
     <app-navbar />
-    <lib-button-theme />
-    <div><router-outlet /></div>
-    <app-horizontal-carousel />
-
-    <app-footer />
+    <div class="mt-8"><router-outlet /></div>
+    
+    <!-- Only show horizontal carousel if NOT on accounts page -->
+    @if (!isAccountsPage()) {
+        <app-horizontal-carousel />
+    }
+    
+    <!-- Only show footer if NOT on accounts page -->
+    @if (!isAccountsPage()) {
+        <app-footer />
+    }
 </section>

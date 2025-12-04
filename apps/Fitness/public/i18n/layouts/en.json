@@ -2,11 +2,26 @@
   "navbar": {
     "home": "Home",
     "about": "About",
-    "contact": "Contact",
-    "logout": "Logout"
-  },
+    "classes": "Classes",
+    "health": "Health",
+    "signup": "Sign Up",
+    "login": "Login"
+  }, 
   "footer": {
-    "copyright": "All rights reserved",
-    "year": "2025"
+    "tagline": "Push harder, go further. Your fitness journey starts today!",
+    "contact": {
+      "title": "CONTACT US",
+      "phone": "+91 123 456 789", 
+      "email": "info@gmail.com"
+    },
+    "hours": {
+      "title": "OUR GYM TIMING",
+      "weekdays": "Mon - Fri : 08:00 AM - 10:00 PM",
+      "weekend": "Sat - Sun : 08:00 AM - 09:00 PM"
+    },
+    "location": {
+      "title": "OUR LOCATION", 
+      "address": "2715 Ash Dr. San Jose, South Dakota 83475"
+    }
   }
 }

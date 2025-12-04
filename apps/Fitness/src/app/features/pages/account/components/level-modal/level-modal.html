@@ -1,0 +1,26 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <button class="close-button" (click)="close()">
+      <i class="pi pi-times"></i>
+    </button>
+    <h2 class="modal-title">{{ 'ACCOUNT.LEVEL.MODAL_TITLE' | translate }}</h2>
+    <p class="modal-subtitle">{{ 'ACCOUNT.LEVEL.SUBTITLE' | translate }}</p>
+  </div>
+  
+  <div class="modal-content">
+    <lib-fitness-form-radio 
+      [config]="activityLevelOptions()" 
+      [selectedItem]="selectedActivityLevel"
+      (selectedItemChange)="onLevelChange($event)"
+    />
+  </div>
+  
+  <div class="modal-actions">
+    <button 
+      pButton 
+      class="p-button-primary next-button"
+      (click)="onNext()"
+      [label]="'ACCOUNT.MODALS.NEXT' | translate"
+    ></button>
+  </div>
+</div>

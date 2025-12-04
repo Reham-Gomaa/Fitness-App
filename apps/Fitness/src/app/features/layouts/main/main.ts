@@ -1,14 +1,22 @@
-import {Component} from "@angular/core";
-import {Navbar} from "./components/navbar/navbar";
-import {Footer} from "./components/footer/footer";
-import {RouterModule} from "@angular/router";
-import {ButtonTheme} from "@fitness-app/buttons";
+import { Component } from "@angular/core";
+import { Router, RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { Navbar } from "./components/navbar/navbar";
+import { Footer } from "./components/footer/footer";
 import { HorizontalCarousel } from "../../../shared/components/ui/horizontalCarousel/horizontalCarousel";
+import { CLIENT_ROUTES } from "../../../core/constants/client-routes";
 
 @Component({
     selector: "app-main",
-    imports: [Navbar, Footer, RouterModule, ButtonTheme, HorizontalCarousel],
+    imports: [Navbar, Footer, RouterModule, HorizontalCarousel, CommonModule],
     templateUrl: "./main.html",
     styleUrl: "./main.scss",
 })
-export class Main {}
+export class Main {
+    constructor(private router: Router) {}
+
+    // Check if current route is the accounts page
+    isAccountsPage(): boolean {
+        return this.router.url.includes(CLIENT_ROUTES.main.account);
+    }
+}

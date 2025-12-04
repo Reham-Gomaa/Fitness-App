@@ -1,0 +1,72 @@
+{
+  "ACCOUNT": {
+    "GOAL": {
+      "TITLE": "Goal",
+      "MODAL_TITLE": "What is your Goal?",
+      "SUBTITLE": "This Helps Us Create Your Personalized Plan",
+      "GAIN_WEIGHT": "Gain Weight",
+      "LOSE_WEIGHT": "Lose Weight",
+      "GET_FITTER": "Get Fitter",
+      "GAIN_MORE_FLEXIBLE": "Gain More Flexible",
+      "LEARN_THE_BASIC": "Learn The Basic",
+      "NOT_SET": "Not Set"
+    },
+    "LEVEL": {
+      "TITLE": "level",
+      "MODAL_TITLE": "Your Regular Physical Activity Level?",
+      "SUBTITLE": "This Helps Us Create Your Personalized Plan",
+      "ROOKIE": "Rookie",
+      "BEGINNER": "Beginner",
+      "INTERMEDIATE": "Intermediate",
+      "ADVANCED": "Advanced",
+      "TRUE_BEAST": "True Beast",
+      "NOT_SET": "Not Set"
+    },
+    "WEIGHT": {
+      "TITLE": "Weight",
+      "MODAL_TITLE": "What Is Your Weight?",
+      "MODAL_SUBTITLE": "This Helps Us Create Your Personalized Plan",
+      "UNIT": "kg"
+    },
+    "SETTINGS": {
+      "TAP_TO_CHANGE": "TAP TO CHANGE",
+      "CHANGE_PASSWORD": "Change Password",
+      "SELECT_LANGUAGE": "Select Language",
+      "MOOD": "Mood",
+      "DARK": "Dark",
+      "LIGHT": "Light",
+      "SECURITY": "Security",
+      "PRIVACY_POLICY": "Privacy Policy",
+      "HELP": "Help",
+      "LOGOUT": "Logout"
+    },
+    "MODALS": {
+      "CHANGE_PASSWORD": {
+        "TITLE": "Change Password",
+        "SUBTITLE": "Enter your current and new password",
+        "CURRENT_PASSWORD": "Current Password",
+        "NEW_PASSWORD": "New Password",
+        "CURRENT_PASSWORD_PLACEHOLDER": "Enter current password",
+        "NEW_PASSWORD_PLACEHOLDER": "Enter new password",
+        "PASSWORD_HINT": "Password must be at least 6 characters",
+        "CHANGE_BUTTON": "Change Password",
+        "CANCEL": "Cancel"
+      },
+      "LOGOUT": {
+        "TITLE": "Logout",
+        "CONFIRMATION": "Are you sure you want to logout?",
+        "CANCEL": "Cancel",
+        "CONFIRM": "Yes, Logout"
+      },
+      "NEXT": "Next",
+      "DONE": "Done"
+    },
+    "MESSAGES": {
+      "PASSWORD_CHANGED_SUCCESS": "Password changed successfully!",
+      "PASSWORD_CHANGE_ERROR": "Failed to change password. Please try again.",
+      "LOGOUT_SUCCESS": "Logged out successfully!",
+      "LOGOUT_LOCAL": "Logged out locally",
+      "LANGUAGE_CHANGED": "Language changed to {{language}}"
+    }
+  }
+}

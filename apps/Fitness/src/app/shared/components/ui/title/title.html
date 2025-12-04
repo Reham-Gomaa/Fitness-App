@@ -1,7 +1,32 @@
-<div class="section-title w-fit mx-auto">
-    <img [ngSrc]="titleImg()" loading="lazy"  [width]="imgW()" [height]="imgH()" alt="meal logo">
-     <div class="sub-title gap-1">
-            <i class="pi pi-android" ></i>
-            <span>{{titleTxt()}}</span>
+<div
+    class="section-title"
+    [class]="containerClass()"
+>
+    @if (titleImg()) {
+    <img
+        class="sec-title"
+        [ngSrc]="titleImg()"
+        loading="lazy"
+        [width]="imgW()"
+        [height]="imgH()"
+        alt="section title"
+    />
+    <div class="overlay"></div>
+    }
+    <div
+        class="sub-title gap-1"
+        [class.justify-content-center]="justifyCenter()"
+    >
+        <div class="dumble">
+            <img
+                loading="lazy"
+                decoding="async"
+                ngSrc="./images/dumble.png"
+                alt="dumble"
+                width="34"
+                height="19.37"
+            />
+        </div>
+        <span>{{titleTxt()}}</span>
     </div>
-  </div>
+</div>

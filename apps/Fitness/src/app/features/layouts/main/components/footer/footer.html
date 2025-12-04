@@ -1,1 +1,56 @@
-<p class="mt-5 md:mt-6 lg:mt-0">footer works!</p>
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Brand Section -->
+    <div class="footer-section brand-section">
+      <div class="logo-wrapper">
+        <img src="/images/fit 1.png" alt="Gym Logo" class="footer-logo">
+      </div>
+      <p class="brand-tagline">
+        {{ 'footer.tagline' | translate }}
+      </p>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="section-title">{{ 'footer.contact.title' | translate }}</h3>
+      <div class="contact-items">
+
+        <div class="contact-item">
+          <div class="icon-wrapper phone-icon">
+              <img src="/images/Vector.png" class="icons" alt="Phone" class="contact-icon">
+          </div>
+          <span class="contact-text">
+            {{ 'footer.contact.phone' | translate }}
+          </span>
+        </div>
+
+        <div class="contact-item">
+          <div class="icon-wrapper email-icon">
+            <img src="/images/email-icon.png" class="icons" alt="Email" class="contact-icon">
+          </div>
+          <span class="contact-text">
+            {{ 'footer.contact.email' | translate }}
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Gym Timing Section -->
+    <div class="footer-section timing-section">
+      <h3 class="section-title">{{ 'footer.hours.title' | translate }}</h3>
+      <div class="timing-items">
+        <p class="timing-text">{{ 'footer.hours.weekdays' | translate }}</p>
+        <p class="timing-text">{{ 'footer.hours.weekend' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Location Section -->
+    <div class="footer-section location-section">
+      <h3 class="section-title">{{ 'footer.location.title' | translate }}</h3>
+      <p class="location-text">{{ 'footer.location.address' | translate }}</p>
+    </div>
+
+  </div>
+</footer>

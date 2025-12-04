@@ -16,16 +16,18 @@ import { RadioItem } from '../../interfaces/radio-item';
 })
 export class FitnessFormRadio implements OnInit {
   config = input.required<RadioItem[]>();
+   selectedItem = input<string>('');
   selectedItemChange = output<string>();
 
-  selectedItem: WritableSignal<string> = signal('');
+  selectedItemSignal: WritableSignal<string> = signal('');
 
   ngOnInit(): void {
-    this.selectedItem.set(this.config()[0].value);
+    const initialValue = this.selectedItem() ;
+    this.selectedItemSignal.set(initialValue);
   }
 
   selectedItemChangeHandler(value: string) {
-    this.selectedItem.set(value);
+    this.selectedItemSignal.set(value);
     this.selectedItemChange.emit(value);
   }
 }

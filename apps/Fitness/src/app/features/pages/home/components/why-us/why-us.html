@@ -1,0 +1,117 @@
+<section
+    class="why-us-layout grid nested-grid m-0"
+    aria-labelledby="why-us-heading"
+>
+    <article class="col-12 lg:col">
+        <header>
+            <app-title
+                [titleImg]="'./images/why-us/Why us.avif'"
+                [imgW]="'200'"
+                [imgH]="'45'"
+                id="why-us-heading"
+                [titleTxt]="'why-us.section' |translate"
+                [containerClass]="''"
+                [justifyCenter]="false"
+            ></app-title>
+            <app-header
+                class="sec-header mt-4"
+                [containerClass]="''"
+            >
+                {{"why-us.titleStart" |translate}}
+                <span class="long-desc-span">{{"why-us.titleMiddle" |translate}}</span>
+                {{"why-us.titleEnd" |translate}}
+            </app-header>
+        </header>
+        <p class="goals-p">{{ "why-us.paragraph" |translate}}</p>
+        <ul
+            class="list-none p-0 m-0"
+            role="list"
+            aria-label="Fitness program features"
+        >
+            @for (step of steps(); track $index) {
+            <li>
+                <article
+                    class="step-wrapper flex align-items-center"
+                    [attr.aria-labelledby]="'step-' + $index + '-header'"
+                >
+                    <div class="w-2 flex justify-content-start align-items-center">
+                        <span
+                            class="step-num"
+                            aria-hidden="true"
+                            >{{step.id |translate}}</span
+                        >
+                    </div>
+                    <div class="w-9">
+                        <h3 id="step-{{$index}}-header">{{step.header |translate}}</h3>
+                        <p>{{step.paragraph |translate}}</p>
+                    </div>
+                </article>
+            </li>
+            }
+        </ul>
+    </article>
+    <figure
+        class="col-12 lg:col p-0 m-0"
+        aria-label="Our fitness trainers"
+    >
+        <div class="images-wrapper">
+            <div class="first-col">
+                @for (item of trainersCol1(); track $index) {
+                <picture>
+                    <source
+                        srcset="./images/why-us/{{item.name}}.avif"
+                        type="image/avif"
+                    />
+                    <source
+                        srcset="./images/why-us/{{item.name}}.webp"
+                        type="image/webp"
+                    />
+                    <div
+                        [class]="item.name"
+                        class="mx-0"
+                    >
+                        <img
+                            loading="lazy"
+                            decoding="async"
+                            [ngSrc]="'./images/why-us/' + item.name + '.jpg'"
+                            [width]="item.width"
+                            [height]="item.height"
+                            [alt]="(item.alt |translate)  + ' ' + (item.specialty |translate)"
+                            [attr.aria-describedby]="item.description |translate"
+                        />
+                    </div>
+                </picture>
+                }
+            </div>
+            <div class="second-col">
+                @for (item of trainersCol2(); track $index; let i = $index) {
+                <picture>
+                    <source
+                        srcset="./images/why-us/{{item.name}}.avif"
+                        type="image/avif"
+                    />
+                    <source
+                        srcset="./images/why-us/{{item.name}}.webp"
+                        type="image/webp"
+                    />
+                    <div
+                        [class]="item.name"
+                        class="mx-0"
+                    >
+                        <img
+                            loading="lazy"
+                            decoding="async"
+                            [ngSrc]="'./images/why-us/' + item.name + '.jpg'"
+                            [width]="item.width"
+                            [height]="item.height"
+                            [alt]="(item.alt |translate)  + ' ' + (item.specialty |translate)"
+                            [attr.aria-describedby]="item.description |translate"
+                        />
+                    </div>
+                </picture>
+                }
+            </div>
+        </div>
+        <figcaption class="sr-only">{{ "why-us.sr-only.figCaption" |translate}}</figcaption>
+    </figure>
+</section>

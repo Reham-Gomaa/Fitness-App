@@ -1,17 +1,33 @@
 .section-title {
-  position: relative;
-  top: 12px;
-  .sub-title {
-    font-family: var(--font-3);
-    color: var(--main-color);
-    font-size: 13px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    bottom: 6px;
-
-  }
+    position: relative;
+    top: 12px;
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        top: 50%;
+        left: 0;
+        right: 0;
+        opacity: 0.1;
+    }
+    .sub-title {
+        font-family: var(--font-3);
+        color: var(--main-color);
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        bottom: 6px;
+    }
+    .dumble {
+        width: 1.875rem;
+        height: 1.2106rem;
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+    }
 }
