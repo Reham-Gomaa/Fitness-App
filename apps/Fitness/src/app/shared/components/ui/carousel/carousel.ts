@@ -17,7 +17,7 @@ import { Skeleton } from "primeng/skeleton";
 export class Carousel implements OnInit {
     data = input.required<Muscle[] | Category[]>();
     cat = input<string>();
-    rendLocation = input.required<string>();
+    rendLocation = input<string>();
     numVisible = input<number>(3);
     showIndic = input<boolean>(true);
     responsiveOptions: any[] | undefined;
