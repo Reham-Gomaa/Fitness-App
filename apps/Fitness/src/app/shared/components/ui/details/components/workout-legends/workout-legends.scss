@@ -1,0 +1,18 @@
+#legends {
+  color: var(--gray-100);
+  font-family: var(--font-1);
+  .legend-item {
+    font-size: 16.4px;
+    .icon {
+      width: 35.355352869536915px;
+      height: 35.355352869536915px;
+      border-radius:50%;
+      border: 2.12px solid #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--main-color);
+
+    }
+  }
+}

@@ -1,21 +1,35 @@
 <section
     id="details"
     [style.backgroundImage]="'url(./images/details/bg-2.avif)'"
+    class="py-3"
 >
     <div class="blur-overlay"></div>
     <div class="container">
         <div class="content grid">
-            <app-panel class="col-3" />
-            <div class="video-wrapper col-9">
+            <app-panel class="col-4" />
+            <div class="video-wrapper col-8">
                 <div class="flex flex-column gap-4">
-                    <div class="bg-green-500 h-4rem"></div>
-                    <div class="bg-green-500 h-4rem"></div>
-                    <div class="bg-green-500 h-4rem"></div>
+                    <div class="media-container">
+                      <app-media-container [type]="cat() === 'meals'?'meal':'class'"  />
+                    </div>
+                    @if (cat()==="classes") {
+                    <div class="legends">
+                      <app-workout-legends />
+                    </div>
+                    }
+                    @if (cat()==="meals") {
+
+                    <div class="ingradients">
+                      <app-ingradients />
+                    </div>
+                  }
+                    @if (cat()==="classes") {
+                    <div class="recomendations">
+                      <app-recomendation />
+                    </div>
+                  }
                 </div>
             </div>
         </div>
     </div>
-    itemId --> {{id()}}
-    <br />
-    itemType --> {{cat()}}
 </section>

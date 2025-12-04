@@ -1,6 +1,7 @@
  @if (data().length) {
             <p-carousel [value]="data()"
-            [numVisible]="3"
+            [numVisible]="numVisible()"
+            [showIndicators]="showIndic()"
             autoplayInterval="3000"
             [numScroll]="2"
             [circular]="false"
