@@ -19,7 +19,7 @@
 
       <!-- For MAIN (2 rows) -->
       <ng-template #item let-group>
-        @if (rendLocation() !== 'home') {
+        @if (rendLocation() !== 'home' || rendLocation() !== "recommend" ) {
           <div class="flex flex-column gap-3">
             @for (product of group; track product._id) {
               <app-main-card [item]="{
