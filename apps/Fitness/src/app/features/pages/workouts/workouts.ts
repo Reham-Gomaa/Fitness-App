@@ -1,5 +1,4 @@
 import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
-import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 import {TranslatePipe} from "@ngx-translate/core";
 //primeNg
 import {MessageService} from "primeng/api";
