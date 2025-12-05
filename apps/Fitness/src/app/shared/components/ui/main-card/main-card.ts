@@ -9,12 +9,9 @@ import { RouterLink } from '@angular/router';
   templateUrl: './main-card.html',
   styleUrl: './main-card.scss',
 })
-export class MainCard implements OnInit {
+export class MainCard  {
   item = input<cardInfo>()
 
-  ngOnInit(){
-    console.log(this.item());
-  }
 
 
 

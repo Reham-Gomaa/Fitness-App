@@ -1,7 +1,7 @@
 
 
 
-#meals {
+#meals.at-home {
   & {
     background-image: url("/images/meals/meals-bg.jpg");
     background-position: center center;
@@ -11,4 +11,8 @@
 
 }
 
+
+#meals.main ::ng-deep .nav-tabs li a {
+  color: var(--gray-100);
+}
 

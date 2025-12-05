@@ -22,7 +22,9 @@ export const routes: Routes = [
                 title: "Main",
                 canActivate: [translationPreloadGuard],
                 children: [
-                    {path: "", redirectTo: "home", pathMatch: "full"},
+                    {
+                      path: "", redirectTo: "home", pathMatch: "full"
+                    },
                     {
                         path: CLIENT_ROUTES.main.home,
                         title: "Home",

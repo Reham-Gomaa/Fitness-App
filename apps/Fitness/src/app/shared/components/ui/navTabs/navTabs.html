@@ -7,19 +7,16 @@
             href="#workout-{{item._id}}"
             [class]="{
                   'active':item.isActive
-                }"
-            (click)="itemClickEmit($event , item)"
-        >
-            {{item.name}}
-        </a>
-    </li>
-    } }@else { @for (item of makeArr(13); track $index) {
-    <li>
-        <p-skeleton
-            height="1rem"
-            width="5rem"
-            class="mb-2"
-        />
-    </li>
-    } }
+                }" (click)="itemClickEmit($event , item)">
+                  {{item.name}}
+                </a>
+              </li>
+            }
+          }@else {
+            @for (item of makeArr(13); track $index) {
+            <li>
+              <p-skeleton height="1rem" width="5rem" class="mb-2" />
+            </li>
+            }
+          }
 </ul>
