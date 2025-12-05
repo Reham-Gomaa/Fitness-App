@@ -17,6 +17,8 @@ import {Actions, ofType} from "@ngrx/effects";
 import {Router} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs/operators";
+import {CLIENT_ROUTES} from "apps/Fitness/src/app/core/constants/client-routes";
+import {RouteBuilderService} from "apps/Fitness/src/app/core/services/router/route-builder.service";
 
 @Component({
     selector: "app-select-activity-level",
@@ -32,6 +34,7 @@ export class SelectActivityLevelComponent implements OnInit {
     private readonly actions$ = inject(Actions);
     private readonly router = inject(Router);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly routeBuilder = inject(RouteBuilderService);
 
     activityLevel = signal<string>("level1");
     isLoading = this.store.selectSignal(selectAuthLoading);
@@ -117,6 +120,8 @@ export class SelectActivityLevelComponent implements OnInit {
     }
 
     private navigateToLogin(): void {
-        this.router.navigate(["/auth/login"]);
+        this.router.navigate(
+            this.routeBuilder.buildPath(CLIENT_ROUTES.auth.base, CLIENT_ROUTES.auth.login)
+        );
     }
 }
