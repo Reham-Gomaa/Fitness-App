@@ -22,8 +22,8 @@ export class Muscles {
     // Uses BehaviorSubject for efficient multicasting
     private readonly reloadTrigger$ = this.reloadHelper.createReloadTrigger();
 
+    private selectedExercise = signal<Exercise | null>(null);
     activeMuscleGroup: WritableSignal<string> = signal("1234");
-    selectedExercise = signal<Exercise | null>(null);
 
     /**
      * Get all muscle groups
@@ -64,5 +64,9 @@ export class Muscles {
 
     setSelectedExercise(exercise: Exercise) {
         this.selectedExercise.set(exercise);
+    }
+
+    getSelectedExercise(): Exercise | null {
+        return this.selectedExercise();
     }
 }

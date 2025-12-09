@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {inject, Injectable} from "@angular/core";
-import {Observable} from "rxjs";
+import {Observable, retry, shareReplay} from "rxjs";
 import {EndPoint} from "../../../core/enums/endpoint";
 import {LevelsResponse} from "../../models/levels";
 
@@ -10,9 +10,19 @@ import {LevelsResponse} from "../../models/levels";
 export class Levels {
     private readonly _httpClient = inject(HttpClient);
 
+    private levelsByMuscleCache = new Map<string, Observable<LevelsResponse>>();
+
     getLevelsByMuscle(id: string): Observable<LevelsResponse> {
-        return this._httpClient.get<LevelsResponse>(
-            `${EndPoint.LEVELS_BY_MUSCLE}?primeMoverMuscleId=${id}`
-        );
+        if (!this.levelsByMuscleCache.has(id)) {
+            const request$ = this._httpClient
+                .get<LevelsResponse>(`${EndPoint.LEVELS_BY_MUSCLE}?primeMoverMuscleId=${id}`)
+                .pipe(retry(2), shareReplay({bufferSize: 1, refCount: true}));
+            this.levelsByMuscleCache.set(id, request$);
+        }
+        return this.levelsByMuscleCache.get(id)!;
+    }
+
+    clearCache() {
+        this.levelsByMuscleCache.clear();
     }
 }

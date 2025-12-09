@@ -12,10 +12,8 @@ export class MealService {
     private http = inject(HttpClient);
     private selectedMeal = signal<Meal | null>(null);
 
-    // Cache for categories (commonly used data)
     private categoriesCache$?: Observable<mealCatRes>;
 
-    // Cache for meals by category
     private mealsByCategoryCache = new Map<string, Observable<MealsByCategoryResponse>>();
 
     getMealsCats(): Observable<mealCatRes> {
@@ -31,7 +29,6 @@ export class MealService {
     }
 
     getMealsByCategory(cat: string): Observable<MealsByCategoryResponse> {
-        // Check cache first
         if (!this.mealsByCategoryCache.has(cat)) {
             const request$ = this.http
                 .get<MealsByCategoryResponse>(`${EndPoint.MEALS_BY_CATEGORY}?c=${cat}`)
@@ -54,13 +51,10 @@ export class MealService {
         }
     }
 
-    // getMealsCats(): Observable<mealCatRes> {
-    //     return this.http.get<mealCatRes>(`${environment.mealApiUrl}categories.php`);
-    // }
-
-    // getMealsByCategory(cat: string): Observable<MealsByCategoryResponse> {
-    //     return this.http.get<MealsByCategoryResponse>(`${EndPoint.MEALS_BY_CATEGORY}?c=${cat}`);
-    // }
+    clearAllCache() {
+        this.clearCategoryCache();
+        this.clearMealsByCategoryCache();
+    }
 
     setSelectedMeal(meal: Meal) {
         this.selectedMeal.set(meal);
