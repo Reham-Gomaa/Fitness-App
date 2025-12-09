@@ -19,10 +19,12 @@ import {Levels} from "../../../../services/levels/levels";
 import {MealService} from "../../../../services/meals/meals";
 // Shared_Component
 import {NavTabs} from "../../navTabs/navTabs";
+import {TranslatePipe} from "@ngx-translate/core";
+import {Muscles} from "../../../../services/muscle/muscles";
 
 @Component({
     selector: "app-panel",
-    imports: [NavTabs],
+    imports: [NavTabs, TranslatePipe],
     templateUrl: "./panel.html",
     styleUrl: "./panel.scss",
 })
@@ -30,6 +32,7 @@ export class Panel {
     private readonly _levels = inject(Levels);
     private readonly _exercises = inject(Exercises);
     private readonly _mealService = inject(MealService);
+    private readonly _muscles = inject(Muscles);
     private readonly _destroyRef = inject(DestroyRef);
 
     panelType: InputSignal<string> = input<string>("");
@@ -86,6 +89,10 @@ export class Panel {
             });
     }
 
+    selectExercise(exercise: Exercise) {
+        this._muscles.setSelectedExercise(exercise);
+    }
+
     loadMeals(mealsId: string) {
         this._mealService
             .getMealsCats()
@@ -122,5 +129,9 @@ export class Panel {
                 isActive: item._id === navitem._id,
             }))
         );
+    }
+
+    selectMeal(meal: Meal) {
+        this._mealService.setSelectedMeal(meal);
     }
 }

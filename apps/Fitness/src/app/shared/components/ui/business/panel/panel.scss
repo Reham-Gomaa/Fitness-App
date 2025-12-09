@@ -34,7 +34,7 @@
             }
             .item {
                 height: 5.625rem;
-                padding: 8px 0px 8px 16px;
+                padding: 13px 0px 8px 16px;
                 border-bottom: 0.0625rem solid var(--panel-border-color);
                 gap: 1.0625rem;
                 transition: all 0.2s ease;
@@ -75,20 +75,18 @@
                     font-family: var(--font-1);
                     cursor: pointer;
                     text-transform: capitalize;
+                    line-height: 120%;
 
-                    h1 {
-                        font-weight: 500;
-                        font-size: 1.125rem;
-                        line-height: 140%;
-                        margin: 0;
-                    }
                     .text {
                         width: 85%;
-                        p {
-                            font-family: var(--font-1);
+                        .ul-heading {
+                            font-weight: 500;
+                            font-size: 1.125rem;
+                            margin: 0 0 0.25rem;
+                        }
+                        .ul-paragraph {
                             font-weight: 400;
                             font-size: 0.875rem;
-                            line-height: 140%;
                             margin: 0;
                         }
                     }

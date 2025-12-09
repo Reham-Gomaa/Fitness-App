@@ -13,13 +13,14 @@
             id="panel-heading"
             class="sr-only"
         >
-            {{ panelType() === 'classes' ? 'Workout Exercises' : 'Meal Recipes' }}
+            {{ panelType() === 'classes' ? ('classes.sr-only.heading' |translate) :
+            ('meals.sr-only.heading' |translate) }}
         </h2>
 
         <section
             class="nav-tabs"
             role="tablist"
-            aria-label="{{ panelType() === 'classes' ? 'Difficulty Levels' : 'Meal Categories' }}"
+            aria-label="{{ panelType() === 'classes' ? ('classes.sr-only.section' |translate) : ('meals.sr-only.section' |translate) }}"
         >
             @if (panelType() === 'classes' && difficultyLevels()) {
             <app-nav-tabs
@@ -39,13 +40,15 @@
         <ul
             class="list list-none p-0 pt-1 m-0"
             role="list"
-            aria-label="{{ panelType() === 'classes' ? 'List of exercises' : 'List of meals' }}"
+            aria-label="{{ panelType() === 'classes' ? ('classes.sr-only.ul' |translate) : ('meals.sr-only.ul' |translate) }}"
         >
             @if (panelType() === 'classes') { @for (item of exercesList(); track $index; let isLast
             = $last) {
             <li
                 [class.border-none]="$index === exercesList()!.length - 1"
                 class="item flex align-items-center"
+                (click)="selectExercise(item)"
+                (keydown)="selectExercise(item)"
                 role="listitem"
                 tabindex="0"
                 aria-label="{{ item.exercise }}, {{ item.primary_equipment }}"
@@ -55,15 +58,18 @@
                     aria-hidden="true"
                 >
                     <img
-                        src="./images/details/bg-2.avif"
+                        src="./images/details/trainer-3.avif"
                         alt="{{ item.exercise }}"
                         role="presentation"
                     />
                 </div>
                 <div class="content flex align-items-center">
                     <div class="text">
-                        <h3 class="m-0">{{ item.exercise }}</h3>
-                        <p>{{ item.primary_equipment }}</p>
+                        <h3 class="ul-heading">
+                            {{ item.exercise.split(' ').splice(0,4).join(' ') }}
+                        </h3>
+                        <p class="ul-paragraph">{{ item.grip }}</p>
+                        <p class="ul-paragraph">{{ item.posture }}</p>
                     </div>
                     <div class="icon-wrapper">
                         <div
@@ -75,7 +81,9 @@
                                 style="color: var(--panel-text-color)"
                             ></i>
                         </div>
-                        <span class="sr-only">View details for {{ item.exercise }}</span>
+                        <span class="sr-only"
+                            >{{ ('classes.sr-only.view' |translate) + ' ' + item.exercise }}</span
+                        >
                     </div>
                 </div>
             </li>
@@ -84,13 +92,15 @@
                 class="no-items"
                 role="listitem"
             >
-                <p class="empty">No exercises found</p>
+                <p class="empty">{{'classes.empty' |translate}}</p>
             </li>
             } }@else if (panelType() === 'meals') { @for (item of mealsList(); track $index; let
             isLast = $last) {
             <li
                 [class.border-none]="$index === mealsList()!.length - 1"
                 class="item flex align-items-center"
+                (click)="selectMeal(item)"
+                (keydown)="selectMeal(item)"
                 role="listitem"
                 tabindex="0"
                 aria-label="{{ item.strMeal }}"
@@ -120,7 +130,9 @@
                                 style="color: var(--panel-text-color)"
                             ></i>
                         </div>
-                        <span class="sr-only">View recipe for {{ item.strMeal }}</span>
+                        <span class="sr-only"
+                            >{{ ('meals.sr-only.view' |translate) + ' ' + item.strMeal }}</span
+                        >
                     </div>
                 </div>
             </li>
@@ -129,19 +141,19 @@
                 class="no-items"
                 role="listitem"
             >
-                <p class="empty">No meals found</p>
+                <p class="empty">{{'meals.empty' |translate}}</p>
             </li>
             } }
         </ul>
+    </section>
+</section>
 
-        <!-- Status messages for screen readers -->
-        <div
+<!-- Status messages for screen readers -->
+<!-- <div
             aria-live="polite"
             aria-atomic="true"
             class="sr-only"
         >
             @if (panelType() === 'classes') { {{ exercesList()?.length || 0 }} exercises loaded }
             @else if (panelType() === 'meals') { {{ mealsList()?.length || 0 }} meals loaded }
-        </div>
-    </section>
-</section>
+        </div> -->
