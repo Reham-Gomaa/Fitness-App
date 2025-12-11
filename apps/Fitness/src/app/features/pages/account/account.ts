@@ -224,7 +224,9 @@ export class Account implements OnInit, OnDestroy {
       width: '90vw',
       style: { 
         'max-width': '500px', 
-        'border-radius': '16px'
+        'border-radius': '16px',
+        'border': 'none',
+        'background': 'transparent', 
       }
     });
 
@@ -263,7 +265,9 @@ export class Account implements OnInit, OnDestroy {
       width: '90vw',
       style: { 
         'max-width': '400px', 
-        'border-radius': '16px'
+        'border-radius': '16px',
+        'border': 'none',
+        'background': 'transparent', 
       }
     });
 
