@@ -4,18 +4,21 @@ import {Observable, retry, shareReplay} from "rxjs";
 import {Category, Meal, mealCatRes, MealsByCategoryResponse} from "../../models/meals";
 import {environment} from "@fitness-app/environment/baseUrl.dev";
 import {EndPoint} from "../../../core/enums/endpoint";
+import {ReloadableHttpHelper} from "../../../core/services/api-reload/reloadable-http.helper";
 
 @Injectable({
     providedIn: "root",
 })
 export class MealService {
     private http = inject(HttpClient);
-    private selectedMeal = signal<Meal | null>(null);
 
-    mealCategories: WritableSignal<Category[]> = signal([]);
+    // Caches
     private categoriesCache$?: Observable<mealCatRes>;
-
     private mealsByCategoryCache = new Map<string, Observable<MealsByCategoryResponse>>();
+
+    // State Signals
+    private selectedMeal = signal<Meal | null>(null);
+    mealCategories: WritableSignal<Category[]> = signal([]);
 
     getMealsCats(): Observable<mealCatRes> {
         if (!this.categoriesCache$) {
@@ -39,6 +42,14 @@ export class MealService {
         return this.mealsByCategoryCache.get(cat)!;
     }
 
+    setSelectedMeal(meal: Meal) {
+        this.selectedMeal.set(meal);
+    }
+
+    getSelectedMeal(): Meal | null {
+        return this.selectedMeal();
+    }
+
     // Clear cache when needed (e.g., after logout, or on demand)
     clearCategoryCache(): void {
         this.categoriesCache$ = undefined;
@@ -55,13 +66,5 @@ export class MealService {
     clearAllCache() {
         this.clearCategoryCache();
         this.clearMealsByCategoryCache();
-    }
-
-    setSelectedMeal(meal: Meal) {
-        this.selectedMeal.set(meal);
-    }
-
-    getSelectedMeal(): Meal | null {
-        return this.selectedMeal();
     }
 }
