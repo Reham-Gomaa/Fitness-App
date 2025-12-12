@@ -5,6 +5,7 @@
 }
 
 #hero {
+    color: var(--text-color);
     position: relative;
     overflow: hidden;
     background-size: cover;
@@ -38,7 +39,6 @@
             font-weight: 400;
             font-size: 1.125rem;
             line-height: 28.8px;
-            color: var(--text-color);
             display: flex;
             align-items: center;
             gap: 1rem;

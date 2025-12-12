@@ -2,10 +2,10 @@
     min-height: 100vh;
     background: #24242499;
     position: relative;
-    overflow: hidden;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    padding: 0 80px 50px;
     &::before {
         content: '';
         position: absolute;
@@ -21,11 +21,18 @@
         position: absolute;
         inset: 0;
         z-index: 1;
-        background: #24242499;
+        background: var(--details-bg);
     }
 
-    .container {
+    .workouts-img {
+        position: absolute;
+        top: -35px;
+        inset-inline-start: 40%;
+    }
+
+    .details-container {
         position: relative;
         z-index: 2;
+        margin: 0;
     }
 }

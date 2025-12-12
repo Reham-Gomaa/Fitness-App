@@ -23,6 +23,7 @@
         border-radius: 1.25rem;
         background-color: var(--main-color);
         color: var(--gray-100);
+        transition: all 1s ease;
     }
     .sign-up-btn {
         padding: 0.5rem 1rem;
@@ -30,12 +31,14 @@
         background-color: transparent;
         border: 1px solid var(--orange-500);
         color: var(--orange-500);
+        transition: all 1s ease;
     }
     .orange-btn {
         padding: 0.625rem 1.125rem;
         border-radius: 6.25rem;
         background-color: var(--main-color);
         color: var(--gray-100);
+        transition: all 1s ease;
     }
     .trans-btn {
         padding: 0.625rem 1.125rem;
@@ -43,5 +46,19 @@
         border: 1px solid var(--orange-500);
         background-color: transparent;
         color: var(--orange-500);
+        transition: all 1s ease;
+    }
+
+    .login-btn:hover,
+    .orange-btn:hover {
+        border: 1px solid var(--orange-500);
+        background-color: transparent;
+        color: var(--orange-500);
+    }
+
+    .sign-up-btn:hover,
+    .trans-btn:hover {
+        background-color: var(--main-color);
+        color: var(--gray-100);
     }
 }
