@@ -7,4 +7,5 @@ export class EndPoint {
     static EXERCISES = `${environment.baseApiUrl}exercises`;
     static EXERCISES_BY_MUSCLE_DIFFICULTY = `${environment.baseApiUrl}exercises/by-muscle-difficulty`;
     static MEALS_BY_CATEGORY = `${environment.mealApiUrl}filter.php`;
+    static MEAL_DETAILS = `${environment.mealApiUrl}lookup.php`;
 }
