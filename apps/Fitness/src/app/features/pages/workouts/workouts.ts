@@ -1,5 +1,5 @@
+import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
-import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
 //primeNg
 import {MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
@@ -45,6 +45,7 @@ export class Workouts implements OnInit {
     private muscleService = inject(Muscles);
     private destroyRef = inject(DestroyRef);
     private msgService = inject(MessageService);
+    renderLocation = input('main')
 
     // workout_muscles: MuscleGroup[] = [] as MuscleGroup[];
     workout_muscles = signal<MuscleGroup[]>([]);

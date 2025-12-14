@@ -1,8 +1,18 @@
+
 <app-hero-section />
 <app-horizontal-carousel />
 <app-about-us />
-<app-workouts />
+<div>
+    @for (lang of languages; track lang.code) {
+    <p-button
+        [label]="lang.flag + ' ' + lang.label"
+        [severity]="currentLang() === lang.code ? 'success' : 'secondary'"
+        (onClick)="switchLanguage(lang.code)"
+        [outlined]="currentLang() !== lang.code"
+    />
+    }
+</div>
+<app-workouts [renderLocation]="'home'" />
 <app-why-us />
 <app-meals />
 <app-chat-bot />
-

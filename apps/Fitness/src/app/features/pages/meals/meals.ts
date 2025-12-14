@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
+import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
 import {Category} from "./../../../shared/models/meals";
 import {MealService} from "./../../../shared/services/meals/meals";
 //reusable
@@ -19,6 +19,8 @@ export class Meals implements OnInit {
     private destroyRef = inject(DestroyRef);
     mealCats: WritableSignal<Category[]> = signal([]);
 
+    renderLocation = input<string>()
+
     ngOnInit(): void {
         this.getMealCats();
     }
@@ -28,8 +30,8 @@ export class Meals implements OnInit {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
                 next: (res) => {
-                  this.mealService.mealCategories.set(res.categories)
-                    this.mealCats.set(res.categories);
+                  this.mealCats.set(res.categories)
+
                 },
             });
     }
