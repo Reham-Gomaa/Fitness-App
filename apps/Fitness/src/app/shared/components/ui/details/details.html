@@ -1,17 +1,23 @@
 <section
     id="details"
+    [class]="{ 'p-6': cat() === 'classes', 'p-7': cat() === 'meals'}"
     [style.backgroundImage]="'url(./images/details/bg-2.avif)'"
-    class="py-5"
 >
     <div class="blur-overlay"></div>
-    <!-- <img
-        class="workouts-img"
-        [src]="cat() === 'classes' ? './images/workouts/WOrkouts.png':'./images/meals/Healthy.png'"
-        alt="workouts"
-    /> -->
+
     <div class="details-container">
+        <img
+            class="title-img"
+            [ngSrc]="cat() === 'classes' ? './images/workouts/WOrkouts.png':'./images/meals/Healthy.png'"
+            [alt]="cat() + ' ' + 'title as image'"
+            width="330"
+            height="44"
+        />
         @if (cat() === 'classes') {
-        <app-nav-tabs [navItems]="workout_muscles()" />
+        <app-nav-tabs
+            [navItems]="workout_muscles()"
+            [routerLink]="getPath()"
+        />
         }
         <div class="content grid">
             <app-panel

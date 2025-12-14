@@ -1,5 +1,14 @@
-import {Component, DestroyRef, effect, inject, OnInit, signal, WritableSignal} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import {
+    Component,
+    computed,
+    DestroyRef,
+    effect,
+    inject,
+    OnInit,
+    signal,
+    WritableSignal,
+} from "@angular/core";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Panel} from "../business/panel/panel";
 import {NavTabs} from "../navTabs/navTabs";
 import {Muscles} from "../../../services/muscle/muscles";
@@ -13,10 +22,21 @@ import {MediaContainer} from "./components/media-container/media-container";
 import {WorkoutLegends} from "./components/workout-legends/workout-legends";
 import {Ingradients} from "./components/ingradients/ingradients";
 import {Recomendation} from "./components/recomendation/recomendation";
+import {NgOptimizedImage} from "@angular/common";
+import {CLIENT_ROUTES} from "./../../../../core/constants/client-routes";
 
 @Component({
     selector: "app-details",
-    imports: [Panel, MediaContainer, WorkoutLegends, Ingradients, Recomendation, NavTabs],
+    imports: [
+        Panel,
+        MediaContainer,
+        WorkoutLegends,
+        Ingradients,
+        Recomendation,
+        NavTabs,
+        NgOptimizedImage,
+        RouterLink,
+    ],
     templateUrl: "./details.html",
     styleUrl: "./details.scss",
 })
@@ -32,19 +52,11 @@ export class Details implements OnInit {
     cat: WritableSignal<string> = signal<string>("");
     workout_muscles = signal<MuscleGroup[]>([]);
 
-    selectedExercise = signal<Exercise | null>(null);
-    selectedMeal = signal<Meal | null>(null);
+    selectedExercise = computed(() => this._muscleService.getSelectedExercise());
+    selectedMeal = computed(() => this._mealService.getSelectedMeal());
 
-    private levelsEffect = effect(() => {
-        this.getSelectedExercise();
-        this.getSelectedMeal();
-    });
-
-    getSelectedExercise() {
-        this.selectedExercise.set(this._muscleService.getSelectedExercise());
-    }
-    getSelectedMeal() {
-        this.selectedMeal.set(this._mealService.getSelectedMeal());
+    getPath() {
+        return [CLIENT_ROUTES.main.classes];
     }
 
     ngOnInit(): void {

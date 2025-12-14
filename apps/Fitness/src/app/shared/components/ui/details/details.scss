@@ -24,15 +24,19 @@
         background: var(--details-bg);
     }
 
-    .workouts-img {
-        position: absolute;
-        top: -35px;
-        inset-inline-start: 40%;
-    }
-
     .details-container {
         position: relative;
         z-index: 2;
         margin: 0;
+        .title-img {
+            position: absolute;
+            top: -26px;
+            inset-inline-start: 40%;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
     }
 }
