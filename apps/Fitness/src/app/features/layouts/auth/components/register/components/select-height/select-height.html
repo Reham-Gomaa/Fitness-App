@@ -1,0 +1,16 @@
+<div class="select-height-container">
+    <div class="header">
+        <h1>{{ 'register.selectHeight.title' | translate }}</h1>
+        <p>{{ 'register.selectHeight.subtitle' | translate }}</p>
+    </div>
+
+    <div class="height-selection">
+        <lib-fitness-input-slider
+            [minWeight]="100"
+            [maxWeight]="220"
+            [unit]="'register.selectHeight.unit' | translate"
+            [initialValue]="height()"
+            (weightChange)="onHeightChange($event)"
+        ></lib-fitness-input-slider>
+    </div>
+</div>

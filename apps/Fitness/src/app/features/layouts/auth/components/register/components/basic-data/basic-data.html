@@ -1,0 +1,60 @@
+<section class="login">
+    <p class="title">{{ "register.greeting" | translate }}</p>
+    <p class="header">{{ "register.createAccount" | translate }}</p>
+    <div class="body">
+        <p class="form-head">{{ "register.title" | translate }}</p>
+        <form
+            [formGroup]="basicDataForm"
+            class="flex flex-column gap-3"
+        >
+            <!-- firstName -->
+            <lib-fitness-input
+                formControlName="firstName"
+                [errorHandilgControl]="basicDataForm.get('firstName')!"
+                [placeholder]="'register.firstName' | translate"
+                type="user"
+                id="firstName"
+            ></lib-fitness-input>
+            <!-- lastName -->
+            <lib-fitness-input
+                formControlName="lastName"
+                [errorHandilgControl]="basicDataForm.get('lastName')!"
+                [placeholder]="'register.lastName' | translate"
+                type="user"
+                id="lastName"
+            ></lib-fitness-input>
+            <!-- Email -->
+            <lib-fitness-input
+                formControlName="email"
+                [errorHandilgControl]="basicDataForm.get('email')!"
+                [placeholder]="'register.email' | translate"
+                type="email"
+                id="email"
+            ></lib-fitness-input>
+
+            <!-- Password -->
+            <lib-fitness-input
+                formControlName="password"
+                [errorHandilgControl]="basicDataForm.get('password')!"
+                [placeholder]="'register.password' | translate"
+                type="password"
+                id="password"
+            ></lib-fitness-input>
+
+            <!-- Confirm Password -->
+            <lib-fitness-input
+                formControlName="rePassword"
+                [errorHandilgControl]="basicDataForm.get('rePassword')!"
+                [placeholder]="'register.confirmPassword' | translate"
+                type="password"
+                id="rePassword"
+            ></lib-fitness-input>
+        </form>
+        <p class="register">
+            {{ "register.haveAccount" | translate }}
+            <a [routerLink]="_routeBuilder.buildPath(ROUTES.auth.base, ROUTES.auth.login)"
+                >{{ "register.signIn" | translate }}</a
+            >
+        </p>
+    </div>
+</section>

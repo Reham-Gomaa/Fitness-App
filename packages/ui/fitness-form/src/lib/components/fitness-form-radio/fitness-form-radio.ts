@@ -1,33 +1,32 @@
-import {
-  Component,
-  input,
-  OnInit,
-  output,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import { RadioItem } from '../../interfaces/radio-item';
+import {Component, input, OnInit, output, signal, WritableSignal} from "@angular/core";
+import {RadioItem} from "../../interfaces/radio-item";
+
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
-  selector: 'lib-fitness-form-radio',
-  imports: [],
-  templateUrl: './fitness-form-radio.html',
-  styleUrl: './fitness-form-radio.scss',
+    selector: "lib-fitness-form-radio",
+    imports: [TranslatePipe],
+    templateUrl: "./fitness-form-radio.html",
+    styleUrl: "./fitness-form-radio.scss",
 })
 export class FitnessFormRadio implements OnInit {
-  config = input.required<RadioItem[]>();
-   selectedItem = input<string>('');
-  selectedItemChange = output<string>();
+    config = input.required<RadioItem[]>();
+    initialValue = input<string>();
+    selectedItemChange = output<string>();
 
-  selectedItemSignal: WritableSignal<string> = signal('');
+    selectedItem: WritableSignal<string> = signal("");
 
-  ngOnInit(): void {
-    const initialValue = this.selectedItem() ;
-    this.selectedItemSignal.set(initialValue);
-  }
+    ngOnInit(): void {
+        const initial = this.initialValue();
+        if (initial) {
+            this.selectedItem.set(initial);
+        } else {
+            this.selectedItem.set(this.config()[0].value);
+        }
+    }
 
-  selectedItemChangeHandler(value: string) {
-    this.selectedItemSignal.set(value);
-    this.selectedItemChange.emit(value);
-  }
+    selectedItemChangeHandler(value: string) {
+        this.selectedItem.set(value);
+        this.selectedItemChange.emit(value);
+    }
 }

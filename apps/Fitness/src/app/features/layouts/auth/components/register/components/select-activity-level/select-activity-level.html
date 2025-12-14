@@ -1,0 +1,14 @@
+<div class="select-activity-container">
+    <div class="header">
+        <h1>{{ 'register.selectActivity.title' | translate }}</h1>
+        <p>{{ 'register.selectActivity.subtitle' | translate }}</p>
+    </div>
+
+    <div class="activity-selection">
+        <lib-fitness-form-radio
+            [config]="activityOptions"
+            [initialValue]="activityLevel()"
+            (selectedItemChange)="onActivityChange($event)"
+        ></lib-fitness-form-radio>
+    </div>
+</div>

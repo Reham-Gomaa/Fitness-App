@@ -1,0 +1,29 @@
+<div class="progress-container">
+    <svg
+        [attr.width]="(radius() + strokeWidth()) * 2"
+        [attr.height]="(radius() + strokeWidth()) * 2"
+        class="progress-ring"
+    >
+        <circle
+            class="progress-ring__circle-bg"
+            [attr.stroke-width]="strokeWidth()"
+            [attr.r]="radius()"
+            [attr.cx]="radius() + strokeWidth()"
+            [attr.cy]="radius() + strokeWidth()"
+        />
+        <circle
+            class="progress-ring__circle"
+            [attr.stroke-width]="strokeWidth()"
+            [attr.r]="radius()"
+            [attr.cx]="radius() + strokeWidth()"
+            [attr.cy]="radius() + strokeWidth()"
+            [style.stroke-dasharray]="circumference() + ' ' + circumference()"
+            [style.stroke-dashoffset]="strokeDashoffset()"
+        />
+    </svg>
+    <div class="progress-text">
+        <span class="current">{{ current() }}</span>
+        <span class="separator">/</span>
+        <span class="total">{{ total() }}</span>
+    </div>
+</div>

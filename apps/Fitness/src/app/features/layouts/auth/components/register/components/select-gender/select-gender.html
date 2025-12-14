@@ -1,0 +1,13 @@
+<div class="select-gender-container">
+    <div class="header">
+        <h1>{{ 'register.selectGender.title' | translate }}</h1>
+        <p>{{ 'register.selectGender.subtitle' | translate }}</p>
+    </div>
+
+    <div class="gender-options">
+        <lib-fitness-input-gender
+            [initialGender]="selectedGender()"
+            (genderChange)="onGenderChange($event)"
+        ></lib-fitness-input-gender>
+    </div>
+</div>

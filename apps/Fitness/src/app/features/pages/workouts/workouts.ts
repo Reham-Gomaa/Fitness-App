@@ -1,5 +1,5 @@
+import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
-import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
 //primeNg
 import {MessageService} from "primeng/api";
 import {ButtonModule} from "primeng/button";
@@ -54,6 +54,7 @@ export class Workouts implements OnInit {
             "Explore workout categories by muscle group (Chest, Back, Legs, Shoulders, Arms, Stomach) and filter by difficulty level (Beginner to Advanced). Watch detailed exercise videos with step-by-step guidance, and get personalized meal recommendations to support your fitness journey."
         );
     }
+    renderLocation = input("main");
 
     // workout_muscles: MuscleGroup[] = [] as MuscleGroup[];
     workout_muscles = signal<MuscleGroup[]>([]);

@@ -1,0 +1,14 @@
+<div class="select-goal-container">
+    <div class="header">
+        <h1>{{ 'register.selectGoal.title' | translate }}</h1>
+        <p>{{ 'register.selectGoal.subtitle' | translate }}</p>
+    </div>
+
+    <div class="goal-selection">
+        <lib-fitness-form-radio
+            [config]="goalOptions"
+            [initialValue]="goal()"
+            (selectedItemChange)="onGoalChange($event)"
+        ></lib-fitness-form-radio>
+    </div>
+</div>

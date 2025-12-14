@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
+import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
 import {Category} from "./../../../shared/models/meals";
 import {MealService} from "./../../../shared/services/meals/meals";
 //reusable
@@ -28,6 +28,7 @@ export class Meals implements OnInit {
             "Explore healthy meal categories like chicken, pasta, and seafood. View detailed recipes with ingredients, step-by-step instructions, and nutritional guidance to support your fitness goals. Find meal ideas that fit your diet plan."
         );
     }
+    renderLocation = input<string>();
 
     ngOnInit(): void {
         this.getMealCats();

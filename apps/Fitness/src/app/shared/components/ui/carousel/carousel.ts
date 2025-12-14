@@ -9,35 +9,38 @@ import { Category } from '../../../models/meals';
 import { Skeleton } from "primeng/skeleton";
 
 @Component({
-  selector: 'app-carousel',
-  imports: [
-    MainCard,
-    CarouselModule,
-    ButtonModule,
-    TagModule,
-    Skeleton
-],
-  templateUrl: './carousel.html',
-  styleUrl: './carousel.scss',
+    selector: "app-carousel",
+    imports: [MainCard, CarouselModule, ButtonModule, TagModule, Skeleton],
+    templateUrl: "./carousel.html",
+    styleUrl: "./carousel.scss",
 })
 export class Carousel implements OnInit {
-  data = input.required<Muscle[] | Category[]>();
-  cat = input<string>();
-  numVisible = input<number>(2)
-  showIndic = input<boolean>(true)
-  responsiveOptions: any[] | undefined;
-  ngOnInit(): void {
-    this.responsiveOptions = [
-      {
-        breakpoint: '1400px',
-        numVisible: 2,
-        numScroll: 2,
-      },
-      {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1,
-      },
-    ];
-  }
+    data = input.required<Muscle[] | Category[]>();
+    cat = input<string>();
+    rendLocation = input.required<string>();
+    numVisible = input<number>(3);
+    showIndic = input<boolean>(true);
+    responsiveOptions: any[] | undefined;
+    ngOnInit(): void {
+        this.responsiveOptions = [
+            {
+                breakpoint: "1400px",
+                numVisible: 2,
+                numScroll: 2,
+            },
+            {
+                breakpoint: "767px",
+                numVisible: 1,
+                numScroll: 1,
+            },
+        ];
+    }
+
+    groupInRows(data: Muscle[] | Category[], rows = 2) {
+        const grouped = [];
+        for (let i = 0; i < data.length; i += rows) {
+            grouped.push(data.slice(i, i + rows));
+        }
+        return grouped;
+    }
 }

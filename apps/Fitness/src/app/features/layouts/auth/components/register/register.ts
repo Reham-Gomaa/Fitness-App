@@ -1,66 +1,70 @@
 // Core
-import { Component } from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {Component, inject} from "@angular/core";
+import {ReactiveFormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
 
 // Shared-components
-import { FitnessInput, FitnessInputGender, Gender, FitnessInputSlider, FitnessFormRadio, RadioItem } from '@fitness-app/fitness-form';
+import {CommonModule} from "@angular/common";
+import {ButtonModule} from "primeng/button";
+import {TranslatePipe} from "@ngx-translate/core";
+import {FormsModule} from "@angular/forms";
+import {ProgressCircleComponent} from "apps/Fitness/src/app/shared/components/progress-circle/progress-circle";
+import {BasicData} from "./components/basic-data/basic-data";
+import {SelectGender} from "./components/select-gender/select-gender";
+
+// NgRx
+import {Store} from "@ngrx/store";
+import {nextStep, prevStep, submitRegistration} from "../../store/auth.actions";
+import {
+    selectAuthLoading,
+    selectAuthError,
+    selectStep,
+    selectIsStepValid,
+} from "../../store/auth.selectors";
+import {SelectOldComponent} from "./components/select-old/select-old";
+import {SelectWeightComponent} from "./components/select-weight/select-weight";
+import {SelectHeightComponent} from "./components/select-height/select-height";
+import {SelectGoalComponent} from "./components/select-goal/select-goal";
+import {SelectActivityLevelComponent} from "./components/select-activity-level/select-activity-level";
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FitnessInputGender,
-    FitnessInput,
-    RouterModule,
-    FitnessInputSlider,
-    FitnessFormRadio
-],
-  templateUrl: './register.html',
-  styleUrl: './register.scss',
+    selector: "app-register",
+    standalone: true,
+    imports: [
+        BasicData,
+        SelectGender,
+        ReactiveFormsModule,
+        RouterModule,
+        SelectOldComponent,
+        SelectWeightComponent,
+        SelectHeightComponent,
+        SelectGoalComponent,
+        SelectActivityLevelComponent,
+        CommonModule,
+        ButtonModule,
+        TranslatePipe,
+        ProgressCircleComponent,
+        FormsModule,
+    ],
+    templateUrl: "./register.html",
+    styleUrl: "./register.scss",
 })
 export class Register {
-  registerForm: FormGroup;
+    private store = inject(Store);
+    isLoading = this.store.selectSignal(selectAuthLoading);
+    error = this.store.selectSignal(selectAuthError);
+    step = this.store.selectSignal(selectStep);
+    isStepValid = this.store.selectSignal(selectIsStepValid);
 
-
-  radioConfig: RadioItem[] = [
-    { value: 'Gain weight', label: 'Gain weight' },
-    { value: 'lose weight', label: 'lose weight' },
-    { value: 'Get fitter', label: 'Get fitter' },
-    { value: 'Gain more flexible', label: 'Gain more flexible' },
-  ]
-
-  constructor(private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
-
-  submit() {
-    if (this.registerForm.valid) {
-      console.log('Form Data:', this.registerForm.value);
-    } else {
-      this.registerForm.markAllAsTouched();
+    next() {
+        if (this.step() === 6) {
+            this.store.dispatch(submitRegistration());
+        } else {
+            this.store.dispatch(nextStep());
+        }
     }
-  }
 
-  onGenderChange(gender: Gender) {
-    console.log('Selected gender:', gender);
-  }
-
-  onWeightChanged(newWeight: number): void {
-    console.log('Weight changed to:', newWeight);
-  }
-
-  onActivityLevelChanged(newActivityLevel: string): void {
-    console.log('Activity level changed to:', newActivityLevel);
-  }
+    back() {
+        this.store.dispatch(prevStep());
+    }
 }

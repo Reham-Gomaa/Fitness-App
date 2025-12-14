@@ -1,0 +1,16 @@
+<div class="select-old-container">
+    <div class="header">
+        <h1>{{ 'register.selectOld.title' | translate }}</h1>
+        <p>{{ 'register.selectOld.subtitle' | translate }}</p>
+    </div>
+
+    <div class="age-selection">
+        <lib-fitness-input-slider
+            [minWeight]="10"
+            [maxWeight]="100"
+            [unit]="'register.selectOld.unit' | translate"
+            [initialValue]="age()"
+            (weightChange)="onAgeChange($event)"
+        ></lib-fitness-input-slider>
+    </div>
+</div>

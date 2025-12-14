@@ -1,0 +1,42 @@
+:host {
+    display: inline-block;
+}
+
+.progress-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring__circle-bg {
+    fill: transparent;
+}
+
+.progress-ring__circle {
+    fill: transparent;
+    stroke: var(--orange-500); /* Use the app's orange variable */
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Baloo Thambi 2', cursive; /* Match app font */
+    font-weight: 700;
+    color: var(--white);
+    font-size: 1rem; /* Adjust as needed */
+
+    .separator {
+        margin: 0 2px;
+        opacity: 0.7;
+    }
+}

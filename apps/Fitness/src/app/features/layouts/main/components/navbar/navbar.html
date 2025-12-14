@@ -100,14 +100,13 @@
             </button>
         </div>
     </div>
-
     <!-- Mobile Overlay -->
     <div
         class="mobile-overlay"
         [class.active]="mobileMenuOpen"
-        tabindex="0"
         (click)="closeMobileMenu()"
         (keydown)="closeMobileMenu()"
+        tabindex="0"
     ></div>
 
     <!-- Mobile Sidebar Menu -->
@@ -146,15 +145,14 @@
             <div class="mobile-auth-buttons">
                 <div
                     class="cursor-pointer"
-                    tabindex="0"
                     (click)="onLogin(); closeMobileMenu()"
                     (keydown)="onLogin(); closeMobileMenu()"
+                    tabindex="0"
                 >
                     <app-main-button
                         [btnText]="'navbar.login' | translate"
                         [customClass]="'orange-btn'"
                         [fontWeight]="'font-semibold'"
-                        [btnText]="'about.button' |translate"
                     >
                     </app-main-button>
                 </div>
@@ -162,8 +160,8 @@
                 <div
                     class="cursor-pointer"
                     tabindex="0"
-                    (click)="onSignup(); closeMobileMenu()"
                     (keydown)="onSignup(); closeMobileMenu()"
+                    (click)="onSignup(); closeMobileMenu()"
                 >
                     <app-main-button
                         [btnText]="'navbar.signup' | translate"

@@ -14,6 +14,8 @@
         "loggingIn": "جاري تسجيل الدخول..."
     },
     "register": {
+        "greeting": "أهلا وسهلا",
+        "createAccount": "إنشاء حساب",
         "title": "التسجيل",
         "email": "البريد الإلكتروني",
         "password": "كلمة المرور",
@@ -21,8 +23,74 @@
         "firstName": "الاسم الأول",
         "lastName": "اسم العائلة",
         "submit": "التسجيل",
-        "haveAccount": "لديك حساب بالفعل؟",
-        "signIn": "تسجيل الدخول"
+        "haveAccount": "لديك حساب بالفعل ؟",
+        "signIn": "تسجيل الدخول",
+        "forgotPassword": "نسيت كلمة المرور ؟",
+        "or": "أو",
+        "loading": "جاري التحميل...",
+        "success": {
+            "title": "نجح!",
+            "message": "تم التسجيل بنجاح! جاري التوجيه إلى تسجيل الدخول..."
+        },
+        "error": {
+            "title": "خطأ",
+            "message": "فشل التسجيل. يرجى المحاولة مرة أخرى."
+        },
+        "selectGender": {
+            "title": "أخبرنا عن نفسك!",
+            "subtitle": "نحتاج لمعرفة جنسك",
+            "male": "ذكر",
+            "female": "أنثى",
+            "next": "التالي",
+            "back": "رجوع"
+        },
+        "selectOld": {
+            "title": "كم عمرك ؟",
+            "subtitle": "هذا يساعدنا في إنشاء خطتك الشخصية",
+            "unit": "سنة",
+            "next": "التالي",
+            "back": "رجوع"
+        },
+        "selectWeight": {
+            "title": "ما هو وزنك ؟",
+            "subtitle": "هذا يساعدنا في إنشاء خطتك الشخصية",
+            "unit": "كجم",
+            "next": "التالي",
+            "back": "رجوع"
+        },
+        "selectHeight": {
+            "title": "ما هو طولك ؟",
+            "subtitle": "هذا يساعدنا في إنشاء خطتك الشخصية",
+            "unit": "سم",
+            "next": "التالي",
+            "back": "رجوع"
+        },
+        "selectGoal": {
+            "title": "ما هو هدفك ؟",
+            "subtitle": "هذا يساعدنا في إنشاء خطتك الشخصية",
+            "next": "التالي",
+            "back": "رجوع",
+            "options": {
+                "gainWeight": "زيادة الوزن",
+                "loseWeight": "إنقاص الوزن",
+                "getFitter": "الحصول على لياقة بدنية",
+                "gainFlexibility": "زيادة المرونة",
+                "learnBasics": "تعلم الأساسيات"
+            }
+        },
+        "selectActivity": {
+            "title": "مستوى نشاطك البدني المعتاد ؟",
+            "subtitle": "هذا يساعدنا في إنشاء خطتك الشخصية",
+            "next": "التالي",
+            "back": "رجوع",
+            "options": {
+                "rookie": "مبتدئ",
+                "beginner": "مبتدئ",
+                "intermediate": "متوسط",
+                "advance": "متقدم",
+                "trueBeast": "وحش حقيقي"
+            }
+        }
     },
     "forgetpass": {
         "title": "نسيت كلمة المرور",

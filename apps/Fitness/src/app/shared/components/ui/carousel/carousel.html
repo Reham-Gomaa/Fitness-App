@@ -1,40 +1,59 @@
- @if (data().length) {
-            <p-carousel [value]="data()"
-            [numVisible]="numVisible()"
-            [showIndicators]="showIndic()"
-            autoplayInterval="3000"
-            [numScroll]="2"
-            [circular]="false"
-            [responsiveOptions]="responsiveOptions"
-            [showNavigators]="false"
-            [indicatorStyle]="{
-              'background-color':'#242424',
-              'width':'10px',
-              'height':'10px',
-              'border-radius':'50%',
-            }"
+@if (data().length) {
 
-            >
-                <ng-template let-product #item>
-                    <app-main-card [item]="{
-                      name:product.name || product.strCategory,
-                      id:product._id || product.idCategory,
-                      img:product.image || product.strCategoryThumb,
-                      cat:cat()
-                    }" />
-                </ng-template>
-            </p-carousel>
-}@else {
+  <p-carousel
+      [value]="rendLocation() !== 'home' ? groupInRows(data(), 2) : data()"
+      [numVisible]="numVisible()"
+      [showIndicators]="showIndic()"
+      autoplayInterval="3000"
+      [numScroll]="1"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+      [showNavigators]="false"
+      [indicatorStyle]="{
+        'background-color':rendLocation()==='home'?'#242424':'#fff',
+        'width':'10px',
+        'height':'10px',
+        'border-radius':'50%'
+      }"
+  >
 
+      <!-- For MAIN (2 rows) -->
+      <ng-template #item let-group>
+        @if (rendLocation() !== 'home' || rendLocation() !== "recommend" ) {
+          <div class="flex flex-column gap-3">
+            @for (product of group; track product._id) {
+              <app-main-card [item]="{
+                name:product.name || product.strCategory,
+                id:product._id || product.idCategory,
+                img:product.image || product.strCategoryThumb,
+                cat:cat()
+              }" />
+            }
+          </div>
+        }
+
+        <!-- NORMAL (1 row) -->
+        @else {
+          <app-main-card [item]="{
+            name:group.name || group.strCategory,
+            id:group._id || group.idCategory,
+            img:group.image || group.strCategoryThumb,
+            cat:cat()
+          }" />
+        }
+
+      </ng-template>
+
+  </p-carousel>
+
+} @else {
 
   <div class="grid">
     @for (sk of [1,2,3]; track $index) {
-    <div class="col-12 xl:col-4 md:col-6">
-      <p-skeleton height="10rem" />
-
-    </div>
+      <div class="col-12 xl:col-4 md:col-6">
+        <p-skeleton height="10rem" />
+      </div>
     }
   </div>
 
 }
-

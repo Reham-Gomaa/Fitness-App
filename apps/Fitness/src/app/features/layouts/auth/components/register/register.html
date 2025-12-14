@@ -1,50 +1,39 @@
-<div class="register-container flex flex-column">
-  <h2 class="title">Create Account</h2>
+<div class="register-container">
+    @if (step() > 0) {
+    <app-progress-circle
+        [current]="step()"
+        [total]="6"
+    ></app-progress-circle>
+    } @switch (step()) { @case (0) {
+    <app-basic-data></app-basic-data>
+    } @case (1) {
+    <app-select-gender></app-select-gender>
+    } @case (2) {
+    <app-select-old></app-select-old>
+    } @case (3) {
+    <app-select-weight></app-select-weight>
+    } @case (4) {
+    <app-select-height></app-select-height>
+    } @case (5) {
+    <app-select-goal></app-select-goal>
+    } @case (6) {
+    <app-select-activity-level></app-select-activity-level>
 
-  <form [formGroup]="registerForm" (ngSubmit)="submit()" class="flex flex-column gap-3">
-    <!-- First Name -->
-    <lib-fitness-input
-      formControlName="firstName"
-      [errorHandilgControl]="registerForm.get('firstName')!"
-      placeholder="Enter your first name"
-      type="text"
-      id="firstName"
-    ></lib-fitness-input>
-
-    <!-- Email -->
-    <lib-fitness-input
-      formControlName="email"
-      [errorHandilgControl]="registerForm.get('email')!"
-      placeholder="Enter your email"
-      type="email"
-      id="email"
-    ></lib-fitness-input>
-
-    <!-- Password -->
-    <lib-fitness-input
-      formControlName="password"
-      [errorHandilgControl]="registerForm.get('password')!"
-      placeholder="Enter your password"
-      type="password"
-      id="password"
-    ></lib-fitness-input>
-
-    <div>
-      <lib-fitness-input-gender (genderChange)="onGenderChange($event)"></lib-fitness-input-gender>
+    } }
+    <div class="button-group">
+        @if (step() > 0) {
+        <button
+            class="back-btn"
+            (click)="back()"
+        >
+            {{ 'register.selectWeight.back' | translate }}
+        </button>
+        }
+        <button
+            class="next-btn"
+            (click)="next()"
+        >
+            {{ 'register.selectWeight.next' | translate }}
+        </button>
     </div>
-
-    <div class="flex justify-content-center">
-      <lib-fitness-input-slider unit="kg" (weightChange)="onWeightChanged($event)"></lib-fitness-input-slider>
-    </div>
-
-    <div>
-      <lib-fitness-form-radio
-        [config]="radioConfig"
-        (selectedItemChange)="onActivityLevelChanged($event)"
-      ></lib-fitness-form-radio>
-    </div>
-
-    <button type="submit" class="submit-btn">Register</button>
-  </form>
-
 </div>
