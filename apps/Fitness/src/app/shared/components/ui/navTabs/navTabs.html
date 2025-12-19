@@ -1,6 +1,12 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
-<div class="nav-tabs-container">
+<div
+    class="nav-tabs-container"
+    [class]="{
+        'dafault-margin': !isInPanel(),
+        'panel-margin': isInPanel()
+        }"
+>
     <ul class="nav-tabs">
         @if (navItems()!.length > 0) { @for (item of navItems(); track $index) {
         <li>

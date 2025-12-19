@@ -1,8 +1,13 @@
+.dafault-margin {
+    margin: 0 auto 32px;
+}
+.panel-margin {
+    margin: 0 auto;
+}
 .nav-tabs-container {
     width: 80%;
     overflow-x: auto;
     overflow-y: hidden;
-    margin: 0 auto 32px;
 
     &::-webkit-scrollbar {
         height: 4px;

@@ -10,7 +10,9 @@ import {navItem} from "../../../models/navItem";
 })
 export class NavTabs {
     navItems = input<navItem[]>();
+    isInPanel = input<boolean>(false);
     navItemClick: OutputEmitterRef<navItem> = output();
+
     makeArr(l: number) {
         return Array.from({length: l});
     }
