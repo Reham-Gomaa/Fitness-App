@@ -1,13 +1,16 @@
 import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
-import {Category} from "./../../../shared/models/meals";
-import {MealService} from "./../../../shared/services/meals/meals";
-//reusable
+import {TranslatePipe} from "@ngx-translate/core";
+// rxjs
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+// Interface
+import {Category} from "./../../../shared/models/meals";
+// Services
+import {MealService} from "./../../../shared/services/meals/meals";
+import {SeoService} from "../../../core/services/seo/seo.service";
+// Reusable_Components
 import {Carousel} from "./../../../shared/components/ui/carousel/carousel";
 import {Header} from "./../../../shared/components/ui/header/header";
 import {Title} from "./../../../shared/components/ui/title/title";
-import {SeoService} from "../../../core/services/seo/seo.service";
-import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
     selector: "app-meals",

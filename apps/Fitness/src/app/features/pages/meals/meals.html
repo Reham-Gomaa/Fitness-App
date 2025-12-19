@@ -1,34 +1,42 @@
-<section id="meals" [class]="{
+<section
+    id="meals"
+    [class]="{
   'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
-}" class="app-section py-5" >
-  <app-title
-   [titleImg]="'/images/meals/Healthy.png'"
-   [titleTxt]="'Healthy Nutritions'"
-   [imgW]="'258'"
-   [imgH]="'43'"
-
-   />
-  <div class="sec-gradient overflow-hidden" [class]="{
+}"
+    class="app-section pb-6"
+>
+    <app-title
+        [titleImg]="'/images/meals/Healthy.png'"
+        [titleTxt]="'Healthy Nutritions'"
+        [imgW]="'258'"
+        [imgH]="'43'"
+    />
+    <div
+        class="sec-gradient overflow-hidden"
+        [class]="{
     'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
-  }">
-    <div class="container">
-      <div class="meals-info text-center my-4">
-        <app-header>
+  }"
+    >
+        <div class="container">
+            <div class="meals-info text-center my-4">
+                <app-header>
                     {{'meals.header.part1' |translate}} <br />
                     {{'meals.header.part2' |translate}}
                     <span class="long-desc-span">{{'meals.header.part3' |translate}}</span>
                     {{'meals.header.part4' |translate}}
-       </app-header>
-      </div>
-      <div class="meal-items">
-            <div class="card">
-
-                <app-carousel  [data]="mealCats()" [cat]="'meals'" [rendLocation]="renderLocation()!" />
-          </div>
+                </app-header>
+            </div>
+            <div class="meal-items">
+                <div class="card">
+                    <app-carousel
+                        [data]="mealCats()"
+                        [cat]="'meals'"
+                        [rendLocation]="renderLocation()!"
+                    />
+                </div>
             </div>
         </div>
     </div>
 </section>
-

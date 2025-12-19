@@ -12,17 +12,17 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 //app Service
 import {Muscles} from "./../../../shared/services/muscle/muscles";
+import {SeoService} from "../../../core/services/seo/seo.service";
 
 //interfaces
 import {Muscle, MuscleGroup} from "./../../../shared/models/muscles";
+import {navItem} from "./../../../shared/models/navItem";
 
 //reusable directive
 import {Carousel} from "./../../../shared/components/ui/carousel/carousel";
 import {Header} from "./../../../shared/components/ui/header/header";
 import {NavTabs} from "./../../../shared/components/ui/navTabs/navTabs";
 import {Title} from "./../../../shared/components/ui/title/title";
-import {navItem} from "./../../../shared/models/navItem";
-import {SeoService} from "../../../core/services/seo/seo.service";
 import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 
 @Component({
