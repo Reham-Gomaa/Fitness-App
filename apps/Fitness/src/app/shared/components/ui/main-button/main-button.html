@@ -3,6 +3,9 @@
     class="mt-5 w-fit relative"
 >
     <button
+        (click)="getFired()"
+        (keydown)="getFired()"
+        tabindex="0"
         [class]="[fontWeight(), customClass()]"
         type="button"
         [aria-label]="btnText()"
