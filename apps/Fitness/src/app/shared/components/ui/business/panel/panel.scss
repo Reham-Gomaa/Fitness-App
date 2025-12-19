@@ -7,6 +7,14 @@
     background: var(--details-bg);
     z-index: 1;
     color: var(--panel-text-color);
+    margin-bottom: 10px;
+    @media all and (min-width: 48rem) {
+        padding-inline: 30px;
+    }
+    @media all and (min-width: 62rem) {
+        margin-bottom: 0;
+        padding-inline: 0px;
+    }
 
     .blur-overlay {
         backdrop-filter: blur(20px);
@@ -23,7 +31,7 @@
         width: 100%;
         .list {
             // gap: 0.5rem;
-            max-height: 110vh;
+            max-height: 23vh;
             overflow: hidden;
             overflow-y: auto;
             scrollbar-width: none; /* Firefox */
@@ -31,6 +39,18 @@
 
             &::-webkit-scrollbar {
                 display: none; /* Chrome, Safari and Opera */
+            }
+            @media all and (min-width: 48rem) {
+                max-height: 18vh;
+            }
+            @media all and (min-width: 50rem) {
+                max-height: 16vh;
+            }
+            @media all and (min-width: 55.25rem) {
+                max-height: 19vh;
+            }
+            @media all and (min-width: 62rem) {
+                max-height: 110vh;
             }
             .item {
                 height: 5.625rem;
@@ -62,8 +82,15 @@
                     border-radius: 1.25rem;
                     padding: 0;
                     width: 22%;
-                    img {
+                    height: 60px;
+                    position: relative;
+                    overflow: hidden;
+                    @media all and (min-width: 62rem) {
                         height: 4.875rem;
+                    }
+                    img {
+                        position: relative;
+                        height: 100%;
                         width: 100%;
                         display: block;
                         border-radius: 1.25rem;
@@ -83,6 +110,13 @@
                             font-weight: 500;
                             font-size: 1.125rem;
                             margin: 0 0 0.25rem;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2; // Show max 2 lines
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            line-clamp: 2;
+                            max-height: 3em; // Adjust based on your line-height
                         }
                         .ul-paragraph {
                             font-weight: 400;

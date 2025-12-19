@@ -25,6 +25,7 @@
                 [navItems]="getNavItems()"
                 (navItemClick)="getNavItemsResponse($event)"
                 role="presentation"
+                [isInPanel]="true"
             />
         </section>
 
@@ -101,26 +102,22 @@
                         [ngSrc]="panelType() === 'classes'
                                 ? './images/details/exercise.avif'
                                 : $any(item).strMealThumb"
-                        width="500"
-                        height="750"
+                        fill
                         alt="{{ panelType() === 'classes' ? $any(item).exercise : $any(item).strMeal }}"
                         role="presentation"
                     />
                 </div>
 
-                <div class="content flex align-items-center">
+                <div class="content gap-2 flex align-items-center">
                     <div class="text">
                         <h3 class="ul-heading">
-                            {{ panelType() === 'classes' ? $any(item).exercise.split('
-                            ').slice(0,4).join(' ') : $any(item).strMeal }}
+                            {{ panelType() === 'classes' ? $any(item).exercise : $any(item).strMeal
+                            }}
                         </h3>
 
-                        <p class="ul-paragraph">
-                            {{ panelType() === 'classes' ? $any(item).grip : $any(item).strMeal }}
-                        </p>
-
                         @if (panelType() === 'classes') {
-                        <p class="ul-paragraph">{{ $any(item).posture }}</p>
+                        <p class="ul-paragraph hidden md:block">{{ $any(item).grip }}</p>
+                        <p class="ul-paragraph hidden md:block">{{ $any(item).posture }}</p>
                         }
                     </div>
 
