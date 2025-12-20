@@ -1,31 +1,153 @@
 #panel {
-    border: 2px solid #282828;
-    // background: #24242480;
-    gap: 24px;
-    border-radius: 20px;
-    padding-top: 16px;
+    border: 0.125rem solid var(--panel-border-color);
+    gap: 1.5rem;
+    border-radius: 1.25rem;
     position: relative;
-    height: 100vh;
-    &::before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        // Preload LCP image
-        background-image: url('/images/details/bg-1.avif');
+    overflow: hidden;
+    background: var(--details-bg);
+    z-index: 1;
+    color: var(--panel-text-color);
+    margin-bottom: 10px;
+    @media all and (min-width: 48rem) {
+        padding-inline: 30px;
+    }
+    @media all and (min-width: 62rem) {
+        margin-bottom: 0;
+        padding-inline: 0px;
     }
 
     .blur-overlay {
         backdrop-filter: blur(20px);
         position: absolute;
         inset: 0;
-        z-index: 1;
-        // background: #24242499;
+        z-index: 2;
     }
 
     .container {
         position: relative;
-        z-index: 2;
+        z-index: 3;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        .list {
+            max-height: 23vh;
+            overflow: hidden;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+
+            &::-webkit-scrollbar {
+                display: none; /* Chrome, Safari and Opera */
+            }
+            @media all and (min-width: 48rem) {
+                max-height: 18vh;
+            }
+            @media all and (min-width: 50rem) {
+                max-height: 16vh;
+            }
+            @media all and (min-width: 55.25rem) {
+                max-height: 19vh;
+            }
+            @media all and (min-width: 62rem) {
+                max-height: 110vh;
+            }
+            .item {
+                height: 5.625rem;
+                padding: 13px 0px 8px 16px;
+                border-bottom: 0.0625rem solid var(--panel-border-color);
+                gap: 1.0625rem;
+                transition: all 0.2s ease;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--panel-hover-bg);
+                    padding-inline-end: 8px;
+
+                    .image {
+                        img {
+                            filter: brightness(1.05) contrast(1.1);
+                            transition: filter 0.3s ease;
+                        }
+                    }
+
+                    .icon {
+                        i {
+                            color: var(--panel-icon-hover-color) !important;
+                        }
+                    }
+                }
+
+                .image {
+                    border-radius: 1.25rem;
+                    padding: 0;
+                    width: 22%;
+                    height: 60px;
+                    position: relative;
+                    overflow: hidden;
+                    @media all and (min-width: 62rem) {
+                        height: 4.875rem;
+                    }
+                    img {
+                        position: relative;
+                        height: 100%;
+                        width: 100%;
+                        display: block;
+                        border-radius: 1.25rem;
+                        object-fit: cover;
+                    }
+                }
+                .content {
+                    width: 76%;
+                    font-family: var(--font-1);
+                    cursor: pointer;
+                    text-transform: capitalize;
+                    line-height: 120%;
+
+                    .text {
+                        width: 85%;
+                        .ul-heading {
+                            font-weight: 500;
+                            font-size: 1.125rem;
+                            margin: 0 0 0.25rem;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2; // Show max 2 lines
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            line-clamp: 2;
+                            max-height: 3em; // Adjust based on your line-height
+                        }
+                        .ul-paragraph {
+                            font-weight: 400;
+                            font-size: 0.875rem;
+                            margin: 0;
+                        }
+                    }
+                    .icon-wrapper {
+                        width: 15%;
+                        .icon {
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            background-color: var(--panel-icon-bg);
+                            border-radius: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .empty {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        background: linear-gradient(to bottom right, var(--orange-500), #ff7a29, #ffd36b);
+        color: transparent;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
     }
 }

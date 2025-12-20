@@ -1,44 +1,52 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
-<section id="workouts" [class]="{
+<section
+    id="workouts"
+    [class]="{
   'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
-
-}" class="app-section py-5">
-  <app-title
-  [titleImg]="'/images/workouts/WOrkouts.png'"
-   [titleTxt]="'classes.title' |translate"
-  [imgW]="'330'"
-  [imgH]="'44'"
-  />
-  <div [class]="{
+}"
+    class="app-section pb-6"
+>
+    <app-title
+        [titleImg]="'/images/workouts/WOrkouts.png'"
+        [titleTxt]="'classes.title' |translate"
+        [imgW]="'330'"
+        [imgH]="'44'"
+    />
+    <div
+        [class]="{
     'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
 
-  }" class="sec-gradient  overflow-hidden">
-    <div class="container">
-      <div class="meals-info text-center my-3">
-
-       <app-header>
+  }"
+        class="sec-gradient overflow-hidden"
+    >
+        <div class="container">
+            <div class="meals-info text-center my-3">
+                <app-header>
                     {{'classes.header.part1' |translate}} <br />
                     {{'classes.header.part2' |translate}}
                     <span class="long-desc-span"> {{'classes.header.part3' |translate}} </span>
-       </app-header>
+                </app-header>
+            </div>
+            <div class="meal-items">
+                <app-nav-tabs
+                    [navItems]="workout_muscles()"
+                    (navItemClick)="SetCurrentMuscle($event)"
+                    [isInPanel]="false"
+                />
 
-      </div>
-      <div class="meal-items">
+                @if(related_Muscles().length > 3) {
 
-
-        <app-nav-tabs
-        [navItems]="workout_muscles()"
-        (navItemClick)="SetCurrentMuscle($event)" />
-
-          @if(related_Muscles().length > 3) {
-
-            <div class="card">
-              <app-carousel [rendLocation]="renderLocation()!"  [data]="related_Muscles()" [cat]="'classes'" />
-               </div>
+                <div class="card">
+                    <app-carousel
+                        [rendLocation]="renderLocation()!"
+                        [data]="related_Muscles()"
+                        [cat]="'classes'"
+                    />
+                </div>
                 }@else {
                 <div class="grid justify-content-center">
                     @if (related_Muscles().length) { @for (muscle of related_Muscles(); track
@@ -53,7 +61,6 @@
                       }"
                         />
                     </div>
-
                     } }
                 </div>
                 }

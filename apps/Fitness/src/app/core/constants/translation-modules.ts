@@ -20,7 +20,7 @@ export type TranslationModule = (typeof TRANSLATION_MODULES)[number];
 
 export const ROUTE_MODULE_MAP: Record<string, TranslationModule[]> = {
     "/auth": ["auth"],
-    "/home": ["home", "about"],
+    "/home": ["home", "about", "classes", "meals"],
     "/about": ["about"],
     "/classes": ["classes"],
     "/meals": ["meals"],

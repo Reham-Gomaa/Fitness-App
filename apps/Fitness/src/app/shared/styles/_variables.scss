@@ -12,9 +12,13 @@
     --white: #ffffff;
     --black: #000000;
 
+    --gray-50: #f1f1f1;
     --gray-100: #f3f3f4;
     --gray-200: #d9d9d9;
     --gray-300: #d3d3d3;
+    --gray-400: #c1c1c1;
+    --gray-700: #4a4a4a;
+    --gray-800: #2d2d2d;
     --gray-900: #242424;
     --gray-950: #232526;
     --gray-100-14: #f3f3f424;
@@ -22,6 +26,8 @@
     --gray-900-60: #24242499;
 
     --orange-500: #ff4100;
+    --light-orange-4: rgba(255, 65, 0, 0.04);
+    --light-orange-5: rgba(255, 255, 255, 0.05);
     --gradient-70: #b4b3b1;
 
     --body: var(--white);
@@ -29,15 +35,31 @@
     // Hero
     --hero-bg: var(--white-30);
     // About-Us
-    --about-section-bg: var(--white-95);
     --about-text-color: var(--gray-900);
     --about-line-break-bg: var(--gray-900-14);
     //meals and workouts shared
     --main-color: var(--orange-500);
     --text-color: var(--gray-900);
     --sec-grad-color: var(--gradient-70);
-    /*details*/
-    --txt-color:var(--gray-100);
+
+    // Scrollbar
+    --panel-scrollbar-track: var(--gray-50);
+    --panel-scrollbar-thumb: var(--gray-400);
+    // Details
+    --details-bg: var(--white-30);
+    --txt-color: var(--gray-100);
+    // Panel
+    --panel-border-color: var(--gray-900-14);
+    --panel-text-color: var(--gray-900);
+    --panel-icon-bg: var(--orange-500);
+    --panel-icon-hover-color: var(--white);
+    --panel-hover-bg: var(--light-orange-4);
+    // Ingradients
+    --ingradients-border-color: var(--gray-900-14);
+    --ingradients-text-color: var(--gray-900);
+    // Media-container
+    --media-text-color: var(--gray-900);
+    --media-gradient-color: rgba(0, 0, 0, 0.095) 3.06%, rgba(255, 255, 255, 0.777) 63.13%;
 
     // Why-Us
     --whyus-section-bg: var(--white-95);
@@ -45,15 +67,15 @@
     --whyus-step-bg: var(--orange-500);
     --whyus-step-color: var(--gray-100);
     --whyus-step-border-color: var(--gray-900-14);
-   
+
     /* Footer */
     --footer-bg: var(--gray-100);
     --footer-text: var(--gray-900);
-    --icon-color:0;
+    --icon-color: 0;
     --icon-border-color: var(--gray-900);
 
     /* Account Page */
-    --text-color:var(--gray-900);
+    --text-color: var(--gray-900);
     --bg-color: 255, 255, 255, 0.5;
     --hover-bg-color: 50, 50, 50, 0.6;
     --modal-bg-color: var(--gray-100) !important;
@@ -69,7 +91,6 @@
     --scroll-bg: 255, 255, 255, 0.95;
     --sidebar-bg: var(--white);
     --nav-bg: var(--gray-100);
-   
 }
 
 .dark-mode {
@@ -86,6 +107,24 @@
     //meals and workouts shared
     --text-color: var(--white);
     --sec-grad-bg: var(--gradient-70);
+
+    // Scrollbar
+    --panel-scrollbar-track: var(--gray-800);
+    --panel-scrollbar-thumb: var(--gray-700);
+    // Details
+    --details-bg: var(--gray-900-60);
+    // Panel
+    --panel-border-color: var(--gray-800);
+    --panel-text-color: var(--gray-100);
+    --panel-icon-hover-color: var(--gray-900);
+    --panel-hover-bg: var(--light-orange-5);
+    // Ingradients
+    --ingradients-border-color: var(--gray-800);
+    --ingradients-text-color: var(--gray-100);
+    // Media-container
+    --media-text-color: var(--gray-100);
+    --media-gradient-color: rgba(0, 0, 0, 0.095) 3.06%, rgba(36, 36, 36, 0.95) 63.13%;
+
     // Why-Us
     --whyus-section-bg: var(--gray-950);
     --whyus-text-color: var(--gray-100);
@@ -96,16 +135,16 @@
     /* Footer */
     --footer-bg: var(--gray-900);
     --footer-text: var(--gray-100);
-    --icon-color:1;
+    --icon-color: 1;
     --icon-border-color: var(--gray-900);
 
     /* Account Page */
-    --text-color:var(--gray-100);
+    --text-color: var(--gray-100);
     --bg-color: 20, 20, 20, 0.85;
     --hover-bg-color: 50, 50, 50, 0.9;
-    --modal-bg-color: var(--gray-900)!important; ;
+    --modal-bg-color: var(--gray-900) !important;
     --modal-title-color: var(--white);
-    --modal-radio-background: var(--gray-100-14) ;
+    --modal-radio-background: var(--gray-100-14);
     --modal-radio-color: var(--gray-200);
     --logout-btn-text: var(--gray-300);
     --logout-btn-color: var(--orange-500);
@@ -116,5 +155,4 @@
     --scroll-bg: 29, 28, 28, 0.95;
     --sidebar-bg: var(--gray-950);
     --nav-bg: var(--gray-900);
-    
 }

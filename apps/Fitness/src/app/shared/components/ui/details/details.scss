@@ -1,19 +1,22 @@
 #details {
     min-height: 100vh;
-    background: #24242499;
     position: relative;
-    overflow: hidden;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    padding: 120px 25px 50px;
     &::before {
         content: '';
         position: absolute;
         width: 0;
         height: 0;
         overflow: hidden;
-        // Preload LCP image
-        background-image: url('/images/details/bg-2.avif');
+    }
+    @media all and (min-width: 48rem) {
+        padding: 100px 80px 50px;
+    }
+    @media all and (62rem <= width <= 75.625rem) {
+        padding: 120px 25px 50px;
     }
 
     .blur-overlay {
@@ -21,11 +24,29 @@
         position: absolute;
         inset: 0;
         z-index: 1;
-        background: #24242499;
+        background: var(--details-bg);
     }
 
-    .container {
+    .details-container {
         position: relative;
         z-index: 2;
+        margin: 0;
+        .title-img {
+            position: absolute;
+            top: -26px;
+            inset-inline-start: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            width: 230px;
+            @media all and (min-width: 62rem) {
+                inset-inline-start: 40%;
+                transform: translateX(0%);
+                width: 330px;
+            }
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
     }
 }

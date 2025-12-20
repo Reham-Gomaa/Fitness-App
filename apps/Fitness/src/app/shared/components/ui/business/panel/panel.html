@@ -1,4 +1,150 @@
-<section id="panel">
-    <div class="blur-overlay"></div>
-    <div class="container"></div>
+<section
+    id="panel"
+    role="region"
+    aria-labelledby="panel-heading"
+>
+    <div
+        class="blur-overlay"
+        aria-hidden="true"
+    ></div>
+
+    <section class="container">
+        <h2
+            id="panel-heading"
+            class="sr-only"
+        >
+            {{ panelConfig().heading | translate }}
+        </h2>
+
+        <section
+            class="nav-tabs"
+            role="tablist"
+            aria-label="{{ panelConfig().section | translate }}"
+        >
+            <app-nav-tabs
+                [navItems]="getNavItems()"
+                (navItemClick)="getNavItemsResponse($event)"
+                role="presentation"
+                [isInPanel]="true"
+            />
+        </section>
+
+        @if (loading()) {
+        <ul class="list list-none p-0 pt-1 m-0">
+            @for (_ of [1,2,3,4]; track $index) {
+            <li class="item flex align-items-center skeleton-item">
+                <div
+                    class="image"
+                    aria-hidden="true"
+                >
+                    <p-skeleton
+                        width="4rem"
+                        height="4rem"
+                        borderRadius="8px"
+                    ></p-skeleton>
+                </div>
+
+                <div
+                    class="content flex align-items-center ml-3"
+                    style="width: 100%"
+                >
+                    <div
+                        class="text"
+                        style="width: 100%"
+                    >
+                        <p-skeleton
+                            width="60%"
+                            height="1rem"
+                        ></p-skeleton>
+                        <p-skeleton
+                            width="40%"
+                            height="1rem"
+                            class="mt-2"
+                        ></p-skeleton>
+                        <p-skeleton
+                            width="30%"
+                            height="1rem"
+                            class="mt-2"
+                        ></p-skeleton>
+                    </div>
+
+                    <div class="icon-wrapper ml-auto">
+                        <p-skeleton
+                            shape="circle"
+                            size="1.5rem"
+                        ></p-skeleton>
+                    </div>
+                </div>
+            </li>
+            }
+        </ul>
+        }@else {
+        <ul
+            class="list list-none p-0 pt-1 m-0"
+            role="list"
+            aria-label="{{ panelConfig().listLabel | translate }}"
+        >
+            @for (item of panelConfig().list; track $index) {
+            <li
+                class="item flex align-items-center"
+                [class.border-none]="$index === panelConfig().list!.length - 1"
+                (click)="panelConfig().onItemSelect(item)"
+                (keydown)="panelConfig().onItemSelect(item)"
+                tabindex="0"
+                role="listitem"
+                aria-label="{{ panelConfig().getItemLabel(item) }}"
+            >
+                <div
+                    class="image"
+                    aria-hidden="true"
+                >
+                    <img
+                        [ngSrc]="panelType() === 'classes'
+                                ? './images/details/exercise.avif'
+                                : $any(item).strMealThumb"
+                        fill
+                        alt="{{ panelType() === 'classes' ? $any(item).exercise : $any(item).strMeal }}"
+                        role="presentation"
+                    />
+                </div>
+
+                <div class="content gap-2 flex align-items-center">
+                    <div class="text">
+                        <h3 class="ul-heading">
+                            {{ panelType() === 'classes' ? $any(item).exercise : $any(item).strMeal
+                            }}
+                        </h3>
+
+                        @if (panelType() === 'classes') {
+                        <p class="ul-paragraph hidden md:block">{{ $any(item).grip }}</p>
+                        <p class="ul-paragraph hidden md:block">{{ $any(item).posture }}</p>
+                        }
+                    </div>
+
+                    <div class="icon-wrapper">
+                        <div
+                            class="icon"
+                            aria-hidden="true"
+                        >
+                            <i
+                                class="pi pi-caret-right"
+                                style="color: var(--panel-text-color)"
+                            ></i>
+                        </div>
+
+                        <span class="sr-only">
+                            {{ (panelType() + '.sr-only.view') | translate }} {{ panelType() ===
+                            'classes' ? $any(item).exercise : $any(item).strMeal }}
+                        </span>
+                    </div>
+                </div>
+            </li>
+            } @empty {
+            <li class="no-items">
+                <p class="empty">{{ panelConfig().emptyLabel | translate }}</p>
+            </li>
+            }
+        </ul>
+        }
+    </section>
 </section>
