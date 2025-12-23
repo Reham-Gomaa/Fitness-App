@@ -24,7 +24,6 @@ export interface servicesKeys {
     styleUrl: "./about-us.scss",
 })
 export class AboutUs {
-    renderLocation = input("home");
 
     readonly trainers: WritableSignal<trainersKeys[]> = signal([
         {
