@@ -1,14 +1,12 @@
 <div id="recomendation">
-    <h3 class="capitalize" >Recommendation For You </h3>
+    <h3 class="capitalize mt-4">Recommendation For You</h3>
     <div class="recom-meals">
-
-      <app-carousel
-      [data]="mealCats()"
-      [cat]="'meals'"
-      [showIndic]="false"
-      [numVisible]="2.5"
-      [rendLocation]="'recommend'"
-      />
-
+        <app-carousel
+            [data]="mealCats()"
+            [cat]="'meals'"
+            [showIndic]="false"
+            [numVisible]="2.5"
+            [rendLocation]="'recommend'"
+        />
     </div>
 </div>

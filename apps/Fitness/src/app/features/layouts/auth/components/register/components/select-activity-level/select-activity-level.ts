@@ -8,6 +8,7 @@ import {
     registerFailure,
     prevStep,
     updateRegisterData,
+    resetRegisterState,
 } from "../../../../store/auth.actions";
 import {FitnessFormRadio, RadioItem} from "@fitness-app/fitness-form";
 import {selectRegisterData, selectAuthLoading} from "../../../../store/auth.selectors";
@@ -54,6 +55,7 @@ export class SelectActivityLevelComponent implements OnInit {
 
     onActivityChange(level: string): void {
         this.activityLevel.set(level);
+        this.store.dispatch(updateRegisterData({data: {activityLevel: level}}));
     }
 
     back(): void {
@@ -72,6 +74,10 @@ export class SelectActivityLevelComponent implements OnInit {
                 tap((data) => {
                     if (data.activityLevel) {
                         this.activityLevel.set(data.activityLevel);
+                    } else {
+                        this.store.dispatch(
+                            updateRegisterData({data: {activityLevel: this.activityLevel()}})
+                        );
                     }
                 }),
                 takeUntilDestroyed(this.destroyRef)
@@ -119,8 +125,12 @@ export class SelectActivityLevelComponent implements OnInit {
     }
 
     private navigateToLogin(): void {
-        this.router.navigate(
-            this.routeBuilder.buildPath(CLIENT_ROUTES.auth.base, CLIENT_ROUTES.auth.login)
-        );
+        this.router
+            .navigate(
+                this.routeBuilder.buildPath(CLIENT_ROUTES.auth.base, CLIENT_ROUTES.auth.login)
+            )
+            .then(() => {
+                this.store.dispatch(resetRegisterState());
+            });
     }
 }

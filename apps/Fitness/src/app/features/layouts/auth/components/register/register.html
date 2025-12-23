@@ -32,8 +32,11 @@
         <button
             class="next-btn"
             (click)="next()"
+            [disabled]="isLoading()"
         >
-            {{ 'register.selectWeight.next' | translate }}
+            @if (isLoading()) {
+            <i class="pi pi-spin pi-spinner"></i>
+            } {{ 'register.selectWeight.next' | translate }}
         </button>
     </div>
 </div>

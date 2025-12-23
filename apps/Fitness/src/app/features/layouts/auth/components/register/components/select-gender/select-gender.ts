@@ -1,4 +1,5 @@
-import {Component, inject, OnInit, signal} from "@angular/core";
+import {Component, DestroyRef, inject, OnInit, signal} from "@angular/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
@@ -15,18 +16,31 @@ import {selectRegisterData} from "../../../../store/auth.selectors";
 })
 export class SelectGender implements OnInit {
     private store = inject(Store);
+    private destroyRef = inject(DestroyRef);
     selectedGender = signal<Gender>(Gender.Male);
 
     ngOnInit() {
-        this.store.select(selectRegisterData).subscribe((data) => {
-            if (data.gender) {
-                this.selectedGender.set(data.gender as Gender);
-            }
-        });
+        this.loadSavedGender();
+    }
+
+    private loadSavedGender() {
+        this.store
+            .select(selectRegisterData)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data) => {
+                if (data.gender) {
+                    this.selectedGender.set(data.gender as Gender);
+                } else {
+                    this.store.dispatch(
+                        updateRegisterData({data: {gender: this.selectedGender()}})
+                    );
+                }
+            });
     }
 
     onGenderChange(gender: Gender) {
         this.selectedGender.set(gender);
+        this.store.dispatch(updateRegisterData({data: {gender}}));
     }
 
     back() {

@@ -1,33 +1,55 @@
 <section
     id="details"
-    [style.backgroundImage]="'url(./images/details/bg-2.avif)'"
-    class="py-3"
+    [style.backgroundImage]="'url(./images/details/bg-3.avif)'"
 >
     <div class="blur-overlay"></div>
-    <div class="container">
+
+    <div class="details-container">
+        <img
+            class="title-img"
+            [ngSrc]="cat() === 'classes' ? './images/workouts/WOrkouts.png':'./images/meals/Healthy.png'"
+            [alt]="cat() + ' ' + 'title as image'"
+            width="330"
+            height="44"
+        />
+        @if (cat() === 'classes') {
+        <app-nav-tabs
+            class="hidden lg:block"
+            [navItems]="workout_muscles()"
+            (click)="getPath()"
+            [isInPanel]="false"
+        />
+        }
         <div class="content grid">
-            <app-panel class="col-4" />
-            <div class="video-wrapper col-8">
+            <app-panel
+                [panelID]="id()"
+                [panelType]="cat()"
+                class="col-12 lg:col-4 align-items-center"
+            />
+
+            <div class="video-wrapper col-12 lg:col-8">
                 <div class="flex flex-column gap-4">
                     <div class="media-container">
-                      <app-media-container [type]="cat() === 'meals'?'meal':'class'"  />
+                        <app-media-container
+                            [type]="cat() === 'meals'?'meal':'class'"
+                            [selectedExercise]="selectedExercise()!"
+                            [selectedMeal]="selectedMeal()!"
+                        />
                     </div>
                     @if (cat()==="classes") {
                     <div class="legends">
-                      <app-workout-legends />
+                        <app-workout-legends />
                     </div>
-                    }
-                    @if (cat()==="meals") {
+                    } @if (cat()==="meals") {
 
                     <div class="ingradients">
-                      <app-ingradients />
+                        <app-ingradients />
                     </div>
-                  }
-                    @if (cat()==="classes") {
+                    } @if (cat()==="classes") {
                     <div class="recomendations">
-                      <app-recomendation />
+                        <app-recomendation />
                     </div>
-                  }
+                    }
                 </div>
             </div>
         </div>

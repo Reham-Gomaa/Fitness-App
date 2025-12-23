@@ -1,8 +1,7 @@
 <section
-  [class]="{
-  'navOffset':renderLocation()!=='home',
-  }"
-    class="about-layout grid pt-8"
+
+    [class]="{ 'pt-6': getLocation()}"
+    class="about-layout grid"
     role="region"
     aria-labelledby="about-heading"
     aria-describedby="about-summary"
@@ -145,6 +144,7 @@
             aria-label="Get Started section"
         >
             <app-main-button
+                [fireStartExplore]="'start'"
                 [customClass]="'orange-btn'"
                 [fontWeight]="'font-semibold'"
                 [btnText]="'about.button' |translate"

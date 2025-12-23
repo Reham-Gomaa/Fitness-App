@@ -2,8 +2,9 @@
     padding: 1.5rem 1rem;
     color: var(--about-text-color);
     font-family: var(--font-1);
+    backdrop-filter: blur(86px);
     @media all and (min-width: 48rem) {
-        padding: 2.5rem 5rem;
+        padding: 95px 5rem 2.5rem;
         gap: 5rem;
     }
     @media all and (62rem <= width <= 78.125rem) {

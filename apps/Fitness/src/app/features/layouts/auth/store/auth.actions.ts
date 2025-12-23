@@ -26,3 +26,5 @@ export const setStep = createAction("[Auth] Set Step", props<{step: number}>());
 export const nextStep = createAction("[Auth] Next Step");
 
 export const prevStep = createAction("[Auth] Previous Step");
+
+export const resetRegisterState = createAction("[Auth] Reset Register State");

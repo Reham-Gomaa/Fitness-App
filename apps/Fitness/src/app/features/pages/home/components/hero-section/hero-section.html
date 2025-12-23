@@ -1,7 +1,7 @@
 <section
     id="hero"
-    [style.backgroundImage]="'url(./images/hero/bg-2.avif)'"
     class="flex-1 min-h-screen pt-8"
+    [style.backgroundImage]="'url(./images/hero/bg-2.avif)'"
 >
     <div class="hero-blur"></div>
     <div class="container">
@@ -27,11 +27,13 @@
 
                 <div class="btns flex justify-content-center lg:justify-content-start">
                     <app-main-button
+                        [fireStartExplore]="'start'"
                         [customClass]="'orange-btn'"
                         [fontWeight]="'font-semibold'"
                         [btnText]="'hero.btn-start' |translate"
                     />
                     <app-main-button
+                        [fireStartExplore]="'explore'"
                         [customClass]="'trans-btn'"
                         [fontWeight]="'font-semibold'"
                         [btnText]="'hero.btn-explore' |translate"

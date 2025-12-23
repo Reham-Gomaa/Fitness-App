@@ -1,4 +1,5 @@
-import {Component, inject, OnInit, signal} from "@angular/core";
+import {Component, DestroyRef, inject, OnInit, signal} from "@angular/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
@@ -15,18 +16,29 @@ import {selectRegisterData} from "../../../../store/auth.selectors";
 })
 export class SelectWeightComponent implements OnInit {
     private store = inject(Store);
+    private destroyRef = inject(DestroyRef);
     weight = signal<number>(90);
 
     ngOnInit() {
-        this.store.select(selectRegisterData).subscribe((data) => {
-            if (data.weight) {
-                this.weight.set(data.weight);
-            }
-        });
+        this.loadSavedWeight();
+    }
+
+    private loadSavedWeight() {
+        this.store
+            .select(selectRegisterData)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data) => {
+                if (data.weight) {
+                    this.weight.set(data.weight);
+                } else {
+                    this.store.dispatch(updateRegisterData({data: {weight: this.weight()}}));
+                }
+            });
     }
 
     onWeightChange(weight: number) {
         this.weight.set(weight);
+        this.store.dispatch(updateRegisterData({data: {weight}}));
     }
 
     back() {

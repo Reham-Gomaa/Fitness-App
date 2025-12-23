@@ -12,16 +12,17 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 //app Service
 import {Muscles} from "./../../../shared/services/muscle/muscles";
+import {SeoService} from "../../../core/services/seo/seo.service";
 
 //interfaces
 import {Muscle, MuscleGroup} from "./../../../shared/models/muscles";
+import {navItem} from "./../../../shared/models/navItem";
 
 //reusable directive
 import {Carousel} from "./../../../shared/components/ui/carousel/carousel";
 import {Header} from "./../../../shared/components/ui/header/header";
 import {NavTabs} from "./../../../shared/components/ui/navTabs/navTabs";
 import {Title} from "./../../../shared/components/ui/title/title";
-import {navItem} from "./../../../shared/models/navItem";
 import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 
 @Component({
@@ -45,7 +46,15 @@ export class Workouts implements OnInit {
     private muscleService = inject(Muscles);
     private destroyRef = inject(DestroyRef);
     private msgService = inject(MessageService);
-    renderLocation = input('main')
+    private seo = inject(SeoService);
+
+    constructor() {
+        this.seo.update(
+            "Classes | FitZone",
+            "Explore workout categories by muscle group (Chest, Back, Legs, Shoulders, Arms, Stomach) and filter by difficulty level (Beginner to Advanced). Watch detailed exercise videos with step-by-step guidance, and get personalized meal recommendations to support your fitness journey."
+        );
+    }
+    renderLocation = input("main");
 
     // workout_muscles: MuscleGroup[] = [] as MuscleGroup[];
     workout_muscles = signal<MuscleGroup[]>([]);
@@ -64,6 +73,7 @@ export class Workouts implements OnInit {
             }))
         );
         this.getMusclesByGroup(muscle._id);
+        this.muscleService.activeMuscleGroup.set(muscle._id);
     }
 
     getAllMuscleGroups() {

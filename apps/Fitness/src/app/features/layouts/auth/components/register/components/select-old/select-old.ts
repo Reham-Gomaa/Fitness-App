@@ -1,4 +1,5 @@
-import {Component, inject, OnInit, signal} from "@angular/core";
+import {Component, DestroyRef, inject, OnInit, signal} from "@angular/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
@@ -15,18 +16,29 @@ import {selectRegisterData} from "../../../../store/auth.selectors";
 })
 export class SelectOldComponent implements OnInit {
     private store = inject(Store);
+    private destroyRef = inject(DestroyRef);
     age = signal<number>(25);
 
     ngOnInit() {
-        this.store.select(selectRegisterData).subscribe((data) => {
-            if (data.age) {
-                this.age.set(data.age);
-            }
-        });
+        this.loadSavedAge();
+    }
+
+    private loadSavedAge() {
+        this.store
+            .select(selectRegisterData)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data) => {
+                if (data.age) {
+                    this.age.set(data.age);
+                } else {
+                    this.store.dispatch(updateRegisterData({data: {age: this.age()}}));
+                }
+            });
     }
 
     onAgeChange(age: number) {
         this.age.set(age);
+        this.store.dispatch(updateRegisterData({data: {age}}));
     }
 
     back() {

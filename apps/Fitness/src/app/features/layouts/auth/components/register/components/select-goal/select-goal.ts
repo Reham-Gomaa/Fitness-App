@@ -1,4 +1,5 @@
-import {Component, inject, OnInit, signal} from "@angular/core";
+import {Component, DestroyRef, inject, OnInit, signal} from "@angular/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
@@ -15,14 +16,24 @@ import {selectRegisterData} from "../../../../store/auth.selectors";
 })
 export class SelectGoalComponent implements OnInit {
     private store = inject(Store);
+    private destroyRef = inject(DestroyRef);
     goal = signal<string>("gainWeight");
 
     ngOnInit() {
-        this.store.select(selectRegisterData).subscribe((data) => {
-            if (data.goal) {
-                this.goal.set(data.goal);
-            }
-        });
+        this.loadSavedGoal();
+    }
+
+    private loadSavedGoal() {
+        this.store
+            .select(selectRegisterData)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data) => {
+                if (data.goal) {
+                    this.goal.set(data.goal);
+                } else {
+                    this.store.dispatch(updateRegisterData({data: {goal: this.goal()}}));
+                }
+            });
     }
 
     goalOptions: RadioItem[] = [
@@ -35,6 +46,7 @@ export class SelectGoalComponent implements OnInit {
 
     onGoalChange(goal: string) {
         this.goal.set(goal);
+        this.store.dispatch(updateRegisterData({data: {goal}}));
     }
 
     back() {

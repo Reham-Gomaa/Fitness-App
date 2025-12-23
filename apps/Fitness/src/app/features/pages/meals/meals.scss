@@ -1,18 +1,16 @@
-
-
-
 #meals.at-home {
-  & {
-    background-image: url("/images/meals/meals-bg.jpg");
-    background-position: center center;
-    background-size: 100% 100%;
-
-  }
-
+    padding-top: 0.5rem;
+    & {
+        background-image: url('/images/meals/meals-bg.jpg');
+        background-position: center center;
+        background-size: 100% 100%;
+    }
 }
 
+#meals.main {
+    padding-top: 5rem;
+}
 
 #meals.main ::ng-deep .nav-tabs li a {
-  color: var(--gray-100);
+    color: var(--gray-100);
 }
-
