@@ -1,5 +1,5 @@
 import {NgOptimizedImage} from "@angular/common";
-import {Component, signal, WritableSignal} from "@angular/core";
+import {Component, input, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Header} from "./../../../shared/components/ui/header/header";
 import {Title} from "./../../../shared/components/ui/title/title";
@@ -24,6 +24,8 @@ export interface servicesKeys {
     styleUrl: "./about-us.scss",
 })
 export class AboutUs {
+    renderLocation = input("home");
+
     readonly trainers: WritableSignal<trainersKeys[]> = signal([
         {
             name: "trainer-3",

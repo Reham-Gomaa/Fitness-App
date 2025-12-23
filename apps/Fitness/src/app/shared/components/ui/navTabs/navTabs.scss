@@ -20,7 +20,7 @@
     transition: all 0.3s;
     &.active {
       background-color: var(--main-color);
-      color: white;
+      color: white !important;
     }
   }
 }

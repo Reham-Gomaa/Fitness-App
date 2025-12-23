@@ -1,7 +1,7 @@
 
 <app-hero-section />
 <app-horizontal-carousel />
-<app-about-us />
+<app-about-us [renderLocation]="'home'" />
 <div>
     @for (lang of languages; track lang.code) {
     <p-button
@@ -13,6 +13,6 @@
     }
 </div>
 <app-workouts [renderLocation]="'home'" />
-<app-why-us />
+<app-why-us  />
 <app-meals [renderLocation]="'home'" />
 

@@ -4,6 +4,8 @@
 <section id="workouts" [class]="{
   'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
+  'navOffset':renderLocation()!=='home' && renderLocation()!=='recommend',
+
 
 }" class="app-section py-5">
   <app-title

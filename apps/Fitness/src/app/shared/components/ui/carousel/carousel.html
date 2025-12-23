@@ -1,7 +1,7 @@
 @if (data().length) {
 
   <p-carousel
-      [value]="rendLocation() !== 'home' ? groupInRows(data(), 2) : data()"
+      [value]="rendLocation() !== 'home' && rendLocation() !== 'recommend' ? groupInRows(data(), 2) : data()"
       [numVisible]="numVisible()"
       [showIndicators]="showIndic()"
       autoplayInterval="3000"
@@ -10,7 +10,7 @@
       [responsiveOptions]="responsiveOptions"
       [showNavigators]="false"
       [indicatorStyle]="{
-        'background-color':rendLocation()==='home'?'#242424':'#fff',
+        'background-color':rendLocation()==='home' || rendLocation() === 'recommend'?'#242424':'',
         'width':'10px',
         'height':'10px',
         'border-radius':'50%'
@@ -19,7 +19,7 @@
 
       <!-- For MAIN (2 rows) -->
       <ng-template #item let-group>
-        @if (rendLocation() !== 'home' || rendLocation() !== "recommend" ) {
+        @if (rendLocation() !== 'home' && rendLocation() !== "recommend" ) {
           <div class="flex flex-column gap-3">
             @for (product of group; track product._id) {
               <app-main-card [item]="{

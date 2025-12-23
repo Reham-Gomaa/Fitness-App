@@ -13,16 +13,17 @@ html {
 .sec-gradient.at-home {
     background: linear-gradient(to bottom, var(--sec-grad-color) 0% 75%, transparent 70% 100%);
 }
+
 .sec-gradient {
   position: relative;
   z-index: 1;
   &.main .sec-long-desc {
-  color: var(--gray-100)
+  color: var(--text-color)
   }
 
 }
 
-.app-section {
+.app-section.main {
   background-image: url('/images/details/bg-2.avif');
   background-position: center center;
   background-size: 100% 100%;
@@ -34,11 +35,17 @@ html {
     display: block;
     inset: 0;
     backdrop-filter:blur(64px);
-    background: #24242499;
+    background: var(--sec-grad-main-color);
+
+
 
   }
+
 }
 
+.p-carousel-indicator-active button {
+  background-color: var(--nav-dot-main-bg) !important;
+}
 .container {
     max-width: 90%;
     margin: auto;
@@ -68,4 +75,8 @@ html {
     &:disabled {
         cursor: not-allowed;
     }
+}
+
+.navOffset {
+  padding-top: 120px !important;
 }

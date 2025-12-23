@@ -1,7 +1,8 @@
 <section id="meals" [class]="{
   'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
-}" class="app-section py-5" >
+  'navOffset':renderLocation()!=='home' && renderLocation()!=='recommend',
+}" class="app-section pb-5" >
   <app-title
    [titleImg]="'/images/meals/Healthy.png'"
    [titleTxt]="'Healthy Nutritions'"
