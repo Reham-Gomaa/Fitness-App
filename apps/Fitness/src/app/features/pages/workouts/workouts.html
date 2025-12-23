@@ -6,17 +6,17 @@
     [class]="{
   'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
-}"
-    class="app-section pb-6"
->
-    <app-title
-        [titleImg]="'/images/workouts/WOrkouts.png'"
-        [titleTxt]="'classes.title' |translate"
-        [imgW]="'330'"
-        [imgH]="'44'"
-    />
-    <div
-        [class]="{
+  'navOffset':renderLocation()!=='home' && renderLocation()!=='recommend',
+
+
+}" class="app-section py-5">
+  <app-title
+  [titleImg]="'/images/workouts/WOrkouts.png'"
+   [titleTxt]="'classes.title' |translate"
+  [imgW]="'330'"
+  [imgH]="'44'"
+  />
+  <div [class]="{
     'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
 

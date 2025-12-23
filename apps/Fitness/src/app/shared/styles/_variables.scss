@@ -26,6 +26,7 @@
     --gray-900-60: #24242499;
 
     --orange-500: #ff4100;
+    --gradient-70: #b3b3b3;
     --light-orange-4: rgba(255, 65, 0, 0.04);
     --light-orange-5: rgba(255, 255, 255, 0.05);
     --gradient-70: #b4b3b1;
@@ -37,9 +38,19 @@
     // About-Us
     --about-text-color: var(--gray-900);
     --about-line-break-bg: var(--gray-900-14);
-    //meals and workouts shared
+    /*meals and workouts shared */
     --main-color: var(--orange-500);
     --text-color: var(--gray-900);
+    --sec-grad-bg: var(--gradient-70);
+    --sec-grad-main-bg: var(--white);
+    /*main card*/
+    --desc-bg : var(--gray-300);
+    --title-color:var(--gray-900);
+    /*nav tabs*/
+    --nav-dot-main-bg:var(--gray-900-60)
+
+    /*details*/
+    --txt-color:var(--gray-100);
     --sec-grad-color: var(--gradient-70);
 
     // Scrollbar
@@ -91,12 +102,14 @@
     --scroll-bg: 255, 255, 255, 0.95;
     --sidebar-bg: var(--white);
     --nav-bg: var(--gray-100);
+
 }
 
 .dark-mode {
     --body: var(--gray-950);
 
-    --gradient-70: #232425;
+    --gradient-70: var(--gray-900-60);
+    --home-gradient : rgba(0,0,0,0.7);
 
     // Hero
     --hero-bg: var(--gray-900-60);
@@ -106,7 +119,13 @@
     --about-line-break-bg: var(--gray-100-14);
     //meals and workouts shared
     --text-color: var(--white);
-    --sec-grad-bg: var(--gradient-70);
+    --sec-grad-bg: var(--gray-950);
+    --sec-grad-main-bg: var(--gradient-70);
+    /*main card*/
+    --desc-bg : var(--gray-900-60);
+    --title-color:var(--white);
+    /*nav tabs*/
+
 
     // Scrollbar
     --panel-scrollbar-track: var(--gray-800);
@@ -124,6 +143,7 @@
     // Media-container
     --media-text-color: var(--gray-100);
     --media-gradient-color: rgba(0, 0, 0, 0.095) 3.06%, rgba(36, 36, 36, 0.95) 63.13%;
+
 
     // Why-Us
     --whyus-section-bg: var(--gray-950);
@@ -155,4 +175,5 @@
     --scroll-bg: 29, 28, 28, 0.95;
     --sidebar-bg: var(--gray-950);
     --nav-bg: var(--gray-900);
+
 }
