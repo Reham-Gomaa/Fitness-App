@@ -27,33 +27,34 @@
                 id:product._id || product.idCategory,
                 img:product.image || product.strCategoryThumb,
                 cat:cat()
-              }" />
+              }"
+            />
             }
-          </div>
+        </div>
         }
 
         <!-- NORMAL (1 row) -->
         @else {
-          <app-main-card [item]="{
+        <app-main-card
+            [item]="{
             name:group.name || group.strCategory,
             id:group._id || group.idCategory,
             img:group.image || group.strCategoryThumb,
             cat:cat()
-          }" />
+          }"
+        />
         }
-
-      </ng-template>
-
-  </p-carousel>
+    </ng-template>
+</p-carousel>
 
 } @else {
 
-  <div class="grid">
+<div class="grid">
     @for (sk of [1,2,3]; track $index) {
-      <div class="col-12 xl:col-4 md:col-6">
+    <div class="col-12 xl:col-4 md:col-6">
         <p-skeleton height="10rem" />
-      </div>
+    </div>
     }
-  </div>
+</div>
 
 }

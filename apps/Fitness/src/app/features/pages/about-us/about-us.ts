@@ -1,9 +1,14 @@
 import {NgOptimizedImage} from "@angular/common";
 import {Component, input, signal, WritableSignal} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
+import {Router} from "@angular/router";
+// Reusable_Components
 import {Header} from "./../../../shared/components/ui/header/header";
 import {Title} from "./../../../shared/components/ui/title/title";
 import {MainButton} from "./../../../shared/components/ui/main-button/main-button";
+// Constants
+import {CLIENT_ROUTES} from "./../../../core/constants/client-routes";
+import {StorageKeys} from "./../../../core/constants/storage.config";
 
 export interface trainersKeys {
     name: string;
@@ -23,8 +28,18 @@ export interface servicesKeys {
     templateUrl: "./about-us.html",
     styleUrl: "./about-us.scss",
 })
-export class AboutUs {
-    renderLocation = input("home");
+
+export class AboutUs implements OnInit {
+    private _router = inject(Router);
+ renderLocation = input("home");
+    ngOnInit(): void {
+        this.getLocation();
+    }
+
+    getLocation() {
+        return this._router.url.includes("home");
+    }
+
 
     readonly trainers: WritableSignal<trainersKeys[]> = signal([
         {

@@ -5,6 +5,13 @@
             "part1": "Transform Your Body with Our",
             "part2": "Dynamic",
             "part3": "Upcoming Workouts"
+        },
+        "empty": "No exercises found",
+        "sr-only": {
+            "heading": "Workout Exercises",
+            "section": "Difficulty Levels",
+            "ul": "List of exercises",
+            "view": "View details for"
         }
     }
 }

@@ -1,4 +1,5 @@
 import {Component, DestroyRef, inject, OnInit} from "@angular/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslateService, TranslatePipe} from "@ngx-translate/core";
 import {AuthApiKpService} from "auth-api-kp";
@@ -16,6 +17,7 @@ import {nextStep, updateRegisterData} from "../../../../store/auth.actions";
 import {selectRegisterData} from "../../../../store/auth.selectors";
 import {PASSWORD_PATTERN} from "apps/Fitness/src/app/core/constants/validation.constants";
 import {passwordMatchValidator} from "apps/Fitness/src/app/core/utils/validators.util";
+import {debounceTime} from "rxjs/operators";
 
 @Component({
     selector: "app-basic-data",
@@ -37,18 +39,32 @@ export class BasicData implements OnInit {
 
     ngOnInit(): void {
         this.frominit();
+
+        // Save data to store on changes
+        this.basicDataForm.valueChanges
+            .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+            .subscribe((value) => {
+                this.store.dispatch(updateRegisterData({data: value}));
+            });
+
         // Load saved data from store
-        this.store.select(selectRegisterData).subscribe((data) => {
-            if (data.firstName || data.email) {
-                this.basicDataForm.patchValue({
-                    firstName: data.firstName || "",
-                    lastName: data.lastName || "",
-                    email: data.email || "",
-                    password: data.password || "",
-                    rePassword: data.rePassword || "",
-                });
-            }
-        });
+        this.store
+            .select(selectRegisterData)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data) => {
+                if (data.firstName || data.email) {
+                    this.basicDataForm.patchValue(
+                        {
+                            firstName: data.firstName || "",
+                            lastName: data.lastName || "",
+                            email: data.email || "",
+                            password: data.password || "",
+                            rePassword: data.rePassword || "",
+                        },
+                        {emitEvent: false}
+                    );
+                }
+            });
     }
 
     frominit() {

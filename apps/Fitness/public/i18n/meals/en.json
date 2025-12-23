@@ -6,6 +6,13 @@
             "part2": "customized",
             "part3": "meal plans",
             "part4": "for you"
+        },
+        "empty": "No meals found",
+        "sr-only": {
+            "heading": "Meal Recipes",
+            "section": "Meal Categories",
+            "ul": "List of meals",
+            "view": "View recipe for"
         }
     }
 }

@@ -73,5 +73,6 @@ export const authReducer = createReducer(
     on(AuthActions.setStepValidity, (state, {isValid}) => ({
         ...state,
         isStepValid: isValid,
-    }))
+    })),
+    on(AuthActions.resetRegisterState, () => initialState)
 );

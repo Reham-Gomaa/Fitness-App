@@ -1,12 +1,16 @@
 import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
-import {Category} from "./../../../shared/models/meals";
-import {MealService} from "./../../../shared/services/meals/meals";
-//reusable
+import {TranslatePipe} from "@ngx-translate/core";
+// rxjs
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+// Interface
+import {Category} from "./../../../shared/models/meals";
+// Services
+import {MealService} from "./../../../shared/services/meals/meals";
+import {SeoService} from "../../../core/services/seo/seo.service";
+// Reusable_Components
 import {Carousel} from "./../../../shared/components/ui/carousel/carousel";
 import {Header} from "./../../../shared/components/ui/header/header";
 import {Title} from "./../../../shared/components/ui/title/title";
-import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
     selector: "app-meals",
@@ -17,9 +21,17 @@ import {TranslatePipe} from "@ngx-translate/core";
 export class Meals implements OnInit {
     private mealService = inject(MealService);
     private destroyRef = inject(DestroyRef);
+    private seo = inject(SeoService);
+
     mealCats: WritableSignal<Category[]> = signal([]);
 
-    renderLocation = input<string>()
+    constructor() {
+        this.seo.update(
+            "Healthy | FitZone",
+            "Explore healthy meal categories like chicken, pasta, and seafood. View detailed recipes with ingredients, step-by-step instructions, and nutritional guidance to support your fitness goals. Find meal ideas that fit your diet plan."
+        );
+    }
+    renderLocation = input<string>();
 
     ngOnInit(): void {
         this.getMealCats();
@@ -30,8 +42,8 @@ export class Meals implements OnInit {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
                 next: (res) => {
-                  this.mealCats.set(res.categories)
-
+                    this.mealService.mealCategories.set(res.categories);
+                    this.mealCats.set(res.categories);
                 },
             });
     }
