@@ -45,6 +45,10 @@ export class Meals implements OnInit {
                     this.mealService.mealCategories.set(res.categories);
                     this.mealCats.set(res.categories);
                 },
+                error:(err)=>{
+                  console.log(err);
+
+                }
             });
     }
 }

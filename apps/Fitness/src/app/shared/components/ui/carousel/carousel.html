@@ -1,31 +1,28 @@
 @if (data().length) {
 
-<p-carousel
-    [value]="rendLocation() !== 'home' ? groupInRows(data(), 2) : data()"
-    [numVisible]="numVisible()"
-    [showIndicators]="showIndic()"
-    autoplayInterval="3000"
-    [numScroll]="1"
-    [circular]="false"
-    [responsiveOptions]="responsiveOptions"
-    [showNavigators]="false"
-    [indicatorStyle]="{
+  <p-carousel
+      [value]="rendLocation() !== 'home' || rendLocation() !== 'recommend' ? groupInRows(data(), 2) : data()"
+      [numVisible]="numVisible()"
+      [showIndicators]="showIndic()"
+      autoplayInterval="3000"
+      [numScroll]="1"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+      [showNavigators]="false"
+      [indicatorStyle]="{
         'background-color':rendLocation()==='home'?'#242424':'#fff',
         'width':'10px',
         'height':'10px',
         'border-radius':'50%'
       }"
->
-    <!-- For MAIN (2 rows) -->
-    <ng-template
-        #item
-        let-group
-    >
+  >
+
+      <!-- For MAIN (2 rows) -->
+      <ng-template #item let-group>
         @if (rendLocation() !== 'home' && rendLocation() !== "recommend" ) {
-        <div class="flex flex-column gap-3">
-            @for (product of group; track product._id|| product.idCategory || $index) {
-            <app-main-card
-                [item]="{
+          <div class="flex flex-column gap-3">
+            @for (product of group; track product._id) {
+              <app-main-card [item]="{
                 name:product.name || product.strCategory,
                 id:product._id || product.idCategory,
                 img:product.image || product.strCategoryThumb,
