@@ -1,5 +1,5 @@
-import {Component, inject, OnDestroy, OnInit} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {Component, inject, OnDestroy, OnInit, PLATFORM_ID, Inject} from "@angular/core";
+import {CommonModule, isPlatformBrowser} from "@angular/common";
 import {Router, RouterModule} from "@angular/router";
 import {ButtonModule} from "primeng/button";
 import {AvatarModule} from "primeng/avatar";
@@ -28,6 +28,7 @@ import {TranslateModule, TranslateService} from "@ngx-translate/core";
 export class Navbar implements OnInit, OnDestroy {
     private router = inject(Router);
     private translate = inject(TranslateService);
+    private isBrowser: boolean;
 
     isLoggedIn = false;
     mobileMenuOpen = false;
@@ -54,34 +55,54 @@ export class Navbar implements OnInit, OnDestroy {
         },
     ];
 
+    constructor(@Inject(PLATFORM_ID) platformId: Object) {
+        this.isBrowser = isPlatformBrowser(platformId);
+    }
+
     ngOnInit() {
         this.checkAuthStatus();
-        this.authCheckInterval = setInterval(() => {
-            this.checkAuthStatus();
-        }, 1000);
+        
+       
+        if (this.isBrowser) {
+            this.authCheckInterval = setInterval(() => {
+                this.checkAuthStatus();
+            }, 1000);
 
-        window.addEventListener("scroll", this.onScroll.bind(this));
+            window.addEventListener("scroll", this.onScroll.bind(this));
+        }
     }
 
     ngOnDestroy() {
-        if (this.authCheckInterval) {
-            clearInterval(this.authCheckInterval);
+       
+        if (this.isBrowser) {
+            if (this.authCheckInterval) {
+                clearInterval(this.authCheckInterval);
+            }
+            window.removeEventListener("scroll", this.onScroll.bind(this));
         }
-        window.removeEventListener("scroll", this.onScroll.bind(this));
     }
 
     private onScroll() {
-        this.isScrolled = window.scrollY > 20;
+        if (this.isBrowser) {
+            this.isScrolled = window.scrollY > 20;
+        }
     }
 
     private checkAuthStatus() {
-        const token = localStorage.getItem(StorageKeys.TOKEN);
-        this.isLoggedIn = !!token;
+       
+        if (this.isBrowser) {
+            const token = localStorage.getItem(StorageKeys.TOKEN);
+            this.isLoggedIn = !!token;
+        }
     }
 
     getCurrentLang(): string {
-        const lang = localStorage.getItem(StorageKeys.LANGUAGE) || "en";
-        return lang.toLowerCase();
+        
+        if (this.isBrowser) {
+            const lang = localStorage.getItem(StorageKeys.LANGUAGE) || "en";
+            return lang.toLowerCase();
+        }
+        return "en";
     }
 
     getRoute(path: string) {
@@ -91,10 +112,13 @@ export class Navbar implements OnInit, OnDestroy {
     toggleMobileMenu() {
         this.mobileMenuOpen = !this.mobileMenuOpen;
 
-        if (this.mobileMenuOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
+       
+        if (this.isBrowser) {
+            if (this.mobileMenuOpen) {
+                document.body.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "";
+            }
         }
     }
 
@@ -122,7 +146,10 @@ export class Navbar implements OnInit, OnDestroy {
     }
 
     logout() {
-        localStorage.removeItem(StorageKeys.TOKEN);
+       
+        if (this.isBrowser) {
+            localStorage.removeItem(StorageKeys.TOKEN);
+        }
         this.checkAuthStatus();
         this.closeMobileMenu();
         this.router.navigate([this.getCurrentLang(), "main", CLIENT_ROUTES.main.home]);
@@ -130,6 +157,9 @@ export class Navbar implements OnInit, OnDestroy {
 
     closeMobileMenu() {
         this.mobileMenuOpen = false;
-        document.body.style.overflow = "";
+      
+        if (this.isBrowser) {
+            document.body.style.overflow = "";
+        }
     }
 }
