@@ -18,7 +18,12 @@
                     {
                         "glob": "**/*",
                         "input": "apps/Fitness/public"
-                    }
+                    },
+                     {
+    "glob": ".env",
+    "input": "apps/Fitness",
+    "output": "."
+  }
                 ],
                 "styles": [
                     "node_modules/primeicons/primeicons.css",
@@ -26,22 +31,14 @@
                     "node_modules/primeflex/themes/primeone-light.css",
                     "apps/Fitness/src/styles.scss"
                 ],
-                "outputMode": "static"
+                "outputMode": "server",
+                "server": "apps/Fitness/src/main.server.ts",
+                "ssr": {
+                    "entry": "apps/Fitness/src/server.ts"
+                }
             },
             "configurations": {
                 "production": {
-                    "budgets": [
-                        {
-                            "type": "initial",
-                            "maximumWarning": "2mb",
-                            "maximumError": "4mb"
-                        },
-                        {
-                            "type": "anyComponentStyle",
-                            "maximumWarning": "6kb",
-                            "maximumError": "10kb"
-                        }
-                    ],
                     "outputHashing": "all",
                     "optimization": {
                         "scripts": true,
@@ -75,12 +72,18 @@
         "serve": {
             "continuous": true,
             "executor": "@angular/build:dev-server",
+            "options": {
+                "buildTarget": "Fitness:build:development",
+                "port": 4200
+            },
             "configurations": {
                 "production": {
-                    "buildTarget": "Fitness:build:production"
+                    "buildTarget": "Fitness:build:production",
+                    "port": 4200
                 },
                 "development": {
-                    "buildTarget": "Fitness:build:development"
+                    "buildTarget": "Fitness:build:development",
+                    "port": 4200
                 }
             },
             "defaultConfiguration": "development"
