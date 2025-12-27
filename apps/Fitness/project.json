@@ -26,7 +26,11 @@
                     "node_modules/primeflex/themes/primeone-light.css",
                     "apps/Fitness/src/styles.scss"
                 ],
-                "outputMode": "static"
+                "server": "apps/Fitness/src/main.server.ts",
+                "ssr": {
+                    "entry": "apps/Fitness/src/server.ts"
+                },
+                "outputMode": "server"
             },
             "configurations": {
                 "production": {
