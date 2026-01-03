@@ -1,8 +1,85 @@
 <div class="bot-body">
     <img
-       class="w-full"
+        class="w-full"
         src="/images/emo.png"
         alt="img for emo chat bot"
     />
     <button class="chat-btn">Hey Ask Me</button>
+</div>
+<!-- <div>
+    <input
+        #myInput
+        type="text"
+        placeholder="type here"
+    />
+    <button
+        (click)="submit(myInput.value)"
+        (keydown)="submit(myInput.value)"
+        tabindex="0"
+    >
+        submit
+    </button>
+    <p>{{ response() }}</p>
+</div> -->
+
+<div class="chat">
+    @for (msg of messages(); track $index) {
+    <div
+        class="message-container"
+        [class.user]="msg.role === 'user'"
+    >
+        <div
+            class="message border-round-lg text-white py-2 px-3"
+            [class.user]="msg.role === 'user'"
+            [class.model]="msg.role === 'model'"
+        >
+            {{ msg.text }}
+        </div>
+    </div>
+
+    }
+</div>
+
+<input #input />
+<button (click)="send(input.value); input.value = ''">Send</button>
+
+<button (click)="reset()">Reset</button>
+
+<button (click)="getHistory()">history</button>
+
+<!-- Add this to your template -->
+<div class="chat-history">
+    <h3>Chat History</h3>
+    @for (session of chatHistory(); track session.id) {
+    <div class="session border p-3 mb-3">
+        <div class="session-header">
+            <strong>{{ session.title || 'Untitled Chat' }}</strong>
+            <small class="text-muted ml-2"> {{ session.createdAt | date:'short' }} </small>
+            <button
+                (click)="loadSession(session.id)"
+                class="btn btn-sm btn-outline-primary ml-2"
+            >
+                Load
+            </button>
+            <button
+                (click)="deleteSession(session.id)"
+                class="btn btn-sm btn-outline-danger ml-2"
+            >
+                Delete
+            </button>
+        </div>
+        <div class="session-preview">
+            @for (msg of session.messages.slice(0, 2); track $index) {
+            <div class="message-preview">
+                <strong>{{ msg.role }}:</strong>
+                {{ msg.text.length > 50 ? (msg.text | slice:0:50) + '...' : msg.text }}
+            </div>
+            } @if (session.messages.length > 2) {
+            <div class="text-muted">... and {{ session.messages.length - 2 }} more messages</div>
+            }
+        </div>
+    </div>
+    } @empty {
+    <p class="text-muted">No chat history yet.</p>
+    }
 </div>

@@ -30,3 +30,36 @@
         }
     }
 }
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.message-container {
+    display: flex;
+
+    &.user {
+        justify-content: flex-end;
+    }
+
+    &:not(.user) {
+        justify-content: flex-start;
+    }
+}
+
+.message {
+    max-width: 60%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+
+    &.user {
+        background-color: var(--orange-500);
+    }
+
+    &.model {
+        background-color: var(--gray-900);
+    }
+}
