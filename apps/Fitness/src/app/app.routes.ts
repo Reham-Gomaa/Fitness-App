@@ -5,7 +5,6 @@ import {Auth} from "./features/layouts/auth/auth";
 import {translationPreloadGuard} from "./core/guards/translation-preload.guard";
 import {CLIENT_ROUTES} from "./core/constants/client-routes";
 
-// Helper function to create routes with language prefix
 export const routes: Routes = [
     {path: "", pathMatch: "full", redirectTo: DEFAULT_LANGUAGE},
     {
@@ -107,3 +106,6 @@ export const routes: Routes = [
         ],
     },
 ];
+
+
+

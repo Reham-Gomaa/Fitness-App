@@ -26,7 +26,7 @@ import Aura from "@primeuix/themes/aura";
 import {MessageService} from "primeng/api";
 import {providePrimeNG} from "primeng/config";
 import {ToastModule} from "primeng/toast";
-import { DialogService } from 'primeng/dynamicdialog';
+import {DialogService} from "primeng/dynamicdialog";
 
 // Translation
 import {provideTranslateService, TranslateLoader} from "@ngx-translate/core";
@@ -34,7 +34,6 @@ import {DEFAULT_LANGUAGE} from "./core/constants/translation.constants";
 import {TRANSLATION_INITIALIZER} from "./core/initializers/translation.initializer";
 import {createCustomTranslateLoader} from "./core/services/translation/custom-translate-loader";
 
-import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {environment} from "@fitness-app/environment/baseUrl.dev";
 import {API_CONFIG} from "auth-api-kp";
 
@@ -45,9 +44,11 @@ import {provideStoreDevtools} from "@ngrx/store-devtools";
 import {authReducer} from "./features/layouts/auth/store/auth.reducer";
 import {AuthEffects} from "./features/layouts/auth/store/auth.effects";
 import {isDevMode} from "@angular/core";
+import {provideClientHydration, withEventReplay} from "@angular/platform-browser";
 
 export const appConfig: ApplicationConfig = {
     providers: [
+        provideClientHydration(withEventReplay()),
         // Translation
         TRANSLATION_INITIALIZER,
         // HTTP Client
@@ -96,7 +97,7 @@ export const appConfig: ApplicationConfig = {
 
         // PrimeNG
         MessageService,
-         DialogService, 
+        DialogService,
         importProvidersFrom(ToastModule),
         providePrimeNG({
             theme: {
@@ -109,7 +110,7 @@ export const appConfig: ApplicationConfig = {
             },
         }),
 
-        // Router with hash location (Angular 20 best practice)
+        //  Router without hash location - modern Angular uses PathLocationStrategy by default
         provideRouter(
             routes,
             withViewTransitions(),
@@ -118,9 +119,7 @@ export const appConfig: ApplicationConfig = {
             }),
             withComponentInputBinding()
         ),
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
-        provideHttpClient(withFetch()),
-
+        
         // NgRx
         provideStore({auth: authReducer}),
         provideEffects([AuthEffects]),

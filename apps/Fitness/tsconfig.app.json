@@ -1,16 +1,16 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "types": ["node"]
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": [
-    "jest.config.ts",
-    "src/test-setup.ts",
-    "src/**/*.test.ts",
-    "src/**/*.spec.ts",
-    "**/*.stories.ts",
-    "**/*.stories.js"
-  ]
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc",
+        "types": ["node"]
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": [
+        "jest.config.ts",
+        "src/test-setup.ts",
+        "src/**/*.test.ts",
+        "src/**/*.spec.ts",
+        "**/*.stories.ts",
+        "**/*.stories.js"
+    ]
 }
