@@ -12,6 +12,7 @@ import {AboutUs} from "../about-us/about-us";
 import {Workouts} from "../workouts/workouts";
 import {WhyUs} from "./components/why-us/why-us";
 import {Meals} from "../meals/meals";
+import { Bot } from "../../../shared/components/business/bot/bot";
 @Component({
     selector: "app-home",
     imports: [
@@ -24,6 +25,7 @@ import {Meals} from "../meals/meals";
     HeroSection,
     WhyUs,
     Meals,
+    Bot
 ],
     templateUrl: "./home.html",
     styleUrl: "./home.scss",
