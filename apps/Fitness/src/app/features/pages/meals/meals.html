@@ -3,18 +3,16 @@
     [class]="{
   'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
-}"
-    class="app-section pb-6"
->
-    <app-title
-        [titleImg]="'/images/meals/Healthy.png'"
-        [titleTxt]="'Healthy Nutritions'"
-        [imgW]="'258'"
-        [imgH]="'43'"
-    />
-    <div
-        class="sec-gradient overflow-hidden"
-        [class]="{
+  'navOffset':renderLocation()!=='home' && renderLocation()!=='recommend',
+}" class="app-section pb-5" >
+  <app-title
+   [titleImg]="'/images/meals/Healthy.png'"
+   [titleTxt]="'Healthy Nutritions'"
+   [imgW]="'258'"
+   [imgH]="'43'"
+
+   />
+  <div class="sec-gradient overflow-hidden" [class]="{
     'at-home':renderLocation()==='home',
   'main':renderLocation()!=='home',
   }"

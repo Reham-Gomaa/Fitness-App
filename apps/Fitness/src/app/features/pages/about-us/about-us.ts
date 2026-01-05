@@ -1,5 +1,7 @@
 import {NgOptimizedImage} from "@angular/common";
+
 import {Component, inject, OnInit, signal, WritableSignal} from "@angular/core";
+
 import {TranslatePipe} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 // Reusable_Components
