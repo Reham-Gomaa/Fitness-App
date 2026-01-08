@@ -12,19 +12,21 @@ import {AboutUs} from "../about-us/about-us";
 import {Workouts} from "../workouts/workouts";
 import {WhyUs} from "./components/why-us/why-us";
 import {Meals} from "../meals/meals";
+import {ChatBot} from "../chat-bot/chat-bot";
 @Component({
     selector: "app-home",
     imports: [
-    ButtonModule,
-    TranslateModule,
-    AboutUs,
-    Workouts,
-    Meals,
-    HorizontalCarousel,
-    HeroSection,
-    WhyUs,
-    Meals,
-],
+        ButtonModule,
+        TranslateModule,
+        AboutUs,
+        Workouts,
+        Meals,
+        HorizontalCarousel,
+        HeroSection,
+        WhyUs,
+        Meals,
+        ChatBot,
+    ],
     templateUrl: "./home.html",
     styleUrl: "./home.scss",
 })

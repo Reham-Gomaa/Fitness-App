@@ -27,30 +27,35 @@
         }
     }
     .nav-tabs {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 32px 0px;
-      li span {
-        font-family: var(--font-1);
-        text-decoration: none;
-        color: var(--text-color);
-        font-size: 18px;
-        text-transform: capitalize;
-        font-weight: 700;
-        padding: 5px 10px;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s;
-        &.active {
-          background-color: var(--main-color);
-          color: white !important;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: max-content; // Important for horizontal scroll
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 32px 0px;
+        li {
+            flex-shrink: 0;
+        }
+        li span {
+            font-family: var(--font-1);
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 18px;
+            text-transform: capitalize;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            &.active {
+                background-color: var(--main-color);
+                color: white !important;
+            }
         }
     }
-
-    }
 }
-
