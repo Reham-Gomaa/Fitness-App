@@ -1,6 +1,6 @@
 import {isPlatformBrowser} from "@angular/common";
 import {inject, Injectable, PLATFORM_ID, signal} from "@angular/core";
-import {GoogleGenerativeAI} from "@google/generative-ai";
+import {StorageKeys} from "../../constants/storage.config";
 
 export type ChatRole = "user" | "model";
 
@@ -17,13 +17,13 @@ export interface ChatSession {
     updatedAt: number;
 }
 
-const STORAGE_KEY = "gemini_chat_history";
-
 @Injectable({
     providedIn: "root",
 })
 export class GeminiIntegration {
     private readonly _PLATFORM_ID = inject(PLATFORM_ID);
+    private activeSessionId = signal<number | null>(null);
+    readonly currentSessionId = this.activeSessionId.asReadonly();
 
     // Current conversation history
     private history = signal<ChatMessage[]>([]);
@@ -43,17 +43,16 @@ export class GeminiIntegration {
         if (!isPlatformBrowser(this._PLATFORM_ID)) return;
 
         try {
-            const stored = localStorage.getItem(STORAGE_KEY);
+            const stored = localStorage.getItem(StorageKeys.STORAGE_KEY);
             if (stored) {
                 const sessions = JSON.parse(stored) as ChatSession[];
                 this.chatHistory.set(sessions);
-                console.log("old history from storage", this.chatHistory());
             }
         } catch (error) {
             console.error("Failed to load chat history from localStorage:", error);
             // Clear corrupted data
             if (isPlatformBrowser(this._PLATFORM_ID)) {
-                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(StorageKeys.STORAGE_KEY);
             }
         }
     }
@@ -62,7 +61,7 @@ export class GeminiIntegration {
         if (!isPlatformBrowser(this._PLATFORM_ID)) return;
 
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(this.chatHistory()));
+            localStorage.setItem(StorageKeys.STORAGE_KEY, JSON.stringify(this.chatHistory()));
         } catch (error) {
             console.error("Failed to save chat history to localStorage:", error);
         }
@@ -100,30 +99,44 @@ export class GeminiIntegration {
     }
 
     resetConversation(): number {
-        console.log("chat history", this.chatHistory());
-        console.log("history", this.history());
-
         const currentMessages = this.history();
+        if (currentMessages.length === 0) return this.chatHistory().length;
 
-        // Only save if there are messages
-        if (currentMessages.length > 0) {
+        const now = Date.now();
+        const activeId = this.activeSessionId();
+
+        if (activeId) {
+            // 🔁 Update existing session
+            this.chatHistory.update((sessions) =>
+                sessions.map((session) =>
+                    session.id === activeId
+                        ? {
+                              ...session,
+                              messages: [...currentMessages],
+                              updatedAt: now,
+                          }
+                        : session
+                )
+            );
+        } else {
+            // 🆕 Create new session
             const newSession: ChatSession = {
-                id: Date.now(), // Use timestamp for unique ID
+                id: now,
                 messages: [...currentMessages],
-                createdAt: Date.now(),
-                updatedAt: Date.now(),
+                createdAt: now,
+                updatedAt: now,
                 title: this.generateSessionTitle(currentMessages),
             };
 
-            // Update chat history
             this.chatHistory.update((sessions) => [newSession, ...sessions]);
-
-            // Save to storage
-            this.saveToStorage();
+            this.activeSessionId.set(newSession.id);
         }
 
-        // Clear current history
+        this.saveToStorage();
+
+        // Reset current conversation
         this.history.set([]);
+        this.activeSessionId.set(null);
 
         return this.chatHistory().length;
     }
@@ -146,6 +159,7 @@ export class GeminiIntegration {
         const session = this.getSessionById(id);
         if (session) {
             this.history.set([...session.messages]);
+            this.activeSessionId.set(id);
             return true;
         }
         return false;
@@ -161,7 +175,7 @@ export class GeminiIntegration {
         this.history.set([]);
 
         if (isPlatformBrowser(this._PLATFORM_ID)) {
-            localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(StorageKeys.STORAGE_KEY);
         }
     }
 
@@ -174,82 +188,3 @@ export class GeminiIntegration {
         this.saveToStorage();
     }
 }
-
-// import { isPlatformBrowser } from "@angular/common";
-// import { inject, Injectable, PLATFORM_ID, signal, WritableSignal } from "@angular/core";
-// import { GoogleGenerativeAI } from "@google/generative-ai";
-// import { ApiKey } from "../../../../../api-key";
-
-// export type ChatRole = "user" | "model";
-
-// export interface ChatMessage {
-//     role: ChatRole;
-//     text: string;
-// }
-
-// export interface ChatSession {
-//     id: number;
-//     title?: string;
-//     messages: ChatMessage[];
-//     createdAt?: number;
-//     updatedAt?: number;
-// }
-
-// @Injectable({
-//     providedIn: "root",
-// })
-// export class GeminiIntegration {
-//     private _PLATFORM_ID = inject(PLATFORM_ID);
-//     private genAI = new GoogleGenerativeAI(ApiKey.googleApiKey);
-//     private model = this.genAI.getGenerativeModel({
-//         model: "gemini-2.5-flash",
-//     });
-
-//     private history: WritableSignal<ChatMessage[]> = signal([]);
-//     private chatHistory: WritableSignal<ChatSession[]> = signal([]);
-
-//     constructor() {
-//         if (!isPlatformBrowser(this._PLATFORM_ID)) return;
-//         if (localStorage.getItem("History")) {
-//             this.chatHistory().push(JSON.parse(localStorage.getItem("History")!));
-//         }
-//         console.log(this.chatHistory());
-//     }
-
-//     async *sendMessage(prompt: string): AsyncGenerator<string> {
-//         // Add user message to history
-//         this.history().push({role: "user", text: prompt});
-
-//         const result = await this.model.generateContentStream({
-//             contents: this.history().map((msg) => ({
-//                 role: msg.role,
-//                 parts: [{text: msg.text}],
-//             })),
-//         });
-
-//         let fullResponse = "";
-
-//         for await (const chunk of result.stream) {
-//             const text = chunk.text();
-//             if (text) {
-//                 fullResponse += text;
-//                 yield text;
-//             }
-//         }
-
-//         // Save model response into history
-//         this.history().push({role: "model", text: fullResponse});
-//     }
-
-//     resetConversation() {
-//         console.log(this.chatHistory());
-//         console.log(this.history());
-
-//         this.chatHistory().push({
-//             id: this.chatHistory.length + 1,
-//             messages: this.history(),
-//         });
-//         localStorage.setItem("History", JSON.stringify(this.chatHistory));
-//         this.history.set([]);
-//     }
-// }

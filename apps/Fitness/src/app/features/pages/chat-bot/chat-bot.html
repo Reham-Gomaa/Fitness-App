@@ -6,21 +6,6 @@
     />
     <button class="chat-btn">Hey Ask Me</button>
 </div>
-<!-- <div>
-    <input
-        #myInput
-        type="text"
-        placeholder="type here"
-    />
-    <button
-        (click)="submit(myInput.value)"
-        (keydown)="submit(myInput.value)"
-        tabindex="0"
-    >
-        submit
-    </button>
-    <p>{{ response() }}</p>
-</div> -->
 
 <div class="chat">
     @for (msg of messages(); track $index) {
@@ -43,11 +28,10 @@
 <input #input />
 <button (click)="send(input.value); input.value = ''">Send</button>
 
-<button (click)="reset()">Reset</button>
+<button (click)="reset()">New Chat</button>
 
 <button (click)="getHistory()">history</button>
 
-<!-- Add this to your template -->
 <div class="chat-history">
     <h3>Chat History</h3>
     @for (session of chatHistory(); track session.id) {

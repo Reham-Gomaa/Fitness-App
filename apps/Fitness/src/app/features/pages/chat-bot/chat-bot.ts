@@ -1,33 +1,12 @@
-// // import {Component, inject, signal} from "@angular/core";
-// // import {GeminiIntegration} from "../../../core/services/gemini-int/gemini-integration";
-
-// // @Component({
-// //     selector: "app-chat-bot",
-// //     imports: [],
-// //     templateUrl: "./chat-bot.html",
-// //     styleUrl: "./chat-bot.scss",
-// // })
-// // export class ChatBot {
-// //     private _geminiIntegration = inject(GeminiIntegration);
-// //     response = signal<string>("");
-
-// //     submit(text: string) {
-// //         const response = this._geminiIntegration.generateText(text);
-// //         response.then((result) => {
-// //             this.response.set(result);
-// //         });
-// //     }
-// // }
-
 import {Component, computed, inject, signal} from "@angular/core";
+import {DatePipe, SlicePipe} from "@angular/common";
+// Shared_Services
 import {
     ChatMessage,
     ChatSession,
     GeminiIntegration,
 } from "../../../core/services/gemini-int/gemini-integration";
-import {DatePipe, SlicePipe} from "@angular/common";
 
-type ViewState = "new" | "history" | "chat";
 @Component({
     selector: "app-chat-bot",
     imports: [SlicePipe, DatePipe],
@@ -39,7 +18,7 @@ export class ChatBot {
 
     messages = signal<ChatMessage[]>([]);
     chatHistory = signal<ChatSession[]>([]);
-    isStreaming = signal(false);
+    isStreaming = signal<boolean>(false);
 
     async send(prompt: string) {
         if (!prompt.trim()) return;
