@@ -9,7 +9,7 @@
     <div class="conversations-sidebar">
       <h4>Previous Conversations</h4>
       <div class="conversations-list">
-        @for (conv of conversations; track conv.id) {
+        @for (conv of conversations(); track conv.id) {
           <div class="conversation-item" (click)="loadConversation(conv.id)">
             <div class="conversation-content">
               <span class="conversation-title">{{ conv.title }}</span>
@@ -19,7 +19,7 @@
           </div>
         }
         
-        @if (conversations.length === 0) {
+        @if (conversations().length === 0) {
           <p class="no-conversations">No previous conversations</p>
         }
       </div>
@@ -27,7 +27,7 @@
   }
 
   <div class="chat-messages">
-    @for (message of messages; track message.timestamp) {
+    @for (message of messages(); track message.timestamp) {
       <div class="message" [class.user-message]="message.role === 'user'" [class.assistant-message]="message.role === 'assistant'">
         <div class="message-content">
           <p>{{ message.content }}</p>

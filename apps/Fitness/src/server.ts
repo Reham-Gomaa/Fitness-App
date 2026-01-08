@@ -8,7 +8,7 @@ import express from "express";
 import {dirname, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import 'dotenv/config';
-import { chatWithGemini, simulateStreamChatWithGemini } from './genkit/menuSuggestionFlow';
+import { chatWithGemini, streamChatWithGemini } from './genkit/menuSuggestionFlow';
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, "../browser");
@@ -50,7 +50,7 @@ app.post('/api/chat/stream', async (req, res) => {
   res.setHeader('Connection', 'keep-alive');
   
   try {
-    await simulateStreamChatWithGemini(message, history, (chunk) => {
+    await streamChatWithGemini(message, history, (chunk) => {
       res.write(`data: ${JSON.stringify({ content: chunk })}\n\n`);
     });
     

@@ -14,7 +14,6 @@ export interface ChatResponse {
   providedIn: 'root'
 })
 export class GeminiService {
-
   async sendChatMessage(request: ChatRequest): Promise<ChatResponse> {
     try {
       const response = await fetch(API_ENDPOINTS.chat, {
@@ -83,9 +82,7 @@ export class GeminiService {
                 onError(parsed.error);
                 return;
               }
-            } catch (e) {
-              // Skip invalid JSON
-            }
+            } catch (e) {}
           }
         }
       }
