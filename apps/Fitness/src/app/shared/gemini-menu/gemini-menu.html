@@ -1,0 +1,70 @@
+<div class="chatbot-container">
+  <div class="chat-header">
+    <button class="menu-btn" (click)="toggleConversationList()">☰</button>
+    <h3>Smart Coach</h3>
+    <button class="new-chat-btn" (click)="startNewConversation()">+</button>
+  </div>
+
+  @if (showConversationList) {
+    <div class="conversations-sidebar">
+      <h4>Previous Conversations</h4>
+      <div class="conversations-list">
+        @for (conv of conversations(); track conv.id) {
+          <div class="conversation-item" (click)="loadConversation(conv.id)">
+            <div class="conversation-content">
+              <span class="conversation-title">{{ conv.title }}</span>
+              <span class="conversation-date">{{ conv.updatedAt | date:'short' }}</span>
+            </div>
+            <button class="delete-btn" (click)="deleteConversation(conv.id, $event)">×</button>
+          </div>
+        }
+        
+        @if (conversations().length === 0) {
+          <p class="no-conversations">No previous conversations</p>
+        }
+      </div>
+    </div>
+  }
+
+  <div class="chat-messages">
+    @for (message of messages(); track message.timestamp) {
+      <div class="message" [class.user-message]="message.role === 'user'" [class.assistant-message]="message.role === 'assistant'">
+        <div class="message-content">
+          <p>{{ message.content }}</p>
+        </div>
+      </div>
+    }
+    
+    @if (loading) {
+      <div class="message assistant-message">
+        <div class="message-content">
+          <p class="typing">Thinking...</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (error) {
+    <div class="error-message">{{ error }}</div>
+  }
+
+  <div class="chat-input">
+    <input
+      [(ngModel)]="userInput"
+      (keypress)="handleKeyPress($event)"
+      placeholder="Ask Me Any Things"
+      [disabled]="loading || cooldownRemaining > 0"
+    />
+    <button 
+      (click)="sendMessage()" 
+      [disabled]="loading || !userInput.trim() || cooldownRemaining > 0"
+      [class.cooldown]="cooldownRemaining > 0"
+    >
+      @if (cooldownRemaining > 0) {
+        <span>{{ cooldownRemaining }}s</span>
+      } @else {
+        <span>➤</span>
+      }
+    </button>
+  </div>
+</div>
