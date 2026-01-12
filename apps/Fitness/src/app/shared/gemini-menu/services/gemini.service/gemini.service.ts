@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';  
 import { API_ENDPOINTS } from '../../../../core/constants/api-constants';
 
 export interface ChatRequest {
@@ -14,19 +15,15 @@ export interface ChatResponse {
   providedIn: 'root'
 })
 export class GeminiService {
+  constructor(private http: HttpClient) {} 
+
   async sendChatMessage(request: ChatRequest): Promise<ChatResponse> {
     try {
-      const response = await fetch(API_ENDPOINTS.chat, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(request),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return await response.json();
+      
+      return await this.http.post<ChatResponse>(
+        API_ENDPOINTS.chat, 
+        request
+      ).toPromise() as ChatResponse;
     } catch (error) {
       console.error('Error sending chat message:', error);
       throw new Error('Failed to send message. Please try again.');
@@ -40,6 +37,7 @@ export class GeminiService {
     onError: (error: string) => void
   ): Promise<void> {
     try {
+      
       const response = await fetch(API_ENDPOINTS.chatStream, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -8,8 +8,10 @@ if (!apiKey) {
 
 const ai = new GoogleGenAI({apiKey});
 
+type ChatRole = "user" | "model";
+
 interface ChatHistory {
-    role: string;
+    role: ChatRole;
     content: string;
 }
 
@@ -37,7 +39,7 @@ export async function chatWithGemini(
             }
         }
 
-        const response = await chat.sendMessage({message: userMessage});
+        const response = await chat.sendMessage({message: userMessage}); 
         const text = response.text || "No response generated";
 
         return {response: text};
@@ -79,12 +81,12 @@ export async function streamChatWithGemini(
         if (conversationHistory && conversationHistory.length > 0) {
             for (const msg of conversationHistory) {
                 if (msg.role === "user") {
-                    await chat.sendMessage({message: msg.content});
+                    await chat.sendMessage({message: msg.content}); 
                 }
             }
         }
 
-        const stream = await chat.sendMessageStream({message: userMessage});
+        const stream = await chat.sendMessageStream({message: userMessage}); 
 
         for await (const chunk of stream) {
             const chunkText = chunk.text || "";

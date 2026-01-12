@@ -12,7 +12,8 @@ import { ConversationStorageService } from '../../shared/gemini-menu/services/co
   styleUrl: "./gemini-menu.scss",
 })
 export class GeminiMenuComponent implements OnInit, OnDestroy {
-  private isBrowser: boolean;
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
   
   userInput = '';
   loading = false;
@@ -32,11 +33,7 @@ export class GeminiMenuComponent implements OnInit, OnDestroy {
   cooldownRemaining = 0;
   private cooldownInterval: any;
 
-  constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
+  constructor() {}  
 
   ngOnInit(): void {
     if (this.isBrowser) {
