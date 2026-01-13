@@ -1,7 +1,7 @@
-import { Component, computed, DestroyRef, inject, signal } from "@angular/core";
-import { DatePipe, SlicePipe } from "@angular/common";
+import {Component, computed, DestroyRef, inject, signal} from "@angular/core";
+import {DatePipe, SlicePipe} from "@angular/common";
 // rxjs
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 // Shared_Services
 import {
     ChatMessage,
@@ -23,16 +23,15 @@ export class ChatBot {
     chatHistory = signal<ChatSession[]>([]);
     isStreaming = signal<boolean>(false);
 
-
     send(prompt: string) {
         if (!prompt.trim()) return;
 
-        this.messages.update((m) => [...m, { role: "user", text: prompt }]);
+        this.messages.update((m) => [...m, {role: "user", text: prompt}]);
 
         let modelIndex = -1;
         this.messages.update((m) => {
             modelIndex = m.length;
-            return [...m, { role: "model", text: "" }];
+            return [...m, {role: "model", text: ""}];
         });
 
         this.isStreaming.set(true);
