@@ -8,10 +8,11 @@ import {
     ChatSession,
     GeminiIntegration,
 } from "../../../core/services/gemini-int/gemini-integration";
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
     selector: "app-chat-bot",
-    imports: [SlicePipe, DatePipe],
+    imports: [SlicePipe, DatePipe, MarkdownModule],
     templateUrl: "./chat-bot.html",
     styleUrl: "./chat-bot.scss",
 })

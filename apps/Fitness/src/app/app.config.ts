@@ -4,14 +4,14 @@ import {
     withInterceptors,
     withInterceptorsFromDi,
 } from "@angular/common/http";
-import {authInterceptor} from "./core/interceptors/auth.interceptor";
+import { authInterceptor } from "./core/interceptors/auth.interceptor";
 import {
     ApplicationConfig,
     importProvidersFrom,
     provideBrowserGlobalErrorListeners,
     provideZonelessChangeDetection,
 } from "@angular/core";
-import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import {
     provideRouter,
     withComponentInputBinding,
@@ -19,32 +19,33 @@ import {
     withViewTransitions,
 } from "@angular/router";
 
-import {routes} from "./app.routes";
+import { routes } from "./app.routes";
 
 // Primeng
 import Aura from "@primeuix/themes/aura";
-import {MessageService} from "primeng/api";
-import {providePrimeNG} from "primeng/config";
-import {ToastModule} from "primeng/toast";
-import {DialogService} from "primeng/dynamicdialog";
+import { MessageService } from "primeng/api";
+import { providePrimeNG } from "primeng/config";
+import { ToastModule } from "primeng/toast";
+import { DialogService } from "primeng/dynamicdialog";
 
 // Translation
-import {provideTranslateService, TranslateLoader} from "@ngx-translate/core";
-import {DEFAULT_LANGUAGE} from "./core/constants/translation.constants";
-import {TRANSLATION_INITIALIZER} from "./core/initializers/translation.initializer";
-import {createCustomTranslateLoader} from "./core/services/translation/custom-translate-loader";
+import { provideTranslateService, TranslateLoader } from "@ngx-translate/core";
+import { DEFAULT_LANGUAGE } from "./core/constants/translation.constants";
+import { TRANSLATION_INITIALIZER } from "./core/initializers/translation.initializer";
+import { createCustomTranslateLoader } from "./core/services/translation/custom-translate-loader";
 
-import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-import {environment} from "@fitness-app/environment/baseUrl.dev";
-import {API_CONFIG} from "auth-api-kp";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
+import { environment } from "@fitness-app/environment/baseUrl.dev";
+import { API_CONFIG } from "auth-api-kp";
 
 // NgRx
-import {provideStore} from "@ngrx/store";
-import {provideEffects} from "@ngrx/effects";
-import {provideStoreDevtools} from "@ngrx/store-devtools";
-import {authReducer} from "./features/layouts/auth/store/auth.reducer";
-import {AuthEffects} from "./features/layouts/auth/store/auth.effects";
-import {isDevMode} from "@angular/core";
+import { provideStore } from "@ngrx/store";
+import { provideEffects } from "@ngrx/effects";
+import { provideStoreDevtools } from "@ngrx/store-devtools";
+import { authReducer } from "./features/layouts/auth/store/auth.reducer";
+import { AuthEffects } from "./features/layouts/auth/store/auth.effects";
+import { isDevMode } from "@angular/core";
+import { provideMarkdown } from 'ngx-markdown';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -121,8 +122,9 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(withFetch()),
 
         // NgRx
-        provideStore({auth: authReducer}),
+        provideStore({ auth: authReducer }),
         provideEffects([AuthEffects]),
-        provideStoreDevtools({maxAge: 25, logOnly: !isDevMode()}),
+        provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+        provideMarkdown(),
     ],
 };

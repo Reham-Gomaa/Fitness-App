@@ -12,7 +12,11 @@
     <div class="message-container" [class.user]="msg.role === 'user'">
         <div class="message border-round-lg text-white py-2 px-3" [class.user]="msg.role === 'user'"
             [class.model]="msg.role === 'model'">
+            @if (msg.role === 'model') {
+            <markdown [data]="msg.text"></markdown>
+            } @else {
             {{ msg.text }}
+            }
         </div>
     </div>
     }
