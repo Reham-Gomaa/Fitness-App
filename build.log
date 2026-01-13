@@ -1,0 +1,95 @@
+
+> nx run Fitness:build:production
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[33mΓ¥»[39m Building...
+[32mΓ£ö[39m Building...
+[37m[35mPrerendered 0 static routes.[39m[37m[39m
+[37mApplication bundle generation failed. [10.622 seconds] - 2026-01-13T10:49:28.373Z[39m
+[37m[39m
+X [ERROR] Could not resolve "@angular/animations/browser"
+
+    node_modules/@angular/platform-browser/fesm2022/animations/async.mjs:54:53:
+      54 Γöé ....moduleImpl ?? import('@angular/animations/browser').then(m => m);
+         Γò╡                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations/browser" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle. You can also add ".catch()" here to handle this failure at run-time instead of bundle-time.
+
+
+X [ERROR] Could not resolve "@angular/animations"
+
+    node_modules/primeng/fesm2022/primeng-dialog.mjs:381:88:
+      381 Γöé ..., trigger, transition, useAnimation } from '@angular/animations';
+          Γò╡                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+
+X [ERROR] Could not resolve "@angular/animations"
+
+    node_modules/primeng/fesm2022/primeng-menu.mjs:461:63:
+      461 Γöé ...ansition, style as style$1, animate } from '@angular/animations';
+          Γò╡                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+
+X [ERROR] Could not resolve "@angular/animations"
+
+    node_modules/primeng/fesm2022/primeng-toast.mjs:249:91:
+      249 Γöé ...yle$1, animate, query, animateChild } from '@angular/animations';
+          Γò╡                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/anima
+tions" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+
+X [ERROR] Could not resolve "@angular/animations/browser"
+
+    node_modules/@angular/platform-browser/fesm2022/animations/async.mjs:54:53:
+      54 Γöé ....moduleImpl ?? import('@angular/animations/browser').then(m => m);
+         Γò╡                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations/browser" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle. You can also add ".catch()" here to handle this failure at run-time instead of bundle-time.
+
+
+X [ERROR] Could not resolve "@angular/animations"
+
+    node_modules/primeng/fesm2022/primeng-dialog.mjs:381:88:
+      381 Γöé ..., trigger, transition, useAnimation } from '@angular/animations';
+          Γò╡                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+
+X [ERROR] Could not resolve "@angular/animations"
+
+    node_modules/primeng/fesm2022/primeng-menu.mjs:461:63:
+      461 Γöé ...ansition, style as style$1, animate } from '@angular/animations';
+          Γò╡                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+
+X [ERROR] Could not resolve "@angular/animations"
+
+    node_modules/primeng/fesm2022/primeng-toast.mjs:249:91:
+      249 Γöé ...yle$1, animate, query, animateChild } from '@angular/animations';
+          Γò╡                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "@angular/animations" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+
+
+
+
+ NX   Running target build for project Fitness failed
+
+Failed tasks:
+
+- Fitness:build:production
+
+Hint: run the command with --verbose for more details.
+
+View structured, searchable error logs at https://nx.app/runs/Kzem1QJNDb
+

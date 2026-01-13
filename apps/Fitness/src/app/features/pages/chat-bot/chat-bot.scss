@@ -63,3 +63,31 @@
         background-color: var(--gray-900);
     }
 }
+
+.loading-dots {
+    &::after {
+        content: ' .';
+        animation: dots 1s steps(5, end) infinite;
+    }
+}
+
+@keyframes dots {
+
+    0%,
+    20% {
+        content: ' .';
+    }
+
+    40% {
+        content: ' ..';
+    }
+
+    60% {
+        content: ' ...';
+    }
+
+    80%,
+    100% {
+        content: '';
+    }
+}
