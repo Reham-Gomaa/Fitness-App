@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "rewrites": [
     { "source": "/api/gemini/(.*)", "destination": "/api/gemini/$1" },
-    {"source": "/(.*)", "destination": "/"}
+    { "source": "/(.*)", "destination": "/" }
   ],
   "functions": {
     "api/gemini/*.js": { "runtime": "nodejs18.x" }
