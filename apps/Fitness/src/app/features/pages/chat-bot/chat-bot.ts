@@ -1,4 +1,4 @@
-import {Component, computed, DestroyRef, inject, signal} from "@angular/core";
+import {Component, computed, DestroyRef, inject, signal, ViewChild, ElementRef, AfterViewChecked} from "@angular/core";
 import {DatePipe, SlicePipe} from "@angular/common";
 // rxjs
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -15,13 +15,28 @@ import {
     templateUrl: "./chat-bot.html",
     styleUrl: "./chat-bot.scss",
 })
-export class ChatBot {
+export class ChatBot implements AfterViewChecked {
     private gemini = inject(GeminiIntegration);
     private destroyRef = inject(DestroyRef);
+
+    @ViewChild('chatContainer') private chatContainer?: ElementRef;
 
     messages = signal<ChatMessage[]>([]);
     chatHistory = signal<ChatSession[]>([]);
     isStreaming = signal<boolean>(false);
+
+    ngAfterViewChecked() {
+        this.scrollToBottom();
+    }
+
+    private scrollToBottom(): void {
+        try {
+            if (this.chatContainer) {
+                this.chatContainer.nativeElement.scrollTop = 
+                    this.chatContainer.nativeElement.scrollHeight;
+            }
+        } catch (err) {}
+    }
 
     send(prompt: string) {
         if (!prompt.trim()) return;
@@ -49,6 +64,8 @@ export class ChatBot {
                         };
                         return updated;
                     });
+                    // Scroll immediately after each chunk
+                    setTimeout(() => this.scrollToBottom(), 0);
                 },
                 complete: () => {
                     this.isStreaming.set(false);

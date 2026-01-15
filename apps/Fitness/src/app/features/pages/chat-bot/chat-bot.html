@@ -7,7 +7,7 @@
     <button class="chat-btn">Hey Ask Me</button>
 </div> -->
 
-<div class="chat">
+<div class="chat" #chatContainer>
     @for (msg of messages(); track $index) {
     <div
         class="message-container"
