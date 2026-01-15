@@ -1,6 +1,19 @@
 {
+    "version": 2,
+    "public": true,
     "rewrites": [
-        {"source": "/api/(.*)", "destination": "/api/$1"},
-        {"source": "/(.*)", "destination": "/"}
-    ]
+        {
+            "source": "/api/:path*",
+            "destination": "/api/index.js"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/api/index.js"
+        }
+    ],
+    "functions": {
+        "api/index.js": {
+            "includeFiles": "dist/**"
+        }
+    }
 }

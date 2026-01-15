@@ -5,10 +5,10 @@ import {
     isMainModule,
     writeResponseToNodeResponse,
 } from "@angular/ssr/node";
-import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from "@google/genai";
+import {GoogleGenAI, HarmCategory, HarmBlockThreshold} from "@google/genai";
 import express from "express";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import {dirname, resolve} from "node:path";
+import {fileURLToPath} from "node:url";
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, "../browser");
@@ -24,11 +24,11 @@ app.post("/api/gemini/chat", express.json(), async (req, res) => {
             return;
         }
 
-        const { messages } = req.body as {
-            messages: { role: "user" | "model"; text: string }[];
+        const {messages} = req.body as {
+            messages: {role: "user" | "model"; text: string}[];
         };
 
-        const ai = new GoogleGenAI({ apiKey });
+        const ai = new GoogleGenAI({apiKey});
 
         res.setHeader("Content-Type", "text/plain; charset=utf-8");
         res.setHeader("Transfer-Encoding", "chunked");
@@ -39,8 +39,6 @@ Your name is "Elevate Coach".
 Your goal is to help users achieve their fitness goals through scientific, practical, and motivating advice.
 Your tone is encouraging, strict when necessary, and always focused on safety and form.
 If a user asks about non-fitness topics, politely steer them back to health and wellness.`;
-
-
 
         // Safety Settings
         const safetySettings = [
@@ -73,7 +71,7 @@ If a user asks about non-fitness topics, politely steer them back to health and 
             },
             contents: recentMessages.map((m) => ({
                 role: m.role,
-                parts: [{ text: m.text }],
+                parts: [{text: m.text}],
             })),
         });
 
