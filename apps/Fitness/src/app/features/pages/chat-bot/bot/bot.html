@@ -1,5 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
-<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <section id="bot">
     <div
         (click)="openChat()"
@@ -20,22 +18,124 @@
         class="chat-box"
         [class.active]="isActiveChat()"
     >
+        <!-- Sidebar -->
+        <div
+            class="chat-sidebar"
+            [class.hidden]="!isSidebarOpen()"
+        >
+            <div class="sidebar-header">
+                <i
+                    class="pi pi-plus new-chat-btn cursor-pointer"
+                    (click)="resetChat(); toggleSidebar()"
+                    title="New Chat"
+                ></i>
+                <h4>{{ 'bot.previousConversations' | translate }}</h4>
+            </div>
+
+            <div class="conversations-list">
+                @for (session of chatHistory(); track session.id) {
+                <div
+                    class="conversation-item"
+                    [class.editing]="editingSessionId() === session.id"
+                    (click)="onSessionClick(session)"
+                >
+                    @if (editingSessionId() === session.id) {
+                    <div class="edit-mode flex align-items-center w-full">
+                        <input
+                            type="text"
+                            [(ngModel)]="editingTitle"
+                            (click)="$event.stopPropagation()"
+                            (keydown.enter)="saveTitle($event)"
+                            (keydown.escape)="cancelEditing($event)"
+                            class="edit-input"
+                            autofocus
+                        />
+                        <div class="edit-actions flex ml-2">
+                            <i
+                                class="pi pi-check text-green-500 mr-2 cursor-pointer"
+                                (click)="saveTitle($event)"
+                            ></i>
+                            <i
+                                class="pi pi-times text-red-500 cursor-pointer"
+                                (click)="cancelEditing($event)"
+                            ></i>
+                        </div>
+                    </div>
+                    } @else {
+                    <span class="conversation-text">
+                        {{ session.title || ('bot.untitledChat' | translate) }}
+                    </span>
+                    <div class="actions flex">
+                        <i
+                            class="pi pi-pencil edit-btn mr-2"
+                            (click)="startEditingTitle($event, session)"
+                        ></i>
+                        <i
+                            class="pi pi-trash delete-btn"
+                            (click)="deleteSession(session.id); $event.stopPropagation()"
+                        ></i>
+                    </div>
+                    }
+                </div>
+                } @empty {
+                <p class="no-conversations">{{ 'bot.noPreviousConversations' | translate }}</p>
+                }
+            </div>
+        </div>
         <div class="chat-nav flex justify-content-between align-items-center">
-            <h3 class="my-0">Smart coach</h3>
-            <i class="pi pi-align-right text-lg cursor-pointer"></i>
+            <h3 class="my-0">{{ 'bot.smartCoach' | translate }}</h3>
+            <i
+                class="pi pi-align-right text-lg cursor-pointer"
+                (click)="toggleSidebar()"
+            ></i>
+        </div>
+
+        <!-- Overlay -->
+        @if (isSidebarOpen()) {
+        <div
+            class="sidebar-overlay"
+            (click)="toggleSidebar()"
+        ></div>
+        }
+
+        <!-- Chat Messages Container -->
+        <div
+            class="chat-messages"
+            #chatContainer
+        >
+            @for (msg of messages(); track $index) { @if (msg.text) {
+            <div
+                class="message-bubble"
+                [class.user]="msg.role === 'user'"
+                [class.model]="msg.role === 'model'"
+            >
+                {{ msg.text }}
+            </div>
+            } } @if (isStreaming() && (!messages().length || !messages()[messages().length -
+            1].text)) {
+            <div class="message-bubble model">
+                <span class="loading-dots">●●●</span>
+            </div>
+            }@else { }
         </div>
 
         <div class="chat-input flex justify-content-between align-items-center">
-            <div class="card relative flex justify-content-center">
+            <div class="card relative flex justify-content-center w-full mr-2">
                 <input
+                    #chatInput
                     type="text"
-                    placeholder="ask me any things"
+                    [placeholder]="'bot.placeholder' | translate"
                     [(ngModel)]="chatMessage"
+                    (keydown.enter)="sendMessage()"
+                    (focus)="onInputFocus()"
                 />
                 <i class="pi edit pi-pencil absolute"></i>
             </div>
-            <div class="send-icon flex align-items-center">
-                <i class="pi pi-send text-lg"></i>
+            <div
+                class="send-icon flex align-items-center"
+                (click)="sendMessage()"
+            >
+                <i class="pi pi-send text-lg cursor-pointer"></i>
             </div>
         </div>
     </div>

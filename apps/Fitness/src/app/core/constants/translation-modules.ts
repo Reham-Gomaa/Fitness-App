@@ -1,4 +1,4 @@
-export const CORE_TRANSLATION_MODULES = ["shared", "layouts"] as const;
+export const CORE_TRANSLATION_MODULES = ["shared", "layouts", "bot"] as const;
 
 export const FEATURE_TRANSLATION_MODULES = [
     "auth",
@@ -7,6 +7,7 @@ export const FEATURE_TRANSLATION_MODULES = [
     "classes",
     "meals",
     "account",
+    "bot",
 ] as const;
 
 export const TRANSLATION_MODULES = [
@@ -25,4 +26,5 @@ export const ROUTE_MODULE_MAP: Record<string, TranslationModule[]> = {
     "/classes": ["classes", "layouts"],
     "/meals": ["meals", "layouts"],
     "/account": ["account", "layouts"],
+    "/bot": ["bot"],
 };

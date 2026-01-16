@@ -1,0 +1,11 @@
+{
+    "bot": {
+        "previousConversations": "PREVIOUS CONVERSATIONS",
+        "untitledChat": "Untitled Chat",
+        "noPreviousConversations": "No previous conversations",
+        "openChat": "Hey Ask Me",
+        "closeChat": "Close Chat",
+        "smartCoach": "Smart Coach",
+        "placeholder": "Ask Me Any Things"
+    }
+}

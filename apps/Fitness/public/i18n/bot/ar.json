@@ -1,0 +1,11 @@
+{
+    "bot": {
+        "previousConversations": "المحادثات السابقة",
+        "untitledChat": "محادثة بدون عنوان",
+        "noPreviousConversations": "لا توجد محادثات سابقة",
+        "openChat": "اسألني",
+        "closeChat": "إغلاق المحادثة",
+        "smartCoach": "المدرب الذكي",
+        "placeholder": "اسألني عن أي شيء"
+    }
+}
