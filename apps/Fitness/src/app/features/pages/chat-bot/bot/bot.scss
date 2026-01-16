@@ -104,6 +104,7 @@
         font-size: 14px;
         line-height: 1.4;
         word-wrap: break-word;
+        white-space: pre-wrap;
 
         &.user {
             align-self: flex-end;
@@ -252,13 +253,55 @@
                     padding-right: 12px;
                 }
 
+                .actions {
+                    opacity: 0;
+                    transition: opacity 0.2s;
+                    flex-shrink: 0;
+                }
+
+                &:hover .actions {
+                    opacity: 1;
+                }
+
+                .edit-btn,
                 .delete-btn {
                     font-size: 14px;
-                    padding: 6px;
+                    padding: 4px;
                     border-radius: 4px;
                     transition: all 0.2s;
                     color: var(--gray-300);
                     flex-shrink: 0;
+
+                    &:hover {
+                        color: var(--orange-500) !important;
+                    }
+                }
+
+                .edit-mode {
+                    .edit-input {
+                        flex: 1;
+                        background: rgba(255, 255, 255, 0.1);
+                        border: 1px solid var(--orange-500);
+                        color: white;
+                        font-size: 12px;
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                        outline: none;
+                        width: 100%;
+
+                        &:focus {
+                            background: rgba(255, 255, 255, 0.15);
+                        }
+                    }
+
+                    .edit-actions {
+                        i {
+                            transition: transform 0.2s;
+                            &:hover {
+                                transform: scale(1.2);
+                            }
+                        }
+                    }
                 }
             }
 

@@ -39,6 +39,11 @@ export class Bot implements AfterViewChecked, OnInit {
     chatHistory = signal<ChatSession[]>([]);
     isSidebarOpen = signal<boolean>(false);
     private shouldScroll = false;
+    private typingTimer: any;
+    private fullResponseText = "";
+    private displayedResponseText = "";
+    editingSessionId = signal<number | null>(null);
+    editingTitle = signal<string>("");
 
     ngOnInit() {
         this.chatHistory.set(this.gemini.allChatSessions());
@@ -71,30 +76,69 @@ export class Bot implements AfterViewChecked, OnInit {
             return [...m, {role: "model", text: ""}];
         });
 
+        this.fullResponseText = "";
+        this.displayedResponseText = "";
+
         this.isStreaming.set(true);
 
         this.gemini
             .sendMessage$(message)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
-                next: (chunk) => {
-                    this.messages.update((m) => {
-                        const updated = [...m];
-                        updated[modelIndex] = {
-                            ...updated[modelIndex],
-                            text: chunk,
-                        };
-                        return updated;
-                    });
-                    this.shouldScroll = true;
+                next: (fullBuffer) => {
+                    this.fullResponseText = fullBuffer;
+                    if (!this.typingTimer) {
+                        this.startTypewriter(modelIndex);
+                    }
                 },
                 complete: () => {
                     this.isStreaming.set(false);
                 },
                 error: () => {
                     this.isStreaming.set(false);
+                    if (this.typingTimer) {
+                        clearInterval(this.typingTimer);
+                        this.typingTimer = null;
+                    }
                 },
             });
+    }
+
+    private startTypewriter(modelIndex: number) {
+        this.displayedResponseText = "";
+        this.typingTimer = setInterval(() => {
+            if (this.displayedResponseText.length < this.fullResponseText.length) {
+                // Word-by-word: find next space
+                const remaining = this.fullResponseText.substring(
+                    this.displayedResponseText.length
+                );
+                const nextSpaceIndex = remaining.indexOf(" ", 1);
+
+                let textToAdd = "";
+                if (nextSpaceIndex > -1) {
+                    textToAdd = remaining.substring(0, nextSpaceIndex + 1);
+                } else {
+                    textToAdd = remaining;
+                }
+
+                this.displayedResponseText += textToAdd;
+                this.messages.update((m) => {
+                    const updated = [...m];
+                    if (updated[modelIndex]) {
+                        updated[modelIndex] = {
+                            ...updated[modelIndex],
+                            text: this.displayedResponseText,
+                        };
+                    }
+                    return updated;
+                });
+                this.shouldScroll = true;
+            } else if (!this.isStreaming()) {
+                // Finished streaming and typing has caught up
+                clearInterval(this.typingTimer);
+                this.typingTimer = null;
+            }
+        }, 30); // Adjust speed here (higher = slower)
     }
 
     toggleSidebar() {
@@ -116,6 +160,35 @@ export class Bot implements AfterViewChecked, OnInit {
     resetChat() {
         this.gemini.resetConversation();
         this.messages.set([]);
+    }
+
+    onSessionClick(session: ChatSession) {
+        if (this.editingSessionId() === session.id) return;
+        this.loadSession(session.id);
+        this.toggleSidebar();
+    }
+
+    startEditingTitle(event: Event, session: ChatSession) {
+        event.stopPropagation();
+        this.editingSessionId.set(session.id);
+        this.editingTitle.set(session.title || "");
+    }
+
+    saveTitle(event: Event) {
+        event.stopPropagation();
+        const id = this.editingSessionId();
+        const title = this.editingTitle().trim();
+        if (id !== null && title) {
+            this.gemini.updateSessionTitle(id, title);
+            this.chatHistory.set(this.gemini.allChatSessions());
+        }
+        this.cancelEditing();
+    }
+
+    cancelEditing(event?: Event) {
+        if (event) event.stopPropagation();
+        this.editingSessionId.set(null);
+        this.editingTitle.set("");
     }
 
     private scrollToBottom(): void {

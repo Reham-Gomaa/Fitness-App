@@ -31,15 +31,46 @@
                 @for (session of chatHistory(); track session.id) {
                 <div
                     class="conversation-item"
-                    (click)="loadSession(session.id); toggleSidebar()"
+                    [class.editing]="editingSessionId() === session.id"
+                    (click)="onSessionClick(session)"
                 >
+                    @if (editingSessionId() === session.id) {
+                    <div class="edit-mode flex align-items-center w-full">
+                        <input
+                            type="text"
+                            [(ngModel)]="editingTitle"
+                            (click)="$event.stopPropagation()"
+                            (keydown.enter)="saveTitle($event)"
+                            (keydown.escape)="cancelEditing($event)"
+                            class="edit-input"
+                            autofocus
+                        />
+                        <div class="edit-actions flex ml-2">
+                            <i
+                                class="pi pi-check text-green-500 mr-2 cursor-pointer"
+                                (click)="saveTitle($event)"
+                            ></i>
+                            <i
+                                class="pi pi-times text-red-500 cursor-pointer"
+                                (click)="cancelEditing($event)"
+                            ></i>
+                        </div>
+                    </div>
+                    } @else {
                     <span class="conversation-text">
                         {{ session.title || ('bot.untitledChat' | translate) }}
                     </span>
-                    <i
-                        class="pi pi-trash delete-btn"
-                        (click)="deleteSession(session.id); $event.stopPropagation()"
-                    ></i>
+                    <div class="actions flex">
+                        <i
+                            class="pi pi-pencil edit-btn mr-2"
+                            (click)="startEditingTitle($event, session)"
+                        ></i>
+                        <i
+                            class="pi pi-trash delete-btn"
+                            (click)="deleteSession(session.id); $event.stopPropagation()"
+                        ></i>
+                    </div>
+                    }
                 </div>
                 } @empty {
                 <p class="no-conversations">{{ 'bot.noPreviousConversations' | translate }}</p>
