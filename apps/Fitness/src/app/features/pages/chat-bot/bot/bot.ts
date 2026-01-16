@@ -27,6 +27,7 @@ import {Translation} from "../../../../core/services/translation/translation";
 })
 export class Bot implements AfterViewChecked, OnInit {
     @ViewChild("chatContainer") private chatContainer?: ElementRef;
+    @ViewChild("chatInput") private chatInput?: ElementRef;
 
     private gemini = inject(GeminiIntegration);
     private destroyRef = inject(DestroyRef);
@@ -58,6 +59,9 @@ export class Bot implements AfterViewChecked, OnInit {
 
     openChat() {
         this.isActiveChat.update((v) => !v);
+        if (this.isActiveChat()) {
+            this.focusInput();
+        }
     }
 
     sendMessage() {
@@ -93,9 +97,11 @@ export class Bot implements AfterViewChecked, OnInit {
                 },
                 complete: () => {
                     this.isStreaming.set(false);
+                    this.chatHistory.set(this.gemini.allChatSessions());
                 },
                 error: () => {
                     this.isStreaming.set(false);
+                    this.chatHistory.set(this.gemini.allChatSessions());
                     if (this.typingTimer) {
                         clearInterval(this.typingTimer);
                         this.typingTimer = null;
@@ -145,6 +151,12 @@ export class Bot implements AfterViewChecked, OnInit {
         this.isSidebarOpen.update((value) => !value);
     }
 
+    onInputFocus() {
+        if (this.isSidebarOpen()) {
+            this.isSidebarOpen.set(false);
+        }
+    }
+
     loadSession(id: number) {
         if (this.gemini.loadSession(id)) {
             this.messages.set([...this.gemini.currentHistory()]);
@@ -166,6 +178,13 @@ export class Bot implements AfterViewChecked, OnInit {
         if (this.editingSessionId() === session.id) return;
         this.loadSession(session.id);
         this.toggleSidebar();
+        this.focusInput();
+    }
+
+    private focusInput() {
+        setTimeout(() => {
+            this.chatInput?.nativeElement.focus();
+        }, 100);
     }
 
     startEditingTitle(event: Event, session: ChatSession) {

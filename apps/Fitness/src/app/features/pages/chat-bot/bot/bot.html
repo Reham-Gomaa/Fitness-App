@@ -103,7 +103,7 @@
             class="chat-messages"
             #chatContainer
         >
-            @for (msg of messages(); track $index) {
+            @for (msg of messages(); track $index) { @if (msg.text) {
             <div
                 class="message-bubble"
                 [class.user]="msg.role === 'user'"
@@ -111,7 +111,8 @@
             >
                 {{ msg.text }}
             </div>
-            } @if (isStreaming()) {
+            } } @if (isStreaming() && (!messages().length || !messages()[messages().length -
+            1].text)) {
             <div class="message-bubble model">
                 <span class="loading-dots">●●●</span>
             </div>
@@ -119,12 +120,14 @@
         </div>
 
         <div class="chat-input flex justify-content-between align-items-center">
-            <div class="card relative flex justify-content-center">
+            <div class="card relative flex justify-content-center w-full mr-2">
                 <input
+                    #chatInput
                     type="text"
                     [placeholder]="'bot.placeholder' | translate"
                     [(ngModel)]="chatMessage"
                     (keydown.enter)="sendMessage()"
+                    (focus)="onInputFocus()"
                 />
                 <i class="pi edit pi-pencil absolute"></i>
             </div>
