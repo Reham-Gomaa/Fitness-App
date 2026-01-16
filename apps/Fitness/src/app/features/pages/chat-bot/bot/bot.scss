@@ -202,15 +202,14 @@
                 color: var(--white);
             }
 
-            i {
+            i.new-chat-btn {
                 font-size: 16px;
-                padding: 4px;
-                border-radius: 4px;
-                transition: background-color 0.2s;
+                padding: 8px;
+                border-radius: 50%;
+                color: white;
+                transition: transform 0.2s, background-color 0.2s;
+                margin-right: 12px;
 
-                &:hover {
-                    background-color: var(--light-orange-5);
-                }
             }
         }
 

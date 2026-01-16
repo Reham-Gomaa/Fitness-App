@@ -24,6 +24,11 @@
             [class.hidden]="!isSidebarOpen()"
         >
             <div class="sidebar-header">
+                <i
+                    class="pi pi-plus new-chat-btn cursor-pointer"
+                    (click)="resetChat(); toggleSidebar()"
+                    title="New Chat"
+                ></i>
                 <h4>{{ 'bot.previousConversations' | translate }}</h4>
             </div>
 
