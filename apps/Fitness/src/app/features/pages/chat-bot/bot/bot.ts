@@ -37,7 +37,7 @@ export class Bot implements AfterViewChecked, OnInit {
     isActiveChat = signal<boolean>(false);
     messages = signal<ChatMessage[]>([]);
     isStreaming = signal<boolean>(false);
-    chatHistory = signal<ChatSession[]>([]);
+    chatHistory = this.gemini.allChatSessions;
     isSidebarOpen = signal<boolean>(false);
     private shouldScroll = false;
     private typingTimer: any;
@@ -46,9 +46,7 @@ export class Bot implements AfterViewChecked, OnInit {
     editingSessionId = signal<number | null>(null);
     editingTitle = signal<string>("");
 
-    ngOnInit() {
-        this.chatHistory.set(this.gemini.allChatSessions());
-    }
+    ngOnInit() {}
 
     ngAfterViewChecked() {
         if (this.shouldScroll) {
@@ -97,11 +95,9 @@ export class Bot implements AfterViewChecked, OnInit {
                 },
                 complete: () => {
                     this.isStreaming.set(false);
-                    this.chatHistory.set(this.gemini.allChatSessions());
                 },
                 error: () => {
                     this.isStreaming.set(false);
-                    this.chatHistory.set(this.gemini.allChatSessions());
                     if (this.typingTimer) {
                         clearInterval(this.typingTimer);
                         this.typingTimer = null;
@@ -166,7 +162,6 @@ export class Bot implements AfterViewChecked, OnInit {
 
     deleteSession(id: number) {
         this.gemini.deleteSession(id);
-        this.chatHistory.set(this.gemini.allChatSessions());
     }
 
     resetChat() {
@@ -199,7 +194,6 @@ export class Bot implements AfterViewChecked, OnInit {
         const title = this.editingTitle().trim();
         if (id !== null && title) {
             this.gemini.updateSessionTitle(id, title);
-            this.chatHistory.set(this.gemini.allChatSessions());
         }
         this.cancelEditing();
     }
