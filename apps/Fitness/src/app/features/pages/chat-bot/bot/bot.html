@@ -133,9 +133,13 @@
             </div>
             <div
                 class="send-icon flex align-items-center"
-                (click)="sendMessage()"
+                (click)="isStreaming() ? stopResponse() : sendMessage()"
             >
+                @if (isStreaming()) {
+                <i class="pi pi-stop-circle text-lg cursor-pointer text-red-500"></i>
+                } @else {
                 <i class="pi pi-send text-lg cursor-pointer"></i>
+                }
             </div>
         </div>
     </div>

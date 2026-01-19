@@ -17,7 +17,7 @@ import {
     ChatSession,
 } from "../../../../core/services/gemini-int/gemini-integration";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {Translation} from "../../../../core/services/translation/translation";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: "app-bot",
@@ -31,7 +31,6 @@ export class Bot implements AfterViewChecked, OnInit {
 
     private gemini = inject(GeminiIntegration);
     private destroyRef = inject(DestroyRef);
-    private translation = inject(Translation);
 
     chatMessage = "";
     isActiveChat = signal<boolean>(false);
@@ -45,6 +44,7 @@ export class Bot implements AfterViewChecked, OnInit {
     private displayedResponseText = "";
     editingSessionId = signal<number | null>(null);
     editingTitle = signal<string>("");
+    private currentSubscription?: Subscription;
 
     ngOnInit() {}
 
@@ -83,7 +83,7 @@ export class Bot implements AfterViewChecked, OnInit {
 
         this.isStreaming.set(true);
 
-        this.gemini
+        this.currentSubscription = this.gemini
             .sendMessage$(message)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
@@ -104,6 +104,20 @@ export class Bot implements AfterViewChecked, OnInit {
                     }
                 },
             });
+    }
+
+    stopResponse() {
+        if (this.currentSubscription) {
+            this.currentSubscription.unsubscribe();
+            this.currentSubscription = undefined;
+        }
+
+        if (this.typingTimer) {
+            clearInterval(this.typingTimer);
+            this.typingTimer = null;
+        }
+
+        this.isStreaming.set(false);
     }
 
     private startTypewriter(modelIndex: number) {
