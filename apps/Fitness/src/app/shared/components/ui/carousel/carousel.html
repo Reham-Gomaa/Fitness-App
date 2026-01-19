@@ -39,7 +39,9 @@
             name:group.name || group.strCategory,
             id:group._id || group.idCategory,
             img:group.image || group.strCategoryThumb,
-            cat:cat()
+            cat:cat(),
+            renLocation:rendLocation() === 'recommend' ? rendLocation() : null
+
           }"
         />
         }

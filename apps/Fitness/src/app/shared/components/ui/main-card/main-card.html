@@ -1,7 +1,7 @@
 <div
     id="main-card"
     class="w-11 h-full mx-auto"
-    [routerLink]="['../details',item()?.cat,item()?.id]"
+    [routerLink]="[item()?.renLocation ? '../../../details':'../details',item()?.cat,item()?.id]"
 >
     <div class="card-img">
         <img

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterModule } from "@angular/router";
+import { RouterLink, RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-auth',
-  imports: [RouterModule],
+  imports: [RouterModule  , RouterLink],
   templateUrl: './auth.html',
   styleUrl: './auth.scss',
 })
