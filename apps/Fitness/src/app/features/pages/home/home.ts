@@ -1,18 +1,17 @@
-import {Component, computed, inject, PLATFORM_ID} from "@angular/core";
 import {isPlatformBrowser} from "@angular/common";
+import {Component, computed, inject, PLATFORM_ID} from "@angular/core";
 import {TranslateModule} from "@ngx-translate/core";
 import {ButtonModule} from "primeng/button";
 // Services
-import {Translation} from "../../../core/services/translation/translation";
 import {SeoService} from "../../../core/services/seo/seo.service";
+import {Translation} from "../../../core/services/translation/translation";
 // Shared_components
-import {HeroSection} from "./components/hero-section/hero-section";
 import {HorizontalCarousel} from "../../../shared/components/ui/horizontalCarousel/horizontalCarousel";
 import {AboutUs} from "../about-us/about-us";
-import {Workouts} from "../workouts/workouts";
-import {WhyUs} from "./components/why-us/why-us";
 import {Meals} from "../meals/meals";
-import {ChatBot} from "../chat-bot/chat-bot";
+import {Workouts} from "../workouts/workouts";
+import {HeroSection} from "./components/hero-section/hero-section";
+import {WhyUs} from "./components/why-us/why-us";
 @Component({
     selector: "app-home",
     imports: [
@@ -25,7 +24,6 @@ import {ChatBot} from "../chat-bot/chat-bot";
         HeroSection,
         WhyUs,
         Meals,
-        ChatBot,
     ],
     templateUrl: "./home.html",
     styleUrl: "./home.scss",
