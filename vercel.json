@@ -3,6 +3,14 @@
     "public": true,
     "rewrites": [
         {
+            "source": "/robots.txt",
+            "destination": "/robots.txt"
+        },
+        {
+            "source": "/sitemap.xml",
+            "destination": "/sitemap.xml"
+        },
+        {
             "source": "/api/:path*",
             "destination": "/api/index.js"
         },

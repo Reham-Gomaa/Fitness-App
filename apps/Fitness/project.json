@@ -18,7 +18,9 @@
                     {
                         "glob": "**/*",
                         "input": "apps/Fitness/public"
-                    }
+                    },
+                    "apps/Fitness/src/robots.txt",
+                    "apps/Fitness/src/sitemap.xml"
                 ],
                 "styles": [
                     "node_modules/primeicons/primeicons.css",
