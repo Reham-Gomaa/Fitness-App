@@ -5,7 +5,7 @@
     <article class="col-12 lg:col">
         <header>
             <app-title
-                [titleImg]="'./images/why-us/Why us.avif'"
+                [titleImg]="'./images/why-us/Why%20us.avif'"
                 [imgW]="'222'"
                 [imgH]="'44'"
                 id="why-us-heading"
@@ -28,7 +28,7 @@
             role="list"
             aria-label="Fitness program features"
         >
-            @for (step of steps(); track $index) {
+            @for (step of steps(); track step.id) {
             <li>
                 <article
                     class="step-wrapper flex align-items-center"
@@ -56,7 +56,7 @@
     >
         <div class="images-wrapper">
             <div class="first-col">
-                @for (item of trainersCol1(); track $index) {
+                @for (item of trainersCol1(); track item.name) {
                 <picture>
                     <source
                         srcset="./images/why-us/{{item.name}}.avif"
@@ -73,18 +73,20 @@
                         <img
                             loading="lazy"
                             decoding="async"
-                            [ngSrc]="'./images/why-us/' + item.name + '.jpg'"
+                            [ngSrc]="'/images/why-us/' + item.name + '.jpg'"
                             [width]="item.width"
                             [height]="item.height"
-                            [alt]="(item.alt |translate)  + ' ' + (item.specialty |translate)"
-                            [attr.aria-describedby]="item.description |translate"
+                            [alt]="(item.alt | translate) + ' ' + (item.specialty | translate)"
+                            [attr.aria-describedby]="item.description | translate"
+                            [ngSrcset]="item.width + 'w, ' + (item.width * 2) + 'w'"
+                            sizes="(max-width: 48rem) 100vw, 30vw"
                         />
                     </div>
                 </picture>
                 }
             </div>
             <div class="second-col">
-                @for (item of trainersCol2(); track $index; let i = $index) {
+                @for (item of trainersCol2(); track item.name) {
                 <picture>
                     <source
                         srcset="./images/why-us/{{item.name}}.avif"
@@ -101,11 +103,13 @@
                         <img
                             loading="lazy"
                             decoding="async"
-                            [ngSrc]="'./images/why-us/' + item.name + '.jpg'"
+                            [ngSrc]="'/images/why-us/' + item.name + '.jpg'"
                             [width]="item.width"
                             [height]="item.height"
-                            [alt]="(item.alt |translate)  + ' ' + (item.specialty |translate)"
-                            [attr.aria-describedby]="item.description |translate"
+                            [alt]="(item.alt | translate) + ' ' + (item.specialty | translate)"
+                            [attr.aria-describedby]="item.description | translate"
+                            [ngSrcset]="item.width + 'w, ' + (item.width * 2) + 'w'"
+                            sizes="(max-width: 48rem) 100vw, 30vw"
                         />
                     </div>
                 </picture>

@@ -3,7 +3,6 @@ import {CommonModule} from "@angular/common";
 
 @Component({
     selector: "app-progress-circle",
-    standalone: true,
     imports: [CommonModule],
     templateUrl: "./progress-circle.html",
     styleUrls: ["./progress-circle.scss"],

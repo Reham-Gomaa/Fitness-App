@@ -6,7 +6,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-logout-confirmation-modal',
-  standalone: true,
   imports: [CommonModule, ButtonModule, TranslateModule],
   templateUrl: "./logout-confirmation-modal.html",
   styleUrl: "./logout-confirmation-modal.scss",
@@ -16,10 +15,10 @@ export class LogoutConfirmationModalComponent {
   protected translate = inject(TranslateService);
 
   confirmLogout(): void {
-    this.dialogRef.close(true); 
+    this.dialogRef.close(true);
   }
 
   close(): void {
-    this.dialogRef.close(false); 
+    this.dialogRef.close(false);
   }
 }

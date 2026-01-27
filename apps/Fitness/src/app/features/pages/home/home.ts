@@ -1,5 +1,5 @@
 import {isPlatformBrowser} from "@angular/common";
-import {Component, computed, inject, PLATFORM_ID} from "@angular/core";
+import {ChangeDetectionStrategy, Component, computed, inject, PLATFORM_ID} from "@angular/core";
 import {TranslateModule} from "@ngx-translate/core";
 import {ButtonModule} from "primeng/button";
 // Services
@@ -27,6 +27,7 @@ import {WhyUs} from "./components/why-us/why-us";
     ],
     templateUrl: "./home.html",
     styleUrl: "./home.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
     private readonly translation = inject(Translation);

@@ -6,10 +6,13 @@ import {
     RendererFactory2,
     signal,
     effect,
+    DestroyRef,
 } from "@angular/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {TranslateService} from "@ngx-translate/core";
-import {Router} from "@angular/router";
-import {firstValueFrom} from "rxjs";
+import {Router, NavigationEnd} from "@angular/router";
+import {firstValueFrom, filter} from "rxjs";
+import {MessageService} from "primeng/api";
 
 import {StorageKeys} from "../../constants/storage.config";
 import {TranslationManagerService} from "./translation-manager.service";
@@ -24,6 +27,17 @@ import {
 } from "../../constants/translation.constants";
 import {PlatFormService} from "@fitness-app/services";
 
+/**
+ * Translation Service with Two-Way URL ↔ localStorage Sync
+ *
+ * Flow:
+ * 1. Router is the source of truth
+ * 2. URL change → updates localStorage and lang signal
+ * 3. setLanguage() call → updates URL (which triggers #2)
+ * 4. Page reload → reads from URL first, then localStorage as fallback
+ *
+ * No polling, no infinite loops, uses Angular signals and Router events.
+ */
 @Injectable({providedIn: "root"})
 export class Translation {
     private readonly translate = inject(TranslateService);
@@ -32,11 +46,15 @@ export class Translation {
     private readonly platformService = inject(PlatFormService);
     private readonly translationManager = inject(TranslationManagerService);
     private readonly router = inject(Router);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly messageService = inject(MessageService);
 
     private readonly STORAGE_KEY = StorageKeys.LANGUAGE || "lang";
     private renderer!: Renderer2;
     private isInitializing = false;
+    private isNavigating = false; // Prevent infinite loops
 
+    /** Current language signal - reactive state */
     lang = signal<string>(DEFAULT_LANGUAGE);
 
     constructor() {
@@ -46,20 +64,76 @@ export class Translation {
         this.translate.setDefaultLang(DEFAULT_LANGUAGE);
 
         if (this.platformService.isBrowser()) {
-            const savedLang = localStorage.getItem(this.STORAGE_KEY) || DEFAULT_LANGUAGE;
-            this.lang.set(savedLang);
-            // Set language immediately to prevent lag - translations will load in background
-            this.translate.use(savedLang).subscribe();
+            // Priority: URL > localStorage > default
+            const urlLang = this.getLangFromUrl();
+            const storedLang = localStorage.getItem(this.STORAGE_KEY);
+            const initialLang = urlLang || storedLang || DEFAULT_LANGUAGE;
+
+            this.lang.set(initialLang);
+            this.translate.use(initialLang).subscribe();
+
+            // Sync localStorage with URL lang if different
+            if (urlLang && storedLang !== urlLang) {
+                localStorage.setItem(this.STORAGE_KEY, urlLang);
+            }
+
+            // Setup router event listener for URL → localStorage sync
+            this.setupRouterListener();
         } else {
-            // Server-side: use default language
             this.translate.use(DEFAULT_LANGUAGE).subscribe();
         }
 
         this.setupLangEffect();
     }
 
+    /**
+     * Listen to router navigation events to sync URL → localStorage
+     */
+    private setupRouterListener(): void {
+        this.router.events
+            .pipe(
+                filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe((event) => {
+                if (this.isNavigating) return; // Skip if we triggered this navigation
+
+                const urlLang = this.extractLangFromUrl(event.urlAfterRedirects || event.url);
+                if (urlLang && ALL_LANGUAGES.includes(urlLang as Language)) {
+                    const currentLang = this.lang();
+
+                    if (urlLang !== currentLang) {
+                        // URL changed externally (browser back/forward, manual URL change)
+                        // Update localStorage and signal without triggering URL update
+                        this.isNavigating = true;
+                        localStorage.setItem(this.STORAGE_KEY, urlLang);
+                        this.lang.set(urlLang);
+                        this.isNavigating = false;
+                    }
+                }
+            });
+    }
+
+    /**
+     * Extract language from URL path
+     */
+    private extractLangFromUrl(url: string): string | null {
+        const parts = url.split("/").filter(Boolean);
+        const firstPart = parts[0]?.toLowerCase();
+
+        if (firstPart && ALL_LANGUAGES.includes(firstPart as Language)) {
+            return firstPart;
+        }
+        return null;
+    }
+
+    /**
+     * Set language - updates URL which triggers localStorage sync
+     */
     setLanguage(lang: string): void {
         if (this.lang() === lang) return;
+        if (!ALL_LANGUAGES.includes(lang as Language)) return;
+
         this.lang.set(lang);
         // URL update will be handled by the effect
     }
@@ -70,47 +144,30 @@ export class Translation {
             const lang =
                 preferredLang || this.getLangFromUrl() || this.getStoredLang() || DEFAULT_LANGUAGE;
 
-            // Set language signal immediately (non-blocking)
             this.lang.set(lang);
-
-            // Update HTML attributes immediately (non-blocking)
             this.updateLanguageAttributes(lang);
 
-            // Use language immediately without waiting - this allows app to render instantly
-            // translate.use() will use default/fallback translations if not loaded yet
-            // We don't await this - it's fire-and-forget to prevent blocking
             this.translate.use(lang).subscribe({
                 next: () => {
-                    // Language set successfully
+                    /* Language set successfully */
                 },
                 error: () => {
-                    // Ignore errors - app will use fallback
+                    /* Silently ignore - fallback will be used */
                 },
             });
 
-            // Load translations in background (completely non-blocking)
-            // This doesn't block app initialization, translations will update when ready
-            // Fire and forget - don't await to prevent blocking
             this.loadTranslationsInBackground(lang).catch(() => {
-                // Silently fail - app should still work with default translations
+                /* Silently fail */
             });
         } finally {
-            // Mark initialization as complete immediately (non-blocking)
-            // This allows the app to render while translations load in background
             this.isInitializing = false;
         }
     }
 
-    /**
-     * Load translations in background without blocking app initialization
-     * This allows the app to render immediately while translations load
-     */
     private async loadTranslationsInBackground(lang: string): Promise<void> {
         try {
-            // Load core translations
             await firstValueFrom(this.translationManager.loadCoreTranslations(lang));
 
-            // Load route translations if needed
             const routePath = this.getBaseRoutePath();
             if (routePath) {
                 try {
@@ -122,8 +179,6 @@ export class Translation {
                 }
             }
 
-            // Update language again to ensure all translations are applied
-            // This will trigger a re-render with full translations
             this.translate.use(lang).subscribe();
         } catch {
             // If loading fails, app still works with default/fallback translations
@@ -132,7 +187,6 @@ export class Translation {
 
     /**
      * Update HTML attributes and localStorage for language
-     * Extracted to avoid duplication
      */
     private updateLanguageAttributes(lang: string): void {
         if (!this.platformService.isBrowser()) return;
@@ -151,13 +205,8 @@ export class Translation {
         }
     }
 
-    /**
-     * Get URL path from hash or router
-     * Extracted to avoid duplication
-     */
     private getUrlPath(): string {
         if (!this.platformService.isBrowser()) return "";
-        // With hash routing, check window.location.hash for the actual URL
         const hash = window.location.hash;
         return hash ? hash.substring(1) : this.router.url || "";
     }
@@ -169,10 +218,8 @@ export class Translation {
         effect(() => {
             const currentLang = this.lang();
 
-            // Skip during initialization
             if (this.isInitializing) return;
 
-            // Handle initial load
             if (isInitialLoad) {
                 isInitialLoad = false;
                 previousLang = currentLang;
@@ -180,45 +227,65 @@ export class Translation {
                 return;
             }
 
-            // Handle language change
             if (previousLang !== null && previousLang !== currentLang) {
-                // Update URL with new language
-                if (this.platformService.isBrowser()) {
+                // Update URL with new language (only if not already navigating)
+                if (this.platformService.isBrowser() && !this.isNavigating) {
+                    this.isNavigating = true;
                     this.updateUrlWithLanguage(currentLang);
+                    // Reset flag after a short delay to allow navigation to complete
+                    setTimeout(() => {
+                        this.isNavigating = false;
+                    }, 100);
                 }
 
-                // Load new language translations first, then clear old cache
                 this.translationManager.loadCoreTranslations(currentLang).subscribe({
                     next: () => {
                         const routePath = this.getBaseRoutePath();
+                        const showToast = () => {
+                            const langName = currentLang === "en" ? "English" : "العربية";
+                            this.messageService.add({
+                                severity: "success",
+                                summary: this.translate.instant(
+                                    "ACCOUNT.MESSAGES.LANGUAGE_CHANGED",
+                                    {
+                                        language: langName,
+                                    }
+                                ),
+                                life: 2500,
+                            });
+                        };
+
                         if (routePath) {
                             this.translationManager
                                 .preloadRouteTranslations(routePath, currentLang)
                                 .subscribe({
                                     next: () => {
-                                        // Clear old language cache after new one is loaded
                                         if (previousLang) {
                                             this.translationManager.clearCache(previousLang);
                                         }
-                                        this.translate.use(currentLang).subscribe();
+                                        this.translate.use(currentLang).subscribe({
+                                            next: () => showToast(),
+                                        });
                                     },
                                     error: () => {
-                                        // Even if route translations fail, use core translations
                                         if (previousLang) {
                                             this.translationManager.clearCache(previousLang);
                                         }
-                                        this.translate.use(currentLang).subscribe();
+                                        this.translate.use(currentLang).subscribe({
+                                            next: () => showToast(),
+                                        });
                                     },
                                 });
                         } else {
                             if (previousLang) {
                                 this.translationManager.clearCache(previousLang);
                             }
-                            this.translate.use(currentLang).subscribe();
+                            this.translate.use(currentLang).subscribe({
+                                next: () => showToast(),
+                            });
                         }
                     },
                     error: () => {
-                        // Fallback: use language even if translations fail
                         if (previousLang) {
                             this.translationManager.clearCache(previousLang);
                         }
@@ -232,10 +299,6 @@ export class Translation {
         });
     }
 
-    /**
-     * Parse URL parts from current URL
-     * Cached to avoid repeated parsing
-     */
     private getUrlParts(): string[] {
         const url = this.getUrlPath();
         return url.split("/").filter(Boolean);
@@ -247,7 +310,6 @@ export class Translation {
         const parts = this.getUrlParts();
         if (parts.length === 0) return null;
 
-        // First part might be language (uppercase), skip it
         const maybeLang = parts[0]?.toLowerCase();
         const baseIdx = ALL_LANGUAGES.includes(maybeLang as Language) ? 1 : 0;
         const base = parts[baseIdx];
@@ -266,7 +328,12 @@ export class Translation {
 
         const parts = this.getUrlParts();
         if (parts.length === 0) return null;
-        return parts[0] || null;
+
+        const firstPart = parts[0]?.toLowerCase();
+        if (firstPart && ALL_LANGUAGES.includes(firstPart as Language)) {
+            return firstPart;
+        }
+        return null;
     }
 
     isRtl(lang?: string): boolean {
@@ -282,10 +349,6 @@ export class Translation {
         return getDirectionForLanguage(this.lang());
     }
 
-    /**
-     * Update URL with new language without page refresh
-     * Works with hash location strategy
-     */
     private updateUrlWithLanguage(newLang: string): void {
         if (!this.platformService.isBrowser()) return;
 
@@ -293,31 +356,24 @@ export class Translation {
         const firstPart = parts[0]?.toLowerCase();
         const hasLangInUrl = ALL_LANGUAGES.includes(firstPart as Language);
 
-        // Build new URL path
         let newUrl: string;
         if (hasLangInUrl && parts.length > 1) {
-            // Replace language in URL, keep rest of path
             parts[0] = newLang.toLowerCase();
             newUrl = "/" + parts.join("/");
         } else if (hasLangInUrl && parts.length === 1) {
-            // Only language in URL, just replace it
             newUrl = `/${newLang.toLowerCase()}`;
         } else if (parts.length > 0) {
-            // No language in URL, add it at the beginning
             newUrl = `/${newLang.toLowerCase()}/${parts.join("/")}`;
         } else {
-            // Empty path, just add language
             newUrl = `/${newLang.toLowerCase()}`;
         }
 
-        // Navigate with hash location strategy
         this.router
             .navigateByUrl(newUrl, {
                 replaceUrl: true,
                 skipLocationChange: false,
             })
             .catch((err) => {
-                // Silently ignore AbortError from view transitions
                 if (err?.name !== "AbortError" && err?.message !== "Transition was skipped") {
                     console.error("Error updating URL with language:", err);
                 }

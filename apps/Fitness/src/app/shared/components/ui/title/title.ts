@@ -1,11 +1,12 @@
 import {NgOptimizedImage} from "@angular/common";
-import {Component, input} from "@angular/core";
+import {ChangeDetectionStrategy, Component, input} from "@angular/core";
 
 @Component({
     selector: "app-title",
     imports: [NgOptimizedImage],
     templateUrl: "./title.html",
     styleUrl: "./title.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Title {
     titleImg = input<string>("");

@@ -12,7 +12,7 @@
             <lib-fitness-input
                 formControlName="email"
                 [errorHandilgControl]="loginForm.get('email')!"
-                placeholder="Enter your email"
+                [placeholder]="'login.email' | translate"
                 type="email"
                 id="email"
             ></lib-fitness-input>
@@ -21,7 +21,7 @@
             <lib-fitness-input
                 formControlName="password"
                 [errorHandilgControl]="loginForm.get('password')!"
-                placeholder="Enter your password"
+                [placeholder]="'login.password' | translate"
                 type="password"
                 id="password"
             ></lib-fitness-input>

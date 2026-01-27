@@ -32,7 +32,7 @@
         <button
             class="next-btn"
             (click)="next()"
-            [disabled]="isLoading()"
+            [disabled]="isLoading() || !isStepValid()"
         >
             @if (isLoading()) {
             <i class="pi pi-spin pi-spinner"></i>

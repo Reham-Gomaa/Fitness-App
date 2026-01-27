@@ -1,4 +1,13 @@
-import {Component, DestroyRef, inject, input, OnInit, signal, WritableSignal} from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    inject,
+    input,
+    OnInit,
+    signal,
+    WritableSignal,
+} from "@angular/core";
 import {TranslatePipe} from "@ngx-translate/core";
 // rxjs
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -17,6 +26,7 @@ import {Title} from "./../../../shared/components/ui/title/title";
     imports: [Title, Header, Carousel, TranslatePipe],
     templateUrl: "./meals.html",
     styleUrl: "./meals.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Meals implements OnInit {
     private mealService = inject(MealService);
@@ -45,10 +55,9 @@ export class Meals implements OnInit {
                     this.mealService.mealCategories.set(res.categories);
                     this.mealCats.set(res.categories);
                 },
-                error:(err)=>{
-                  console.log(err);
-
-                }
+                error: (err) => {
+                    console.error("Error fetching meal categories:", err);
+                },
             });
     }
 }

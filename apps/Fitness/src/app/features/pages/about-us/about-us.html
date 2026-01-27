@@ -11,25 +11,17 @@
         aria-label="Trainers gallery"
     >
         @for (t of trainers(); track t.name) {
-        <picture>
-            <source
-                srcset="./images/about-us/{{t.name}}-min.avif"
-                type="image/avif"
-            />
-            <source
-                srcset="./images/about-us/{{t.name}}-min.webp"
-                type="image/webp"
-            />
-            <img
-                [style.aspectRatio]="t.ratio"
-                class="{{t.name}}"
-                ngSrc="./images/about-us/{{t.name}}-min.jpg"
-                [width]="t.width"
-                [height]="t.height"
-                alt="Trainer image"
-                decoding="async"
-            />
-        </picture>
+        <img
+            [style.aspectRatio]="t.ratio"
+            class="{{t.name}}"
+            [ngSrc]="'/images/about-us/' + t.name + '-min.jpg'"
+            [width]="t.width"
+            [height]="t.height"
+            [ngSrcset]="t.width + 'w'"
+            [priority]="t.name === 'trainer-3'"
+            alt="Trainer image"
+            decoding="async"
+        />
         }
         <figcaption class="sr-only">{{ 'about.sronly.figCaption' |translate}}</figcaption>
     </figure>
@@ -42,7 +34,7 @@
         <header>
             <app-title
                 id="about-heading"
-                [titleImg]="'./images/about-us/About us.avif'"
+                [titleImg]="'./images/about-us/About%20us.avif'"
                 [imgW]="'290'"
                 [imgH]="'44'"
                 [titleTxt]="'about.section' |translate"
@@ -100,27 +92,17 @@
                             id="service-{{$index}}-title"
                             class="service-header"
                         >
-                            <picture>
-                                <source
-                                    srcset="./images/about-us/Vector.avif"
-                                    type="image/avif"
-                                />
-                                <source
-                                    srcset="./images/about-us/Vector.webp"
-                                    type="image/webp"
-                                />
-                                <img
-                                    style="object-fit: cover; aspect-ratio: 18 / 17"
-                                    decoding="async"
-                                    loading="lazy"
-                                    ngSrc="./images/about-us/Vector.jpg"
-                                    width="18"
-                                    height="17"
-                                    alt="right arrow"
-                                    class="icon"
-                                    aria-hidden="true"
-                                />
-                            </picture>
+                            <img
+                                style="object-fit: cover; aspect-ratio: 18 / 17"
+                                decoding="async"
+                                loading="lazy"
+                                ngSrc="./images/about-us/Vector.jpg"
+                                width="18"
+                                height="17"
+                                alt="right arrow"
+                                class="icon"
+                                aria-hidden="true"
+                            />
                             {{item.header |translate}}
                         </h3>
                         <div id="service-{{$index}}-desc">

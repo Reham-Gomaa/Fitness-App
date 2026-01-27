@@ -9,6 +9,7 @@ import {
     prevStep,
     updateRegisterData,
     resetRegisterState,
+    setStepValidity,
 } from "../../../../store/auth.actions";
 import {FitnessFormRadio, RadioItem} from "@fitness-app/fitness-form";
 import {selectRegisterData, selectAuthLoading} from "../../../../store/auth.selectors";
@@ -17,12 +18,11 @@ import {Actions, ofType} from "@ngrx/effects";
 import {Router} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs/operators";
-import {CLIENT_ROUTES} from "apps/Fitness/src/app/core/constants/client-routes";
-import {RouteBuilderService} from "apps/Fitness/src/app/core/services/router/route-builder.service";
+import {RouteBuilderService} from "../../../../../../../core/services/router/route-builder.service";
+import {CLIENT_ROUTES} from "../../../../../../../core/constants/client-routes";
 
 @Component({
     selector: "app-select-activity-level",
-    standalone: true,
     imports: [CommonModule, TranslatePipe, FitnessFormRadio],
     templateUrl: "./select-activity-level.html",
     styleUrl: "./select-activity-level.scss",
@@ -51,6 +51,7 @@ export class SelectActivityLevelComponent implements OnInit {
         this.loadSavedActivityLevel();
         this.listenToRegistrationSuccess();
         this.listenToRegistrationFailure();
+        this.store.dispatch(setStepValidity({isValid: true}));
     }
 
     onActivityChange(level: string): void {

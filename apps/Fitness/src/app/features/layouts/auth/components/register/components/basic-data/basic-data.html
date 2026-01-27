@@ -52,7 +52,7 @@
         </form>
         <p class="register">
             {{ "register.haveAccount" | translate }}
-            <a [routerLink]="_routeBuilder.buildPath(ROUTES.auth.base, ROUTES.auth.login)"
+            <a [routerLink]="routeBuilder.buildPath(ROUTES.auth.base, ROUTES.auth.login)"
                 >{{ "register.signIn" | translate }}</a
             >
         </p>

@@ -23,7 +23,6 @@ import { isPlatformBrowser } from '@angular/common';
  *
  * @Component({
  *   selector: 'app-example',
- *   standalone: true,
  *   template: `
  * @if(isBrowser) {
  *     <p>Running in Browser</p>

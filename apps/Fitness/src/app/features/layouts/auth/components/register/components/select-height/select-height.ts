@@ -3,13 +3,17 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
-import {nextStep, prevStep, updateRegisterData} from "../../../../store/auth.actions";
+import {
+    nextStep,
+    prevStep,
+    setStepValidity,
+    updateRegisterData,
+} from "../../../../store/auth.actions";
 import {FitnessInputSlider} from "@fitness-app/fitness-form";
 import {selectRegisterData} from "../../../../store/auth.selectors";
 
 @Component({
     selector: "app-select-height",
-    standalone: true,
     imports: [CommonModule, TranslatePipe, FitnessInputSlider],
     templateUrl: "./select-height.html",
     styleUrl: "./select-height.scss",
@@ -21,6 +25,7 @@ export class SelectHeightComponent implements OnInit {
 
     ngOnInit() {
         this.loadSavedHeight();
+        this.store.dispatch(setStepValidity({isValid: true}));
     }
 
     private loadSavedHeight() {

@@ -5,8 +5,8 @@
         position: absolute;
         bottom: 0;
         top: 50%;
-        left: 0;
-        right: 0;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
         opacity: 0.1;
     }
     .sub-title {

@@ -1,5 +1,52 @@
-<p-toast />
+<p-toast
+    [life]="4000"
+    position="top-right"
+>
+    <ng-template
+        #content
+        let-message
+    >
+        <div
+            class="custom-toast"
+            [ngClass]="'toast-' + message.severity"
+        >
+            <div class="toast-icon-wrapper">
+                <i
+                    class="pi"
+                    [ngClass]="{
+          'pi-check-circle': message.severity === 'success',
+          'pi-times-circle': message.severity === 'error',
+          'pi-info-circle': message.severity === 'info',
+          'pi-exclamation-triangle': message.severity === 'warn'
+        }"
+                ></i>
+            </div>
+            <div class="toast-content-wrapper">
+                <h3 class="toast-title">
+                    {{ message.summary || ( message.severity === 'success' ? ('COMMON.SUCCESS' |
+                    translate) : message.severity === 'error' ? ('COMMON.ERROR' | translate) :
+                    message.severity === 'warn' ? ('COMMON.WARN' | translate) : ('COMMON.INFO' |
+                    translate) ) }}
+                </h3>
+                <p class="toast-detail">{{ message.detail }}</p>
+            </div>
+            <div
+                class="toast-close-btn"
+                (click)="onClose()"
+                role="button"
+                tabindex="0"
+                aria-label="Close"
+                (keydown.enter)="onClose()"
+            >
+                <span class="p-toast-icon-close pi pi-times"></span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="toast-progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
 <router-outlet />
 <app-bot />
-
-

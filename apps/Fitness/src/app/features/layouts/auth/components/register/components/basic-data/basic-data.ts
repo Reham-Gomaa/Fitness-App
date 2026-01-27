@@ -1,53 +1,77 @@
-import {Component, DestroyRef, inject, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from "@angular/core";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {TranslateService, TranslatePipe} from "@ngx-translate/core";
-import {AuthApiKpService} from "auth-api-kp";
-import {MessageService} from "primeng/api";
+import {TranslatePipe} from "@ngx-translate/core";
+import {debounceTime} from "rxjs/operators";
+import {Store} from "@ngrx/store";
+import {RouterLink} from "@angular/router";
 
 // Shared-components
 import {FitnessInput} from "@fitness-app/fitness-form";
-import {Router, RouterLink} from "@angular/router";
-import {RouteBuilderService} from "apps/Fitness/src/app/core/services/router/route-builder.service";
-import {CLIENT_ROUTES} from "apps/Fitness/src/app/core/constants/client-routes";
-
-import {Store} from "@ngrx/store";
-import {nextStep, updateRegisterData} from "../../../../store/auth.actions";
-
+import {RouteBuilderService} from "../../../../../../../core/services/router/route-builder.service";
+import {CLIENT_ROUTES} from "../../../../../../../core/constants/client-routes";
+import {nextStep, setStepValidity, updateRegisterData} from "../../../../store/auth.actions";
 import {selectRegisterData} from "../../../../store/auth.selectors";
-import {PASSWORD_PATTERN} from "apps/Fitness/src/app/core/constants/validation.constants";
-import {passwordMatchValidator} from "apps/Fitness/src/app/core/utils/validators.util";
-import {debounceTime} from "rxjs/operators";
+import {PASSWORD_PATTERN} from "../../../../../../../core/constants/validation.constants";
+import {passwordMatchValidator} from "../../../../../../../core/utils/validators.util";
 
 @Component({
     selector: "app-basic-data",
+    standalone: true,
     imports: [FitnessInput, ReactiveFormsModule, RouterLink, TranslatePipe],
     templateUrl: "./basic-data.html",
     styleUrl: "./basic-data.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicData implements OnInit {
-    private readonly _translate = inject(TranslateService);
-    private readonly _authApiKpService = inject(AuthApiKpService);
-    private readonly _messageService = inject(MessageService);
     private readonly destroyRef = inject(DestroyRef);
-    private readonly _formBuilder = inject(FormBuilder);
-    _routeBuilder = inject(RouteBuilderService);
-    ROUTES = CLIENT_ROUTES;
-    private readonly _router = inject(Router);
+    private readonly formBuilder = inject(FormBuilder);
     private readonly store = inject(Store);
+    readonly routeBuilder = inject(RouteBuilderService);
+
+    readonly ROUTES = CLIENT_ROUTES;
     basicDataForm!: FormGroup;
 
     ngOnInit(): void {
-        this.frominit();
+        this.initForm();
+        this.observeFormChanges();
+        this.loadSavedData();
+        // Set initial validity
+        this.store.dispatch(setStepValidity({isValid: this.basicDataForm.valid}));
+    }
 
-        // Save data to store on changes
+    onSubmit(): void {
+        if (this.basicDataForm.valid) {
+            this.store.dispatch(updateRegisterData({data: this.basicDataForm.value}));
+            this.store.dispatch(nextStep());
+        }
+    }
+
+    private initForm(): void {
+        this.basicDataForm = this.formBuilder.group(
+            {
+                firstName: ["", [Validators.required, Validators.minLength(2)]],
+                lastName: ["", [Validators.required, Validators.minLength(2)]],
+                email: ["", [Validators.required, Validators.email]],
+                password: ["", [Validators.required, Validators.pattern(PASSWORD_PATTERN)]],
+                rePassword: ["", [Validators.required]],
+            },
+            {
+                validators: passwordMatchValidator("password", "rePassword"),
+            }
+        );
+    }
+
+    private observeFormChanges(): void {
         this.basicDataForm.valueChanges
             .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
             .subscribe((value) => {
                 this.store.dispatch(updateRegisterData({data: value}));
+                this.store.dispatch(setStepValidity({isValid: this.basicDataForm.valid}));
             });
+    }
 
-        // Load saved data from store
+    private loadSavedData(): void {
         this.store
             .select(selectRegisterData)
             .pipe(takeUntilDestroyed(this.destroyRef))
@@ -65,27 +89,5 @@ export class BasicData implements OnInit {
                     );
                 }
             });
-    }
-
-    frominit() {
-        this.basicDataForm = this._formBuilder.group(
-            {
-                firstName: ["", [Validators.required, Validators.minLength(2)]],
-                lastName: ["", [Validators.required, Validators.minLength(2)]],
-                email: ["", [Validators.required, Validators.email]],
-                password: ["", [Validators.required, Validators.pattern(PASSWORD_PATTERN)]],
-                rePassword: ["", [Validators.required]],
-            },
-            {
-                validators: passwordMatchValidator("password", "rePassword"),
-            }
-        );
-    }
-
-    onSubmit() {
-        if (this.basicDataForm.valid) {
-            this.store.dispatch(updateRegisterData({data: this.basicDataForm.value}));
-            this.store.dispatch(nextStep());
-        }
     }
 }

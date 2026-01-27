@@ -8,11 +8,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractContro
 
 @Component({
   selector: 'app-change-password-modal',
-  standalone: true,
   imports: [
-    CommonModule, 
-    ButtonModule, 
-    TranslateModule, 
+    CommonModule,
+    ButtonModule,
+    TranslateModule,
     FitnessInput,
     ReactiveFormsModule
   ],

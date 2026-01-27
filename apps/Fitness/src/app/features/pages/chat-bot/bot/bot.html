@@ -6,8 +6,12 @@
         class="bot-btn flex flex-column justify-content-center align-items-center"
     >
         <img
-            src="/images/bot/bot.avif"
+            ngSrc="/images/bot/bot.avif"
             alt="bot image"
+            width="110"
+            height="80"
+            priority
+            ngSrcset="110w"
         />
         <app-main-button
             [fireStartExplore]="'bot'"
@@ -49,7 +53,8 @@
                     <div class="edit-mode flex align-items-center w-full">
                         <input
                             type="text"
-                            [(ngModel)]="editingTitle"
+                            [ngModel]="editingTitle()"
+                            (ngModelChange)="editingTitle.set($event)"
                             (click)="$event.stopPropagation()"
                             (keydown.enter)="saveTitle($event)"
                             (keydown.escape)="cancelEditing($event)"
@@ -137,7 +142,7 @@
             }@else { }
         </div>
 
-        <div class="chat-input flex justify-content-between align-items-center">
+        <div class="chat-input flex justify-content-between align-items-center gap-2">
             <div class="card relative flex justify-content-center w-full mr-2">
                 <input
                     #chatInput

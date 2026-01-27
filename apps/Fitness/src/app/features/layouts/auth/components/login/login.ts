@@ -1,4 +1,4 @@
-import {OnInit} from "@angular/core";
+import {ChangeDetectionStrategy} from "@angular/core";
 // Core
 import {Component, DestroyRef, inject, signal} from "@angular/core";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -22,11 +22,14 @@ import {AuthApiKpService, ErrorResponse, SignInResponse} from "auth-api-kp";
 import {RouteBuilderService} from "../../../../../core/services/router/route-builder.service";
 // Local Storage Keys
 import {StorageKeys} from "../../../../../core/constants/storage.config";
+import {UserService} from "../../../../pages/account/services/user-service/user-service";
+
 @Component({
     selector: "app-login",
     imports: [ReactiveFormsModule, FitnessInput, TranslatePipe, RouterLink],
     templateUrl: "./login.html",
     styleUrl: "./login.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
     // Denpendency Injection
@@ -36,6 +39,7 @@ export class Login {
     private readonly _router = inject(Router);
     public _messageService = inject(MessageService);
     private readonly _translate = inject(TranslateService);
+    private readonly _userService = inject(UserService);
     _routeBuilder = inject(RouteBuilderService);
     ROUTES = CLIENT_ROUTES;
     isLoading = signal<boolean>(false);
@@ -82,6 +86,9 @@ export class Login {
                     // persist token for authenticated requests
                     this.saveToken(successRes.token);
 
+                    // Fetch user profile to update application state
+                    this._userService.getLoggedUserData().subscribe();
+
                     const message =
                         successRes.message || this._translate.instant("messagesToast.loginSuccess");
                     this._messageService.add({
@@ -94,7 +101,7 @@ export class Login {
                 error: (err: HttpErrorResponse) => {
                     this._messageService.add({
                         severity: "error",
-                        detail: err.error,
+                        detail: err.error?.message || err.error || "An error occurred",
                         life: 5000,
                     });
                 },

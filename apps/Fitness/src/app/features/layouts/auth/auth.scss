@@ -25,7 +25,7 @@
     }
 
     .left-side {
-        border-right: #ff410033 2px solid;
+        border-inline-end: #ff410033 2px solid;
         flex: 1;
         flex-direction: column;
         display: flex;
@@ -51,7 +51,7 @@
         width: 100%;
     }
 
-@media (max-width: 1000px) {
+    @media (max-width: 1000px) {
         flex-direction: column;
 
         .left-side {

@@ -12,6 +12,8 @@
             "section": "Difficulty Levels",
             "ul": "List of exercises",
             "view": "View details for"
-        }
+        },
+        "noDataSummary": "Info",
+        "noDataDetail": "No Data Available Now!"
     }
 }

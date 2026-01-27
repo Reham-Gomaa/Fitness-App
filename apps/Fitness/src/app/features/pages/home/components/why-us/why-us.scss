@@ -144,7 +144,7 @@
             img {
                 display: block;
                 width: 100%;
-                height: 100%;
+                height: auto;
                 object-fit: cover;
                 border-radius: 0.6375rem;
                 margin: 0;
@@ -154,11 +154,10 @@
                 }
             }
 
-            // Consolidated trainer classes
             .trainer-1,
             .trainer-3 {
                 @media (min-width: 62rem) {
-                    margin-left: auto !important;
+                    margin-inline-start: auto !important;
                 }
             }
 
@@ -206,88 +205,88 @@
 
                 @media (min-width: 83.25rem) {
                     width: 18.1875rem;
-                    margin-left: 0;
+                    margin-inline-start: 0;
                 }
             }
 
             // Specific heights
             .trainer-1 {
-                height: 13.375rem;
+                height: auto;
 
                 @media (min-width: 25.8125rem) {
-                    height: 14.375rem;
+                    height: auto;
                 }
 
                 @media (min-width: 48rem) {
-                    height: 23.625rem;
+                    height: auto;
                 }
 
                 @media (min-width: 62rem) {
-                    height: 11.875rem;
+                    height: auto;
                 }
 
                 @media (min-width: 83.25rem) {
-                    height: 23.625rem;
+                    height: auto;
                 }
             }
 
             .trainer-2 {
-                height: 12.1875rem;
+                height: auto;
 
                 @media (min-width: 25.8125rem) {
-                    height: 13.4375rem;
+                    height: auto;
                 }
 
                 @media (min-width: 48rem) {
-                    height: 21.5rem;
+                    height: auto;
                 }
 
                 @media (min-width: 62rem) {
-                    height: 11.875rem;
+                    height: auto;
                 }
 
                 @media (min-width: 83.25rem) {
-                    height: 21.5rem;
+                    height: auto;
                 }
             }
 
             .trainer-3 {
-                height: 10.125rem;
+                height: auto;
 
                 @media (min-width: 25.8125rem) {
-                    height: 11.0625rem;
+                    height: auto;
                 }
 
                 @media (min-width: 48rem) {
-                    height: 17.8125rem;
+                    height: auto;
                 }
 
                 @media (min-width: 62rem) {
-                    height: 11.875rem;
+                    height: auto;
                 }
 
                 @media (min-width: 83.25rem) {
-                    height: 17.8125rem;
+                    height: auto;
                 }
             }
 
             .trainer-4 {
-                height: 12.25rem;
+                height: auto;
 
                 @media (min-width: 25.8125rem) {
-                    height: 13.1875rem;
+                    height: auto;
                 }
 
                 @media (min-width: 48rem) {
-                    height: 21.625rem;
+                    height: auto;
                 }
 
                 @media (min-width: 62rem) {
-                    height: 11.875rem;
+                    height: auto;
                 }
 
                 @media (min-width: 83.25rem) {
-                    height: 21.625rem;
+                    height: auto;
                 }
             }
 
@@ -313,19 +312,11 @@
         }
     }
 
-    // RTL support
+    // RTL support - only for cases that can't be handled by logical properties
     :host-context([dir='rtl']) {
         .images-wrapper {
             @media (min-width: 62rem) {
                 justify-content: end !important;
-            }
-        }
-
-        .trainer-1,
-        .trainer-3 {
-            @media (min-width: 62rem) {
-                margin-right: auto !important;
-                margin-left: 0 !important;
             }
         }
     }

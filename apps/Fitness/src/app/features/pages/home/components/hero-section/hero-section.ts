@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {ChangeDetectionStrategy, Component} from "@angular/core";
 import {Header} from "./../../../../../shared//components/ui/header/header";
 import {MainButton} from "./../../../../../shared/components/ui/main-button/main-button";
 import {TranslatePipe} from "@ngx-translate/core";
@@ -9,6 +9,7 @@ import {NgOptimizedImage} from "@angular/common";
     imports: [Header, MainButton, TranslatePipe, NgOptimizedImage],
     templateUrl: "./hero-section.html",
     styleUrl: "./hero-section.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroSection {
     statistics = [

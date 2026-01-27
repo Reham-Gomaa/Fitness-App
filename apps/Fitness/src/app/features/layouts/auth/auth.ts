@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from "@angular/router";
+import {ChangeDetectionStrategy, Component} from "@angular/core";
+import {RouterModule} from "@angular/router";
 
 @Component({
-  selector: 'app-auth',
-  imports: [RouterModule  , RouterLink],
-  templateUrl: './auth.html',
-  styleUrl: './auth.scss',
+    selector: "app-auth",
+    imports: [RouterModule],
+    templateUrl: "./auth.html",
+    styleUrl: "./auth.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Auth {}

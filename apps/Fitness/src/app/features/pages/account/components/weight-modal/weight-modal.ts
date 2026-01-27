@@ -2,12 +2,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
-import { FitnessInputSlider } from '@fitness-app/fitness-form'; 
+import { FitnessInputSlider } from '@fitness-app/fitness-form';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-weight-modal',
-  standalone: true,
   imports: [CommonModule, ButtonModule, FitnessInputSlider, TranslateModule],
   templateUrl: "./weight-modal.html",
   styleUrl: "./weight-modal.scss",
@@ -34,6 +33,6 @@ export class WeightModalComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(false); 
+    this.dialogRef.close(false);
   }
 }

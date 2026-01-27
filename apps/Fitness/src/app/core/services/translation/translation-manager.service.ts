@@ -1,4 +1,4 @@
-import {Injectable, inject, signal, Injector} from "@angular/core";
+import {Injectable, inject, Injector} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {TranslateService} from "@ngx-translate/core";
 import {Observable, forkJoin, of} from "rxjs";
@@ -20,7 +20,7 @@ export class TranslationManagerService {
     private translateService: TranslateService | null = null;
     private readonly translationCache = new Map<string, Map<TranslationModule, any>>();
     private readonly loadingMap = new Map<string, Observable<any>>();
-    private readonly loadedModules = signal<Set<TranslationModule>>(new Set());
+    private readonly loadedModulesByLang = new Map<string, Set<TranslationModule>>();
 
     private getTranslateService(): TranslateService {
         if (!this.translateService) {
@@ -83,9 +83,10 @@ export class TranslationManagerService {
                 }
                 this.translationCache.get(lang)!.set(module, translations);
 
-                const currentLoaded = new Set(this.loadedModules());
-                currentLoaded.add(module);
-                this.loadedModules.set(currentLoaded);
+                if (!this.loadedModulesByLang.has(lang)) {
+                    this.loadedModulesByLang.set(lang, new Set());
+                }
+                this.loadedModulesByLang.get(lang)!.add(module);
 
                 this.loadingMap.delete(cacheKey);
             }),
@@ -97,56 +98,46 @@ export class TranslationManagerService {
     }
 
     loadCoreTranslations(lang: string): Observable<any> {
-        const loadedSet = this.loadedModules();
+        const loadedSet = this.loadedModulesByLang.get(lang) || new Set();
         const allCoreLoaded = CORE_TRANSLATION_MODULES.every((module) => loadedSet.has(module));
 
         if (allCoreLoaded) {
-            let cachedTranslations: any = {};
-            CORE_TRANSLATION_MODULES.forEach((module) => {
-                const cached = this.translationCache.get(lang)?.get(module);
-                if (cached) {
-                    cachedTranslations = this.deepMerge(cachedTranslations, cached);
-                }
-            });
-            // IMPORTANT: Set cached translations so translate.use() can find them
-            this.getTranslateService().setTranslation(lang, cachedTranslations, false);
-            return of(cachedTranslations);
+            return of(this.getMergedTranslations(lang));
         }
 
         const requests = CORE_TRANSLATION_MODULES.map((module) => this.loadModule(module, lang));
 
         return forkJoin(requests).pipe(
-            map((translations) => {
-                let merged = {};
-                translations.forEach((moduleTranslations) => {
-                    merged = this.deepMerge(merged, moduleTranslations);
-                });
-                return merged;
-            }),
+            map(() => this.getMergedTranslations(lang)),
             tap((merged) => {
                 this.getTranslateService().setTranslation(lang, merged, false);
             })
         );
     }
 
+    private getMergedTranslations(lang: string): any {
+        const cachedMap = this.translationCache.get(lang);
+        let merged = {};
+        if (cachedMap) {
+            cachedMap.forEach((translations) => {
+                merged = this.deepMerge(merged, translations);
+            });
+        }
+        return merged;
+    }
+
     loadModules(modules: TranslationModule[], lang: string): Observable<any> {
-        const loadedSet = this.loadedModules();
+        const loadedSet = this.loadedModulesByLang.get(lang) || new Set();
         const modulesToLoad = modules.filter((module) => !loadedSet.has(module));
 
         if (modulesToLoad.length === 0) {
-            return of({});
+            return of(this.getMergedTranslations(lang));
         }
 
         const requests = modulesToLoad.map((module) => this.loadModule(module, lang));
 
         return forkJoin(requests).pipe(
-            map((translations) => {
-                let merged = {};
-                translations.forEach((moduleTranslations) => {
-                    merged = this.deepMerge(merged, moduleTranslations);
-                });
-                return merged;
-            }),
+            map(() => this.getMergedTranslations(lang)),
             tap((merged) => {
                 this.getTranslateService().setTranslation(lang, merged, true);
             })
@@ -161,22 +152,23 @@ export class TranslationManagerService {
         return this.loadModules(modules, lang);
     }
 
-    areModulesLoaded(modules: TranslationModule[]): boolean {
-        const loadedSet = this.loadedModules();
+    areModulesLoaded(modules: TranslationModule[], lang: string): boolean {
+        const loadedSet = this.loadedModulesByLang.get(lang) || new Set();
         return modules.every((module) => loadedSet.has(module));
     }
 
     clearCache(lang?: string): void {
         if (lang) {
             this.translationCache.delete(lang);
+            this.loadedModulesByLang.delete(lang);
         } else {
             this.translationCache.clear();
+            this.loadedModulesByLang.clear();
         }
-        this.loadedModules.set(new Set());
         this.loadingMap.clear();
     }
 
-    getLoadedModules(): Set<TranslationModule> {
-        return this.loadedModules();
+    getLoadedModules(lang: string): Set<TranslationModule> {
+        return this.loadedModulesByLang.get(lang) || new Set();
     }
 }

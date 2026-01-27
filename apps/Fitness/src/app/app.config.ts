@@ -11,6 +11,8 @@ import {
     provideZonelessChangeDetection,
 } from "@angular/core";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import {IMAGE_LOADER} from "@angular/common";
+import {customImageLoader} from "./core/config/image-loader.config";
 import {
     provideRouter,
     withComponentInputBinding,
@@ -55,6 +57,12 @@ export const appConfig: ApplicationConfig = {
             withInterceptors([authInterceptor]),
             withInterceptorsFromDi()
         ),
+
+        // Image Optimization
+        {
+            provide: IMAGE_LOADER,
+            useValue: customImageLoader,
+        },
 
         // Auth API Configuration
         {
@@ -111,14 +119,18 @@ export const appConfig: ApplicationConfig = {
         // Router with hash location (Angular 20 best practice)
         provideRouter(
             routes,
-            withViewTransitions(),
+            withViewTransitions({
+                onViewTransitionCreated: ({transition}) => {
+                    transition.finished.catch(() => {
+                        /* Ignore aborted transitions to prevent InvalidStateError */
+                    });
+                },
+            }),
             withInMemoryScrolling({
                 scrollPositionRestoration: "enabled",
             }),
             withComponentInputBinding()
         ),
-        provideHttpClient(withFetch()),
-
         // NgRx
         provideStore({auth: authReducer}),
         provideEffects([AuthEffects]),
