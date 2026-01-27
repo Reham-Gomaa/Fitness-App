@@ -1,0 +1,15 @@
+# Targets all search engines (Google, Bing, etc.)
+User-agent: *
+
+# Allow crawling of the main site and assets
+Allow: /
+Allow: /assets/
+
+# Hide private or technical folders
+Disallow: /admin/
+Disallow: /profile/
+Disallow: /settings/
+Disallow: /api/
+
+# Help crawlers find your sitemap (replace with your actual domain)
+Sitemap: https://fitness-app-five-chi.vercel.app/sitemap.xml

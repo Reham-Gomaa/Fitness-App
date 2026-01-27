@@ -48,7 +48,6 @@ export class ReloadableHttpHelper {
             },
             {
                 injector: this.injector,
-                allowSignalWrites: true,
             }
         );
 

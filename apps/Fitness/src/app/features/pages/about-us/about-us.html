@@ -1,6 +1,6 @@
 <section
-    [class]="{ 'pt-6': getLocation()}"
-    class="about-layout navOffset grid"
+    [class]="isAboutPage() ? 'about-p':'home-p'"
+    class="about-layout grid"
     role="region"
     aria-labelledby="about-heading"
     aria-describedby="about-summary"
@@ -43,8 +43,8 @@
             <app-title
                 id="about-heading"
                 [titleImg]="'./images/about-us/About us.avif'"
-                [imgW]="'200'"
-                [imgH]="'45'"
+                [imgW]="'290'"
+                [imgH]="'44'"
                 [titleTxt]="'about.section' |translate"
                 [containerClass]="''"
                 [justifyCenter]="false"

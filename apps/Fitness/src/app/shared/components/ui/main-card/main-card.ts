@@ -11,8 +11,4 @@ import {cardInfo} from "../../../models/card";
 })
 export class MainCard {
     item = input<cardInfo>();
-
-    sayHi(){
-      console.log("object");
-    }
 }

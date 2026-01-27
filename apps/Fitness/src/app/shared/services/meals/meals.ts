@@ -31,8 +31,8 @@ export class MealService {
     getMealsCats(): Observable<mealCatRes> {
         if (!this.categoriesCache$) {
             this.categoriesCache$ = this.http
-                .get<mealCatRes>(`${environment.mealApiUrl}categories.php` , {
-                  credentials:'omit'
+                .get<mealCatRes>(`${environment.mealApiUrl}categories.php`, {
+                    credentials: "omit",
                 })
                 .pipe(
                     retry(2),
@@ -45,10 +45,8 @@ export class MealService {
     getMealsByCategory(cat: string): Observable<MealsByCategoryResponse> {
         if (!this.mealsByCategoryCache.has(cat)) {
             const request$ = this.http
-                .get<MealsByCategoryResponse>(`${EndPoint.MEALS_BY_CATEGORY}?c=${cat}` , {
-
-                  credentials:'omit'
-
+                .get<MealsByCategoryResponse>(`${EndPoint.MEALS_BY_CATEGORY}?c=${cat}`, {
+                    credentials: "omit",
                 })
                 .pipe(retry(2), shareReplay({bufferSize: 1, refCount: true}));
             this.mealsByCategoryCache.set(cat, request$);
