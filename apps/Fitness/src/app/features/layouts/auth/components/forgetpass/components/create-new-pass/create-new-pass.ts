@@ -1,10 +1,5 @@
 import {Component, inject, signal, DestroyRef, input, output} from "@angular/core";
-import {
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    Validators,
-} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {TranslateService, TranslatePipe} from "@ngx-translate/core";

@@ -5,6 +5,7 @@
     "scripts": {
         "fitness": "nx serve Fitness -o",
         "build": "nx build Fitness",
+        "format": "prettier --write \"{apps,packages,api}/**/*.{ts,html,scss,json,md,js}\" --ignore-path .gitignore",
         "commit": "git-cz"
     },
     "private": true,

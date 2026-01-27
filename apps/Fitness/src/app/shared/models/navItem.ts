@@ -1,5 +1,5 @@
 export interface navItem {
-  _id:string,
-  name:string,
-  isActive?:boolean
+    _id: string;
+    name: string;
+    isActive?: boolean;
 }

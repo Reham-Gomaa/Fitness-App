@@ -1,16 +1,16 @@
 {
-  "app": {
-    "title": "Fitness App",
-    "welcome": "Welcome"
-  },
-  "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "search": "Search",
-    "loading": "Loading...",
-    "error": "Error",
-    "success": "Success"
-  }
+    "app": {
+        "title": "Fitness App",
+        "welcome": "Welcome"
+    },
+    "common": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "search": "Search",
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success"
+    }
 }

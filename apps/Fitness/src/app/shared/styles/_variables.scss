@@ -44,13 +44,13 @@
     --sec-grad-bg: var(--gradient-70);
     --sec-grad-main-bg: var(--white);
     /*main card*/
-    --desc-bg : var(--gray-300);
-    --title-color:var(--gray-900);
+    --desc-bg: var(--gray-300);
+    --title-color: var(--gray-900);
     /*nav tabs*/
-    --nav-dot-main-bg:var(--gray-900-60)
+    --nav-dot-main-bg: var(--gray-900-60);
 
     /*details*/
-    --txt-color:var(--gray-100);
+    --txt-color: var(--gray-100);
     --sec-grad-color: var(--gradient-70);
 
     // Scrollbar
@@ -102,14 +102,13 @@
     --scroll-bg: 255, 255, 255, 0.95;
     --sidebar-bg: var(--white);
     --nav-bg: var(--gray-100);
-
 }
 
 .dark-mode {
     --body: var(--gray-950);
 
     --gradient-70: var(--gray-900-60);
-    --home-gradient : rgba(0,0,0,0.7);
+    --home-gradient: rgba(0, 0, 0, 0.7);
 
     // Hero
     --hero-bg: var(--gray-900-60);
@@ -122,10 +121,9 @@
     --sec-grad-bg: var(--gray-950);
     --sec-grad-main-bg: var(--gradient-70);
     /*main card*/
-    --desc-bg : var(--gray-900-60);
-    --title-color:var(--white);
+    --desc-bg: var(--gray-900-60);
+    --title-color: var(--white);
     /*nav tabs*/
-
 
     // Scrollbar
     --panel-scrollbar-track: var(--gray-800);
@@ -143,7 +141,6 @@
     // Media-container
     --media-text-color: var(--gray-100);
     --media-gradient-color: rgba(0, 0, 0, 0.095) 3.06%, rgba(36, 36, 36, 0.95) 63.13%;
-
 
     // Why-Us
     --whyus-section-bg: var(--gray-950);
@@ -175,5 +172,4 @@
     --scroll-bg: 29, 28, 28, 0.95;
     --sidebar-bg: var(--gray-950);
     --nav-bg: var(--gray-900);
-
 }

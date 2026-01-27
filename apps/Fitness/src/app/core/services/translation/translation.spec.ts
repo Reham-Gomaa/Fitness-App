@@ -1,19 +1,19 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from "@angular/core/testing";
 
-import { Translation } from './translation';
-import { provideZonelessChangeDetection } from '@angular/core';
+import {Translation} from "./translation";
+import {provideZonelessChangeDetection} from "@angular/core";
 
-describe('Translation', () => {
-  let service: Translation;
+describe("Translation", () => {
+    let service: Translation;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [provideZonelessChangeDetection()],
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [provideZonelessChangeDetection()],
+        });
+        service = TestBed.inject(Translation);
     });
-    service = TestBed.inject(Translation);
-  });
 
-  xit('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    xit("should be created", () => {
+        expect(service).toBeTruthy();
+    });
 });
