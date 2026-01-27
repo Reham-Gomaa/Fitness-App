@@ -1,10 +1,12 @@
 <section id="bot">
     <div
         (click)="openChat()"
+        (keydown)="openChat()"
+        tabindex="0"
         class="bot-btn flex flex-column justify-content-center align-items-center"
     >
         <img
-            src="/images/bot/bot.png"
+            src="/images/bot/bot.avif"
             alt="bot image"
         />
         <app-main-button
@@ -27,6 +29,8 @@
                 <i
                     class="pi pi-plus new-chat-btn cursor-pointer"
                     (click)="resetChat(); toggleSidebar()"
+                    (keydown)="resetChat(); toggleSidebar()"
+                    tabindex="0"
                     title="New Chat"
                 ></i>
                 <h4>{{ 'bot.previousConversations' | translate }}</h4>
@@ -38,6 +42,8 @@
                     class="conversation-item"
                     [class.editing]="editingSessionId() === session.id"
                     (click)="onSessionClick(session)"
+                    (keydown)="onSessionClick(session)"
+                    tabindex="0"
                 >
                     @if (editingSessionId() === session.id) {
                     <div class="edit-mode flex align-items-center w-full">
@@ -54,10 +60,14 @@
                             <i
                                 class="pi pi-check text-green-500 mr-2 cursor-pointer"
                                 (click)="saveTitle($event)"
+                                (keydown)="saveTitle($event)"
+                                tabindex="0"
                             ></i>
                             <i
                                 class="pi pi-times text-red-500 cursor-pointer"
                                 (click)="cancelEditing($event)"
+                                (keydown)="cancelEditing($event)"
+                                tabindex="0"
                             ></i>
                         </div>
                     </div>
@@ -69,10 +79,14 @@
                         <i
                             class="pi pi-pencil edit-btn mr-2"
                             (click)="startEditingTitle($event, session)"
+                            (keydown)="startEditingTitle($event, session)"
+                            tabindex="0"
                         ></i>
                         <i
                             class="pi pi-trash delete-btn"
                             (click)="deleteSession(session.id); $event.stopPropagation()"
+                            (keydown)="deleteSession(session.id); $event.stopPropagation()"
+                            tabindex="0"
                         ></i>
                     </div>
                     }
@@ -87,6 +101,8 @@
             <i
                 class="pi pi-align-right text-lg cursor-pointer"
                 (click)="toggleSidebar()"
+                (keydown)="toggleSidebar()"
+                tabindex="0"
             ></i>
         </div>
 
@@ -95,6 +111,8 @@
         <div
             class="sidebar-overlay"
             (click)="toggleSidebar()"
+            (keydown)="toggleSidebar()"
+            tabindex="0"
         ></div>
         }
 
@@ -134,6 +152,8 @@
             <div
                 class="send-icon flex align-items-center"
                 (click)="isStreaming() ? stopResponse() : sendMessage()"
+                (keydown)="isStreaming() ? stopResponse() : sendMessage()"
+                tabindex="0"
             >
                 @if (isStreaming()) {
                 <i class="pi pi-stop-circle text-lg cursor-pointer text-red-500"></i>

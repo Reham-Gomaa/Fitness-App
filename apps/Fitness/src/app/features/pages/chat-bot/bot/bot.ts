@@ -1,23 +1,22 @@
 import {
-    Component,
-    signal,
-    inject,
-    DestroyRef,
-    ViewChild,
-    ElementRef,
     AfterViewChecked,
-    OnInit,
+    Component,
+    DestroyRef,
+    ElementRef,
+    inject,
+    signal,
+    ViewChild,
 } from "@angular/core";
-import {TranslatePipe} from "@ngx-translate/core";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {FormsModule} from "@angular/forms";
-import {MainButton} from "./../../../../shared/components/ui/main-button/main-button";
+import {TranslatePipe} from "@ngx-translate/core";
+import {Subscription} from "rxjs";
 import {
-    GeminiIntegration,
     ChatMessage,
     ChatSession,
+    GeminiIntegration,
 } from "../../../../core/services/gemini-int/gemini-integration";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {Subscription} from "rxjs";
+import {MainButton} from "./../../../../shared/components/ui/main-button/main-button";
 
 @Component({
     selector: "app-bot",
@@ -25,7 +24,7 @@ import {Subscription} from "rxjs";
     templateUrl: "./bot.html",
     styleUrl: "./bot.scss",
 })
-export class Bot implements AfterViewChecked, OnInit {
+export class Bot implements AfterViewChecked {
     @ViewChild("chatContainer") private chatContainer?: ElementRef;
     @ViewChild("chatInput") private chatInput?: ElementRef;
 
@@ -45,8 +44,6 @@ export class Bot implements AfterViewChecked, OnInit {
     editingSessionId = signal<number | null>(null);
     editingTitle = signal<string>("");
     private currentSubscription?: Subscription;
-
-    ngOnInit() {}
 
     ngAfterViewChecked() {
         if (this.shouldScroll) {
