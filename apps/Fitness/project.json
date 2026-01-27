@@ -53,6 +53,7 @@
                         "scripts": true,
                         "styles": {
                             "minify": true,
+                            "inlineCritical": true,
                             "removeSpecialComments": true
                         },
                         "fonts": true

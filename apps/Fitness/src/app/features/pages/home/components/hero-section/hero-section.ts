@@ -2,10 +2,11 @@ import {Component} from "@angular/core";
 import {Header} from "./../../../../../shared//components/ui/header/header";
 import {MainButton} from "./../../../../../shared/components/ui/main-button/main-button";
 import {TranslatePipe} from "@ngx-translate/core";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
     selector: "app-hero-section",
-    imports: [Header, MainButton, TranslatePipe],
+    imports: [Header, MainButton, TranslatePipe, NgOptimizedImage],
     templateUrl: "./hero-section.html",
     styleUrl: "./hero-section.scss",
 })
