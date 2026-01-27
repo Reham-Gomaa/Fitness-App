@@ -117,7 +117,6 @@ export const appConfig: ApplicationConfig = {
             }),
             withComponentInputBinding()
         ),
-        provideHttpClient(withFetch()),
 
         // NgRx
         provideStore({auth: authReducer}),
