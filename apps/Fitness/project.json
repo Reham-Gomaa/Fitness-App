@@ -22,7 +22,12 @@
                     "apps/Fitness/src/robots.txt",
                     "apps/Fitness/src/sitemap.xml"
                 ],
-                "styles": ["apps/Fitness/src/styles.scss"],
+                "styles": [
+                    "node_modules/primeicons/primeicons.css",
+                    "node_modules/primeflex/primeflex.css",
+                    "node_modules/primeflex/themes/primeone-light.css",
+                    "apps/Fitness/src/styles.scss"
+                ],
                 "server": "apps/Fitness/src/main.server.ts",
                 "ssr": {
                     "entry": "apps/Fitness/src/server.ts"
@@ -48,7 +53,6 @@
                         "scripts": true,
                         "styles": {
                             "minify": true,
-                            "inlineCritical": true,
                             "removeSpecialComments": true
                         },
                         "fonts": true

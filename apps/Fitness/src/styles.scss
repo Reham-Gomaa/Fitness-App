@@ -1,10 +1,6 @@
 @use './app/shared/styles/_utilities' as utl;
 @use './app/shared/styles/_variables' as vars;
 
-@import 'primeflex/themes/primeone-light.css';
-@import 'primeflex/primeflex.css';
-@import 'primeicons/primeicons.css';
-
 body,
 html {
     margin: 0;

@@ -44,9 +44,11 @@ import {provideStore} from "@ngrx/store";
 import {provideStoreDevtools} from "@ngrx/store-devtools";
 import {AuthEffects} from "./features/layouts/auth/store/auth.effects";
 import {authReducer} from "./features/layouts/auth/store/auth.reducer";
+import {provideClientHydration, withEventReplay} from "@angular/platform-browser";
 
 export const appConfig: ApplicationConfig = {
     providers: [
+        provideClientHydration(withEventReplay()),
         // Translation
         TRANSLATION_INITIALIZER,
         // HTTP Client
