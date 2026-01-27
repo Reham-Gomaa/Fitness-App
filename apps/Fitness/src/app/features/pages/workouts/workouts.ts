@@ -11,19 +11,20 @@ import {Toast} from "primeng/toast";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 //app Service
-import {Muscles} from "./../../../shared/services/muscle/muscles";
 import {SeoService} from "../../../core/services/seo/seo.service";
+import {Muscles} from "./../../../shared/services/muscle/muscles";
 
 //interfaces
 import {Muscle, MuscleGroup} from "./../../../shared/models/muscles";
 import {navItem} from "./../../../shared/models/navItem";
 
 //reusable directive
+import {IMAGE_LOADER, ImageLoaderConfig} from "@angular/common";
 import {Carousel} from "./../../../shared/components/ui/carousel/carousel";
 import {Header} from "./../../../shared/components/ui/header/header";
+import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 import {NavTabs} from "./../../../shared/components/ui/navTabs/navTabs";
 import {Title} from "./../../../shared/components/ui/title/title";
-import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
 
 @Component({
     selector: "app-workouts",
@@ -38,6 +39,28 @@ import {MainCard} from "./../../../shared/components/ui/main-card/main-card";
         Toast,
         NavTabs,
         TranslatePipe,
+    ],
+    providers: [
+        {
+            provide: IMAGE_LOADER,
+            useValue: (config: ImageLoaderConfig) => {
+                // 1. If it's a local image (starts with /), don't use the proxy
+                if (
+                    config.src.startsWith("/") ||
+                    config.src.startsWith("./") ||
+                    config.src.startsWith("assets/")
+                ) {
+                    return config.src;
+                }
+
+                // 2. For external images (like Wikimedia), use the proxy
+                // We use encodeURIComponent to ensure special characters in URLs don't break the proxy
+                const imageUrl = config.src.includes("://") ? config.src : `https://${config.src}`;
+                return `https://wsrv.nl/?url=${encodeURIComponent(imageUrl)}&w=${
+                    config.width
+                }&output=webp`;
+            },
+        },
     ],
     templateUrl: "./workouts.html",
     styleUrl: "./workouts.scss",
@@ -88,7 +111,6 @@ export class Workouts implements OnInit {
                         name: "full body",
                         isActive: true,
                     });
-
                 },
             });
     }
