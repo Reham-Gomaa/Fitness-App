@@ -1,11 +1,25 @@
+.about-p {
+    padding-top: 120px;
+}
+.home-p {
+    padding-top: 1.5rem;
+    @media all and (min-width: 48rem) {
+        padding-top: 95px;
+    }
+}
 .about-layout {
-    padding: 1.5rem 1rem;
+    padding-inline: 1rem;
+    padding-bottom: 5.9375rem;
     color: var(--about-text-color);
     font-family: var(--font-1);
     backdrop-filter: blur(86px);
     @media all and (min-width: 48rem) {
-        padding: 95px 5rem 2.5rem;
+        padding-inline: 5rem;
+        padding-bottom: 12.5rem;
         gap: 5rem;
+    }
+    @media all and (min-width: 62rem) {
+        padding-bottom: 2.9375rem;
     }
     @media all and (62rem <= width <= 78.125rem) {
         gap: 3rem;

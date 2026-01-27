@@ -33,12 +33,17 @@ export interface servicesKeys {
 export class AboutUs implements OnInit {
     private _router = inject(Router);
 
+    isAboutPage = signal(false);
+
     ngOnInit(): void {
-        this.getLocation();
+        this.checkLocation();
     }
 
-    getLocation() {
-        return this._router.url.includes("home");
+    checkLocation() {
+        const currentUrl = this._router.url;
+
+        const match = currentUrl.split("/").includes("about") || currentUrl === "/about";
+        this.isAboutPage.set(match);
     }
 
     readonly trainers: WritableSignal<trainersKeys[]> = signal([

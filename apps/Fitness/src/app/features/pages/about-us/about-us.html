@@ -1,6 +1,6 @@
 <section
-    [class]="{ 'pt-6': getLocation()}"
-    class="about-layout navOffset grid"
+    [class]="isAboutPage() ? 'about-p':'home-p'"
+    class="about-layout grid"
     role="region"
     aria-labelledby="about-heading"
     aria-describedby="about-summary"
