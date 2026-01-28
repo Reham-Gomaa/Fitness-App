@@ -1,7 +1,7 @@
 #workouts.at-home {
     padding-top: 0.5rem;
     & {
-        background-image: url('/images/workouts/workouts.jpg');
+        background-image: url('/images/workouts/workouts.avif');
         background-position: center center;
         background-size: 100% 100%;
     }
@@ -12,5 +12,5 @@
 }
 
 #workouts.main ::ng-deep .nav-tabs li a {
-  color: var(--text-color);
+    color: var(--text-color);
 }
