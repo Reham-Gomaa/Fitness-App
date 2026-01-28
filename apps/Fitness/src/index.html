@@ -59,16 +59,19 @@
             />
         </noscript>
 
-        <!--  Preload PrimeIcons font -->
+        <!-- Preload LCP images -->
         <link
             rel="preload"
-            href="./media/primeicons.woff2"
-            as="font"
-            type="font/woff2"
-            crossorigin
+            href="./images/hero/Theo Vance.avif"
+            as="image"
+            fetchpriority="high"
         />
-
-        <!-- Preload LCP images -->
+        <link
+            rel="preload"
+            href="./images/hero/bg-2.avif"
+            as="image"
+            fetchpriority="high"
+        />
     </head>
     <body>
         <app-root></app-root>

@@ -1,8 +1,16 @@
 <section
     id="hero"
     class="flex-1 min-h-screen pt-8"
-    [style.backgroundImage]="'url(./images/hero/bg-2.avif)'"
 >
+    <img
+        ngSrc="./images/hero/bg-2.avif"
+        width="2000"
+        height="1334"
+        priority
+        fetchpriority="high"
+        alt="image for blur"
+        class="absolute inset-0 -z-10 object-cover"
+    />
     <div class="hero-blur"></div>
     <div class="container">
         <div class="grid align-items-center">

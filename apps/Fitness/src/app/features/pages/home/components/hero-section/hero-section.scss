@@ -32,10 +32,10 @@
     }
     .hero-img {
         .hero-img-style {
-            width: 100%; /* Takes full width of the column */
-            height: auto; /* Allows height to scale proportionally */
+            width: 100%;
+            height: auto;
             display: block;
-            object-fit: cover; /* Ensures the image fills the area without distortion */
+            object-fit: cover;
         }
     }
     .hero-caption {
