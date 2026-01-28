@@ -1,6 +1,8 @@
 @use './app/shared/styles/_utilities' as utl;
 @use './app/shared/styles/_variables' as vars;
 
+@import 'primeicons/primeicons.css';
+
 body,
 html {
     margin: 0;
