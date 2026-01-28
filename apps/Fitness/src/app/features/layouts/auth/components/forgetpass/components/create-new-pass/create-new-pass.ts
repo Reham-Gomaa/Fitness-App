@@ -1,21 +1,14 @@
 import {Component, inject, signal, DestroyRef, input, output} from "@angular/core";
-import {
-    AbstractControl,
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    Validators,
-    ValidationErrors,
-} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {TranslateService, TranslatePipe} from "@ngx-translate/core";
-import {FitnessInput, FitnessInputErrorHandeling} from "@fitness-app/fitness-form";
+import {FitnessInput} from "@fitness-app/fitness-form";
 import {MessageService} from "primeng/api";
 import {AuthApiKpService, ErrorResponse, ResetPasswordResponse} from "auth-api-kp";
 import {HttpErrorResponse} from "@angular/common/http";
-import { PASSWORD_PATTERN } from "apps/Fitness/src/app/core/constants/validation.constants";
-import { passwordMatchValidator } from "apps/Fitness/src/app/core/utils/validators.util";
+import {PASSWORD_PATTERN} from "../../../../../../../core/constants/validation.constants";
+import {passwordMatchValidator} from "../../../../../../../core/utils/validators.util";
 
 @Component({
     selector: "app-create-new-pass",

@@ -1,4 +1,4 @@
-import {Component, input, output, OutputEmitterRef} from "@angular/core";
+import {ChangeDetectionStrategy, Component, input, output} from "@angular/core";
 import {Skeleton} from "primeng/skeleton";
 import {navItem} from "../../../models/navItem";
 
@@ -7,18 +7,19 @@ import {navItem} from "../../../models/navItem";
     imports: [Skeleton],
     templateUrl: "./navTabs.html",
     styleUrl: "./navTabs.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavTabs {
     navItems = input<navItem[]>();
     isInPanel = input<boolean>(false);
-    navItemClick: OutputEmitterRef<navItem> = output();
+    navItemClick = output<navItem>();
 
-    makeArr(l: number) {
-        return Array.from({length: l});
+    makeArr(length: number): undefined[] {
+        return Array.from({length});
     }
 
-    itemClickEmit(e: PointerEvent, item: navItem) {
-        e.preventDefault();
+    itemClickEmit(event: PointerEvent, item: navItem): void {
+        event.preventDefault();
         this.navItemClick.emit(item);
     }
 }

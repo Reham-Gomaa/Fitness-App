@@ -1,21 +1,20 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     computed,
     DestroyRef,
     inject,
     OnInit,
     signal,
-    WritableSignal,
 } from "@angular/core";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NgOptimizedImage} from "@angular/common";
 import {MuscleGroup} from "../../../models/muscles";
 import {MealService} from "../../../services/meals/meals";
 import {Muscles} from "../../../services/muscle/muscles";
 import {Panel} from "../business/panel/panel";
 import {NavTabs} from "../navTabs/navTabs";
-
-import {NgOptimizedImage} from "@angular/common";
 import {CLIENT_ROUTES} from "./../../../../core/constants/client-routes";
 import {StorageKeys} from "./../../../../core/constants/storage.config";
 import {Ingradients} from "./components/ingradients/ingradients";
@@ -36,68 +35,69 @@ import {WorkoutLegends} from "./components/workout-legends/workout-legends";
     ],
     templateUrl: "./details.html",
     styleUrl: "./details.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Details implements OnInit {
-    private activatedRoute = inject(ActivatedRoute);
-    private _router = inject(Router);
-    private _muscleService = inject(Muscles);
-    private _mealService = inject(MealService);
-    private _destroyRef = inject(DestroyRef);
+    private readonly activatedRoute = inject(ActivatedRoute);
+    private readonly router = inject(Router);
+    private readonly muscleService = inject(Muscles);
+    private readonly mealService = inject(MealService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    id: WritableSignal<string> = signal<string>("");
-    //to decide which api to call
-    cat: WritableSignal<string> = signal<string>("");
-    workout_muscles = signal<MuscleGroup[]>([]);
+    readonly id = signal<string>("");
+    readonly cat = signal<string>("");
+    readonly workoutMuscles = signal<MuscleGroup[]>([]);
 
-    selectedExercise = computed(() => this._muscleService.getSelectedExercise());
-    selectedMeal = computed(() => this._mealService.getSelectedMeal());
+    readonly selectedExercise = computed(() => this.muscleService.getSelectedExercise());
+    readonly selectedMeal = computed(() => this.mealService.getSelectedMeal());
+
+    ngOnInit(): void {
+        this.getItemId();
+    }
 
     getCurrentLang(): string {
         const lang = localStorage.getItem(StorageKeys.LANGUAGE) || "en";
         return lang.toLowerCase();
     }
 
-    getPath() {
-        this._router.navigate([
+    getPath(): void {
+        this.router.navigate([
             this.getCurrentLang(),
             CLIENT_ROUTES.main.base,
             CLIENT_ROUTES.main.classes,
         ]);
     }
 
-    ngOnInit(): void {
-        this.getItemId();
+    private getItemId(): void {
+        this.activatedRoute.paramMap
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((params) => {
+                this.id.set(params.get("id") ?? "");
+                this.cat.set(params.get("cat") ?? "");
+                if (this.router.url.includes("classes")) {
+                    this.getAllMuscles();
+                }
+            });
     }
 
-    getItemId() {
-        this.activatedRoute.paramMap.subscribe((res) => {
-            this.id.set(res.get("id") as string);
-            this.cat.set(res.get("cat") as string);
-            if (this._router.url.includes("classes")) {
-                this.getAllMuscles();
-            }
-        });
-    }
-
-    getAllMuscles() {
-        this._muscleService
+    private getAllMuscles(): void {
+        this.muscleService
             .getAllMuscleGroups()
-            .pipe(takeUntilDestroyed(this._destroyRef))
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
                 next: (res) => {
-                    this.workout_muscles.set(res.musclesGroup);
-                    const allMuscles = [
+                    const allMuscles: MuscleGroup[] = [
                         {
                             _id: "1234",
                             name: "full body",
-                            isActive: this._muscleService.activeMuscleGroup() === "1234",
+                            isActive: this.muscleService.activeMuscleGroup() === "1234",
                         },
                         ...res.musclesGroup.map((item) => ({
                             ...item,
-                            isActive: item._id === this._muscleService.activeMuscleGroup(),
+                            isActive: item._id === this.muscleService.activeMuscleGroup(),
                         })),
                     ];
-                    this.workout_muscles.set(allMuscles);
+                    this.workoutMuscles.set(allMuscles);
                 },
             });
     }

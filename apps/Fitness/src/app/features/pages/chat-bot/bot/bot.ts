@@ -1,5 +1,6 @@
 import {
     AfterViewChecked,
+    ChangeDetectionStrategy,
     Component,
     DestroyRef,
     ElementRef,
@@ -17,49 +18,52 @@ import {
     GeminiIntegration,
 } from "../../../../core/services/gemini-int/gemini-integration";
 import {MainButton} from "./../../../../shared/components/ui/main-button/main-button";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
     selector: "app-bot",
-    imports: [MainButton, TranslatePipe, FormsModule],
+    standalone: true,
+    imports: [MainButton, TranslatePipe, FormsModule, NgOptimizedImage],
     templateUrl: "./bot.html",
     styleUrl: "./bot.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Bot implements AfterViewChecked {
-    @ViewChild("chatContainer") private chatContainer?: ElementRef;
-    @ViewChild("chatInput") private chatInput?: ElementRef;
+    @ViewChild("chatContainer") private chatContainer?: ElementRef<HTMLElement>;
+    @ViewChild("chatInput") private chatInput?: ElementRef<HTMLInputElement>;
 
-    private gemini = inject(GeminiIntegration);
-    private destroyRef = inject(DestroyRef);
+    private readonly gemini = inject(GeminiIntegration);
+    private readonly destroyRef = inject(DestroyRef);
 
     chatMessage = "";
-    isActiveChat = signal<boolean>(false);
-    messages = signal<ChatMessage[]>([]);
-    isStreaming = signal<boolean>(false);
-    chatHistory = this.gemini.allChatSessions;
-    isSidebarOpen = signal<boolean>(false);
+    readonly isActiveChat = signal<boolean>(false);
+    readonly messages = signal<ChatMessage[]>([]);
+    readonly isStreaming = signal<boolean>(false);
+    readonly chatHistory = this.gemini.allChatSessions;
+    readonly isSidebarOpen = signal<boolean>(false);
     private shouldScroll = false;
-    private typingTimer: any;
+    private typingTimer: ReturnType<typeof setInterval> | null = null;
     private fullResponseText = "";
     private displayedResponseText = "";
-    editingSessionId = signal<number | null>(null);
-    editingTitle = signal<string>("");
+    readonly editingSessionId = signal<number | null>(null);
+    readonly editingTitle = signal<string>("");
     private currentSubscription?: Subscription;
 
-    ngAfterViewChecked() {
+    ngAfterViewChecked(): void {
         if (this.shouldScroll) {
             this.scrollToBottom();
             this.shouldScroll = false;
         }
     }
 
-    openChat() {
+    openChat(): void {
         this.isActiveChat.update((v) => !v);
         if (this.isActiveChat()) {
             this.focusInput();
         }
     }
 
-    sendMessage() {
+    sendMessage(): void {
         const message = this.chatMessage.trim();
         if (!message || this.isStreaming()) return;
 
@@ -84,7 +88,7 @@ export class Bot implements AfterViewChecked {
             .sendMessage$(message)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
-                next: (fullBuffer) => {
+                next: (fullBuffer: string) => {
                     this.fullResponseText = fullBuffer;
                     if (!this.typingTimer) {
                         this.startTypewriter(modelIndex);
@@ -95,33 +99,86 @@ export class Bot implements AfterViewChecked {
                 },
                 error: () => {
                     this.isStreaming.set(false);
-                    if (this.typingTimer) {
-                        clearInterval(this.typingTimer);
-                        this.typingTimer = null;
-                    }
+                    this.clearTypingTimer();
                 },
             });
     }
 
-    stopResponse() {
+    stopResponse(): void {
         if (this.currentSubscription) {
             this.currentSubscription.unsubscribe();
             this.currentSubscription = undefined;
         }
-
-        if (this.typingTimer) {
-            clearInterval(this.typingTimer);
-            this.typingTimer = null;
-        }
-
+        this.clearTypingTimer();
         this.isStreaming.set(false);
     }
 
-    private startTypewriter(modelIndex: number) {
+    toggleSidebar(): void {
+        this.isSidebarOpen.update((value) => !value);
+    }
+
+    onInputFocus(): void {
+        if (this.isSidebarOpen()) {
+            this.isSidebarOpen.set(false);
+        }
+    }
+
+    loadSession(id: number): void {
+        if (this.gemini.loadSession(id)) {
+            this.messages.set([...this.gemini.currentHistory()]);
+            this.shouldScroll = true;
+        }
+    }
+
+    deleteSession(id: number): void {
+        this.gemini.deleteSession(id);
+    }
+
+    resetChat(): void {
+        this.gemini.resetConversation();
+        this.messages.set([]);
+    }
+
+    onSessionClick(session: ChatSession): void {
+        if (this.editingSessionId() === session.id) return;
+        this.loadSession(session.id);
+        this.toggleSidebar();
+        this.focusInput();
+    }
+
+    private focusInput(): void {
+        setTimeout(() => {
+            this.chatInput?.nativeElement.focus();
+        }, 100);
+    }
+
+    startEditingTitle(event: Event, session: ChatSession): void {
+        event.stopPropagation();
+        this.editingSessionId.set(session.id);
+        this.editingTitle.set(session.title || "");
+    }
+
+    saveTitle(event: Event): void {
+        event.stopPropagation();
+        const id = this.editingSessionId();
+        const title = this.editingTitle().trim();
+        if (id !== null && title) {
+            this.gemini.updateSessionTitle(id, title);
+        }
+        this.cancelEditing();
+    }
+
+    cancelEditing(event?: Event): void {
+        if (event) event.stopPropagation();
+        this.editingSessionId.set(null);
+        this.editingTitle.set("");
+    }
+
+    private startTypewriter(modelIndex: number): void {
         this.displayedResponseText = "";
         this.typingTimer = setInterval(() => {
             if (this.displayedResponseText.length < this.fullResponseText.length) {
-                // Word-by-word: find next space
+                // Word-by-word typing logic
                 const remaining = this.fullResponseText.substring(
                     this.displayedResponseText.length
                 );
@@ -147,72 +204,16 @@ export class Bot implements AfterViewChecked {
                 });
                 this.shouldScroll = true;
             } else if (!this.isStreaming()) {
-                // Finished streaming and typing has caught up
-                clearInterval(this.typingTimer);
-                this.typingTimer = null;
+                this.clearTypingTimer();
             }
-        }, 30); // Adjust speed here (higher = slower)
+        }, 30);
     }
 
-    toggleSidebar() {
-        this.isSidebarOpen.update((value) => !value);
-    }
-
-    onInputFocus() {
-        if (this.isSidebarOpen()) {
-            this.isSidebarOpen.set(false);
+    private clearTypingTimer(): void {
+        if (this.typingTimer) {
+            clearInterval(this.typingTimer);
+            this.typingTimer = null;
         }
-    }
-
-    loadSession(id: number) {
-        if (this.gemini.loadSession(id)) {
-            this.messages.set([...this.gemini.currentHistory()]);
-            this.shouldScroll = true;
-        }
-    }
-
-    deleteSession(id: number) {
-        this.gemini.deleteSession(id);
-    }
-
-    resetChat() {
-        this.gemini.resetConversation();
-        this.messages.set([]);
-    }
-
-    onSessionClick(session: ChatSession) {
-        if (this.editingSessionId() === session.id) return;
-        this.loadSession(session.id);
-        this.toggleSidebar();
-        this.focusInput();
-    }
-
-    private focusInput() {
-        setTimeout(() => {
-            this.chatInput?.nativeElement.focus();
-        }, 100);
-    }
-
-    startEditingTitle(event: Event, session: ChatSession) {
-        event.stopPropagation();
-        this.editingSessionId.set(session.id);
-        this.editingTitle.set(session.title || "");
-    }
-
-    saveTitle(event: Event) {
-        event.stopPropagation();
-        const id = this.editingSessionId();
-        const title = this.editingTitle().trim();
-        if (id !== null && title) {
-            this.gemini.updateSessionTitle(id, title);
-        }
-        this.cancelEditing();
-    }
-
-    cancelEditing(event?: Event) {
-        if (event) event.stopPropagation();
-        this.editingSessionId.set(null);
-        this.editingTitle.set("");
     }
 
     private scrollToBottom(): void {

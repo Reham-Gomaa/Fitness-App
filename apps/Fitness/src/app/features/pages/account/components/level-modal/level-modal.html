@@ -13,7 +13,7 @@
     <div class="modal-content">
         <lib-fitness-form-radio
             [config]="activityLevelOptions()"
-            [initialValue]="selectedActivityLevel"
+            [initialValue]="selectedActivityLevel()"
             (selectedItemChange)="onLevelChange($event)"
         />
     </div>

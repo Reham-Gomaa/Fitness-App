@@ -28,11 +28,12 @@
     font-size: 1.2rem;
     font-weight: 700;
     cursor: pointer;
-    transition: opacity 0.3s;
+    transition: all 0.3s;
 
     &:disabled {
         opacity: 0.5;
-        cursor: not-allowed;
+        cursor: default;
+        background: var(--gray-300) !important;
     }
 }
 
@@ -51,6 +52,6 @@
     color: var(--white);
 
     &:disabled {
-        background-color: var(--gray-500);
+        background-color: var(--gray-300);
     }
 }

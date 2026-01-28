@@ -1,6 +1,13 @@
 import {NgOptimizedImage} from "@angular/common";
 
-import {Component, inject, OnInit, signal, WritableSignal} from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    inject,
+    OnInit,
+    signal,
+    WritableSignal,
+} from "@angular/core";
 
 import {TranslatePipe} from "@ngx-translate/core";
 import {Router} from "@angular/router";
@@ -8,9 +15,6 @@ import {Router} from "@angular/router";
 import {Header} from "./../../../shared/components/ui/header/header";
 import {Title} from "./../../../shared/components/ui/title/title";
 import {MainButton} from "./../../../shared/components/ui/main-button/main-button";
-// Constants
-import {CLIENT_ROUTES} from "./../../../core/constants/client-routes";
-import {StorageKeys} from "./../../../core/constants/storage.config";
 
 export interface trainersKeys {
     name: string;
@@ -29,6 +33,7 @@ export interface servicesKeys {
     imports: [NgOptimizedImage, TranslatePipe, Header, Title, MainButton],
     templateUrl: "./about-us.html",
     styleUrl: "./about-us.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutUs implements OnInit {
     private _router = inject(Router);

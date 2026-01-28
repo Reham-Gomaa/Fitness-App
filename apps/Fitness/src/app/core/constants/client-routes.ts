@@ -7,7 +7,7 @@ export const CLIENT_ROUTES = {
         classes: "classes",
         meals: "meals",
         account: "account",
-        details:"details/:cat/:id"
+        details: "details/:cat/:id",
     },
     auth: {
         base: "auth",

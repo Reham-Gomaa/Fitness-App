@@ -42,50 +42,50 @@
         }
         .trainer-3 {
             width: 12.6875rem;
-            height: 19.25rem;
+            height: auto;
             @media all and (min-width: 37.5rem) {
                 width: 15rem;
-                height: 23rem;
+                height: auto;
             }
             @media all and (min-width: 48rem) {
                 width: 22.375rem;
-                height: 33.875rem;
+                height: auto;
             }
             @media all and (62rem <= width <= 74.9375rem) {
                 width: 14rem;
-                height: 18rem;
+                height: auto;
             }
             @media all and (74.9375rem <= width <= 78.125rem) {
                 width: 15rem;
-                height: 23rem;
+                height: auto;
             }
         }
         .trainer-1 {
             position: absolute;
             width: 12.5313rem;
-            height: 16.0625rem;
+            height: auto;
             top: 10.2275rem;
             inset-inline-start: 8.7719rem;
             @media all and (min-width: 37.5rem) {
                 width: 14rem;
-                height: 18rem;
+                height: auto;
                 top: 11.5rem;
                 inset-inline-start: 9.25rem;
             }
             @media all and (min-width: 48rem) {
                 width: 22.0625rem;
-                height: 28.25rem;
+                height: auto;
                 top: 18rem;
                 inset-inline-start: 15.4375rem;
             }
             @media all and (62rem <= width <= 74.9375rem) {
                 width: 14rem;
-                height: 18rem;
+                height: auto;
                 position: static;
             }
             @media all and (74.9375rem <= width <= 78.125rem) {
                 width: 14rem;
-                height: 18rem;
+                height: auto;
                 top: 11.5rem;
                 inset-inline-start: 16.875rem;
             }
@@ -93,29 +93,29 @@
         .trainer-2 {
             position: absolute;
             width: 7.875rem;
-            height: 6.6875rem;
+            height: auto;
             top: 2.8413rem;
             inset-inline-start: 13.4238rem;
             @media all and (min-width: 37.5rem) {
                 width: 8.75rem;
-                height: 7rem;
+                height: auto;
                 top: 3.5rem;
                 inset-inline-start: 15.625rem;
             }
             @media all and (min-width: 48rem) {
                 width: 13.875rem;
-                height: 11.75rem;
+                height: auto;
                 top: 5rem;
                 inset-inline-start: 23.625rem;
             }
             @media all and (62rem <= width <= 74.9375rem) {
                 width: 14rem;
-                height: 18rem;
+                height: auto;
                 position: static;
             }
             @media all and (74.9375rem <= width <= 78.125rem) {
                 width: 8.75rem;
-                height: 7rem;
+                height: auto;
                 top: 3.5rem;
                 inset-inline-start: 21.25rem;
             }
@@ -146,7 +146,7 @@
         .icon {
             width: 1.1062rem;
             height: 1.0625rem;
-            margin-right: 1rem;
+            margin-inline-end: 1rem;
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges;
         }
@@ -181,6 +181,6 @@
 
     :host-context([dir='rtl']) .icon {
         transform: rotate(270deg);
-        margin-left: 1rem;
+        margin-inline-start: 1rem;
     }
 }

@@ -1,6 +1,6 @@
 <nav
     class="navbar"
-    [class.scrolled]="isScrolled"
+    [class.scrolled]="isScrolled()"
 >
     <div class="navbar-container">
         <!-- Logo -->
@@ -33,7 +33,7 @@
 
         <!-- Desktop Auth Section -->
         <div class="nav-auth desktop-only">
-            @if (!isLoggedIn) {
+            @if (!isLoggedIn()) {
             <div class="auth-buttons">
                 <div
                     class="cursor-pointer"
@@ -79,7 +79,7 @@
 
         <!-- Mobile Menu Button -->
         <div class="mobile-menu-btn mobile-only">
-            @if (isLoggedIn) {
+            @if (isLoggedIn()) {
             <p-avatar
                 icon="pi pi-user"
                 size="large"
@@ -92,7 +92,7 @@
             <button
                 class="hamburger"
                 (click)="toggleMobileMenu()"
-                [class.active]="mobileMenuOpen"
+                [class.active]="mobileMenuOpen()"
             >
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -103,7 +103,7 @@
     <!-- Mobile Overlay -->
     <div
         class="mobile-overlay"
-        [class.active]="mobileMenuOpen"
+        [class.active]="mobileMenuOpen()"
         (click)="closeMobileMenu()"
         (keydown)="closeMobileMenu()"
         tabindex="0"
@@ -112,7 +112,7 @@
     <!-- Mobile Sidebar Menu -->
     <div
         class="mobile-sidebar"
-        [class.active]="mobileMenuOpen"
+        [class.active]="mobileMenuOpen()"
     >
         <!-- Sidebar Header -->
         <div class="sidebar-header">
@@ -141,7 +141,7 @@
             </div>
 
             <!-- Auth Buttons / User Info -->
-            @if (!isLoggedIn) {
+            @if (!isLoggedIn()) {
             <div class="mobile-auth-buttons">
                 <div
                     class="cursor-pointer"

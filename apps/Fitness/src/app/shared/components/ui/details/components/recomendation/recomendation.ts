@@ -1,7 +1,7 @@
 import {Component, DestroyRef, inject, OnInit, signal, WritableSignal} from "@angular/core";
-import { Carousel } from "../../../carousel/carousel";
+import {Carousel} from "../../../carousel/carousel";
 import {MealService} from "./../../../../../services/meals/meals";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {Category} from "./../../../../../../shared/models/meals";
 
 @Component({
@@ -16,7 +16,7 @@ export class Recomendation implements OnInit {
     mealCats: WritableSignal<Category[]> = signal([]);
 
     ngOnInit() {
-        this.getMealCats()
+        this.getMealCats();
     }
 
     getMealCats() {

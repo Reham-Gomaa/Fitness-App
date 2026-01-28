@@ -1,5 +1,5 @@
-import { Injectable, inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import {Injectable, inject, PLATFORM_ID} from "@angular/core";
+import {isPlatformBrowser} from "@angular/common";
 
 /**
  * A lightweight service that detects the current Angular rendering platform
@@ -23,7 +23,6 @@ import { isPlatformBrowser } from '@angular/common';
  *
  * @Component({
  *   selector: 'app-example',
- *   standalone: true,
  *   template: `
  * @if(isBrowser) {
  *     <p>Running in Browser</p>
@@ -61,11 +60,11 @@ import { isPlatformBrowser } from '@angular/common';
  * - Designed to work seamlessly with SSR, signals, and zoneless Angular.
  */
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: "root"})
 export class PlatFormService {
-  private readonly platformId = inject(PLATFORM_ID);
+    private readonly platformId = inject(PLATFORM_ID);
 
-  isBrowser(): boolean {
-    return isPlatformBrowser(this.platformId);
-  }
+    isBrowser(): boolean {
+        return isPlatformBrowser(this.platformId);
+    }
 }

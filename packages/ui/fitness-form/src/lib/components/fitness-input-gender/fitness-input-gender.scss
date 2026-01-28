@@ -1,42 +1,42 @@
 .gender-container {
-  font-family: "Baloo Thambi 2", cursive;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-
-  .gender-item {
-    border: 1px solid #ffffff;
-    border-radius: 50%;
-    width: 7rem;
-    height: 7rem;
+    font-family: 'Baloo Thambi 2', cursive;
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    gap: 1.5rem;
 
-    .gender-item-title {
-      color: white;
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-align: center;
+    .gender-item {
+        border: 1px solid #ffffff;
+        border-radius: 50%;
+        width: 7rem;
+        height: 7rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        .gender-item-title {
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        &.active {
+            background-color: var(--orange-500);
+            border-color: var(--orange-500);
+
+            img {
+                filter: brightness(0) invert(1);
+            }
+        }
+
+        &:hover {
+            transform: scale(1.05);
+        }
     }
-
-    &.active {
-      background-color: var(--orange-500);
-      border-color: var(--orange-500);
-
-      img {
-        filter: brightness(0) invert(1);
-      }
-    }
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
 }

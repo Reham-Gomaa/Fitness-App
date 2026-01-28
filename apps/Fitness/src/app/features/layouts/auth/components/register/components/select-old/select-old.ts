@@ -3,13 +3,17 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
-import {nextStep, prevStep, updateRegisterData} from "../../../../store/auth.actions";
+import {
+    nextStep,
+    prevStep,
+    setStepValidity,
+    updateRegisterData,
+} from "../../../../store/auth.actions";
 import {FitnessInputSlider} from "@fitness-app/fitness-form";
 import {selectRegisterData} from "../../../../store/auth.selectors";
 
 @Component({
     selector: "app-select-old",
-    standalone: true,
     imports: [CommonModule, TranslatePipe, FitnessInputSlider],
     templateUrl: "./select-old.html",
     styleUrl: "./select-old.scss",
@@ -21,6 +25,7 @@ export class SelectOldComponent implements OnInit {
 
     ngOnInit() {
         this.loadSavedAge();
+        this.store.dispatch(setStepValidity({isValid: true}));
     }
 
     private loadSavedAge() {

@@ -1,19 +1,26 @@
-import {Component, inject, OnDestroy, OnInit} from "@angular/core";
+import {
+    Component,
+    inject,
+    OnDestroy,
+    OnInit,
+    ChangeDetectionStrategy,
+    signal,
+    computed,
+} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {Router, RouterModule} from "@angular/router";
 import {ButtonModule} from "primeng/button";
 import {AvatarModule} from "primeng/avatar";
 import {MenuModule} from "primeng/menu";
-import {MenuItem} from "primeng/api";
 import {StorageKeys} from "../../../../../core/constants/storage.config";
 import {CLIENT_ROUTES} from "../../../../../core/constants/client-routes";
 import {MainButton} from "./../../../../../shared/components/ui/main-button/main-button";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {TranslateModule} from "@ngx-translate/core";
 import {PlatFormService} from "@fitness-app/services";
+import {UserService} from "../../../../pages/account/services/user-service/user-service";
 
 @Component({
     selector: "app-navbar",
-    standalone: true,
     imports: [
         CommonModule,
         RouterModule,
@@ -25,16 +32,30 @@ import {PlatFormService} from "@fitness-app/services";
     ],
     templateUrl: "./navbar.html",
     styleUrl: "./navbar.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar implements OnInit, OnDestroy {
     private router = inject(Router);
-    private translate = inject(TranslateService);
     private platform = inject(PlatFormService);
+    private userService = inject(UserService);
 
-    isLoggedIn = false;
-    mobileMenuOpen = false;
-    private authCheckInterval: any;
-    isScrolled = false;
+    // Use signals and computed for reactive state
+    isLoggedIn = computed(() => {
+        const user = this.userService.currentUser();
+        if (user) return true;
+
+        // Fallback for initial load if token exists but user profile not yet fetched
+        if (this.platform.isBrowser()) {
+            return !!localStorage.getItem(StorageKeys.TOKEN);
+        }
+        return false;
+    });
+
+    mobileMenuOpen = signal(false);
+    isScrolled = signal(false);
+
+    private boundOnScroll = this.onScroll.bind(this);
+    private boundOnStorage = this.onStorageChange.bind(this);
 
     navItems = [
         {labelKey: "navbar.home", path: CLIENT_ROUTES.main.home},
@@ -43,49 +64,32 @@ export class Navbar implements OnInit, OnDestroy {
         {labelKey: "navbar.health", path: CLIENT_ROUTES.main.meals},
     ];
 
-    accountMenuItems: MenuItem[] = [
-        {
-            label: "Account",
-            icon: "pi pi-user",
-            command: () => this.navigateToAccount(),
-        },
-        {
-            label: "Logout",
-            icon: "pi pi-sign-out",
-            command: () => this.logout(),
-        },
-    ];
-
     ngOnInit() {
         if (this.platform.isBrowser()) {
-            this.checkAuthStatus();
-            this.authCheckInterval = setInterval(() => {
-                this.checkAuthStatus();
-            }, 1000);
-
-            window.addEventListener("scroll", this.onScroll.bind(this));
+            this.userService.getLoggedUserData().subscribe();
+            // Use storage event listener instead of polling interval
+            window.addEventListener("storage", this.boundOnStorage);
+            window.addEventListener("scroll", this.boundOnScroll, {passive: true});
         }
     }
 
     ngOnDestroy() {
         if (this.platform.isBrowser()) {
-            if (this.authCheckInterval) {
-                clearInterval(this.authCheckInterval);
-            }
-            window.removeEventListener("scroll", this.onScroll.bind(this));
+            window.removeEventListener("storage", this.boundOnStorage);
+            window.removeEventListener("scroll", this.boundOnScroll);
         }
     }
 
     private onScroll() {
         if (this.platform.isBrowser()) {
-            this.isScrolled = window.scrollY > 20;
+            this.isScrolled.set(window.scrollY > 20);
         }
     }
 
-    private checkAuthStatus() {
-        if (this.platform.isBrowser()) {
-            const token = localStorage.getItem(StorageKeys.TOKEN);
-            this.isLoggedIn = !!token;
+    private onStorageChange(event: StorageEvent) {
+        if (event.key === StorageKeys.TOKEN) {
+            // Re-fetch user data if token changes in another tab
+            this.userService.getLoggedUserData().subscribe();
         }
     }
 
@@ -102,9 +106,9 @@ export class Navbar implements OnInit, OnDestroy {
     }
 
     toggleMobileMenu() {
-        this.mobileMenuOpen = !this.mobileMenuOpen;
+        this.mobileMenuOpen.update((open) => !open);
 
-        if (this.mobileMenuOpen) {
+        if (this.mobileMenuOpen()) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "";
@@ -135,18 +139,16 @@ export class Navbar implements OnInit, OnDestroy {
     }
 
     logout() {
-        if (this.platform.isBrowser()) {
-            localStorage.removeItem(StorageKeys.TOKEN);
-            this.checkAuthStatus();
-            this.closeMobileMenu();
-            this.router.navigate([this.getCurrentLang(), "main", CLIENT_ROUTES.main.home]);
-        }
+        this.userService.logout().subscribe({
+            next: () => {
+                this.closeMobileMenu();
+                this.router.navigate([this.getCurrentLang(), "main", CLIENT_ROUTES.main.home]);
+            },
+        });
     }
 
     closeMobileMenu() {
-        this.mobileMenuOpen = false;
+        this.mobileMenuOpen.set(false);
         document.body.style.overflow = "";
     }
 }
-
-

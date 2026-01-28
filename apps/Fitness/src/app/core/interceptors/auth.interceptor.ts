@@ -1,7 +1,7 @@
-import { HttpInterceptorFn } from "@angular/common/http";
-import { PlatFormService } from "@fitness-app/services";
-import { inject } from "@angular/core";
-import { StorageKeys } from "../constants/storage.config";
+import {HttpInterceptorFn} from "@angular/common/http";
+import {PlatFormService} from "@fitness-app/services";
+import {inject} from "@angular/core";
+import {StorageKeys} from "../constants/storage.config";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     // Skip MealDB requests completely (from second interceptor)
@@ -12,7 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const platform = inject(PlatFormService);
 
     if (platform.isBrowser()) {
-        const headers: { [key: string]: string } = {};
+        const headers: {[key: string]: string} = {};
 
         const isLoginRequest = req.url.includes("/users/auth/login");
 

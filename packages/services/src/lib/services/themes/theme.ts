@@ -20,7 +20,6 @@ import {PlatFormService} from "../platform/platform";
  *
  * @Component({
  *   selector: 'app-theme-toggle',
- *   standalone: true,
  *   template: `
  *     <button (click)="toggleTheme()">
  *       Toggle Theme ({{ themeService.theme() }})

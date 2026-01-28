@@ -1,4 +1,4 @@
-import {Component, inject, input, InputSignal, signal, WritableSignal} from "@angular/core";
+import {ChangeDetectionStrategy, Component, inject, input, signal} from "@angular/core";
 import {Router} from "@angular/router";
 import {CLIENT_ROUTES} from "./../../../../core/constants/client-routes";
 import {StorageKeys} from "./../../../../core/constants/storage.config";
@@ -8,31 +8,30 @@ import {StorageKeys} from "./../../../../core/constants/storage.config";
     imports: [],
     templateUrl: "./main-button.html",
     styleUrl: "./main-button.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainButton {
-    private _router = inject(Router);
+    private readonly router = inject(Router);
 
     btnText = input.required<string>();
     btnIcon = input<string>();
     fontWeight = input<string>();
     customClass = input<string>();
+    fireStartExplore = input<"start" | "explore" | "bot">("start");
 
-    fireStartExplore: InputSignal<"start" | "explore" | "bot"> = input<"start" | "explore" | "bot">(
-        "start"
-    );
-    isLoggedIn: WritableSignal<boolean> = signal(false);
+    private readonly isLoggedIn = signal(false);
 
-    private checkAuthStatus() {
+    private checkAuthStatus(): void {
         const token = localStorage.getItem(StorageKeys.TOKEN);
         this.isLoggedIn.set(!!token);
     }
 
-    getCurrentLang(): string {
+    private getCurrentLang(): string {
         const lang = localStorage.getItem(StorageKeys.LANGUAGE) || "en";
         return lang.toLowerCase();
     }
 
-    getFired() {
+    getFired(): void {
         if (this.fireStartExplore() === "bot") {
             return;
         }
@@ -48,24 +47,24 @@ export class MainButton {
         }
     }
 
-    goToRegistration() {
-        this._router.navigate([
+    private goToRegistration(): void {
+        this.router.navigate([
             this.getCurrentLang(),
             CLIENT_ROUTES.auth.base,
             CLIENT_ROUTES.auth.register,
         ]);
     }
 
-    getStarted() {
-        this._router.navigate([
+    private getStarted(): void {
+        this.router.navigate([
             this.getCurrentLang(),
             CLIENT_ROUTES.main.base,
             CLIENT_ROUTES.main.classes,
         ]);
     }
 
-    exploreMore() {
-        this._router.navigate([
+    private exploreMore(): void {
+        this.router.navigate([
             this.getCurrentLang(),
             CLIENT_ROUTES.main.base,
             CLIENT_ROUTES.main.meals,

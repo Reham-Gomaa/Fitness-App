@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from "@angular/core/testing";
 
-import { GeminiIntegration } from './gemini-integration';
+import {GeminiIntegration} from "./gemini-integration";
 
-describe('GeminiIntegration', () => {
-  let service: GeminiIntegration;
+describe("GeminiIntegration", () => {
+    let service: GeminiIntegration;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(GeminiIntegration);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(GeminiIntegration);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it("should be created", () => {
+        expect(service).toBeTruthy();
+    });
 });

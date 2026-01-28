@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from "@angular/core/testing";
 
-import { Levels } from './levels';
+import {Levels} from "./levels";
 
-describe('Levels', () => {
-  let service: Levels;
+describe("Levels", () => {
+    let service: Levels;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Levels);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(Levels);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it("should be created", () => {
+        expect(service).toBeTruthy();
+    });
 });

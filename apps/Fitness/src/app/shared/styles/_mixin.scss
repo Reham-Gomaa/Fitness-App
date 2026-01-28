@@ -19,3 +19,45 @@ $breakpoint-tablet-max: 1024px;
         @content;
     }
 }
+
+/// 🔄 RTL mixin
+/// Applies styles only when the document is in RTL mode
+/// Usage: @include rtl { margin-left: 0; margin-right: 8px; }
+@mixin rtl {
+    :host-context([dir='rtl']) & {
+        @content;
+    }
+}
+
+/// 🔄 LTR mixin
+/// Applies styles only when the document is in LTR mode
+/// Usage: @include ltr { margin-right: 0; margin-left: 8px; }
+@mixin ltr {
+    :host-context([dir='ltr']) & {
+        @content;
+    }
+}
+
+/// 🔄 RTL-aware margin-start
+/// Usage: @include margin-start(8px);
+@mixin margin-start($value) {
+    margin-inline-start: $value;
+}
+
+/// 🔄 RTL-aware margin-end
+/// Usage: @include margin-end(8px);
+@mixin margin-end($value) {
+    margin-inline-end: $value;
+}
+
+/// 🔄 RTL-aware padding-start
+/// Usage: @include padding-start(8px);
+@mixin padding-start($value) {
+    padding-inline-start: $value;
+}
+
+/// 🔄 RTL-aware padding-end
+/// Usage: @include padding-end(8px);
+@mixin padding-end($value) {
+    padding-inline-end: $value;
+}

@@ -1,14 +1,12 @@
 // Core
-import {Component, inject} from "@angular/core";
+import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 
 // Shared-components
-import {CommonModule} from "@angular/common";
 import {ButtonModule} from "primeng/button";
 import {TranslatePipe} from "@ngx-translate/core";
-import {FormsModule} from "@angular/forms";
-import {ProgressCircleComponent} from "apps/Fitness/src/app/shared/components/progress-circle/progress-circle";
+import {ProgressCircleComponent} from "../../../../../shared/components/progress-circle/progress-circle";
 import {BasicData} from "./components/basic-data/basic-data";
 import {SelectGender} from "./components/select-gender/select-gender";
 
@@ -29,7 +27,6 @@ import {SelectActivityLevelComponent} from "./components/select-activity-level/s
 
 @Component({
     selector: "app-register",
-    standalone: true,
     imports: [
         BasicData,
         SelectGender,
@@ -40,23 +37,22 @@ import {SelectActivityLevelComponent} from "./components/select-activity-level/s
         SelectHeightComponent,
         SelectGoalComponent,
         SelectActivityLevelComponent,
-        CommonModule,
         ButtonModule,
         TranslatePipe,
         ProgressCircleComponent,
-        FormsModule,
     ],
     templateUrl: "./register.html",
     styleUrl: "./register.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
-    private store = inject(Store);
-    isLoading = this.store.selectSignal(selectAuthLoading);
-    error = this.store.selectSignal(selectAuthError);
-    step = this.store.selectSignal(selectStep);
-    isStepValid = this.store.selectSignal(selectIsStepValid);
+    private readonly store = inject(Store);
+    readonly isLoading = this.store.selectSignal(selectAuthLoading);
+    readonly error = this.store.selectSignal(selectAuthError);
+    readonly step = this.store.selectSignal(selectStep);
+    readonly isStepValid = this.store.selectSignal(selectIsStepValid);
 
-    next() {
+    next(): void {
         if (this.step() === 6) {
             this.store.dispatch(submitRegistration());
         } else {
@@ -64,7 +60,7 @@ export class Register {
         }
     }
 
-    back() {
+    back(): void {
         this.store.dispatch(prevStep());
     }
 }

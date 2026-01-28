@@ -3,13 +3,17 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
-import {nextStep, prevStep, updateRegisterData} from "../../../../store/auth.actions";
+import {
+    nextStep,
+    prevStep,
+    setStepValidity,
+    updateRegisterData,
+} from "../../../../store/auth.actions";
 import {FitnessInputGender, Gender} from "@fitness-app/fitness-form";
 import {selectRegisterData} from "../../../../store/auth.selectors";
 
 @Component({
     selector: "app-select-gender",
-    standalone: true,
     imports: [CommonModule, TranslatePipe, FitnessInputGender],
     templateUrl: "./select-gender.html",
     styleUrl: "./select-gender.scss",
@@ -21,6 +25,7 @@ export class SelectGender implements OnInit {
 
     ngOnInit() {
         this.loadSavedGender();
+        this.store.dispatch(setStepValidity({isValid: true}));
     }
 
     private loadSavedGender() {

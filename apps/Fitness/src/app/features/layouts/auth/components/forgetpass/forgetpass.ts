@@ -1,38 +1,40 @@
-import {Component, inject, signal} from "@angular/core";
+import {ChangeDetectionStrategy, Component, inject, signal} from "@angular/core";
+import {Router} from "@angular/router";
+import {TranslatePipe} from "@ngx-translate/core";
 import {SendEmail} from "./components/send-email/send-email";
 import {ConfirmOtp} from "./components/confirm-otp/confirm-otp";
 import {CreateNewPass} from "./components/create-new-pass/create-new-pass";
-import {TranslatePipe} from "@ngx-translate/core";
-import { Router } from "@angular/router";
 
 @Component({
     selector: "app-forgetpass",
     imports: [SendEmail, ConfirmOtp, CreateNewPass, TranslatePipe],
     templateUrl: "./forgetpass.html",
     styleUrl: "./forgetpass.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Forgetpass {
-    private readonly _router = inject(Router);
-    forgetFlow = signal<"send" | "verify" | "reset">("send");
-    email = signal<string>("");
-    otp = signal<string>("");
+    private readonly router = inject(Router);
 
-    onEmailSubmitted(email: string) {
+    readonly forgetFlow = signal<"send" | "verify" | "reset">("send");
+    readonly email = signal<string>("");
+    readonly otp = signal<string>("");
+
+    onEmailSubmitted(email: string): void {
         this.email.set(email);
         this.forgetFlow.set("verify");
     }
 
-    onCodeVerified(otp: string) {
+    onCodeVerified(otp: string): void {
         this.otp.set(otp);
         this.forgetFlow.set("reset");
     }
 
-    onPasswordReset() {
+    onPasswordReset(): void {
         this.email.set("");
-        this._router.navigate(["/"]);
+        this.router.navigate(["/"]);
     }
 
-    goBackToSend() {
+    goBackToSend(): void {
         this.forgetFlow.set("send");
     }
 }

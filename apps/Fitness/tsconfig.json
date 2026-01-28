@@ -1,35 +1,35 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "target": "es2022",
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "emitDecoratorMetadata": false,
-    "module": "preserve"
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
-    "strictTemplates": true
-  },
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "strict": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "target": "es2022",
+        "moduleResolution": "bundler",
+        "isolatedModules": true,
+        "emitDecoratorMetadata": false,
+        "module": "preserve"
     },
-    {
-      "path": "./tsconfig.spec.json"
+    "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false,
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "typeCheckHostBindings": true,
+        "strictTemplates": true
     },
-    {
-      "path": "./.storybook/tsconfig.json"
-    }
-  ]
+    "files": [],
+    "include": [],
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.spec.json"
+        },
+        {
+            "path": "./.storybook/tsconfig.json"
+        }
+    ]
 }

@@ -3,13 +3,17 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {CommonModule} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {Store} from "@ngrx/store";
-import {nextStep, prevStep, updateRegisterData} from "../../../../store/auth.actions";
+import {
+    nextStep,
+    prevStep,
+    setStepValidity,
+    updateRegisterData,
+} from "../../../../store/auth.actions";
 import {FitnessInputSlider} from "@fitness-app/fitness-form";
 import {selectRegisterData} from "../../../../store/auth.selectors";
 
 @Component({
     selector: "app-select-weight",
-    standalone: true,
     imports: [CommonModule, TranslatePipe, FitnessInputSlider],
     templateUrl: "./select-weight.html",
     styleUrl: "./select-weight.scss",
@@ -21,6 +25,7 @@ export class SelectWeightComponent implements OnInit {
 
     ngOnInit() {
         this.loadSavedWeight();
+        this.store.dispatch(setStepValidity({isValid: true}));
     }
 
     private loadSavedWeight() {

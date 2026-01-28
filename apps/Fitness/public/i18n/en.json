@@ -27,5 +27,11 @@
         "loginFailed": "Login failed. Please check your credentials.",
         "registerSuccess": "Registration successful! Please log in.",
         "registerFailed": "Registration failed. Please try again."
+    },
+    "COMMON": {
+        "SUCCESS": "Success",
+        "ERROR": "Error",
+        "WARN": "Warning",
+        "INFO": "Information"
     }
 }

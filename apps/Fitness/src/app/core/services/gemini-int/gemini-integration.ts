@@ -1,10 +1,10 @@
-import { isPlatformBrowser } from "@angular/common";
-import { HttpClient, HttpEventType } from "@angular/common/http";
-import { inject, Injectable, PLATFORM_ID, signal } from "@angular/core";
+import {isPlatformBrowser} from "@angular/common";
+import {HttpClient, HttpDownloadProgressEvent, HttpEventType} from "@angular/common/http";
+import {inject, Injectable, PLATFORM_ID, signal} from "@angular/core";
 // rxjs
-import { catchError, filter, finalize, map, of } from "rxjs";
+import {catchError, filter, finalize, map, of} from "rxjs";
 // constants
-import { StorageKeys } from "../../constants/storage.config";
+import {StorageKeys} from "../../constants/storage.config";
 
 export type ChatRole = "user" | "model";
 
@@ -83,9 +83,9 @@ export class GeminiIntegration {
         const activeId = this.activeSessionId();
 
         if (activeId) {
-            this.chatHistory.update((sessions) =>
-                sessions.map((session) =>
-                    session.id === activeId ? { ...session, messages, updatedAt: now } : session
+            this.chatHistory.update((sessions: ChatSession[]) =>
+                sessions.map((session: ChatSession) =>
+                    session.id === activeId ? {...session, messages, updatedAt: now} : session
                 )
             );
         } else {
@@ -97,7 +97,7 @@ export class GeminiIntegration {
                 title: this.generateSessionTitle(messages),
             };
 
-            this.chatHistory.update((s) => [newSession, ...s]);
+            this.chatHistory.update((s: ChatSession[]) => [newSession, ...s]);
             this.activeSessionId.set(newSession.id);
         }
 
@@ -109,7 +109,7 @@ export class GeminiIntegration {
         this.error.set(null);
 
         // 1️⃣ push user message immediately
-        this.history.update((h) => [...h, { role: "user", text: prompt }]);
+        this.history.update((h) => [...h, {role: "user", text: prompt}]);
 
         this.currentModelBuffer = "";
         let lastLength = 0;
@@ -117,7 +117,7 @@ export class GeminiIntegration {
         return this.http
             .post(
                 "/api/gemini/chat",
-                { messages: this.history() },
+                {messages: this.history()},
                 {
                     observe: "events",
                     responseType: "text",
@@ -126,8 +126,9 @@ export class GeminiIntegration {
             )
             .pipe(
                 filter((event) => event.type === HttpEventType.DownloadProgress),
-                map((event: any) => {
-                    const text = event.partialText ?? event.target?.responseText ?? "";
+                map((event) => {
+                    const progressEvent = event as HttpDownloadProgressEvent;
+                    const text = progressEvent.partialText ?? "";
                     const chunk = text.substring(lastLength);
                     lastLength = text.length;
 
@@ -147,7 +148,7 @@ export class GeminiIntegration {
                     if (this.currentModelBuffer.trim()) {
                         this.history.update((h) => [
                             ...h,
-                            { role: "model", text: this.currentModelBuffer },
+                            {role: "model", text: this.currentModelBuffer},
                         ]);
                     }
 
@@ -166,14 +167,14 @@ export class GeminiIntegration {
 
         if (activeId) {
             // 🔁 Update existing session
-            this.chatHistory.update((sessions) =>
-                sessions.map((session) =>
+            this.chatHistory.update((sessions: ChatSession[]) =>
+                sessions.map((session: ChatSession) =>
                     session.id === activeId
                         ? {
-                            ...session,
-                            messages: [...currentMessages],
-                            updatedAt: now,
-                        }
+                              ...session,
+                              messages: [...currentMessages],
+                              updatedAt: now,
+                          }
                         : session
                 )
             );
@@ -187,7 +188,7 @@ export class GeminiIntegration {
                 title: this.generateSessionTitle(currentMessages),
             };
 
-            this.chatHistory.update((sessions) => [newSession, ...sessions]);
+            this.chatHistory.update((sessions: ChatSession[]) => [newSession, ...sessions]);
             this.activeSessionId.set(newSession.id);
         }
 
@@ -225,7 +226,9 @@ export class GeminiIntegration {
     }
 
     deleteSession(id: number): void {
-        this.chatHistory.update((sessions) => sessions.filter((session) => session.id !== id));
+        this.chatHistory.update((sessions: ChatSession[]) =>
+            sessions.filter((session: ChatSession) => session.id !== id)
+        );
         this.saveToStorage();
     }
 
@@ -239,14 +242,11 @@ export class GeminiIntegration {
     }
 
     updateSessionTitle(id: number, title: string): void {
-        this.chatHistory.update((sessions) =>
-            sessions.map((session) =>
-                session.id === id ? { ...session, title, updatedAt: Date.now() } : session
+        this.chatHistory.update((sessions: ChatSession[]) =>
+            sessions.map((session: ChatSession) =>
+                session.id === id ? {...session, title, updatedAt: Date.now()} : session
             )
         );
         this.saveToStorage();
     }
 }
-
-
-
